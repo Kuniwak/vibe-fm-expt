@@ -53,6 +53,7 @@ class Session:
         self.tfile = None
         self.texts = []           # (number, text) of every agent display-text block
         self.turn_ends = 0
+        self.in_turn = False   # True from the first user/assistant record after a turn end until the next turn end
         self.handled_turns = 0
         self.last_change = time.time()
         self.replies = 0
@@ -126,6 +127,10 @@ class Session:
                         self.texts.append((len(self.texts) + 1, c["text"]))
             if d.get("type") == "system" and d.get("subtype") == "turn_duration":
                 self.turn_ends += 1
+                self.in_turn = False
+            elif d.get("type") in ("user", "assistant"):
+                # e.g. a task-notification from a finished background task starts a new turn
+                self.in_turn = True
 
     def busy(self):
         """True while the agent still has child processes (e.g. a background build)."""
@@ -232,7 +237,8 @@ class Session:
                 continue
             if self.turn_ends <= self.handled_turns:
                 continue
-            if time.time() - self.last_change < QUIET_SECS or self.busy():
+            # Act only at a break: the latest turn has ended and nothing has started since.
+            if self.in_turn or time.time() - self.last_change < QUIET_SECS or self.busy():
                 continue
             self.handled_turns = self.turn_ends
             last = self.texts[-1] if self.texts else (0, "")
