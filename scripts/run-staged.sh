@@ -109,7 +109,7 @@ python3 -I "$ROOT/scripts/drive/staged.py" --container "$NAME" --log-dir "$RUN_D
   --operator-cmd "${OPCMD_OVERRIDE:-$OPCMD_JSON}" --operator-prompt "$ROLE_PROMPT" \
   --reply "$PROTOCOL_REPLY" --fixed "$PROTOCOL_FIXED" --snapshot-dir "$RUN_DIR/snapshots" \
   --stage2-file "$STAGE_DIR/d-stage2.txt" --stage4-file "$STAGE_DIR/d-stage4.txt" \
-  --timeup-file "$STAGE_DIR/d-stage4-timeout.txt" --done-file "$STAGE_DIR/d-stage4-done.txt" "${STAGED_EXTRA[@]}" \
+  --timeup-file "$STAGE_DIR/d-stage4-timeout.txt" --done-file "$STAGE_DIR/d-stage4-done.txt" ${STAGED_EXTRA[@]+"${STAGED_EXTRA[@]}"} \
   ${MIRROR:+--mirror} -- "${CMD[@]}"
 rc=$?
 set -e
