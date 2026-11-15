@@ -1,0 +1,9 @@
+# Egress allowlist for NET=allowlist (TCP 443 only; DNS to the container resolver).
+# Claude Code (https://code.claude.com/docs/en/network-config#network-access-requirements)
+api.anthropic.com          # API, feature flags
+claude.ai                  # claude.ai account authentication
+platform.claude.com        # OAuth token exchange / refresh
+# Lean / Mathlib (needed for `lake new <name> math` and `lake update`)
+reservoir.lean-lang.org    # Lake package index lookups (require "leanprover-community" / "mathlib")
+github.com                 # git clone of Mathlib and its dependencies
+cache.mathlib.org          # Mathlib build cache for revisions other than the pre-cached one

@@ -1,0 +1,14 @@
+
+-- appended by the audit: list the axioms of every theorem declared in this file
+open Lean Elab Command in
+#eval show CommandElabM Unit from do
+  let env ← getEnv
+  for (n, ci) in env.constants.map₂.toList do
+    if n.isInternalDetail then continue
+    if (match n with | .str _ s => s.startsWith "eq_" | _ => false) then continue
+    match ci with
+    | .thmInfo _ =>
+      let axs ← Lean.collectAxioms n
+      logInfo m!"AXIOMS theorem {n}: {axs.toList}"
+    | .axiomInfo _ => logInfo m!"AXIOMS declared-axiom {n}"
+    | _ => pure ()

@@ -1,0 +1,6 @@
+# Image IDs used in the runs run-02..run-10 (recorded in runs/run-NN/record/metadata.txt).
+# The images are not published; `make build` produces images whose IDs may differ.
+# local tag	image ID	platform
+devenv:latest	sha256:4a6e805085fd6a230427c6d7072ad3a285f9dc0bcd77006e72df6b1255f6b395	linux/arm64
+devenv-b:latest	sha256:a580419d24a64eda3d2c94981ec526e065ef29726c4163f76bc140578432d74a	linux/arm64
+devenv-netguard:latest	sha256:df684500066b7566048c6cd0c091ddfbcef62e6f5201818267b704f3aac7ef42	linux/arm64

@@ -1,0 +1,5 @@
+[user]
+	name = dev
+	email = dev@localhost
+[init]
+	defaultBranch = master

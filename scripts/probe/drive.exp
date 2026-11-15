@@ -1,0 +1,33 @@
+# Drive one interactive session for the probe.
+# usage: expect drive.exp CONTAINER INSIDE_SCRIPT OUT_FILE MODEL -- docker run -it ... claude FLAGS -- /context
+set timeout 5
+set name [lindex $argv 0]
+set inside [lindex $argv 1]
+set outfile [lindex $argv 2]
+set model [lindex $argv 3]
+set cmd [lrange $argv 5 end]
+log_user 0
+proc transcript {name} {
+  if {[catch {exec docker exec $name sh -c {cat $HOME/.claude/projects/*/*.jsonl 2>/dev/null}} out]} { return "" }
+  return $out
+}
+proc drain {} { expect -timeout 1 -re {.+} { exp_continue -continue_timer } timeout {} eof { puts "session ended early"; exit 1 } }
+proc wait_for {name pattern secs what} {
+  for {set i 0} {$i < $secs} {incr i} {
+    drain
+    if {[regexp $pattern [transcript $name]]} { return }
+  }
+  puts "timeout waiting for $what"; exit 1
+}
+spawn {*}$cmd
+# 1. the initial prompt (/context) has been handled
+wait_for $name {local-command-stdout} 120 "initial /context"
+# 2. a neutral message, so that the request actually sent to the model is recorded
+send "hello\r"
+wait_for $name {"api-request-shape"} 180 "first model request"
+wait_for $name {"message":\{"model":"claude-[^"]*"[^\n]*"type":"assistant"} 180 "assistant reply"
+# 3. filesystem and -p inspection while the session is live
+exec sh -c "docker exec -i -e PROBE_MODEL='$model' $name bash -s < '$inside' > '$outfile' 2>&1"
+send "/exit\r"
+expect -timeout 60 eof
+puts "probe session finished"

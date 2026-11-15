@@ -1,0 +1,5 @@
+/runs/
+/.secrets/
+# Fetched by scripts/fetch-playbook.sh (third-party text, not redistributed)
+/prompts/playbook-2133eced.md
+/prompts/b.txt
