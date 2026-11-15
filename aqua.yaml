@@ -1,0 +1,20 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/aquaproj/aqua/main/json-schema/aqua-yaml.json
+# aqua - Declarative CLI Version Manager
+# https://aquaproj.github.io/
+checksum:
+  enabled: true
+  require_checksum: true
+  supported_envs:
+  - darwin/arm64
+  - linux/amd64
+registries:
+- type: standard
+  ref: v4.586.0 # renovate: depName=aquaproj/aqua-registry
+packages:
+- name: koalaman/shellcheck@v0.11.0
+- name: hadolint/hadolint@v2.15.1
+- name: rhysd/actionlint@v1.7.12
+- name: suzuki-shunsuke/ghalint@v1.6.0
+- name: astral-sh/ruff@0.17.3
+- name: zizmorcore/zizmor@v1.31.1

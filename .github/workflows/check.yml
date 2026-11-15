@@ -1,0 +1,52 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions: {}
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    env:
+      AQUA_LOG_COLOR: never
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: aquaproj/aqua-installer@611554c6f0137ba41c8dd15aca8bee82504ea461 # v4.1.1
+        with:
+          aqua_version: v2.65.2
+        env:
+          AQUA_GITHUB_TOKEN: ${{ github.token }}
+      - name: shellcheck
+        run: git ls-files -z '*.sh' | xargs -0 shellcheck -x
+      - name: hadolint
+        run: hadolint image/Dockerfile netguard/Dockerfile
+      - name: ruff
+        run: git ls-files -z '*.py' | xargs -0 ruff check --no-cache
+      - name: JSON
+        run: git ls-files -z '*.json' | xargs -0 -n1 jq empty
+      - name: actionlint
+        run: actionlint
+      - name: ghalint
+        run: ghalint run
+      - name: zizmor
+        run: zizmor --offline .github/workflows
+
+  prompts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Prompt files match the preregistered sha256
+        run: scripts/check-prompts.sh

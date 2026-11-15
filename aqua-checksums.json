@@ -1,0 +1,69 @@
+{
+  "checksums": [
+    {
+      "id": "github_release/github.com/astral-sh/ruff/0.17.3/ruff-aarch64-apple-darwin.tar.gz",
+      "checksum": "118F7121AA838785672BF612487F755A89108BB5F44E0F3DF96C5967A72614F9",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/astral-sh/ruff/0.17.3/ruff-x86_64-unknown-linux-musl.tar.gz",
+      "checksum": "85E76BBB60E708A22624B31EFB227E8BDAA6978177B93C146D352DE4CAF37BA1",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/hadolint/hadolint/v2.15.1/hadolint-linux-x86_64",
+      "checksum": "C7187DB94EEEECA956519A6AF171ADC31453941A1E777961F6E680F697C8C507",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/hadolint/hadolint/v2.15.1/hadolint-macos-arm64",
+      "checksum": "5C09F3213F8E40406ABE048233D985EEBEF336D4A6A20021BE47FADB6CF480A2",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/koalaman/shellcheck/v0.11.0/shellcheck-v0.11.0.darwin.aarch64.tar.xz",
+      "checksum": "56AFFDD8DE5527894DCA6DC3D7E0A99A873B0F004D7AABC30AE407D3F48B0A79",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/koalaman/shellcheck/v0.11.0/shellcheck-v0.11.0.linux.x86_64.tar.xz",
+      "checksum": "8C3BE12B05D5C177A04C29E3C78CE89AC86F1595681CAB149B65B97C4E227198",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/rhysd/actionlint/v1.7.12/actionlint_1.7.12_darwin_arm64.tar.gz",
+      "checksum": "ABA9CED2DEE8D27FECCA3DC7FEB1A7F9A52CAEFA1EB46F3271EA66B6E0E6953F",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/rhysd/actionlint/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz",
+      "checksum": "8ACA8DB96F1B94770F1B0D72B6DDDCB1EBB8123CB3712530B08CC387B349A3D8",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/suzuki-shunsuke/ghalint/v1.6.0/ghalint_1.6.0_darwin_arm64.tar.gz",
+      "checksum": "427ACB85CB6CDDA8828BF46643825B47CB46E6D2D5D3FA4F60B7BDFEE194D2C7",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/suzuki-shunsuke/ghalint/v1.6.0/ghalint_1.6.0_linux_amd64.tar.gz",
+      "checksum": "EDA1AF79C1A4A31C2DE5831CD1333AD582FA6FA72015F8E9C1C4525D550C1D35",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/zizmorcore/zizmor/v1.31.1/zizmor-aarch64-apple-darwin.tar.gz",
+      "checksum": "AD5AA633CD56215B11E6C51D51F90C7E6B22904A75047D1215ABBD422F61D698",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/zizmorcore/zizmor/v1.31.1/zizmor-x86_64-unknown-linux-gnu.tar.gz",
+      "checksum": "D185F726BDAF92DF78273217DFDD24EBCD6B0EF48CF3CE776FF5762B6E138C99",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "registries/github_content/github.com/aquaproj/aqua-registry/v4.586.0/registry.yaml",
+      "checksum": "4E75FD9CD08EB383B93374B52FE4A566B078C1AC87520AAAB409195C21D213A4",
+      "algorithm": "sha256"
+    }
+  ]
+}
