@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # Run one session of a preregistered condition, driven by the fixed procedure.
-# Env: COND (A|A2|B, required), MODEL (required; must equal PROTOCOL_MODEL),
+# Env: COND (A|A2|B|C|C2, required), MODEL (required; must equal PROTOCOL_MODEL),
 #      NET (allowlist|open), OFF_PROTOCOL=1 to allow a model other than PROTOCOL_MODEL.
 # shellcheck source=common.sh
 source "$(dirname "$0")/common.sh"
 # shellcheck source=../config/protocol.env
 source "$ROOT/config/protocol.env"
 
-[ -n "${COND:-}" ] || { echo "error: COND is required (A, A2 or B; see config/conditions.tsv)" >&2; exit 1; }
+[ -n "${COND:-}" ] || { echo "error: COND is required (A, A2, B, C or C2; see config/conditions.tsv)" >&2; exit 1; }
 [ -n "${MODEL:-}" ] || { echo "error: MODEL is required (preregistered: $PROTOCOL_MODEL)" >&2; exit 1; }
 if [ "$MODEL" != "$PROTOCOL_MODEL" ] && [ "${OFF_PROTOCOL:-}" != 1 ]; then
   echo "error: MODEL=$MODEL differs from the preregistered $PROTOCOL_MODEL (set OFF_PROTOCOL=1 for an off-protocol trial)" >&2; exit 1
@@ -18,6 +18,9 @@ if [ "$COND" = TEST ]; then
   IMAGE="${IMAGE:-devenv:latest}"; PROMPT_FILE="$(cd "$(dirname "$PROMPT_FILE")" && pwd)/$(basename "$PROMPT_FILE")"
   PROMPT_SHA="$(shasum -a 256 < "$PROMPT_FILE" | awk '{print $1}')"
   RUNS_BASE="$ROOT/runs/_test"; RUN_PREFIX="test"
+  # The experiment's own phrases are never sent in a harness check.
+  PROTOCOL_REPLY="${TEST_REPLY:-そのまま進めてください}"
+  PROTOCOL_FIXED="${TEST_FIXED:-ありがとうございます。ここまでにしましょう。}"
 else
   row="$(awk -F'\t' -v c="$COND" '$1 == c' "$ROOT/config/conditions.tsv")"
   [ -n "$row" ] || { echo "error: unknown condition $COND" >&2; exit 1; }

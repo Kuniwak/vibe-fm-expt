@@ -1,0 +1,29 @@
+diff --git a/peg_src/jsdoctype.pegjs b/peg_src/jsdoctype.pegjs
+index 98684db..4a2e626 100644
+--- a/peg_src/jsdoctype.pegjs
++++ b/peg_src/jsdoctype.pegjs
+@@ -1060,20 +1060,20 @@ RecordTypeExprEntryOperand = UnionTypeExpr
+  * Spec:
+  *   - https://www.typescriptlang.org/docs/handbook/basic-types.html#tuple
+  */
+-TupleTypeExpr = "[" _ entries:TupleTypeExprEntries _ "]" {
++TupleTypeExpr = "[" _ entries:TupleTypeExprEntries? _ "]" {
+   return {
+     type: NodeType.TUPLE,
+-    entries,
++    entries: entries || [],
+   }
+ }
+ 
+ TupleTypeExprEntries = restWithComma:(TupleTypeExprOperand _ "," _)*
+                        // Variadic type is only allowed on the last entry.
+-                       last:(VariadicTypeExpr / VariadicTypeExprOperand)? {
++                       last:(VariadicTypeExpr / VariadicTypeExprOperand) {
+   return restWithComma.reduceRight((entries, tokens) => {
+     let [entry] = tokens;
+     return [entry].concat(entries);
+-  }, last ? [last] : []);
++  }, [last]);
+ }
+ 
+ TupleTypeExprOperand = UnionTypeExpr

@@ -1,0 +1,12 @@
+diff --git a/lib/traversing.js b/lib/traversing.js
+index a1c9de4..9891c31 100644
+--- a/lib/traversing.js
++++ b/lib/traversing.js
+@@ -101,6 +101,7 @@ const _childNodesMap = {
+   ARROW: {
+     params: _PropertyAccessor.NODE_LIST,
+     returns: _PropertyAccessor.NULLABLE_NODE,
++    new: _PropertyAccessor.NULLABLE_NODE,
+   },
+   ANY: {},
+   UNKNOWN: {},

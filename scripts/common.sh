@@ -15,7 +15,14 @@ IN_USER="dev"
 IN_HOME="/home/dev"
 IN_WORKDIR="/home/dev/jsdoctypeparser"
 
-# Pinned versions live in image/Dockerfile; collect.sh records the values found in the container.
+# Pinned versions (must match image/Dockerfile). collect.sh writes these configured values into
+# metadata.txt; they are not read back from the container.
+# shellcheck disable=SC2034  # used by collect.sh
+MATHLIB_TAG="v4.35.0"
+# shellcheck disable=SC2034
+MATHLIB_REV="56a005855ea17e0b0958f73ec801ae140b0a1679"
+# shellcheck disable=SC2034
+REPO_COMMIT="5166cc4ac8f1ccfac0d32ec4d2957c58642f2beb"
 
 NET_MODE="${NET:-allowlist}"          # allowlist | open
 MODEL="${MODEL:-}"                    # empty = Claude Code default

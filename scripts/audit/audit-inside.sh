@@ -127,18 +127,18 @@ section "Scripts (enumeration, tests)"
 list -name '*.js' -o -name '*.mjs' -o -name '*.cjs' -o -name '*.ts' -o -name '*.py' -o -name '*.sh' \
   | grep -v '^/home/dev/jsdoctypeparser/\(lib\|bin\|peg_lib\|peg_src\|schemas\|tests\|index.js\|coverage\)' > "$OUT/script-candidates.txt"
 # coverage/ is the nyc report written by `npm test`, not a script by the agent.
-# Keep only files that are new or changed relative to the image (git status for the repo; all of /tmp and the rest of home).
+# Keep only files that are new or changed relative to the pinned commit (files the agent committed
+# count as new); all of /tmp and the rest of home are kept.
+BASE=5166cc4ac8f1ccfac0d32ec4d2957c58642f2beb
 : > "$OUT/scripts.txt"
 while read -r f; do
   case "$f" in
     /home/dev/jsdoctypeparser/*)
       rel="${f#/home/dev/jsdoctypeparser/}"
-      git -C /home/dev/jsdoctypeparser ls-files --error-unmatch "$rel" >/dev/null 2>&1 \
-        && git -C /home/dev/jsdoctypeparser diff --quiet -- "$rel" && continue ;;
+      git -C /home/dev/jsdoctypeparser cat-file -e "$BASE:$rel" 2>/dev/null \
+        && git -C /home/dev/jsdoctypeparser diff --quiet "$BASE" -- "$rel" && continue ;;
   esac
-  target="model or other"
-  grep -qE "require\(['\"](/home/dev/jsdoctypeparser|\.\.?/(index|lib)|jsdoctypeparser)" "$f" && target="real code (requires the package)"
-  echo "$f	$target" >> "$OUT/scripts.txt"
+  echo "$f	$(node "$TOOLS/classify.js" "$f" 2>/dev/null || echo 'model or other')" >> "$OUT/scripts.txt"
 done < "$OUT/script-candidates.txt"
 cat "$OUT/scripts.txt"
 : > "$OUT/scripts-rerun.txt"

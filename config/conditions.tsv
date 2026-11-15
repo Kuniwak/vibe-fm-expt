@@ -2,3 +2,5 @@
 A	devenv:latest	prompts/first.txt	3911a1a00ab0e78defffaa646e9cb466527c91c70a7dd1bbe0c3ce617d8a4a6c
 A2	devenv-b:latest	prompts/a2.txt	f8351900f685fcc818a6c88c15465affd49b33da1b5c4505b3248e7774d0261e
 B	devenv-b:latest	prompts/b.txt	b78080c3291eac52e7cd3c43dee366fbfbee88a1acbc6aa25e67217649489539
+C	devenv:latest	prompts/c.txt	ddd11718d9c324ce23b31d1c55660f233bc9568feb37e9c8c613732068370071
+C2	devenv-b:latest	prompts/c2.txt	6d914fedfed0c4dfdd8c7f32f63c47945bc9f9a155e71339fe23c8516a51cb52

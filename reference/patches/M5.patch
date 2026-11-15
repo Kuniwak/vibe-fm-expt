@@ -1,0 +1,13 @@
+diff --git a/peg_src/jsdoctype.pegjs b/peg_src/jsdoctype.pegjs
+index 98684db..de6e9c4 100644
+--- a/peg_src/jsdoctype.pegjs
++++ b/peg_src/jsdoctype.pegjs
+@@ -1023,7 +1023,7 @@ RecordTypeExprEntryKey = '"' key:$([^\\"] / "\\".)* '"' {
+                                .replace(/\\\\/gu, '\\')
+                            };
+                          }
+-                       / key:$(JsIdentifier / UnsignedDecimalNumberLiteralExpr) {
++                       / key:$([a-zA-Z0-9_$]+) {
+                            return {
+                              quoteStyle: 'none',
+                              key

@@ -1,0 +1,13 @@
+diff --git a/peg_src/jsdoctype.pegjs b/peg_src/jsdoctype.pegjs
+index 98684db..f4b07cd 100644
+--- a/peg_src/jsdoctype.pegjs
++++ b/peg_src/jsdoctype.pegjs
+@@ -1173,7 +1173,7 @@ SuffixVariadicTypeExpr = operand:VariadicTypeExprOperand "..." {
+ AnyVariadicTypeExpr = "..." {
+                       return {
+                         type: NodeType.VARIADIC,
+-                        value: { type: NodeType.ANY },
++                        value: null,
+                         meta: { syntax: VariadicTypeSyntax.ONLY_DOTS },
+                       };
+                     }

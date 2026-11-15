@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Run the preregistered sequence (preregistration.md, 3. 手順): A, A2, B three times, 9 runs in all.
+# Run a preregistered sequence. Default: A, A2, B three times (preregistration.md, 3.).
+# SEQUENCE overrides it (e.g. SEQUENCE="C C2 C C2 C C2", ch. 10) and SEQ_PREFIX labels the
+# sequence_index of each run (e.g. SEQ_PREFIX=c gives c1, c2, ...) so sequences do not collide.
 # Runs are executed in waves of PARALLEL consecutive sequence entries started together
 # (amendment in preregistration.md, 7.). After each wave: audit and extraction, one run at a time.
 # Usage: scripts/batch.sh [START_INDEX] [PARALLEL]   (START_INDEX is 1-based; default 1 and 3)
@@ -7,7 +9,9 @@
 source "$(dirname "$0")/common.sh"
 # shellcheck source=../config/protocol.env
 source "$ROOT/config/protocol.env"
-SEQ=(A A2 B A A2 B A A2 B)
+# shellcheck disable=SC2206  # word splitting of SEQUENCE is intended
+SEQ=(${SEQUENCE:-A A2 B A A2 B A A2 B})
+prefix="${SEQ_PREFIX:-}"
 start="${1:-1}"; parallel="${2:-3}"
 mkdir -p "$ROOT/runs/logs"
 
@@ -34,14 +38,14 @@ while [ "$i" -le "${#SEQ[@]}" ]; do
   for j in "${wave[@]}"; do
     c="${SEQ[$((j - 1))]}"
     echo "--- start sequence $j (condition $c)"
-    SEQ_INDEX="$j" COND="$c" MODEL="$PROTOCOL_MODEL" "$ROOT/scripts/run.sh" > "$ROOT/runs/logs/seq-$j.log" 2>&1 &
+    SEQ_INDEX="$prefix$j" COND="$c" MODEL="$PROTOCOL_MODEL" "$ROOT/scripts/run.sh" > "$ROOT/runs/logs/seq-$prefix$j.log" 2>&1 &
     pids+=("$!")
     sleep 15
   done
   failed=0
   for p in "${pids[@]}"; do wait "$p" || failed=1; done
   for j in "${wave[@]}"; do
-    run="$(run_dir_of "$j")"
+    run="$(run_dir_of "$prefix$j")"
     if [ -z "$run" ]; then echo "--- sequence $j: no run directory (see runs/logs/seq-$j.log)"; failed=1; continue; fi
     echo "--- sequence $j -> $run"
     postprocess "$run"

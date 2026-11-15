@@ -1,0 +1,40 @@
+diff --git a/lib/publishing.js b/lib/publishing.js
+index 50a8342..f5297ab 100644
+--- a/lib/publishing.js
++++ b/lib/publishing.js
+@@ -66,9 +66,6 @@ function createDefaultPublisher() {
+                     concretePublish(unionNode.right));
+     },
+     VARIADIC (variadicNode, concretePublish) {
+-      if (variadicNode.meta.syntax === VariadicTypeSyntax.ONLY_DOTS) {
+-        return '...';
+-      }
+       return format('...%s', concretePublish(variadicNode.value));
+     },
+     RECORD (recordNode, concretePublish) {
+diff --git a/lib/traversing.js b/lib/traversing.js
+index a1c9de4..0574dde 100644
+--- a/lib/traversing.js
++++ b/lib/traversing.js
+@@ -13,7 +13,7 @@
+ function traverse(node, opt_onEnter, opt_onLeave) {
+   if (opt_onEnter) opt_onEnter(node, null, null);
+ 
+-  const childNodeInfo = _collectChildNodeInfo(node);
++  const childNodeInfo = node ? _collectChildNodeInfo(node) : [];
+   childNodeInfo.forEach(function([childNode, parentPropName, parentNode]) {
+     traverse(childNode, opt_onEnter ? (node, pn, pNode) => {
+       opt_onEnter(node, pn || parentPropName, pNode || parentNode);
+diff --git a/peg_src/jsdoctype.pegjs b/peg_src/jsdoctype.pegjs
+index 98684db..f4b07cd 100644
+--- a/peg_src/jsdoctype.pegjs
++++ b/peg_src/jsdoctype.pegjs
+@@ -1173,7 +1173,7 @@ SuffixVariadicTypeExpr = operand:VariadicTypeExprOperand "..." {
+ AnyVariadicTypeExpr = "..." {
+                       return {
+                         type: NodeType.VARIADIC,
+-                        value: { type: NodeType.ANY },
++                        value: null,
+                         meta: { syntax: VariadicTypeSyntax.ONLY_DOTS },
+                       };
+                     }

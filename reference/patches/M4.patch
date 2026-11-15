@@ -1,0 +1,22 @@
+diff --git a/peg_src/jsdoctype.pegjs b/peg_src/jsdoctype.pegjs
+index 98684db..81f1e0f 100644
+--- a/peg_src/jsdoctype.pegjs
++++ b/peg_src/jsdoctype.pegjs
+@@ -531,7 +531,7 @@ PrefixUnaryUnionTypeExprOperand = GenericTypeExpr
+ // from jsdoc mode for now.
+ 
+ // no-jsdoc-begin
+-TypeQueryExpr = operator:"typeof" __ name:QualifiedMemberName {
++TypeQueryExpr = operator:"typeof" _ name:QualifiedMemberName {
+                 return {
+                     type: NodeType.TYPE_QUERY,
+                     name,
+@@ -540,7 +540,7 @@ TypeQueryExpr = operator:"typeof" __ name:QualifiedMemberName {
+ // no-jsdoc-end
+ 
+ // no-jsdoc-begin, no-closure-begin
+-KeyQueryExpr = operator:"keyof" __ operand:KeyQueryExprOperand {
++KeyQueryExpr = operator:"keyof" _ operand:KeyQueryExprOperand {
+     return {
+       type: NodeType.KEY_QUERY,
+       value: operand,
