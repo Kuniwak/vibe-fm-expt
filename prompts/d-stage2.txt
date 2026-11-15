@@ -1,0 +1,56 @@
+次の種類のバグが、いまの検証で見つけられるかを知りたいです。
+
+1. 型式の解析結果（演算子の入れ子の形、受理するか拒否するか）が、下の演算子順位の表と食い違う入力がある。表にない演算子は対象外です。
+2. parse、publish、traverse のいずれかが、SyntaxError 以外の例外を投げる入力がある。
+3. parse、publish、traverse のいずれかが、終わらない入力がある。
+
+まず、いまの検証が、変種を入れない状態で、これらの種類のバグを報告しているかを教えてください。
+
+次に、それぞれの種類について、そのバグをライブラリのコードに埋め込んだ変種を作り、いまの検証がそれを検知できるかを確かめてください。まだ検証は直さないでください。
+
+結果は、種類ごとに次を示してください。
+- 変種を入れない状態で出ている違反（あれば、具体的な入力と結果）
+- 埋め込んだ変更の差分
+- 変種を入れて初めて出る違反があるかどうか
+- ある場合は、違反を示す具体的な入力と、そのときの結果
+
+（演算子順位の表）
+表の読み方：行は左側にある記号、列はその右に来る記号です。`<` は右の記号を先に処理する、`>` は左の記号を先に処理する、`=` は対になる括弧、`x` はその並びが誤りであることを表します。空欄は未定義です。
+
+| Operand | Operand | Operand | Operand | Operand | Operand | Operand | Infix | Infix | Infix | Infix | Infix | Open | Open | Open | Open | Close | Close | Close | Prefix | Prefix | Prefix | Prefix | Prefix | Prefix | Prefix | Suffix | Suffix | Suffix | Suffix | Suffix | Suffix | Suffix | Operand |  |  |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|  |  | ? | string | * | name | number | filepath | member | . | ~ | # | \| | / | .< | < | { key: | ( | > | } | ) | = | ! | ? | ... | external: | module: | function(): | = | ! | ? | ... | [] | .<> | <> | $ |
+| Operand | ? | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Operand | string | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Operand | * | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Operand | name | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Operand | number | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Operand | filepath | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Operand | member | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+| Infix | . | x | x | x | x | x | x | x | > | > | > | > | > | > | > | x | x | > | > | > | x | x | x | x | x | x | x | > | > | > | > | > | > | > | > |
+| Infix | ~ | x | x | x | x | x | x | x | > | > | > | > | > | > | > | x | x | > | > | > | x | x | x | x | x | x | x | > | > | > | > | > | > | > | > |
+| Infix | # | x | x | x | x | x | x | x | > | > | > | > | > | > | > | x | x | > | > | > | x | x | x | x | x | x | x | > | > | > | > | > | > | > | > |
+| Infix | \| | x | x | x | x | x | x | x | < | < | < | < | < | < | < | < | < | > | > | > | < | < | < | x | < | < | < | < | < | < | > | < | < | < | > |
+| Infix | / | x | x | x | x | x | x | x | < | < | < | < | < | < | < | < | < | > | > | > | < | < | < | x | < | < | < | < | < | < | > | < | < | < | > |
+| Open | .< | x | x | x | x | x | x | x | < | < | < | < | < | < | < | < | < | = | < | < | < | < | < | x | < | < | < | < | < | < | x | < | < | < | x |
+| Open | < | x | x | x | x | x | x | x | < | < | < | < | < | < | < | < | < | = | x | x | < | < | < | x | < | < | < | < | < | < | x | < | < | < | x |
+| Open | { key: | x | x | x | x | x | x | x | x | x | x | < | < | < | < | < | < | x | = | x | < | < | < | x | < | < | < | < | < | < | x | < | < | < | x |
+| Open | ( | x | x | x | x | x | x | x | x | x | x | < | < | < | < | < | < | x | x | = | < | < | < | x | < | < | < | < | < | < | x | < | < | < | x |
+| Close | > | x | x | x | x | x | x | x | > | > | > | > | > | x | x | x | x | > | > | > | > | > | > | x | > | > | > | > | > | > | > | > | > | > | > |
+| Close | } | x | x | x | x | x | x | x | > | > | > | > | > | x | x | x | x | > | > | > | > | > | > | x | > | > | > | > | > | > | > | > | > | > | > |
+| Close | ) | x | x | x | x | x | x | x | > | > | > | > | > | > | > | x | x | > | > | > | > | > | > | x | > | > | > | > | > | > | > | > | > | > | > |
+| Prefix | = | x | x | x | x | x | x | x | < | < | < | > | > | < | < | < | < | > | > | > | < | < | < | x | < | < | < | < | < | < | > | > | < | < | > |
+| Prefix | ! | x | x | x | x | x | x | x | < | < | < | > | > | < | < | < | < | > | > | > | < | < | < | x | < | < | < | < | < | < | > | > | < | < | > |
+| Prefix | ? | x | x | x | x | x | x | x | < | < | < | > | > | < | < | < | < | > | > | > | < | < | < | x | < | < | < | < | < | < | > | > | < | < | > |
+| Prefix | ... | x | x | x | x | x | x | x | < | < | < | > | > | < | < | < | < | x | x | x | < | < | < | x | < | < | < | < | < | < | > | < | < | < | > |
+| Prefix | external: | x | x | x | x | x | x | x | < | < | < | > | > | > | > | x | x | > | > | > | x | x | x | x | x | x | x | > | > | > | > | > | > | > | > |
+| Prefix | module: | x | x | x | x | x | x | x | < | < | < | > | > | > | > | x | x | > | > | > | x | x | x | x | x | x | x | > | > | > | > | > | > | > | > |
+| Prefix | function(): | x | x | x | x | x | x | x | < | < | < | > | > | < | < | < | < | > | > | > | < | < | < | x | < | < | < | > | > | > | > | > | < | < | > |
+| Suffix | = | x | x | x | x | x | x | x | x | x | x | > | > | x | x | x | x | > | > | > | x | x | x | x | x | x | x | > | > | > | > | > | < | < | > |
+| Suffix | ! | x | x | x | x | x | x | x | x | x | x | > | > | x | x | x | x | > | > | > | x | x | x | x | x | x | x | > | > | > | > | > | < | < | > |
+| Suffix | ? | x | x | x | x | x | x | x | x | x | x | > | > | x | x | x | x | > | > | > | x | x | x | x | x | x | x | > | > | > | > | > | < | < | > |
+| Suffix | ... | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | > |
+| Suffix | [] | x | x | x | x | x | x | x | x | x | x | > | > | x | x | x | x | > | > | > | x | x | x | x | x | x | x | > | > | > | > | > | x | x | > |
+| Suffix | .<> | x | x | x | x | x | x | x | x | x | x | > | > |  |  |  |  |  |  |  | x | x | x | x | x | x | x | > | > | > | > | > | x | x | > |
+| Suffix | <> | x | x | x | x | x | x | x | x | x | x | > | > |  |  |  |  |  |  |  | x | x | x | x | x | x | x | > | > | > | > | > | x | x | > |
+| Operand | ^ | x | x | x | x | x | x | x | < | < | < | < | < | < | < | < | < | x | x | x | < | < | < | < | < | < | < | < | < | < | < | < | < | < | = |

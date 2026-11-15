@@ -1,0 +1,189 @@
+[
+ {
+  "id": "F1",
+  "title": "prefix ?/! combined with suffix ?/!/=: the table applies the suffix first, the parser applies the prefix first",
+  "patterns": [
+   "? N ?",
+   "? N !",
+   "? N =",
+   "! N ?",
+   "! N !",
+   "! N =",
+   "? N . N ?",
+   "? N . N !",
+   "? N . N =",
+   "? N ~ N ?",
+   "? N ~ N !",
+   "? N ~ N =",
+   "? N # N ?",
+   "? N # N !",
+   "? N # N =",
+   "! N . N ?",
+   "! N . N !",
+   "! N . N =",
+   "! N ~ N ?",
+   "! N ~ N !",
+   "! N ~ N =",
+   "! N # N ?",
+   "! N # N !",
+   "! N # N ="
+  ],
+  "examples": [
+   "?A?",
+   "!A=",
+   "?A.B!"
+  ]
+ },
+ {
+  "id": "F2",
+  "title": "prefix ... against |: the table gives (...A)|B, the parser gives ...(A|B)",
+  "patterns": [
+   "... N | N",
+   "... N ? | N",
+   "... N ! | N",
+   "... N = | N",
+   "... N [] | N",
+   "... N | ? N",
+   "... N | ! N",
+   "... ? N | N",
+   "... ! N | N",
+   "... N ? = | N",
+   "... N ? | ? N",
+   "... N ? | ! N",
+   "... N ! = | N",
+   "... N ! | ? N",
+   "... N ! | ! N",
+   "... N = | ? N",
+   "... N = | ! N",
+   "... N [] [] | N",
+   "... N [] | ? N",
+   "... N [] | ! N",
+   "... N . N | N",
+   "... N ~ N | N",
+   "... N # N | N",
+   "... ? N | ? N",
+   "... ? N | ! N",
+   "... ! N | ? N",
+   "... ! N | ! N"
+  ],
+  "examples": [
+   "...A|B",
+   "...A?|B"
+  ]
+ },
+ {
+  "id": "F3",
+  "title": "two suffix operators in a row: accepted by the table, rejected by the parser",
+  "patterns": [
+   "N ? ?",
+   "N ? !",
+   "N ? []",
+   "N ! ?",
+   "N ! !",
+   "N ! []",
+   "N = ?",
+   "N = !",
+   "N = =",
+   "N = []",
+   "N [] ?",
+   "N [] !",
+   "N [] =",
+   "N ? = ?",
+   "N ? = !",
+   "N ? = =",
+   "N ? = []",
+   "N ! = ?",
+   "N ! = !",
+   "N ! = =",
+   "N ! = []",
+   "N [] [] ?",
+   "N [] [] !",
+   "N [] [] =",
+   "N [] [] [] ?",
+   "N [] [] [] !",
+   "N [] [] [] =",
+   "N [] [] [] [] ?",
+   "N [] [] [] [] !",
+   "N [] [] [] [] ="
+  ],
+  "examples": [
+   "A??",
+   "A?!",
+   "A[]?",
+   "A=="
+  ]
+ },
+ {
+  "id": "F4",
+  "title": "two prefix operators in a row: accepted by the table, rejected by the parser",
+  "patterns": [
+   "? ? N",
+   "? ! N",
+   "! ? N",
+   "! ! N"
+  ],
+  "examples": [
+   "??A",
+   "!?A"
+  ]
+ },
+ {
+  "id": "F5",
+  "title": "prefix ?/! with suffix []: accepted by the table, rejected by the parser",
+  "patterns": [
+   "? N []",
+   "! N []",
+   "? N . N []",
+   "? N ~ N []",
+   "? N # N []",
+   "! N . N []",
+   "! N ~ N []",
+   "! N # N []"
+  ],
+  "examples": [
+   "?A[]",
+   "!A.B[]"
+  ]
+ },
+ {
+  "id": "F6",
+  "title": "prefix ... with suffix ...: accepted by the table, rejected by the parser",
+  "patterns": [
+   "... N ...",
+   "... N ? ...",
+   "... N ! ...",
+   "... N = ...",
+   "... N [] ...",
+   "... ? N ...",
+   "... ! N ...",
+   "... N ? = ...",
+   "... N ! = ...",
+   "... N [] [] ...",
+   "... N . N ...",
+   "... N ~ N ...",
+   "... N # N ...",
+   "... N [] [] [] ...",
+   "... N . N ? ...",
+   "... N . N ! ...",
+   "... N . N = ...",
+   "... N . N [] ...",
+   "... N ~ N ? ...",
+   "... N ~ N ! ...",
+   "... N ~ N = ...",
+   "... N ~ N [] ...",
+   "... N # N ? ...",
+   "... N # N ! ...",
+   "... N # N = ...",
+   "... N # N [] ...",
+   "... ? N . N ...",
+   "... ? N ~ N ...",
+   "... ? N # N ...",
+   "... ! N . N ...",
+   "... ! N ~ N ...",
+   "... ! N # N ..."
+  ],
+  "examples": [
+   "...A..."
+  ]
+ }
+]
