@@ -22,9 +22,12 @@ curl -sSfL -o "$tmp/doc" "$URL"
 
 for pair in "doc:$DOC" "b:$B"; do
   src="$tmp/${pair%%:*}"; dst="${pair#*:}"
-  if [ -e "$dst" ]; then
-    cmp -s "$src" "$dst" && echo "unchanged: ${dst#$ROOT/}" || { echo "exists and differs: ${dst#$ROOT/}" >&2; exit 1; }
+  rel="${dst#"$ROOT"/}"
+  if [ ! -e "$dst" ]; then
+    cp "$src" "$dst"; echo "written: $rel"
+  elif cmp -s "$src" "$dst"; then
+    echo "unchanged: $rel"
   else
-    cp "$src" "$dst"; echo "written: ${dst#$ROOT/}"
+    echo "exists and differs: $rel" >&2; exit 1
   fi
 done

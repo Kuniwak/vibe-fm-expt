@@ -15,12 +15,14 @@ fi
 ipset create allowed hash:net family inet
 nameservers=$(awk '/^nameserver/ {print $2}' /etc/resolv.conf)
 log "mode: allowlist"
-log "nameservers: $(echo $nameservers)"
+# shellcheck disable=SC2086  # split the list into words on purpose
+log "nameservers:" $nameservers
 for d in $ALLOW_DOMAINS; do
   ips=$(dig +short +time=3 +tries=2 A "$d" | grep -E '^[0-9.]+$' || true)
   [ -n "$ips" ] || { echo "failed to resolve $d" >&2; exit 1; }
   for ip in $ips; do ipset -exist add allowed "$ip"; done
-  log "allow $d -> $(echo $ips)"
+  # shellcheck disable=SC2086  # split the list into words on purpose
+  log "allow $d ->" $ips
 done
 
 iptables -F; iptables -X

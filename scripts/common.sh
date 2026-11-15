@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # Shared launch definition. Sourced by run.sh, probe.sh, collect.sh, audit.sh.
 # Anything that affects what the agent sees is defined here, once, so that
 # `probe` and `run` launch the agent identically.
@@ -10,13 +11,11 @@ IMAGE="${IMAGE:-devenv:latest}"
 NET_IMAGE="${NET_IMAGE:-devenv-netguard:latest}"
 IN_HOSTNAME="devbox"
 IN_USER="dev"
+# shellcheck disable=SC2034  # used by probe.sh
 IN_HOME="/home/dev"
 IN_WORKDIR="/home/dev/jsdoctypeparser"
 
-# Pinned versions (must match image/Dockerfile; recorded in metadata).
-MATHLIB_TAG="v4.35.0"
-MATHLIB_REV="56a005855ea17e0b0958f73ec801ae140b0a1679"
-REPO_COMMIT="5166cc4ac8f1ccfac0d32ec4d2957c58642f2beb"
+# Pinned versions live in image/Dockerfile; collect.sh records the values found in the container.
 
 NET_MODE="${NET:-allowlist}"          # allowlist | open
 MODEL="${MODEL:-}"                    # empty = Claude Code default
@@ -59,8 +58,8 @@ net_up() {
     --cap-drop ALL --cap-add NET_ADMIN --cap-add NET_RAW \
     -e ALLOW_DOMAINS="$(allow_domains)" \
     "$NET_IMAGE" "$NET_MODE" >/dev/null
-  local i
-  for i in $(seq 1 60); do
+  local _
+  for _ in $(seq 1 60); do
     if docker logs "$name" 2>&1 | grep -q '^READY$'; then
       docker logs "$name" > "$log" 2>&1
       return 0

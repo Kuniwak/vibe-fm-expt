@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 # Collect artifacts and records of a finished run into runs/run-NN/.
 # Usage: collect.sh [runs/run-NN]   (default: latest run)
+# shellcheck source=common.sh
 source "$(dirname "$0")/common.sh"
 
-RUN_DIR="${1:-$(ls -d "$ROOT"/runs/run-* 2>/dev/null | sort | tail -1)}"
+runs=("$ROOT"/runs/run-*)   # glob expansion is sorted
+RUN_DIR="${1:-${runs[${#runs[@]}-1]}}"
 [ -n "$RUN_DIR" ] && [ -f "$RUN_DIR/record/run.env" ] || { echo "error: no run to collect" >&2; exit 1; }
 RUN_DIR="$(cd "$RUN_DIR" && pwd)"
 NAME="$(sed -n 's/^container=//p' "$RUN_DIR/record/run.env")"

@@ -3,6 +3,7 @@
 # Claude Code flags, interactive TTY) and list everything loaded into the agent.
 # The first message is `/context` (local, no model call), the second a neutral "hello".
 # Exits non-zero when anything outside probe/baseline.json shows up.
+# shellcheck source=common.sh
 source "$(dirname "$0")/common.sh"
 [ -n "${MODEL:-}" ] || { echo "error: MODEL is required" >&2; exit 1; }
 load_token

@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 # Inventory a collected run in a new container without the agent.
 # Usage: audit.sh [runs/run-NN]   (default: latest run)
+# shellcheck source=common.sh
 source "$(dirname "$0")/common.sh"
 
-RUN_DIR="${1:-$(ls -d "$ROOT"/runs/run-* 2>/dev/null | sort | tail -1)}"
+runs=("$ROOT"/runs/run-*)   # glob expansion is sorted
+RUN_DIR="${1:-${runs[${#runs[@]}-1]}}"
 [ -n "$RUN_DIR" ] && [ -d "$RUN_DIR/home/dev" ] || { echo "error: no collected run found" >&2; exit 1; }
 RUN_DIR="$(cd "$RUN_DIR" && pwd)"
 OUT="$RUN_DIR/audit"

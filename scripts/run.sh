@@ -2,7 +2,9 @@
 # Run one session of a preregistered condition, driven by the fixed procedure.
 # Env: COND (A|A2|B, required), MODEL (required; must equal PROTOCOL_MODEL),
 #      NET (allowlist|open), OFF_PROTOCOL=1 to allow a model other than PROTOCOL_MODEL.
+# shellcheck source=common.sh
 source "$(dirname "$0")/common.sh"
+# shellcheck source=../config/protocol.env
 source "$ROOT/config/protocol.env"
 
 [ -n "${COND:-}" ] || { echo "error: COND is required (A, A2 or B; see config/conditions.tsv)" >&2; exit 1; }
@@ -15,7 +17,7 @@ if [ "$COND" = TEST ]; then
   [ "${OFF_PROTOCOL:-}" = 1 ] && [ -n "${PROMPT_FILE:-}" ] || { echo "error: COND=TEST needs OFF_PROTOCOL=1 and PROMPT_FILE" >&2; exit 1; }
   IMAGE="${IMAGE:-devenv:latest}"; PROMPT_FILE="$(cd "$(dirname "$PROMPT_FILE")" && pwd)/$(basename "$PROMPT_FILE")"
   PROMPT_SHA="$(shasum -a 256 < "$PROMPT_FILE" | awk '{print $1}')"
-  RUNS_BASE="$ROOT/runs/_test"; RUN_PREFIX=test
+  RUNS_BASE="$ROOT/runs/_test"; RUN_PREFIX="test"
 else
   row="$(awk -F'\t' -v c="$COND" '$1 == c' "$ROOT/config/conditions.tsv")"
   [ -n "$row" ] || { echo "error: unknown condition $COND" >&2; exit 1; }
@@ -68,7 +70,7 @@ OPCMD_JSON="$(python3 -I -c 'import json,sys; print(json.dumps(sys.argv[1:]))' "
   echo "protocol_fixed=$PROTOCOL_FIXED"
   echo "protocol_max_replies=$PROTOCOL_MAX_REPLIES"
   echo "timeout_min=$PROTOCOL_TIMEOUT_MIN"
-  echo "prompt_file=${PROMPT_FILE#$ROOT/}"
+  echo "prompt_file=${PROMPT_FILE#"$ROOT"/}"
   echo "off_protocol=${OFF_PROTOCOL:-0}"
   echo "prompt_file_sha256=$PROMPT_SHA"
   echo "prompt_sent_sha256=$(printf '%s' "$PROMPT" | shasum -a 256 | awk '{print $1}')"

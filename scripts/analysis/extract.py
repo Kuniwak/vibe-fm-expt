@@ -11,6 +11,7 @@ contain a keyword from config/extract-keywords.json, quoted verbatim.
 import glob
 import json
 import os
+import pathlib
 import re
 import sys
 
@@ -22,7 +23,7 @@ def main():
     out = os.path.join(run, "analysis")
     os.makedirs(out, exist_ok=True)
     files = sorted(glob.glob(os.path.join(run, "record", "transcripts", "*.jsonl")))
-    rows = [json.loads(l) for f in files for l in open(f, encoding="utf-8") if l.strip()]
+    rows = [json.loads(l) for f in files for l in pathlib.Path(f).read_text(encoding="utf-8").split("\n") if l.strip()]
     rows = [r for r in rows if not r.get("isSidechain")]
     events, n, u = [], 0, 0
     for r in rows:
@@ -57,7 +58,7 @@ def main():
                 summary = body.get("command") or body.get("file_path") or json.dumps(body, ensure_ascii=False)
                 f.write(f"> [tool {k}] {str(summary).splitlines()[0][:200] if summary else ''}\n\n")
 
-    kw = json.load(open(os.path.join(ROOT, "config", "extract-keywords.json"), encoding="utf-8"))
+    kw = json.loads(pathlib.Path(ROOT, "config", "extract-keywords.json").read_text(encoding="utf-8"))
     with open(os.path.join(out, "keywords.md"), "w", encoding="utf-8") as f:
         f.write("# Keyword extraction (mechanical)\n\nKeywords: config/extract-keywords.json. Sentences quoted verbatim.\n\n")
         for cat, words in kw.items():
@@ -90,7 +91,9 @@ def main():
             f.write("(no operator log: this run was not driven by the blind operator)\n")
         else:
             q = 0
-            for line in open(op, encoding="utf-8"):
+            for line in pathlib.Path(op).read_text(encoding="utf-8").split("\n"):
+                if not line.strip():
+                    continue
                 d = json.loads(line)
                 if d.get("event") == "sent":
                     if d.get("operator_choice") == "1":

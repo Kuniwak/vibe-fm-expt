@@ -27,6 +27,7 @@ done
   echo
   echo "| コミット | 日時 | 内容 |"
   echo "|---|---|---|"
+  # shellcheck disable=SC2016  # backquotes are Markdown, not command substitution
   git log --reverse --date=iso-strict --format='| `%h` | %ad | %s |'
   echo
   echo "書き出し時点の HEAD：\`$(git rev-parse HEAD)\`$(git diff --quiet HEAD && [ -z "$(git ls-files -o --exclude-standard)" ] || echo '（未コミットの変更を含めて書き出した）')"

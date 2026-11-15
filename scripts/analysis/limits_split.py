@@ -6,6 +6,7 @@ Usage: limits_split.py RUN_DIR [RUN_DIR ...]   -> prints a table and writes RUN_
 import glob
 import json
 import os
+import pathlib
 import re
 import sys
 
@@ -17,7 +18,7 @@ KEYWORDS = ["限界", "未検証", "対象外", "範囲", "だけです", "の�
 
 def segments(run):
     rows = [json.loads(l) for f in sorted(glob.glob(os.path.join(run, "record", "transcripts", "*.jsonl")))
-            for l in open(f, encoding="utf-8") if l.strip()]
+            for l in pathlib.Path(f).read_text(encoding="utf-8").split("\n") if l.strip()]
     n, seen_fixed, out = 0, False, []
     for r in rows:
         if r.get("isSidechain"):
@@ -42,7 +43,7 @@ def main():
         cond = ""
         env = os.path.join(run, "record", "run.env")
         if os.path.exists(env):
-            for l in open(env, encoding="utf-8"):
+            for l in pathlib.Path(env).read_text(encoding="utf-8").split("\n"):
                 if l.startswith("condition="):
                     cond = l.strip().split("=", 1)[1]
         msgs, has_fixed = segments(run)

@@ -18,6 +18,7 @@ import argparse
 import fcntl
 import json
 import os
+import pathlib
 import pty
 import select
 import signal
@@ -39,8 +40,10 @@ def now():
 class Session:
     def __init__(self, a):
         self.a = a
-        self.log = open(os.path.join(a.log_dir, "terminal.log"), "ab")
-        self.oplog = open(os.path.join(a.log_dir, "operator.jsonl"), "a", encoding="utf-8")
+        # Both logs stay open for the whole session; they are closed when the process exits.
+        self.log = open(os.path.join(a.log_dir, "terminal.log"), "ab")  # noqa: SIM115
+        self.oplog = open(  # noqa: SIM115
+            os.path.join(a.log_dir, "operator.jsonl"), "a", encoding="utf-8")
         self.pid, self.fd = pty.fork()
         if self.pid == 0:
             os.execvp(a.cmd[0], a.cmd)
@@ -91,7 +94,7 @@ class Session:
     # ---------- transcript ----------
     def dexec(self, script):
         r = subprocess.run(["docker", "exec", self.a.container, "sh", "-c", script],
-                           capture_output=True)
+                           check=False, capture_output=True)
         return r.stdout
 
     def poll(self):
@@ -155,11 +158,11 @@ class Session:
 
     # ---------- operator ----------
     def operator(self, text):
-        prompt = open(self.a.operator_prompt, encoding="utf-8").read()
+        prompt = pathlib.Path(self.a.operator_prompt).read_text(encoding="utf-8")
         cmd = json.loads(self.a.operator_cmd) + ["--system-prompt", prompt]
         for attempt in range(3):
             r = subprocess.run(cmd, input=(text or "（テキストなし）").encode("utf-8"),
-                               capture_output=True, timeout=300)
+                               check=False, capture_output=True, timeout=300)
             out = r.stdout.decode("utf-8", "replace")
             try:
                 result = json.loads(out).get("result", "")

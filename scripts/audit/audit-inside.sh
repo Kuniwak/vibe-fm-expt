@@ -19,7 +19,7 @@ list -name '*.lean' > "$OUT/lean-files.txt"
 echo "lean files: $(wc -l < "$OUT/lean-files.txt")"
 {
   for pat in sorry admit axiom; do
-    echo "=== \\b$pat\\b"
+    printf '=== \\b%s\\b\n' "$pat"
     [ -s "$OUT/lean-files.txt" ] && xargs -d '\n' grep -nHwE "$pat" < "$OUT/lean-files.txt" || true
     echo
   done
@@ -29,8 +29,8 @@ echo "lean files: $(wc -l < "$OUT/lean-files.txt")"
 cat "$OUT/lean-search.txt"
 
 # Lake projects: build (full output), then axioms per theorem, module by module.
-find "${ROOTS[@]}" \( "${PRUNE[@]}" \) -prune -o -type f \( -name lakefile.lean -o -name lakefile.toml \) -print 2>/dev/null \
-  | xargs -r -n1 dirname | sort -u > "$OUT/lake-projects.txt"
+find "${ROOTS[@]}" \( "${PRUNE[@]}" \) -prune -o -type f \( -name lakefile.lean -o -name lakefile.toml \) -exec dirname {} + 2>/dev/null \
+  | sort -u > "$OUT/lake-projects.txt"
 i=0
 while read -r P; do
   i=$((i + 1)); D="$OUT/lake-project-$i"; mkdir -p "$D"; echo "$P" > "$D/path.txt"

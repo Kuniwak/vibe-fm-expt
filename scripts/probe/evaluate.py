@@ -16,6 +16,7 @@ import glob
 import hashlib
 import json
 import os
+import pathlib
 import re
 import sys
 
@@ -66,7 +67,7 @@ def parse(path):
 def interactive(tdir):
     """Parse the interactive session transcript (the one that sent a model request)."""
     for path in sorted(glob.glob(os.path.join(tdir, "**", "*.jsonl"), recursive=True)):
-        rows = [json.loads(x) for x in open(path, encoding="utf-8") if x.strip()]
+        rows = [json.loads(x) for x in pathlib.Path(path).read_text(encoding="utf-8").split("\n") if x.strip()]
         shapes = [r for r in rows if r.get("type") == "api-request-shape"]
         if not shapes:
             continue
@@ -83,7 +84,7 @@ def interactive(tdir):
                 res["mcp_pending"] += a.get("pendingMcpServers", [])
                 res["mcp_failed"] += a.get("failedMcpServers", [])
             elif a.get("type") == "skill_listing":
-                res["skills"] += re.findall(r"^- ([^:\n]+):", a.get("content", ""), re.M)
+                res["skills"] += re.findall(r"^- ([^:\n]+):", a.get("content", ""), re.MULTILINE)
             elif a.get("type") == "agent_listing_delta":
                 res["agents"] += a.get("addedTypes", [])
         for k in ("deferred", "skills", "agents"):

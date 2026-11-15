@@ -1,0 +1,9 @@
+# The base images are pinned by digest and every downloaded artifact by sha256.
+# Distribution packages are not pinned: old versions disappear from the archives,
+# so pinned versions would make the Dockerfile unbuildable. Rebuilt images may therefore
+# differ from the ones used in the runs (config/images.tsv).
+ignored:
+  - DL3008  # apt-get install without versions (see above)
+  - DL3018  # apk add without versions (see above)
+  - DL3003  # cd inside RUN: temporary directories created and removed within the same RUN
+  - DL3066  # USER dev: the user is created in the same Dockerfile with uid 1000

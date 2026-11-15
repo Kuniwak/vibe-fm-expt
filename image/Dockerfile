@@ -7,6 +7,7 @@
 
 FROM ubuntu:24.04@sha256:2198e4c65076e9cb0b3d695219df667c0e3b0072da64ca3c2648aca17dcecaf5 AS a
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ARG TARGETARCH
 ENV DEBIAN_FRONTEND=noninteractive LANG=C.UTF-8 LC_ALL=C.UTF-8
 
@@ -103,6 +104,7 @@ CMD ["bash"]
 
 # ==== Target b: TLA+ and Z3 on top of target a ===============================
 FROM a AS b
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 USER root
 ARG TARGETARCH
 
@@ -129,10 +131,11 @@ RUN set -eu; \
     echo "$TLA_SHA256  /opt/tlaplus/tla2tools.jar" | sha256sum -c -; \
     for pair in tlc:tlc2.TLC tla2sany:tla2sany.SANY pcal:pcal.trans tla2tex:tla2tex.TLA; do \
       name=${pair%%:*}; cls=${pair#*:}; \
-      printf '#!/bin/sh\nexec java -XX:+UseParallelGC -cp /opt/tlaplus/tla2tools.jar %s "$@"\n' "$cls" > /usr/local/bin/$name; \
-      chmod 755 /usr/local/bin/$name; \
+      printf '#!/bin/sh\nexec java -XX:+UseParallelGC -cp /opt/tlaplus/tla2tools.jar %s "$@"\n' "$cls" > "/usr/local/bin/$name"; \
+      chmod 755 "/usr/local/bin/$name"; \
     done; \
-    tlc -h 2>&1 | head -3
+    printf -- '---- MODULE Check ----\n====\n' > /tmp/Check.tla; \
+    (cd /tmp && tla2sany Check.tla); rm -f /tmp/Check.tla
 
 # Z3: command-line solver and Python bindings (same version).
 ARG Z3_VERSION=5.3.3
@@ -143,8 +146,8 @@ ARG Z3PY_SHA256_amd64=0431023a82278dab706c02a320f63178ee0755fb8f10a5c980f0bfe3c8
 RUN set -eu; \
     apt-get update && apt-get install -y --no-install-recommends unzip python3 python3-pip && rm -rf /var/lib/apt/lists/*; \
     case "$TARGETARCH" in \
-      arm64) z=z3-${Z3_VERSION}-arm64-glibc-2.38; s=$Z3_SHA256_arm64; w=z3_solver-${Z3_VERSION}.0-py3-none-manylinux_2_38_aarch64.whl; ws=$Z3PY_SHA256_arm64;; \
-      amd64) z=z3-${Z3_VERSION}-x64-glibc-2.39; s=$Z3_SHA256_amd64; w=z3_solver-${Z3_VERSION}.0-py3-none-manylinux_2_27_x86_64.whl; ws=$Z3PY_SHA256_amd64;; \
+      arm64) z=z3-${Z3_VERSION}-arm64-glibc-2.38; s=$Z3_SHA256_arm64; ws=$Z3PY_SHA256_arm64;; \
+      amd64) z=z3-${Z3_VERSION}-x64-glibc-2.39; s=$Z3_SHA256_amd64; ws=$Z3PY_SHA256_amd64;; \
       *) exit 1;; esac; \
     curl -sSfL -o /tmp/z3.zip "https://github.com/Z3Prover/z3/releases/download/z3-${Z3_VERSION}/${z}.zip"; \
     echo "$s  /tmp/z3.zip" | sha256sum -c -; \

@@ -3,7 +3,9 @@
 # Runs are executed in waves of PARALLEL consecutive sequence entries started together
 # (amendment in preregistration.md, 7.). After each wave: audit and extraction, one run at a time.
 # Usage: scripts/batch.sh [START_INDEX] [PARALLEL]   (START_INDEX is 1-based; default 1 and 3)
+# shellcheck source=common.sh
 source "$(dirname "$0")/common.sh"
+# shellcheck source=../config/protocol.env
 source "$ROOT/config/protocol.env"
 SEQ=(A A2 B A A2 B A A2 B)
 start="${1:-1}"; parallel="${2:-3}"
