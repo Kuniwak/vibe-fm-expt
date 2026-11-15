@@ -129,7 +129,9 @@ list -name '*.js' -o -name '*.mjs' -o -name '*.cjs' -o -name '*.ts' -o -name '*.
 # coverage/ is the nyc report written by `npm test`, not a script by the agent.
 # Keep only files that are new or changed relative to the pinned commit (files the agent committed
 # count as new); all of /tmp and the rest of home are kept.
-BASE=5166cc4ac8f1ccfac0d32ec4d2957c58642f2beb
+# The pinned commit: the recreated one (preregistration.md, 12.) or, for series-1 runs, the upstream one.
+BASE=d395aa070e17b600969e18139e43ace2fbe2f78f
+git -C /home/dev/jsdoctypeparser cat-file -e "$BASE^{commit}" 2>/dev/null || BASE=5166cc4ac8f1ccfac0d32ec4d2957c58642f2beb
 : > "$OUT/scripts.txt"
 while read -r f; do
   case "$f" in

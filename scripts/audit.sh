@@ -13,7 +13,9 @@ rm -rf "$OUT"; mkdir -p "$OUT"
 
 NAME="$(new_name)"
 # Audit with the same image the run used (tools such as tlc/z3 exist only in devenv-b).
-RUN_IMAGE="$(sed -n 's/^image=//p' "$RUN_DIR/record/metadata.txt" 2>/dev/null)"
+# By ID when recorded, so series-1 runs are audited in the series-1 image (preregistration.md, 12.).
+RUN_IMAGE="$(sed -n 's/^container_image_id=//p' "$RUN_DIR/record/metadata.txt" 2>/dev/null)"
+[ -n "$RUN_IMAGE" ] || RUN_IMAGE="$(sed -n 's/^image=//p' "$RUN_DIR/record/metadata.txt" 2>/dev/null)"
 IMAGE="${RUN_IMAGE:-$IMAGE}"
 # No token, no agent; network open so Lake can re-fetch package checkouts that collect left out.
 docker create --name "$NAME" --user "$IN_USER" -w "$IN_HOME" "$IMAGE" sleep infinity >/dev/null

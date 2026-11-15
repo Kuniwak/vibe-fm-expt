@@ -75,6 +75,9 @@ RUN npm install -g "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}" \
 # ---- Target repository -------------------------------------------------------
 ARG REPO_URL=https://github.com/jsdoctypeparser/jsdoctypeparser.git
 ARG REPO_COMMIT=5166cc4ac8f1ccfac0d32ec4d2957c58642f2beb
+# The pinned commit recreated with the build fix below (same tree except package.json,
+# same parent, author, committer, dates and message), so the hash is deterministic.
+ARG REPO_BASE=d395aa070e17b600969e18139e43ace2fbe2f78f
 USER dev
 COPY --chown=dev:dev skel/.gitconfig /home/dev/.gitconfig
 RUN set -eu; \
@@ -82,15 +85,27 @@ RUN set -eu; \
     cd /home/dev/jsdoctypeparser; \
     br=$(git symbolic-ref --short HEAD); \
     git checkout --quiet -B "$br" "$REPO_COMMIT"; \
+    test "$(git rev-parse HEAD)" = "$REPO_COMMIT"; \
+    # Build fix (preregistration.md, 12.): frs-replace reads stdin until EOF before anything
+    # else, so `-i <file>` hangs whenever stdin is an open pipe. Feed the grammar on stdin
+    # instead; the generated peg_lib files are byte-identical.
+    sed -i "s# -i './peg_src/jsdoctype.pegjs' --stdout# < ./peg_src/jsdoctype.pegjs#" package.json; \
+    test "$(grep -c '< ./peg_src/jsdoctype.pegjs' package.json)" = 3; \
+    GIT_COMMITTER_NAME="$(git log -1 --format=%cn)" GIT_COMMITTER_EMAIL="$(git log -1 --format=%ce)" \
+      GIT_COMMITTER_DATE="$(git log -1 --format=%cd --date=raw)" \
+      git commit --quiet --amend --no-verify -C HEAD -- package.json; \
+    test "$(git rev-parse HEAD)" = "$REPO_BASE"; \
+    for t in $(git tag --points-at "$REPO_COMMIT"); do test "$(git cat-file -t "refs/tags/$t")" = commit; git update-ref "refs/tags/$t" "$REPO_BASE"; done; \
     # Drop refs that point past the pinned commit so later upstream history is not reachable;
     # origin/<default branch> and origin/HEAD are kept, pointing at the pinned commit.
     git for-each-ref --format='%(refname)' refs/remotes | xargs -r -n1 git update-ref -d; \
-    git update-ref "refs/remotes/origin/$br" "$REPO_COMMIT"; \
+    git update-ref "refs/remotes/origin/$br" "$REPO_BASE"; \
     git symbolic-ref refs/remotes/origin/HEAD "refs/remotes/origin/$br"; \
     git branch --quiet --set-upstream-to="origin/$br"; \
     for t in $(git tag); do git merge-base --is-ancestor "$t" HEAD || git tag -d "$t" >/dev/null; done; \
     git reflog expire --expire=now --all; git gc --quiet --prune=now; \
-    test "$(git rev-parse HEAD)" = "$REPO_COMMIT"; \
+    test "$(git rev-parse HEAD)" = "$REPO_BASE"; \
+    if git cat-file -e "$REPO_COMMIT" 2>/dev/null; then echo "original commit still reachable" >&2; exit 1; fi; \
     npm ci --no-audit --no-fund; \
     git status --short | head; \
     rm -rf /home/dev/.npm

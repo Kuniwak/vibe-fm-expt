@@ -22,7 +22,11 @@ MATHLIB_TAG="v4.35.0"
 # shellcheck disable=SC2034
 MATHLIB_REV="56a005855ea17e0b0958f73ec801ae140b0a1679"
 # shellcheck disable=SC2034
-REPO_COMMIT="5166cc4ac8f1ccfac0d32ec4d2957c58642f2beb"
+REPO_COMMIT="d395aa070e17b600969e18139e43ace2fbe2f78f"
+# Upstream commit that REPO_COMMIT recreates with the build fix (preregistration.md, 12.).
+# Runs before the fix (series 1, run-01..run-18) were made on this commit itself.
+# shellcheck disable=SC2034
+REPO_UPSTREAM_COMMIT="5166cc4ac8f1ccfac0d32ec4d2957c58642f2beb"
 
 NET_MODE="${NET:-allowlist}"          # allowlist | open
 MODEL="${MODEL:-}"                    # empty = Claude Code default

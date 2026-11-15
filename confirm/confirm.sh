@@ -9,10 +9,14 @@ RUN_DIR="$(cd "$1" && pwd)"; WHAT="${2:-recipe}"
 RUN="$(basename "$RUN_DIR")"
 RECIPE="$ROOT/confirm/recipes/$RUN.sh"
 [ "$WHAT" = suite ] || [ -f "$RECIPE" ] || { echo "no recipe for $RUN" >&2; exit 1; }
-IMAGE="$(sed -n 's/^image=//p' "$RUN_DIR/record/metadata.txt")"
+# The exact image the run used (by ID), so series-1 runs are checked in the series-1 image.
+IMAGE="$(sed -n 's/^container_image_id=//p' "$RUN_DIR/record/metadata.txt")"
+[ -n "$IMAGE" ] || IMAGE="$(sed -n 's/^image=//p' "$RUN_DIR/record/metadata.txt")"
 OUT="$RUN_DIR/confirm/$WHAT"; mkdir -p "$OUT"
 REPO="$RUN_DIR/home/dev/jsdoctypeparser"
-BASE=5166cc4ac8f1ccfac0d32ec4d2957c58642f2beb
+# The pinned commit: the recreated one (preregistration.md, 12.) or, for series-1 runs, the upstream one.
+BASE=d395aa070e17b600969e18139e43ace2fbe2f78f
+git -C "$REPO" cat-file -e "$BASE^{commit}" 2>/dev/null || BASE=5166cc4ac8f1ccfac0d32ec4d2957c58642f2beb
 # Does the agent's tree differ from the pinned commit in the library? Then also run on the original library.
 modes=(tree)
 git -C "$REPO" diff --quiet "$BASE" -- lib peg_src peg_lib index.js || modes+=(orig)

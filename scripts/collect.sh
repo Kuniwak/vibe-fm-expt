@@ -59,6 +59,7 @@ print(", ".join(f"{k} ({v} msgs)" for k, v in seen.items()) or "<none>")
   echo "$VERS"
   echo "mathlib_cached=$MATHLIB_TAG ($MATHLIB_REV)"
   echo "target_repo_commit=$REPO_COMMIT"
+  echo "target_repo_upstream_commit=$REPO_UPSTREAM_COMMIT"
   echo "image=$IMAGE"
   echo "image_id=$IMAGE_ID"
   echo "container_image_id=$CONTAINER_IMAGE"
