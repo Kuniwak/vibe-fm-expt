@@ -23,6 +23,11 @@ def segments(run):
     for r in rows:
         if r.get("isSidechain"):
             continue
+        a = r.get("attachment") if isinstance(r.get("attachment"), dict) else {}
+        if r.get("type") == "attachment" and a.get("type") == "queued_command" and a.get("prompt") == FIXED:
+            # the fixed message delivered inside a running turn (run-06)
+            seen_fixed = True
+            continue
         m = r.get("message") if isinstance(r.get("message"), dict) else None
         if not m:
             continue
