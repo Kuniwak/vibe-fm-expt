@@ -1,0 +1,4 @@
+run	id	oracle_class	asserted_defect	note
+run-21	F1	汎用;自作;リポジトリ内	yes #3	再 parse できる＝汎用（変更2の1、出力器の出力を同じパーサーで再び parse できる）。往復で同じ AST（deepStrictEqual）＝自作。MEMBER.name は文字列＝リポジトリ内（schemas/MemberNode.json の name: {type: string}。被験側が読んだかは問わない）。断定は #3「The fuzz found one real bug.」、#6「実際のバグが 1 件」「見つかったバグ: … 壊れる」でも。
+run-21	F2	自作	no	往復で同じ AST だけに照らす。【リポジトリ内のオラクルと逆】tests/test_publishing.js 476-480行が 'goog.ui.Component?'→'?goog.ui.Component'、415-418行が 'module:foo/bar?'→'?module:foo/bar' を期待。#6 では「意図的な正規化だと思われます」とし、欠陥と断定していない（#7 は固定発言の後で範囲外）。
+run-21	F3	自作	no	往復で同じ AST だけに照らす。【リポジトリ内のオラクルと逆】tests/test_publishing.js 488-492行が 'Object!'→'!Object' を期待。#6 で「意図的な正規化だと思われます」とし、断定していない。

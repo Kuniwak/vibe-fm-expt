@@ -1,0 +1,11 @@
+run	id	oracle_class	asserted_defect	note
+run-20	F1	リポジトリ内;自作;汎用	yes #15	WellFormed の型は lib/parsing.js の AstNode typedef と schemas/MemberNode.json（name: string、call 9 で読んだ）による→リポジトリ内。TraverseComplete は自作。再parse可能は汎用。断定：#15 R1 行「publish の結果も壊れる」、見出し「実バグ4件」。#19「R1 は…バグと言い切れる」もある。
+run-20	F2	汎用;自作	yes #15	再parse可能（汎用）、RoundTrip（自作）。断定：#15 R2 行「正規化が、内側も接頭辞のときに壊れる」。#15 に「よければ R2〜R4 はバグとして確定します」の条件つきの文もある（別の節）。
+run-20	F3	自作	yes #15	normalize 後の同じ AST（自作）。`!??` は再parse できるので汎用の違反はない。断定：#15 R2 行「壊れる」（`??!` → `!??` を同じ行に例示）。同上の条件つきの文あり。
+run-20	F4	汎用	yes #15	再parse可能（汎用）。断定：#15 R3 行「誤読される」と見出し「見つかったバグ」。「誤読」を評価の語と読んだ。
+run-20	F5	自作	yes #15	normalize 後の同じ AST（自作）。断定：#15 見出し「実バグ4件」「### 見つかったバグ」の表に R4 を挙げた。R4 行そのものは「黙って別の型になる」で評価の語を含まない。#15 の「よければ R2〜R4 はバグとして確定します」は条件つき。#16「既知のバグ」、#19「バグ修正：R1〜R4」もある。
+run-20	F6	リポジトリ内;汎用	no	README のサンプル（リポジトリ内）と TypeError で落ちない（汎用）。#15「ドキュメントとの食い違い」「TypeError で落ちます」は挙動の記述で、評価の語なし。
+run-20	F7	リポジトリ内	no	schemas/NodeType.json と lib/NodeType.js の一致。#15「欠けています」は挙動の記述。
+run-20	F8	リポジトリ内	no	README（call 3 で読んだ）の EXTERNAL の構造。schemas/ExternalNode.json は被験側が読んでいない。#15「実装と違います」は評価の語なし。
+run-20	F9	外部	no	JSDoc での慣用。#15 で「意図的でしょうか」と尋ねた。
+run-20	F10	自作	no	permissive が他モードの上位互換（ModeSubset）は、README・lib に記述がなく被験側が立てた性質。#15 で尋ねた。

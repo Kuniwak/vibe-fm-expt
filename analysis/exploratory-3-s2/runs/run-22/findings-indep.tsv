@@ -1,0 +1,7 @@
+run	id	oracle_class	asserted_defect	note
+run-22	F1	汎用;リポジトリ内	yes #2	再 parse できること（P3-reparse）は汎用。MEMBER の name が文字列であることは lib/parsing.js の typedef（`@property {string} [name]`）と schemas/MemberNode.json（name: string）にあるリポジトリ内のオラクル。#2 の「見つかったバグ」の1と「壊れた文字列」で断定。#8 の「修正したバグ」1 でも断定。
+run-22	F2	汎用	yes #2	出力器の出力を再 parse できる（汎用）。#2 の「実際のバグを2件確認」のバグ2の箇条書きに含まれる。#8 の表の2でも。
+run-22	F3	汎用	yes #2	F2 と同じ。
+run-22	F4	自作	yes #2	往復で同じ木（meta を除く JSON の一致）は汎用に入らない（変更2の1）ので自作。リポジトリ内のテストは `Object!` → `!Object` と前置に揃えることを期待しているが、`??!` の入れ子が逆転することまでを期待しているわけではないので、【リポジトリ内のオラクルと逆】とはしなかった。#2 のバグ2（「実際のバグを2件確認」）の箇条書きに含まれ、#8 の表の2（修正したバグ）にも `??!` が明記されている。
+run-22	F5	汎用	yes #4	再 parse できる（汎用）。#4「exposed a third one」（a third bug の意）で断定。#8 の表の3（修正したバグ）でも。元のコードにもある不一致で、被験側の修正で生じたものではない（元の publish も常に前置で出す）。
+run-22	F6	汎用	yes #8	内部エラー（TypeError）で落ちない（汎用）。#7 は「counterexample」「crashes」で、挙動の記述にとどまる。断定は #8「4件のバグを修正し」と表の4（修正したバグ）。#9 の「4つ目のバグ」は固定発言の後なので数えない。

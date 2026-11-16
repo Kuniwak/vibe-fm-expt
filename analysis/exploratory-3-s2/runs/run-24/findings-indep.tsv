@@ -1,0 +1,6 @@
+run	id	oracle_class	asserted_defect	note
+run-24	F1	汎用;自作	yes #1	#1「fix both bugs: ... the publisher (suffix forms)」で後置形の出力を欠陥と断定。#8 で「見つかったバグ」の項目1の例「`!Foo!` は `!!Foo` として出力され、これは構文エラーになります」。オラクルは、出力器の出力を再 parse できる（汎用、call 5 の ERR）と往復で同じ木（自作）。
+run-24	F2	自作	yes #1	#1 の「the publisher (suffix forms)」に含まれる（call 8 で観測済み）。#8 で項目1の例として明示「`keyof Array![]` は `keyof !Array[]` として出力され、型の意味が変わります」。再 parse はでき、木が違うだけなので往復の一致（自作）だけ。
+run-24	F3	自作	yes #1	【リポジトリ内のオラクルと逆】tests/test_publishing.js 417・478・490 行が前置への正規化を期待（call 22・23）、call 24 で期待値を書き換え。#1「suffix forms」の欠陥、#8 項目1「後置の `?` / `!` / `...` が前置で出力される」（見出し「見つかったバグ」）と「この正規化がバグ 1 の原因」。オラクルは meta.syntax を含む往復の一致（自作）。
+run-24	F4	自作	yes #1	#1「suffix forms」（call 7 で `a...`→`...a` を観測した後、修正に SUFFIX_DOTS を含めた call 17）。#8 項目1で `...` を明示。meta.syntax だけの違いで、往復の一致（自作）。既存テストに後置 `...` の期待はなく、call 24 で `number...`→`number...` のテストを追加。
+run-24	F5	汎用;リポジトリ内;自作	yes #1	#1「fix both bugs: the parser (`typeof a.b`)」、#8「`typeof a.b` の AST が壊れている」。汎用：publish の出力が再 parse で SyntaxError（call 5）。リポジトリ内：lib/parsing.js の AstNode typedef `@property {string} [name]`（入力の oracle 欄の「MEMBER.name が文字列」を、この型定義と読み直した。被験側は call 3 で parsing.js の冒頭60行を読んでいる）。自作：往復で同じ木、parse(`a.b`) との形の比較（call 11）。

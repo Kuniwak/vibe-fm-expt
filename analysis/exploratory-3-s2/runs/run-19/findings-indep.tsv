@@ -1,0 +1,10 @@
+run	id	oracle_class	asserted_defect	note
+run-19	F1	汎用	yes #4	P2（publish の出力を同じモードで再 parse できる）は汎用。P2 の失敗では P3 を検査しない（check.js の continue）。#4 の見出し「見つかった不具合」と「文字列に戻した結果が壊れる」の例に ?a? が入っている。
+run-19	F2	自作	yes #4	??!→!?? は再 parse でき、別の木になる。照らしたのは norm 付きの P3（往復で同じ木）だけで、汎用に入らない。#4 の「壊れる」の例に ??! が入り、#11・#13 でも「不具合」の対象に挙がる。リポジトリ内のテストの期待値 ??!→??! は被験側が call 11 で書き加えたもので、主張の前の既存オラクルではない。
+run-19	F3	汎用	yes #11	keyof a?→keyof ?a の再 parse 失敗（call 12）。#11「publish の不具合を修正しました」の表に keyof a? の行。
+run-19	F4	汎用	yes #11	keyof a?=→keyof ?a= の再 parse 失敗（call 20）。#11 の「不具合」の表に keyof a?= の行。
+run-19	F5	自作	no	自作の修正（call 15・22）で生じた、keyof(?a=) の再 parse で PARENTHESIS が1つ増える不一致（call 21）。#11 で「意味は同じです」と評価し、norm で同一視した。断定はない。
+run-19	F6	リポジトリ内;自作	yes #13	keyof ?a の SyntaxError（call 13・14）。文法の KeyQueryExprOperand は UnaryUnionTypeExpr（接頭辞の ?/! を含む）をオペランドに挙げており（call 13 の grep 出力）、これをリポジトリ内のオラクルとみなした。ただし PEG の順序つき選択の下では文法全体としてはこの入力を受理しないので、期待の根拠としては弱く、被験側自身の期待（自作）も併記した。断定は #13「keyof ?a がパースできない問題」の「問題」を評価の語とみなした（#11 の「文法側の曖昧さ」、#14・#15 の「文法側の問題」も同じ）。「問題」を評価の語に含めなければ no。
+run-19	F7	自作	yes #18	自作の修正で生じた不一致（keyof の回避策と文法の修正の組合せ）。照らしたのは test_roundtrip（normalize 後の一致）。call 38 の失敗が再 parse の失敗か木の違いかは記録から区別できない（テストは両方を同じ失敗として集める）。再 parse の失敗なら汎用も当たる。断定は #18「keyof !? を正しく元に戻せないという副作用」の「正しく…ない」「副作用」を評価の語とみなした。
+run-19	F8	自作	no	a?→?a の meta.syntax の変化。norm を入れる前の P3（deepStrictEqual）に対する不一致。被験側は #4 で「設計上の仕様として除外」。既存のテスト（module:foo/bar?→?module:foo/bar ほか）はこの挙動を期待している。
+run-19	F9	自作	no	b...→...b の meta.syntax の変化。norm を入れる前の P3 に対する不一致。#4 の除外に含めて扱った。既存のテストに b...→...b の期待値は見当たらない。

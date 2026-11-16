@@ -1,0 +1,48 @@
+run	id	claim_kind	holds_claim	gap_object	gap_oracle	gap_range	gap_assumption	solo_gap_object	solo_gap_oracle	solo_gap_range	solo_gap_assumption	gap_direction	note
+run-26	C2	その他	no	なし	超えた	なし	なし	なし	超えた	なし	なし	その他	「根本原因ごとに分かれて見える」。call 26 の分類は最小の失敗部分木の形（sig）であり、根本原因ではない。B3 は NOT_NULLABLE/SUFFIX_BANG(...) など複数の束に分かれ、MEMBER(FILE_PATH) の束も B3 の重ね掛けである。分類と根本原因の対応は誰も確かめていない。検査の表示についての文なので向きは「その他」とした（成立側とする読みもありうる。notes.md）
+run-26	C6	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	call 7：335 passing、All files 100%。反例は call 26/27。「反例」は評価の語でない
+run-26	C9	その他	no	なし	なし	なし	超えた	なし	なし	超えた	超えた	成立側	「全列挙」。同じ #13 に「短い文字列 (長さ7まで) を全通り」（やったこと／入力）があるので範囲はなし（単独では超えた）。check.js の codecStrings は文字集合 {a, \, ', ", LF} だけを列挙しており、「この5文字で全文字を代表できる」はコードのコメント（The codec only distinguishes ...）で述べた前提で、誰も確かめていない。発言はこれを述べていないので仮定は超えた
+run-26	C16	成立	yes	なし	なし	なし	超えた	なし	なし	超えた	超えた	成立側	「全文脈・両方の引用符で成り立ちました (約98万件)」。文脈5種×引用符2種は CodecInverse で覆われている（call 26：checked=976560 violations=0）。文字列の範囲は同じ #13 の「短い文字列 (長さ7まで) を全通り」が限定しているのでなし（単独では超えた）。文字集合を5文字に抽象した前提は述べていないので仮定は超えた。parse は permissive モードだけ
+run-26	C18	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「壊れた文字列になる」は評価の語（断定）。照らしたのは再 parse できるか（汎用）で、call 8 の REPARSE-ERR で確かめている。オラクルはなし
+run-26	C19	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「本来文字列のはずの name」。根拠は schemas/MemberNode.json の name: string と README の MEMBER の name: string（リポジトリ内）。call 21 の MEMBER.name: schema says string, got object
+run-26	C20	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	call 26：TraverseExact NAME visited 0 times
+run-26	C22	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	call 8：PUBLISH-THROW Cannot read properties of null。TypeError は汎用。「想定していません」は評価の語でない
+run-26	C23	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「読み戻せない、または意味が変わる」は挙動の記述で、評価の語ではない。call 8 と call 26/35 の例で確かめている
+run-26	C24	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	call 8：!X? → ?!X REPARSE-ERR
+run-26	C25	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	call 35：ARROW(=>GENERIC<NOT_NULLABLE(NAME)>) → publish () => !a[] → GENERIC<ARROW(...)>
+run-26	C26	不一致	no	なし	なし	超えた	なし	なし	なし	超えた	なし	成立側	前半（?string[] と !Foo[] が4モードとも構文エラー）は call 28 で確かめている。後半の「常に負けて、一度も使われない」は全称の主張だが、根拠は文法を読んだ推論（思考の中の「dead branch です」）と数件の例だけで、到達不能を確かめた成果物はない。範囲は超えた。コードの挙動を証拠より広く述べているので向きは成立側
+run-26	C28	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	call 35：() => a[] は ARROW(=>GENERIC)、() => !a[] は GENERIC<ARROW>
+run-26	C29	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	call 28：?[][] は jsdoc では OK、permissive では ERR。「包含していない」は事実の記述
+run-26	C30	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	トップレベルは call 28 で4モードとも NULLABLE。関数の引数の中で KEY_QUERY になるのは permissive だけ（call 27：jsdoc/closure では NULLABLE）。モードを書いていない文は既定のモード（permissive）について述べたものと読み、なしとした（notes.md）
+run-26	C31	不一致	no	なし	両論	なし	なし	なし	超えた	なし	なし	不一致側	【両論】「スキーマとしても不正」は評価の語で、照らしたのは JSON Schema の仕様（外部。検査は被験側の lint）。同じ #13 の別の節「確認していただきたいこと」に「意図した仕様なのかバグなのかは、こちらでは決められません」がある。前半の「実装と食い違い」「10 種類のノードが無く」は call 21 で確かめている（NodeType.json に無い型が10種）
+run-26	C32	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	call 21：SchemaWellFormed violations=7。「無効」は不適合の記述と読み、断定には数えなかった
+run-26	C34	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	call 32 で実装は UNION right=OPTIONAL(FUNCTION) になっている。テスト（test_parsing.js:1941）は `?` の形（Foo|function():Returned?）で、`=` の形ではない。コメントは後置の演算子一般について述べているので、なしとした（notes.md）
+run-26	C35	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	call 8：PARSE-ERR（既定のモード）
+run-26	C37	不一致	no	なし	両論	なし	なし	なし	超えた	なし	なし	不一致側	【両論】「各バグの修正」で、#13 の8項目すべてをバグと呼んでいる。そのうち F5・F12・F13・F14・F15・F16 は自作のオラクルだけ、F18 は外部のオラクルだけに照らしているので超えた。F1・F2・F3・F10・F17 はなし。同じ #13 の「確認していただきたいこと」に「意図した仕様なのかバグなのかは、こちらでは決められません」がある（別の節）
+run-26	C38	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「README / traverse / 文法が既に『あるべき姿』を宣言」。README の MEMBER name: string、traversing.js の NAMED_PARAMETER typeName: NULLABLE_NODE、文法の typeName 省略可（いずれもリポジトリ内）。「一箇所だけが外れている」も、実際の修正が1箇所で済んだこと（call 54/55）と矛盾しない
+run-26	C40	成立	yes	なし	なし	なし	なし	なし	なし	超えた	なし	—	根拠の成果物を選び直した：call 54（npm test 338 passing）と call 55（全量の検査で PublishTotal 0、TraverseExact 0）。同じ #17 に「違反ゼロ (各 74.6 万件)」があるので範囲はなし（単独では超えた）。「意図がはっきりしている」の根拠はリポジトリ内のオラクル（C38 と同じ）
+run-26	C58	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	call 8（!X? → ?!X）と、テスト「?!string はエラーになるべき」（call 46 の出力：should throw an error when "?!string" arrived）。リポジトリ内のオラクル
+run-26	C59	不一致	no	なし	超えた	なし	なし	なし	超えた	なし	なし	不一致側	「B3 はほぼ確実にバグです」。「ほぼ確実に」は「候補」「疑い」の類の留保とは読まず、断定とした。B3 は複数の発見のまとめで、根拠に挙げたテストとの矛盾は再 parse できない形（F3）にしか当たらない。F4（??!）、F5（() => a![]）、F7（keyof keyof [] ?）は自作の RoundTripEq／PublishFixpoint だけに照らしているので超えた
+run-26	C68	成立	yes	なし	なし	超えた	なし	超えた	なし	超えた	なし	成立側	「出力が変わるのは、これまで誤った文字列を出していた入力だけです」は全称の主張。修正の前後で publish の出力を突き合わせた成果物はなく、根拠は修正の箇所の構成と、限られた入力の検査（call 69、73）だけ。範囲は超えた。同じ #24 の「カスタム publisher の制約」が対象（既定の publisher）を限定しているので、対象はなし（単独では超えた）
+run-26	C69	成立	yes	なし	なし	なし	なし	なし	超えた	なし	なし	—	「全量の検査で」と範囲を明示しており、call 83（RoundTripEq 746,236 件、PublishFixpoint 746,236 件、違反0）と一致する。RoundTripEq は normalize（NULLABLE/NOT_NULLABLE の meta を消す）のあとで比べているので、「別の構文木」は厳密な同一ではない。同じ #24 に「既存テストが定めている Object! → !Object の正規化を残しています」があるので、オラクルはなし（単独では超えた）
+run-26	C70	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	リポジトリ内のテストとの矛盾。call 8 と call 46
+run-26	C71	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	call 66：THROWS Cannot read properties of undefined (reading 'syntax')。README の例（リポジトリ内）と TypeError（汎用）。「落ちていました」は評価の語でない
+run-26	C74	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	call 83：PublishReparses 29（KEY_QUERY(UNION) 15、KEY_QUERY(INTERSECTION) 14）
+run-26	C87	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	call 94（README の EXTERNAL value: node、VARIADIC value: node (or null)）と call 88（実装の形 EXTERNAL name・quoteStyle）。照らしたのは README（リポジトリ内）
+run-26	C88	成立	yes	なし	なし	超えた	なし	なし	なし	超えた	なし	成立側	「成り立つことを確認した性質: 次の8つは違反ゼロ」。#27 に入力の範囲の限定がない。証拠は call 83 の全量（74.6 万件。列挙は記号4個まで、ランダム30万件、fixtures）と、call 92/93（--quick）
+run-26	C89	成立	yes	なし	なし	超えた	超えた	なし	なし	超えた	超えた	成立側	#27 に範囲の限定がない。証拠は長さ7までの文字列（call 83：CodecInverse 976,560 件、CodecRawStable 11,106 件）で、文字集合を5文字に抽象した前提（C16 と同じ）も述べていない
+run-26	C90	成立	yes	なし	なし	超えた	なし	なし	なし	超えた	なし	成立側	call 83：PublishTotal 746,265 件で違反0。入力は列挙、ランダム、fixtures を parse した木だけで、手で組んだ木（B9 の型）は含まない。#27 に範囲の限定がない
+run-26	C91	成立	yes	なし	超えた	超えた	なし	なし	超えた	超えた	なし	成立側	「publish した文字列を読み戻すと同じ構文木になる」。RoundTripEq は再 parse に成功した 746,236 件だけを、normalize のあとで比べている。同じ時点で PublishReparses は 29 件の違反（読み戻せない）がある（call 83）。#27 には正規化の注記がなく、「B3 の残り 29 件 (keyof a!|[] の形)」も、読み戻せないことは書いていない。オラクルと範囲は超えた
+run-26	C92	成立	yes	なし	なし	超えた	なし	なし	なし	超えた	なし	成立側	call 83：PublishFixpoint 746,236 件で違反0。#27 に範囲の限定がない
+run-26	C93	成立	yes	なし	なし	超えた	なし	なし	なし	超えた	なし	成立側	call 83：TraverseExact 746,265 件で違反0。#27 に範囲の限定がない
+run-26	C94	成立	yes	なし	なし	超えた	なし	なし	なし	超えた	なし	成立側	call 92（--quick）：SchemaConforms 792,954 件で違反0。スキーマは、実装の出力を集計して被験側が書き直したもの。同じ #27 の「実際に出てくるノードの形を集計してから書き直しました」が述べているので、オラクルはなし。範囲は --quick の入力だけで、#27 に限定がない
+run-26	C95	成立	yes	なし	超えた	なし	なし	なし	超えた	なし	なし	成立側	「スキーマ自体が正しく書かれている」。SchemaWellFormed（call 93、checked=30）は、被験側の lint（キーワード7つだけを許す。$ref はファイルが存在するか、oneOf の要素が object か、type の値）だけを調べている。「正しく」はそれより広い。30 ファイル全部を調べているので、範囲はなし
+run-26	C96	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	call 88：ARROW new=null|string:new。照らしたのは lib/parsing.js の型注釈 @property {AstNode} [new]（リポジトリ内）。「食い違い」は評価の語でない
+run-26	C97	不一致	no	なし	超えた	なし	なし	なし	超えた	なし	なし	不一致側	「答えは『バグはありました』」。続く文で B1・B2・B3・B8・B9 をバグに含め、「残り」として B4〜B7 も含めている。B3 の F4・F5・F7 は自作のオラクルだけ、B8 の F18 は外部のオラクルだけに照らしているので超えた。同じ #29 の「B4〜B7 … プロジェクトの方針として決める必要」は B4〜B7 についての限定で、B3 と B8 には及ばない
+run-26	C98	不一致	no	なし	超えた	なし	なし	なし	超えた	なし	なし	不一致側	「意図がはっきりしていた5件 (B1・B2・B3・B8・B9)」。B3 には自作のオラクルだけの発見（F4・F5・F7）が、B8 には外部のオラクルだけの発見（F18）が含まれる。3コミット（call 86 の2件と call 97）は記録と一致する
+run-26	C109	成立	yes	なし	なし	なし	なし	なし	なし	超えた	なし	—	call 108：lost: 0。範囲は同じ #33 の親の箇条「約140万通りの記号の並び × 4モード」が限定している（単独では超えた）。列挙に使った記号は17種、長さ5まで
+run-26	C111	成立	yes	なし	なし	なし	なし	なし	なし	超えた	なし	—	「読み方が変わるのはここだけ」は、親の箇条（約140万通りの記号の並び）の中の文として読んだ。call 108 は changed: 32 で、出力したのは例の6件だけ。「実データには該当がありません」は call 107（fixtures 全行×4モードで差は0）。単独では範囲を超えた
+run-26	C114	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	call 117：string?[]・string[]!・string[]? は ERR（既定のモード）。TODO は call 30（pegjs:777「Some[]![]」）
+run-26	C115	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	call 28／107：?[] は jsdoc で GENERIC<UNKNOWN>、permissive で NULLABLE(TUPLE)
+run-26	C117	成立	yes	なし	超えた	なし	なし	なし	超えた	なし	なし	成立側	この1行には成立（?[][] の不整合は消えた）と不一致（??[] は jsdoc でだけ受理される）が混じっている。超えたのは成立の側。call 115 では ?[][] は両方のモードで受理されるようになったが、jsdoc は GENERIC<GENERIC<UNKNOWN>>、permissive は NULLABLE(GENERIC<TUPLE>) と、木はまだ違う。同じ #33 で B6 を「読み方がモードで違う」と定義しているので、その意味ではまだ不整合がある。??[] の部分は call 115 と一致する
+run-26	C118	その他	no	証拠なし	証拠なし	証拠なし	証拠なし	証拠なし	証拠なし	証拠なし	証拠なし	—	「退行ではなく、もともとの曖昧さの別の現れです」。原因の帰属を確かめた成果物はない。call 115 では、??[] は変更前は両モードとも ERR で（ModeSubset を満たしていた）、変更後は jsdoc でだけ受理される。ModeSubset に照らせば新しい違反になる。「意図に反しない」とは述べていないので、変更2の2 の対象にはしなかった
