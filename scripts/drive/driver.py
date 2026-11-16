@@ -223,7 +223,15 @@ class Session:
         for q in qinput.get("questions", []) or [{}]:
             for _ in range(len(q.get("options", []))):
                 self.key(b"\x1b[B")
-            self.type(self.a.reply, enter=True)
+            if q.get("multiSelect"):
+                # In a multi-select question, typing into the free-text entry ticks it and Enter would
+                # untick it. The entry right below it ("Next", or "Submit" for the last question)
+                # moves on, so type without Enter, step down once, and press Enter there.
+                self.type(self.a.reply, enter=False)
+                self.key(b"\x1b[B")
+                self.key(b"\r")
+            else:
+                self.type(self.a.reply, enter=True)
             self.pump(1.5)
         # A review screen may follow; press Enter once more only if the dialog is still open.
         for _ in range(5):
@@ -233,6 +241,13 @@ class Session:
                 break
         else:
             self.key(b"\r")
+            for _ in range(5):
+                self.pump(1)
+                self.poll()
+                if not self.dialog_open(qid):
+                    break
+            else:
+                self.record(event="dialog_still_open", tool_use_id=qid)
         self.handled_questions.add(qid)
 
     def dialog_open(self, qid):
