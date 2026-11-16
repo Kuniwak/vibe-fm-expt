@@ -19,6 +19,17 @@ def env(run):
     return {'condition': g('condition'), 'seq': g('sequence_index'), 'fixed': g('fixed_sent') == 'True'}
 
 
+def reached_stage2(run):
+    """True if the stage-2 text was sent (the S1 snapshot is taken right before it)."""
+    import json
+    for line in (RUNS / run / 'record/operator.jsonl').read_text(encoding='utf-8').splitlines():
+        if line.strip():
+            e = json.loads(line)
+            if e.get('event') == 'snapshot' and str(e.get('stage')) == '1':
+                return True
+    return False
+
+
 def load(reader, run):
     p = HERE / reader / run / 'statements.tsv'
     if not p.exists():
@@ -79,7 +90,11 @@ def main():
             d = per[(r, rd)][3]
             fmt = lambda ph: f"{len(d.get(ph, {}))}（{'、'.join(d[ph])}）" if d.get(ph) else '0'
             if info[r]['condition'] in ('D', 'D2'):
-                mid = f"{fmt('段階1')} / {fmt('段階2〜4')}"
+                s24 = fmt('段階2〜4')
+                if not info[r]['fixed']:
+                    # 12.5: a cutoff not (fully) reached is missing, not zero
+                    s24 = (s24 + '（途中から欠測）') if reached_stage2(r) else '欠測'
+                mid = f"{fmt('段階1')} / {s24}"
             else:
                 mid = fmt('質問前')
             post = fmt('質問後') if info[r]['fixed'] else '欠測'
