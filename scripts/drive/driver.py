@@ -31,6 +31,9 @@ import time
 ROWS, COLS = 50, 200
 QUIET_SECS = 20          # transcript and processes must be quiet this long before acting
 POLL_SECS = 2
+# Preregistration 12.5: once the agent's turn has ended, leftover child processes (e.g. a background
+# wait that never finishes) delay the operator by at most this long.
+BUSY_GRACE_SECS = 600
 
 
 def now():
@@ -53,6 +56,8 @@ class Session:
         self.tfile = None
         self.texts = []           # (number, text) of every agent display-text block
         self.turn_ends = 0
+        self.turn_end_at = None   # time.time() of the latest turn end
+        self.grace_recorded = 0   # turn_ends value for which the grace event was recorded
         self.in_turn = False   # True from the first user/assistant record after a turn end until the next turn end
         self.handled_turns = 0
         self.last_change = time.time()
@@ -128,6 +133,7 @@ class Session:
             if d.get("type") == "system" and d.get("subtype") == "turn_duration":
                 self.turn_ends += 1
                 self.in_turn = False
+                self.turn_end_at = time.time()
             elif d.get("type") in ("user", "assistant"):
                 # e.g. a task-notification from a finished background task starts a new turn
                 self.in_turn = True
@@ -136,7 +142,18 @@ class Session:
         """True while the agent still has child processes (e.g. a background build)."""
         out = self.dexec("ps -eo comm= | sort | uniq -c").decode()
         names = {ln.split()[-1] for ln in out.splitlines() if ln.strip()}
-        return bool(names - {"docker-init", "claude", "ps", "sort", "uniq", "sh"})
+        others = names - {"docker-init", "claude", "ps", "sort", "uniq", "sh"}
+        if not others:
+            return False
+        # Preregistration 12.5: the turn has ended and the processes have outlived the grace period.
+        if not self.in_turn and self.turn_end_at is not None and time.time() - self.turn_end_at >= BUSY_GRACE_SECS:
+            if self.grace_recorded != self.turn_ends:
+                self.grace_recorded = self.turn_ends
+                self.record(event="busy_grace_elapsed", turn=self.turn_ends,
+                            seconds_since_turn_end=int(time.time() - self.turn_end_at),
+                            processes=sorted(others))
+            return False
+        return True
 
     def pending_question(self):
         """Return the tool_use id of an AskUserQuestion call that has no result yet."""
