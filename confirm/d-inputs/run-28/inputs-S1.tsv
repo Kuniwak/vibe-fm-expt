@@ -1,0 +1,131 @@
+input	source	kind	note
+typeof a.b	#14（#16、#18 も）	—	publish が `typeof a.{ type: 'NAME', ... }` を出す（MEMBER.name が NAME ノード）。段階1で peg_src を修正済み
+(x:) => T	#14（#16、#18 も）	—	publish が TypeError（型のない名前付き引数）。段階1で lib/publishing.js を修正済み
+!T?	#14（#16、#18 も）	—	publish が再パースできない前置形（?!T、keyof ?T、!T[]）を出す。段階1で lib/publishing.js を修正済み
+keyof T?	#14（#16、#18 も）	—	publish が再パースできない前置形（?!T、keyof ?T、!T[]）を出す。段階1で lib/publishing.js を修正済み
+() => T![]	#14（#16、#18 も）	—	publish が再パースできない前置形（?!T、keyof ?T、!T[]）を出す。段階1で lib/publishing.js を修正済み
+keyof T? | U	#14、#17、#18	—	publish が `keyof ?T | U` を出し再パースできない。未修正（被験側の検査で除外）
+() => T!=[]	#14、#18	—	#14 の表の4番（keyof T? | U と同じ問題）、未修正
+typeof y.t	/tmp/pv/out.txt:2、/tmp/pv/out.txt:3、/tmp/pv/out.txt:4	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+!(y)?	/tmp/pv/out.txt:5、/tmp/pv/out.txt:6、/tmp/pv/out.txt:7	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+keyof 5?	/tmp/pv/out.txt:8、/tmp/pv/out.txt:9	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+[typeof r.f]	/tmp/pv/out.txt:10、/tmp/pv/out.txt:11	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+(t:)=>?	/tmp/pv/out.txt:12、/tmp/pv/out.txt:13	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+(d:)=>o	/tmp/pv/out.txt:14	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+(typeof g.g)	/tmp/pv/out.txt:15、/tmp/pv/out.txt:16	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+(f:)=>''	/tmp/pv/out.txt:17、/tmp/pv/out.txt:18	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+...(f:)=>0	/tmp/pv/out.txt:19、/tmp/pv/out.txt:20	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+()=>typeof n._	/tmp/pv/out.txt:21、/tmp/pv/out.txt:22	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+(y:)=>[]	/tmp/pv/out.txt:23、/tmp/pv/out.txt:24	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+(s:)=>1	/tmp/pv/out.txt:25	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+function(typeof n.e)	/tmp/pv/out.txt:26、/tmp/pv/out.txt:27	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+7<(w:)=>g>	/tmp/pv/out.txt:28、/tmp/pv/out.txt:29	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+?<typeof w.g>	/tmp/pv/out.txt:30、/tmp/pv/out.txt:31	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+(typeof r.d)	/tmp/pv/out.txt:32	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+(l:)=>*	/tmp/pv/out.txt:33	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+(...f:)=>*	/tmp/pv/out.txt:34、/tmp/pv/out.txt:35	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+keyof o!	/tmp/pv/out.txt:36、/tmp/pv/out.txt:37	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+?[]?	/tmp/pv/out.txt:38、/tmp/pv/out.txt:39	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+!0?	/tmp/pv/out.txt:40、/tmp/pv/out.txt:41、/tmp/pv/out.txt:42、ほか 1 箇所	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+[?x?]	/tmp/pv/out.txt:44	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+?d!	/tmp/pv/out.txt:45	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+!{}!	/tmp/pv/out.txt:46、/tmp/pv/out.txt:47、/tmp/pv/out.txt:48、ほか 1 箇所	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+...?<typeof y.i>	/tmp/pv/out.txt:50、/tmp/pv/out.txt:51、/tmp/pv/out.txt:52	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+[?<typeof f.u>]	/tmp/pv/out.txt:53、/tmp/pv/out.txt:54	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+m<(f:)=>*>[]	/tmp/pv/out.txt:55	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+(t:)=>a<r>	/tmp/pv/out.txt:56、/tmp/pv/out.txt:57	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+?0!	/tmp/pv/out.txt:58、/tmp/pv/out.txt:59、/tmp/pv/out.txt:60	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+?e?	/tmp/pv/out.txt:61、/tmp/pv/out.txt:62、/tmp/pv/out.txt:63、ほか 1 箇所	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+e<!m!>	/tmp/pv/out.txt:65	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+7<typeof e.e>	/tmp/pv/out.txt:66、/tmp/pv/out.txt:67、/tmp/pv/out.txt:68	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+keyof ''!	/tmp/pv/out.txt:69、/tmp/pv/out.txt:70	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+(n<typeof g._>)	/tmp/pv/out.txt:71、/tmp/pv/out.txt:72	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+((t:)=>{})	/tmp/pv/out.txt:73、/tmp/pv/out.txt:74	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+!e!	/tmp/pv/out.txt:75、/tmp/pv/out.txt:76、/tmp/pv/out.txt:77	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+!??	/tmp/pv/out.txt:78、/tmp/pv/out.txt:79、/tmp/pv/out.txt:80、ほか 1 箇所	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+function():e?[]	/tmp/pv/out.txt:82、/tmp/pv/out.txt:83	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P3 AST changed on round trip
+(r:)=>*	/tmp/pv/out.txt:84	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+?('')?	/tmp/pv/out.txt:85、/tmp/pv/out.txt:86	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+function(typeof d.o)	/tmp/pv/out.txt:87	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+(o:)=>{}...	/tmp/pv/out.txt:88、/tmp/pv/out.txt:89	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+function():typeof x.e	/tmp/pv/out.txt:90、/tmp/pv/out.txt:91	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+()=>0![]	/tmp/pv/out.txt:92	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P3 AST changed on round trip
+((r:)=>?)	/tmp/pv/out.txt:93、/tmp/pv/out.txt:94	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+!*!	/tmp/pv/out.txt:95、/tmp/pv/out.txt:96、/tmp/pv/out.txt:97、ほか 1 箇所	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+[(n:)=>g]	/tmp/pv/out.txt:99、/tmp/pv/out.txt:100	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+function({d:!''?})	/tmp/pv/out.txt:101、/tmp/pv/out.txt:102、/tmp/pv/out.txt:103、ほか 1 箇所	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+""<keyof e?>	/tmp/pv/out.txt:105	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+?*?	/tmp/pv/out.txt:106、/tmp/pv/out.txt:107	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+keyof f!...	/tmp/pv/out.txt:108、/tmp/pv/out.txt:109	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+(g:)=>""	/tmp/pv/out.txt:110	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+!""?	/tmp/pv/out.txt:111、/tmp/pv/out.txt:112、/tmp/pv/out.txt:113	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+(r:)=>7...	/tmp/pv/out.txt:114、/tmp/pv/out.txt:115	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+?''?	/tmp/pv/out.txt:116、/tmp/pv/out.txt:117、/tmp/pv/out.txt:118	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+("")<(l:)=>t>	/tmp/pv/out.txt:119	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+(l:)=>""	/tmp/pv/out.txt:120	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+!(y)!	/tmp/pv/out.txt:121、/tmp/pv/out.txt:122、/tmp/pv/out.txt:123、ほか 1 箇所	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+?("")?	/tmp/pv/out.txt:125、/tmp/pv/out.txt:126	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+?("")!	/tmp/pv/out.txt:127、/tmp/pv/out.txt:128	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+[(typeof r.g)]	/tmp/pv/out.txt:129、/tmp/pv/out.txt:130	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+{s:(l:)=>t}	/tmp/pv/out.txt:131、/tmp/pv/out.txt:132	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+!*?	/tmp/pv/out.txt:133、/tmp/pv/out.txt:134、/tmp/pv/out.txt:135、ほか 1 箇所	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+!?<"">?	/tmp/pv/out.txt:137	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+function('',(x:)=>m)	/tmp/pv/out.txt:138	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+keyof o?[][]	/tmp/pv/out.txt:139、/tmp/pv/out.txt:140	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+''<!i?>	/tmp/pv/out.txt:141、/tmp/pv/out.txt:142	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+keyof (?)!	/tmp/pv/out.txt:143、/tmp/pv/out.txt:144	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+""<typeof r.o>	/tmp/pv/out.txt:145、/tmp/pv/out.txt:146	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+!""!	/tmp/pv/out.txt:147、/tmp/pv/out.txt:148、/tmp/pv/out.txt:149	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+typeof y._[]	/tmp/pv/out.txt:150	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+''<(t:)=>e>	/tmp/pv/out.txt:151	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+!('')!	/tmp/pv/out.txt:152、/tmp/pv/out.txt:153	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+''<typeof w.n>	/tmp/pv/out.txt:154、/tmp/pv/out.txt:155	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+!w!	/tmp/pv/out.txt:156	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+?''!	/tmp/pv/out.txt:157	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+{'':(g:)=>n}	/tmp/pv/out.txt:158、/tmp/pv/out.txt:159	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+""<typeof t.u>	/tmp/pv/out.txt:160	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+?*!	/tmp/pv/out.txt:161、/tmp/pv/out.txt:162、/tmp/pv/out.txt:163、ほか 1 箇所	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+!?!	/tmp/pv/out.txt:165、/tmp/pv/out.txt:166、/tmp/pv/out.txt:167、ほか 1 箇所	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+{o:?""!}	/tmp/pv/out.txt:169、/tmp/pv/out.txt:170、/tmp/pv/out.txt:171	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+(_:)=>[]|''	/tmp/pv/out.txt:172	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+(r:)=>(d)	/tmp/pv/out.txt:173	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+(""<(x:)=>2>)	/tmp/pv/out.txt:174	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+''|?f?...	/tmp/pv/out.txt:175、/tmp/pv/out.txt:176、/tmp/pv/out.txt:177	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+new(n:)=>*	/tmp/pv/out.txt:178、/tmp/pv/out.txt:179	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+typeof n.o[]	/tmp/pv/out.txt:180	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+!((n))?	/tmp/pv/out.txt:181、/tmp/pv/out.txt:182、/tmp/pv/out.txt:183、ほか 1 箇所	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+?<(t:)=>1>	/tmp/pv/out.txt:185、/tmp/pv/out.txt:186	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+?(*)!	/tmp/pv/out.txt:187、/tmp/pv/out.txt:188、/tmp/pv/out.txt:189、ほか 1 箇所	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+function(?e?)	/tmp/pv/out.txt:191、/tmp/pv/out.txt:192	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+[?4!]	/tmp/pv/out.txt:193	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+function(this:function(?d?))	/tmp/pv/out.txt:194、/tmp/pv/out.txt:195、/tmp/pv/out.txt:196	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+e<(x:typeof e.t)=>(o)>	/tmp/pv/out.txt:197	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+(o:)=>""<i>	/tmp/pv/out.txt:198、/tmp/pv/out.txt:199	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+1<((d:)=>0)>	/tmp/pv/out.txt:200	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+((t:)=>(F))	/tmp/pv/out.txt:201、/tmp/pv/out.txt:202	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+(''<typeof g.f>)	/tmp/pv/out.txt:203、/tmp/pv/out.txt:204	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+keyof ""?	/tmp/pv/out.txt:205、/tmp/pv/out.txt:206	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+keyof ()=>[]?	/tmp/pv/out.txt:207、/tmp/pv/out.txt:208	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+keyof *?	/tmp/pv/out.txt:209	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+(!s<e>?)	/tmp/pv/out.txt:210、/tmp/pv/out.txt:211、/tmp/pv/out.txt:212、ほか 1 箇所	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+((_:)=>t)	/tmp/pv/out.txt:214	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+{f:(s:)=>""}	/tmp/pv/out.txt:215、/tmp/pv/out.txt:216	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+function(?*?)	/tmp/pv/out.txt:217、/tmp/pv/out.txt:218、/tmp/pv/out.txt:219、ほか 1 箇所	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+keyof ""!	/tmp/pv/out.txt:221	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+((a:)=>b)	/tmp/pv/out.txt:222	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+{l:!_!}	/tmp/pv/out.txt:223、/tmp/pv/out.txt:224	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+[!a!]	/tmp/pv/out.txt:225	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+(d:)=>(*)	/tmp/pv/out.txt:226、/tmp/pv/out.txt:227	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish threw
+{n:i&typeof o.r}...	/tmp/pv/out.txt:228	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+[!$?]	/tmp/pv/out.txt:229、/tmp/pv/out.txt:230	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+!("")?	/tmp/pv/out.txt:231、/tmp/pv/out.txt:232	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+?(t)!|r	/tmp/pv/out.txt:233、/tmp/pv/out.txt:234、/tmp/pv/out.txt:235	—	call 7 の /tmp/pv/prop.js 出力（段階1の修正前のライブラリ）。P2 publish output not reparsable
+keyof o!=	call 18 の出力（記録のみ）	—	/tmp/pv/prop.js の出力。P2 publish output not reparsable（#4 の未修正の問題）
+keyof d?=	call 18 の出力（記録のみ）	—	/tmp/pv/prop.js の出力。P2 publish output not reparsable（#4 の未修正の問題）
+keyof *!|m	call 18 の出力（記録のみ）	—	/tmp/pv/prop.js の出力。P2 publish output not reparsable（#4 の未修正の問題）
+keyof n?&i	call 18 の出力（記録のみ）	—	/tmp/pv/prop.js の出力。P2 publish output not reparsable（#4 の未修正の問題）
+keyof ""?=	call 18 の出力（記録のみ）	—	/tmp/pv/prop.js の出力。P2 publish output not reparsable（#4 の未修正の問題）
+keyof y?=	call 18 の出力（記録のみ）	—	/tmp/pv/prop.js の出力。P2 publish output not reparsable（#4 の未修正の問題）
+f<keyof f?=>	call 18 の出力（記録のみ）	—	/tmp/pv/prop.js の出力。P2 publish output not reparsable（#4 の未修正の問題）
+keyof a?&u	call 18 の出力（記録のみ）	—	/tmp/pv/prop.js の出力。P2 publish output not reparsable（#4 の未修正の問題）
+()=>*!=[]	call 20 の出力（記録のみ）	—	/tmp/pv/prop.js の出力。P2 publish output not reparsable（#4 の未修正の問題）
