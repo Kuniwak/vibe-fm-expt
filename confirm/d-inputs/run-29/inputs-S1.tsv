@@ -1,0 +1,19 @@
+input	source	kind	note
+typeof A.b	#7; #25 表 1; call 16 の出力（fuzz-roundtrip.js: ERR reparse）	—	publish が `typeof A.{ type: 'NAME', name: 'b' }` を出力（修正済み）
+(a:) => void	#25 表 2	—	publish が例外（修正済み）
+(a:) => 1	call 22 の出力（fuzz-roundtrip.js: ERR publish）	—	Cannot read properties of null (reading 'type')
+(a:) => A	call 21 の出力（PUBLISH THROWS）; call 24 の出力（ERR publish, seed 2）	—	同上
+(...a:) => A	call 21 の出力（PUBLISH THROWS）	—	同上
+!A!	#25 表 3; call 22・24 の出力（ERR reparse）	—	`!!A` を出力し再パース不能（修正済み）
+keyof A!	#25 表 3; call 30 の出力（ERR reparse, seed 2・3）	—	`keyof !A` を出力し再パース不能（修正済み）
+keyof *?	call 30 の出力（ERR reparse, seed 1）	—	`keyof ?*` を出力し再パース不能（修正済み）
+keyof A?	call 30 の出力（ERR reparse, seed 4）	—	`keyof ?A` を出力し再パース不能（修正済み）
+??!	#25 表 4; call 24 の出力（AST differs）	—	`!??` を出力し別の AST（修正済み）
+(a:) => A![]	#25 表 4	—	再パースすると別の AST（修正済み）
+(a:) => 't'![]	call 30 の出力（AST differs, seed 1）	—	`(a:) => !'t'[]`（修正済み）
+(a:) => 't'?[]	call 30 の出力（AST differs, seed 2）	—	`(a:) => ?'t'[]`（修正済み）
+(a:) => *![]	call 30 の出力（AST differs, seed 3）	—	`(a:) => !*[]`（修正済み）
+(a:) => ?![]	call 30 の出力（AST differs, seed 4）	—	`(a:) => !?[]`（修正済み）
+A![]	#25「parser 自体の弱点」; call 31 の出力（SYNTAX ERROR）	—	トップレベルで構文エラー。被験側は往復のバグではない弱点として挙げ、直していない
+?A[]	#25「parser 自体の弱点」; call 21・31 の出力	—	同上
+keyof !A	#25「parser 自体の弱点」; call 31 の出力	—	パースできない。直していない

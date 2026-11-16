@@ -1,0 +1,77 @@
+input	source	kind	note
+typeof A.b	#7; #25 表 1; call 16 の出力（fuzz-roundtrip.js: ERR reparse）	—	publish が `typeof A.{ type: 'NAME', name: 'b' }` を出力（修正済み）
+(a:) => void	#25 表 2	—	publish が例外（修正済み）
+(a:) => 1	call 22 の出力（fuzz-roundtrip.js: ERR publish）	—	Cannot read properties of null (reading 'type')
+(a:) => A	call 21 の出力（PUBLISH THROWS）; call 24 の出力（ERR publish, seed 2）	—	同上
+(...a:) => A	call 21 の出力（PUBLISH THROWS）	—	同上
+!A!	#25 表 3; call 22・24 の出力（ERR reparse）	—	`!!A` を出力し再パース不能（修正済み）
+keyof A!	#25 表 3; call 30 の出力（ERR reparse, seed 2・3）	—	`keyof !A` を出力し再パース不能（修正済み）
+keyof *?	call 30 の出力（ERR reparse, seed 1）	—	`keyof ?*` を出力し再パース不能（修正済み）
+keyof A?	call 30 の出力（ERR reparse, seed 4）	—	`keyof ?A` を出力し再パース不能（修正済み）
+??!	#25 表 4; call 24 の出力（AST differs）	—	`!??` を出力し別の AST（修正済み）
+(a:) => A![]	#25 表 4	—	再パースすると別の AST（修正済み）
+(a:) => 't'![]	call 30 の出力（AST differs, seed 1）	—	`(a:) => !'t'[]`（修正済み）
+(a:) => 't'?[]	call 30 の出力（AST differs, seed 2）	—	`(a:) => ?'t'[]`（修正済み）
+(a:) => *![]	call 30 の出力（AST differs, seed 3）	—	`(a:) => !*[]`（修正済み）
+(a:) => ?![]	call 30 の出力（AST differs, seed 4）	—	`(a:) => !?[]`（修正済み）
+A![]	#25「parser 自体の弱点」; call 31 の出力（SYNTAX ERROR）; #28 種類1 表	1	トップレベルで構文エラー。被験側は往復のバグではない弱点として挙げ、直していない。段階3で種類1（表は受理、実装は SyntaxError）として再掲
+?A[]	#25「parser 自体の弱点」; call 21・31 の出力; #28 種類1 表	1	同上。段階3で種類1（表は受理、実装は SyntaxError）として再掲
+keyof !A	#25「parser 自体の弱点」; call 31 の出力	—	パースできない。直していない
+?A?	#28 種類1 表	1	表 `?(A?)`、実装 `(?A)?`
+!A=	#28 種類1 表	1	表 `!(A=)`、実装 `(!A)=`
+...A|B	#28 種類1 表（`...A\|B`）	1	表 `(...A)|B`、実装 `...(A|B)`
+??A	#28 種類1 表	1	表は受理、実装は SyntaxError
+A??	#28 種類1 表	1	表は受理、実装は SyntaxError
+? A ?	#47 表; #49 T1; /tmp/runall-final.txt:31	1	表 `(pre? (suf? A))`、実装 `(suf? (pre? A))`
+! A =	#47 表; #49 T1; /tmp/runall-final.txt:25	1	表 `(pre! (suf= A))`、実装 `(suf= (pre! A))`
+? ? A	#47 表; #49 D; /tmp/runall-final.txt:27	1	表は受理、実装は SyntaxError
+A ? ?	#47 表; #49 C; /tmp/runall-final.txt:46	1	同上
+= A	#47 表; #49 A; /tmp/runall-final.txt:18	1	接頭辞 `=`。表は受理、実装は SyntaxError
+A / B	#47 表; #49 B; /tmp/runall-final.txt:40	1	表は受理、実装は SyntaxError
+( A . 'm' )	#47 表; #49 L1; #50	1	表は拒否（`(` × `.` が x）、実装は受理。被験側は表の意図を確かめるべきとも述べた
+= A ?	#49 A; /tmp/runall-final.txt:37	1	表は受理、実装は SyntaxError
+A = !	#49 C; /tmp/runall-final.txt:47	1	同上
+A ! []	#49 C; /tmp/runall-final.txt:55	1	同上
+! ? A	#49 D; /tmp/runall-final.txt:20	1	同上
+...A...	#49 E	1	同上
+? . b	#49 F; /tmp/runall-final.txt:39	1	同上
+A < B > . b	#49 F	1	同上
+( A ) . 'm' ?	#49 F	1	同上
+? A []	#49 G; /tmp/runall-final.txt:51	1	同上
+! ? ?	#49 T1; /tmp/runall-final.txt:21	1	入れ子の違い
+...A | B	#49 T2	1	表 `(| (pre... A) B)`、実装 `(pre... (| A B))`
+function(): A []	#49 T3	1	入れ子の違い
+external: 'e' . 'm'	#49 T4	1	入れ子の違い
+A | B < * > []	#49 その他	1	表は受理、実装は SyntaxError
+...( A ) < B >	#49 その他	1	同上
+{key: ( A ) < B > }	#49 その他	1	同上
+( A ) [] | ( B ) ?	#49 その他	1	同上
+(A.b)	#49（F・L1 の説明「`(A.b)` を拒否」）	1	被験側は表のセルの意図を確かめたほうがよいものとして挙げた
+?.b	#49（F・L1 の説明「`?.b` を受理」）	1	同上
+! ! A	/tmp/runall-final.txt:19	1	table accepts, library rejects; 表 (pre! (pre! A))、実装 SyntaxError
+! = A	/tmp/runall-final.txt:22	1	table accepts, library rejects; 表 (pre! (pre= A))、実装 SyntaxError
+! A !	/tmp/runall-final.txt:23	1	both accept, different nesting; 表 (pre! (suf! A))、実装 (suf! (pre! A))
+! A ?	/tmp/runall-final.txt:24	1	both accept, different nesting; 表 (pre! (suf? A))、実装 (suf? (pre! A))
+? ! A	/tmp/runall-final.txt:26	1	table accepts, library rejects; 表 (pre? (pre! A))、実装 SyntaxError
+? ? ?	/tmp/runall-final.txt:28	1	both accept, different nesting; 表 (pre? (pre? ?)) or (pre? (suf? ?)) or (suf? (suf? ?))、実装 (suf? (pre? ?))
+? = A	/tmp/runall-final.txt:29	1	table accepts, library rejects; 表 (pre? (pre= A))、実装 SyntaxError
+? A !	/tmp/runall-final.txt:30	1	both accept, different nesting; 表 (pre? (suf! A))、実装 (suf! (pre? A))
+? A =	/tmp/runall-final.txt:32	1	both accept, different nesting; 表 (pre? (suf= A))、実装 (suf= (pre? A))
+= ! A	/tmp/runall-final.txt:33	1	table accepts, library rejects; 表 (pre= (pre! A))、実装 SyntaxError
+= ? A	/tmp/runall-final.txt:34	1	table accepts, library rejects; 表 (pre= (pre? A))、実装 SyntaxError
+= = A	/tmp/runall-final.txt:35	1	table accepts, library rejects; 表 (pre= (pre= A))、実装 SyntaxError
+= A !	/tmp/runall-final.txt:36	1	table accepts, library rejects; 表 (pre= (suf! A))、実装 SyntaxError
+= A =	/tmp/runall-final.txt:38	1	table accepts, library rejects; 表 (pre= (suf= A))、実装 SyntaxError
+? # b	/tmp/runall-final.txt:41	1	table accepts, library rejects; 表 (# ? b)、実装 SyntaxError
+? ~ b	/tmp/runall-final.txt:42	1	table accepts, library rejects; 表 (~ ? b)、実装 SyntaxError
+A ! !	/tmp/runall-final.txt:43	1	table accepts, library rejects; 表 (suf! (suf! A))、実装 SyntaxError
+A ! ?	/tmp/runall-final.txt:44	1	table accepts, library rejects; 表 (suf? (suf! A))、実装 SyntaxError
+A ? !	/tmp/runall-final.txt:45	1	table accepts, library rejects; 表 (suf! (suf? A))、実装 SyntaxError
+A = ?	/tmp/runall-final.txt:48	1	table accepts, library rejects; 表 (suf? (suf= A))、実装 SyntaxError
+A = =	/tmp/runall-final.txt:49	1	table accepts, library rejects; 表 (suf= (suf= A))、実装 SyntaxError
+! A []	/tmp/runall-final.txt:50	1	table accepts, library rejects; 表 (suf[] (pre! A))、実装 SyntaxError
+...= A	/tmp/runall-final.txt:52	1	table accepts, library rejects; 表 (pre... (pre= A))、実装 SyntaxError
+= A...	/tmp/runall-final.txt:53	1	table accepts, library rejects; 表 (suf... (pre= A))、実装 SyntaxError
+= A []	/tmp/runall-final.txt:54	1	table accepts, library rejects; 表 (suf[] (pre= A))、実装 SyntaxError
+A ? []	/tmp/runall-final.txt:56	1	table accepts, library rejects; 表 (suf[] (suf? A))、実装 SyntaxError
+A [] !	/tmp/runall-final.txt:57	1	table accepts, library rejects; 表 (suf! (suf[] A))、実装 SyntaxError
