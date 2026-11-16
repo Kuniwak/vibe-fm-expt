@@ -1,0 +1,292 @@
+input	source	kind	note
+typeof a.b	#5（バグ1）, #11（修正内容1）, #16（PR 本文）	—	被験側の報告: MEMBER.name に NAME ノードが入る。publish が typeof a.{ type: 'NAME', ... } を出し（P3）、traverse が中の NAME を訪問しない（P4）
+keyof A?	#5（バグ2）	—	被験側の報告: publish が keyof ?A を出し、構文エラーになる（P3）
+keyof ?A	#11（修正内容3）, #16（PR 本文）	—	被験側の報告: keyof ? が名前 keyof と後置 ? と解釈され、構文エラーになる（パースできない）
+keyof !A	#16（PR 本文）	—	被験側の報告: keyof ?A と同じ原因で構文エラーになる
+keyof A?=	#11（修正内容3）	—	被験側の報告: publish が keyof ?A= を出し、構文エラーになる（P3）。被験側が途中まで直した状態の長さ4の検査で見つけたもの（元のコードでは KNOWN による除外で隠れていた）
+keyof A ? =	analysis/commands.md call 21 の出力（記録の tool_result、"small 4 sp" の examples）	—	検査の出力: P3a-reparseFails（permissive,typescript、各18件の一部）; publish の出力 keyof ?A=。被験側が途中まで直した状態（publisher の keyof 分岐を入れた後、文法の修正前）での出力
+keyof A ! =	analysis/commands.md call 21 の出力（記録の tool_result、"small 4 sp" の examples）	—	検査の出力: P3a-reparseFails（permissive,typescript、各18件の一部）; publish の出力 keyof !A=。被験側が途中まで直した状態（publisher の keyof 分岐を入れた後、文法の修正前）での出力
+keyof b.c ? =	analysis/commands.md call 21 の出力（記録の tool_result、"small 4 sp" の examples）	—	検査の出力: P3a-reparseFails（permissive,typescript、各18件の一部）; publish の出力 keyof ?b.c=。被験側が途中まで直した状態（publisher の keyof 分岐を入れた後、文法の修正前）での出力
+keyof b.c ! =	analysis/commands.md call 21 の出力（記録の tool_result、"small 4 sp" の examples）	—	検査の出力: P3a-reparseFails（permissive,typescript、各18件の一部）; publish の出力 keyof !b.c=。被験側が途中まで直した状態（publisher の keyof 分岐を入れた後、文法の修正前）での出力
+keyof 'x' ? =	analysis/commands.md call 21 の出力（記録の tool_result、"small 4 sp" の examples）	—	検査の出力: P3a-reparseFails（permissive,typescript、各18件の一部）; publish の出力 keyof ?'x'=。被験側が途中まで直した状態（publisher の keyof 分岐を入れた後、文法の修正前）での出力
+? A ?	/tmp/verify/a.json:18	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??A
+? A !	/tmp/verify/a.json:23	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?A
+? b.c ?	/tmp/verify/a.json:28	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??b.c
+? b.c !	/tmp/verify/a.json:33	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?b.c
+? 1 ?	/tmp/verify/a.json:38	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??1
+? 1 !	/tmp/verify/a.json:43	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?1
+? -2.5 ?	/tmp/verify/a.json:48	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??-2.5
+? -2.5 !	/tmp/verify/a.json:53	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?-2.5
+? 'x' ?	/tmp/verify/a.json:58	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??'x'
+? 'x' !	/tmp/verify/a.json:63	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?'x'
+? "y" ?	/tmp/verify/a.json:68	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??"y"
+? "y" !	/tmp/verify/a.json:73	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?"y"
+? * ?	/tmp/verify/a.json:78	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??*
+? * !	/tmp/verify/a.json:83	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?*
+? function ?	/tmp/verify/a.json:88	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??function
+? function !	/tmp/verify/a.json:93	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?function
+? new ?	/tmp/verify/a.json:98	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??new
+? new !	/tmp/verify/a.json:103	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?new
+? this ?	/tmp/verify/a.json:108	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??this
+? this !	/tmp/verify/a.json:113	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?this
+? module ?	/tmp/verify/a.json:118	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??module
+? module !	/tmp/verify/a.json:123	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?module
+? external ?	/tmp/verify/a.json:128	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??external
+? external !	/tmp/verify/a.json:133	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?external
+? typeof ?	/tmp/verify/a.json:138	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??typeof
+? typeof !	/tmp/verify/a.json:143	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?typeof
+? keyof ?	/tmp/verify/a.json:148	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??keyof
+? keyof !	/tmp/verify/a.json:153	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?keyof
+? import ?	/tmp/verify/a.json:158	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??import
+? import !	/tmp/verify/a.json:163	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?import
+? readonly ?	/tmp/verify/a.json:168	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??readonly
+? readonly !	/tmp/verify/a.json:173	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?readonly
+? 'a\'b' ?	/tmp/verify/a.json:178	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??'a\'b'
+? 'a\'b' !	/tmp/verify/a.json:183	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?'a\'b'
+? "a\"b" ?	/tmp/verify/a.json:188	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??"a\"b"
+? "a\"b" !	/tmp/verify/a.json:193	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?"a\"b"
+! A ?	/tmp/verify/a.json:198	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!A
+! A !	/tmp/verify/a.json:203	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!A
+! b.c ?	/tmp/verify/a.json:208	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!b.c
+! b.c !	/tmp/verify/a.json:213	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!b.c
+! 1 ?	/tmp/verify/a.json:218	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!1
+! 1 !	/tmp/verify/a.json:223	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!1
+! -2.5 ?	/tmp/verify/a.json:228	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!-2.5
+! -2.5 !	/tmp/verify/a.json:233	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!-2.5
+! 'x' ?	/tmp/verify/a.json:238	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!'x'
+! 'x' !	/tmp/verify/a.json:243	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!'x'
+! "y" ?	/tmp/verify/a.json:248	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!"y"
+! "y" !	/tmp/verify/a.json:253	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!"y"
+! ? ?	/tmp/verify/a.json:258	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!?
+! ? !	/tmp/verify/a.json:263	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!?
+! * ?	/tmp/verify/a.json:268	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!*
+! * !	/tmp/verify/a.json:273	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!*
+! function ?	/tmp/verify/a.json:278	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!function
+! function !	/tmp/verify/a.json:283	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!function
+! new ?	/tmp/verify/a.json:288	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!new
+! new !	/tmp/verify/a.json:293	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!new
+! this ?	/tmp/verify/a.json:298	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!this
+! this !	/tmp/verify/a.json:303	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!this
+! module ?	/tmp/verify/a.json:308	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!module
+! module !	/tmp/verify/a.json:313	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!module
+! external ?	/tmp/verify/a.json:318	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!external
+! external !	/tmp/verify/a.json:323	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!external
+! typeof ?	/tmp/verify/a.json:328	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!typeof
+! typeof !	/tmp/verify/a.json:333	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!typeof
+! keyof ?	/tmp/verify/a.json:338	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!keyof
+! keyof !	/tmp/verify/a.json:343	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!keyof
+! import ?	/tmp/verify/a.json:348	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!import
+! import !	/tmp/verify/a.json:353	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!import
+! readonly ?	/tmp/verify/a.json:358	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!readonly
+! readonly !	/tmp/verify/a.json:363	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!readonly
+! 'a\'b' ?	/tmp/verify/a.json:368	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!'a\'b'
+! 'a\'b' !	/tmp/verify/a.json:373	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!'a\'b'
+! "a\"b" ?	/tmp/verify/a.json:378	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!"a\"b"
+! "a\"b" !	/tmp/verify/a.json:383	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!"a\"b"
+typeof b.c	#5（parse('typeof b.c') の例）; /tmp/verify/a.json:388	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,closure,typescript）; P4-traverse（permissive,closure,typescript）; publish の出力 typeof b.{ type: 'NAME', name: 'c' }
+keyof A ?	/tmp/verify/a.json:393	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof ?A
+keyof A !	/tmp/verify/a.json:398	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof !A
+keyof b.c ?	/tmp/verify/a.json:403	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof ?b.c
+keyof b.c !	/tmp/verify/a.json:408	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof !b.c
+keyof 1 ?	/tmp/verify/a.json:413	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof ?1
+keyof 1 !	/tmp/verify/a.json:418	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof !1
+keyof -2.5 ?	/tmp/verify/a.json:423	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof ?-2.5
+keyof -2.5 !	/tmp/verify/a.json:428	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof !-2.5
+keyof 'x' ?	/tmp/verify/a.json:433	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof ?'x'
+keyof 'x' !	/tmp/verify/a.json:438	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof !'x'
+keyof "y" ?	/tmp/verify/a.json:443	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof ?"y"
+keyof "y" !	/tmp/verify/a.json:448	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof !"y"
+keyof * ?	/tmp/verify/a.json:453	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof ?*
+keyof * !	/tmp/verify/a.json:458	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof !*
+keyof function ?	/tmp/verify/a.json:463	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof ?function
+keyof function !	/tmp/verify/a.json:468	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof !function
+keyof new ?	/tmp/verify/a.json:473	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof ?new
+keyof new !	/tmp/verify/a.json:478	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof !new
+keyof this ?	/tmp/verify/a.json:483	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof ?this
+keyof this !	/tmp/verify/a.json:488	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof !this
+keyof module ?	/tmp/verify/a.json:493	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof ?module
+keyof module !	/tmp/verify/a.json:498	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof !module
+keyof external ?	/tmp/verify/a.json:503	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof ?external
+keyof external !	/tmp/verify/a.json:508	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof !external
+keyof typeof b.c	/tmp/verify/a.json:513	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; P4-traverse（permissive,typescript）; publish の出力 keyof typeof b.{ type: 'NAME', name: 'c' }
+keyof typeof ?	/tmp/verify/a.json:518	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof ?typeof
+keyof typeof !	/tmp/verify/a.json:523	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof !typeof
+keyof keyof ?	/tmp/verify/a.json:528	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof ?keyof
+keyof keyof !	/tmp/verify/a.json:533	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof !keyof
+keyof import ?	/tmp/verify/a.json:538	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof ?import
+keyof import !	/tmp/verify/a.json:543	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof !import
+keyof readonly ?	/tmp/verify/a.json:548	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof ?readonly
+keyof readonly !	/tmp/verify/a.json:553	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof !readonly
+keyof 'a\'b' ?	/tmp/verify/a.json:558	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof ?'a\'b'
+keyof 'a\'b' !	/tmp/verify/a.json:563	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof !'a\'b'
+keyof "a\"b" ?	/tmp/verify/a.json:568	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof ?"a\"b"
+keyof "a\"b" !	/tmp/verify/a.json:573	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,typescript）; publish の出力 keyof !"a\"b"
+? ? !	/tmp/verify/a.json:1891	—	検査の出力（写しの /tmp/verify）: P3b-semanticDiff（permissive,jsdoc,closure,typescript）; publish の出力 !??
+?A?	#5, #16（PR 本文）, #22; /tmp/verify/b.json:18	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??A
+?A!	/tmp/verify/b.json:23	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?A
+?b.c?	/tmp/verify/b.json:28	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??b.c
+?b.c!	/tmp/verify/b.json:33	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?b.c
+?1?	/tmp/verify/b.json:38	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??1
+?1!	/tmp/verify/b.json:43	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?1
+?-2.5?	/tmp/verify/b.json:48	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??-2.5
+?-2.5!	/tmp/verify/b.json:53	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?-2.5
+?'x'?	/tmp/verify/b.json:58	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??'x'
+?'x'!	/tmp/verify/b.json:63	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?'x'
+?"y"?	/tmp/verify/b.json:68	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??"y"
+?"y"!	/tmp/verify/b.json:73	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?"y"
+?*?	/tmp/verify/b.json:78	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??*
+?*!	/tmp/verify/b.json:83	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?*
+?function?	/tmp/verify/b.json:88	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??function
+?function!	/tmp/verify/b.json:93	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?function
+?new?	/tmp/verify/b.json:98	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??new
+?new!	/tmp/verify/b.json:103	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?new
+?this?	/tmp/verify/b.json:108	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??this
+?this!	/tmp/verify/b.json:113	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?this
+?module?	/tmp/verify/b.json:118	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??module
+?module!	/tmp/verify/b.json:123	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?module
+?external?	/tmp/verify/b.json:128	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??external
+?external!	/tmp/verify/b.json:133	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?external
+?typeof?	/tmp/verify/b.json:138	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??typeof
+?typeof!	/tmp/verify/b.json:143	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?typeof
+?keyof?	/tmp/verify/b.json:148	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??keyof
+?keyof!	/tmp/verify/b.json:153	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?keyof
+?import?	/tmp/verify/b.json:158	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??import
+?import!	/tmp/verify/b.json:163	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?import
+?readonly?	/tmp/verify/b.json:168	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??readonly
+?readonly!	/tmp/verify/b.json:173	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?readonly
+?'a\'b'?	/tmp/verify/b.json:178	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??'a\'b'
+?'a\'b'!	/tmp/verify/b.json:183	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?'a\'b'
+?"a\"b"?	/tmp/verify/b.json:188	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ??"a\"b"
+?"a\"b"!	/tmp/verify/b.json:193	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !?"a\"b"
+!A?	/tmp/verify/b.json:198	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!A
+!A!	/tmp/verify/b.json:203	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!A
+!b.c?	/tmp/verify/b.json:208	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!b.c
+!b.c!	/tmp/verify/b.json:213	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!b.c
+!1?	/tmp/verify/b.json:218	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!1
+!1!	/tmp/verify/b.json:223	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!1
+!-2.5?	/tmp/verify/b.json:228	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!-2.5
+!-2.5!	/tmp/verify/b.json:233	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!-2.5
+!'x'?	/tmp/verify/b.json:238	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!'x'
+!'x'!	/tmp/verify/b.json:243	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!'x'
+!"y"?	/tmp/verify/b.json:248	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!"y"
+!"y"!	/tmp/verify/b.json:253	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!"y"
+!??	/tmp/verify/b.json:258	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!?
+!?!	/tmp/verify/b.json:263	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!?
+!*?	/tmp/verify/b.json:268	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!*
+!*!	/tmp/verify/b.json:273	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!*
+!function?	/tmp/verify/b.json:278	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!function
+!function!	/tmp/verify/b.json:283	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!function
+!new?	/tmp/verify/b.json:288	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!new
+!new!	/tmp/verify/b.json:293	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!new
+!this?	/tmp/verify/b.json:298	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!this
+!this!	/tmp/verify/b.json:303	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!this
+!module?	/tmp/verify/b.json:308	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!module
+!module!	/tmp/verify/b.json:313	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!module
+!external?	/tmp/verify/b.json:318	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!external
+!external!	/tmp/verify/b.json:323	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!external
+!typeof?	/tmp/verify/b.json:328	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!typeof
+!typeof!	/tmp/verify/b.json:333	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!typeof
+!keyof?	/tmp/verify/b.json:338	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!keyof
+!keyof!	/tmp/verify/b.json:343	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!keyof
+!import?	/tmp/verify/b.json:348	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!import
+!import!	/tmp/verify/b.json:353	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!import
+!readonly?	/tmp/verify/b.json:358	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!readonly
+!readonly!	/tmp/verify/b.json:363	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!readonly
+!'a\'b'?	/tmp/verify/b.json:368	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!'a\'b'
+!'a\'b'!	/tmp/verify/b.json:373	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!'a\'b'
+!"a\"b"?	/tmp/verify/b.json:378	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 ?!"a\"b"
+!"a\"b"!	/tmp/verify/b.json:383	—	検査の出力（写しの /tmp/verify）: P3a-reparseFails（permissive,jsdoc,closure,typescript）; publish の出力 !!"a\"b"
+??!	#5, #16（PR 本文）; /tmp/verify/b.json:1506	—	検査の出力（写しの /tmp/verify）: P3b-semanticDiff（permissive,jsdoc,closure,typescript）; publish の出力 !??
+A | typeof b.c	/tmp/verify/c.json:14	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+A & typeof b.c	/tmp/verify/c.json:20	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+b.c | typeof b.c	/tmp/verify/c.json:26	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+b.c & typeof b.c	/tmp/verify/c.json:32	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+'x' | typeof b.c	/tmp/verify/c.json:38	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+'x' & typeof b.c	/tmp/verify/c.json:44	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+[ typeof b.c ]	/tmp/verify/c.json:50	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+( typeof b.c )	/tmp/verify/c.json:56	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+? | typeof b.c	/tmp/verify/c.json:62	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+? & typeof b.c	/tmp/verify/c.json:68	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+* | typeof b.c	/tmp/verify/c.json:74	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+* & typeof b.c	/tmp/verify/c.json:80	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+function | typeof b.c	/tmp/verify/c.json:86	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+function & typeof b.c	/tmp/verify/c.json:92	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+new | typeof b.c	/tmp/verify/c.json:98	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+new & typeof b.c	/tmp/verify/c.json:104	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+typeof A . A	/tmp/verify/c.json:110	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof A . b.c	/tmp/verify/c.json:116	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof A . function	/tmp/verify/c.json:123	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof A . new	/tmp/verify/c.json:129	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof A . typeof	/tmp/verify/c.json:135	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof A . keyof	/tmp/verify/c.json:141	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof A . module	/tmp/verify/c.json:147	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof b.c . A	/tmp/verify/c.json:159	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof b.c . b.c	/tmp/verify/c.json:166	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof b.c . function	/tmp/verify/c.json:174	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof b.c . new	/tmp/verify/c.json:181	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof b.c . typeof	/tmp/verify/c.json:188	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof b.c . keyof	/tmp/verify/c.json:195	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof b.c . module	/tmp/verify/c.json:202	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof b.c | A	/tmp/verify/c.json:209	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof b.c | b.c	/tmp/verify/c.json:215	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof b.c | 'x'	/tmp/verify/c.json:221	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof b.c | ?	/tmp/verify/c.json:227	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof b.c | *	/tmp/verify/c.json:233	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof b.c | function	/tmp/verify/c.json:239	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof b.c | new	/tmp/verify/c.json:245	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof b.c | typeof	/tmp/verify/c.json:251	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof b.c | keyof	/tmp/verify/c.json:257	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof b.c | module	/tmp/verify/c.json:263	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof b.c & A	/tmp/verify/c.json:269	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+typeof b.c & b.c	/tmp/verify/c.json:275	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+typeof b.c & 'x'	/tmp/verify/c.json:281	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+typeof b.c & ?	/tmp/verify/c.json:287	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+typeof b.c & *	/tmp/verify/c.json:293	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+typeof b.c & function	/tmp/verify/c.json:299	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+typeof b.c & new	/tmp/verify/c.json:305	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+typeof b.c & typeof	/tmp/verify/c.json:311	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+typeof b.c & keyof	/tmp/verify/c.json:317	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+typeof b.c & module	/tmp/verify/c.json:323	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+typeof b.c [ ]	/tmp/verify/c.json:329	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+typeof | typeof b.c	/tmp/verify/c.json:335	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof & typeof b.c	/tmp/verify/c.json:341	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+typeof function . A	/tmp/verify/c.json:347	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof function . b.c	/tmp/verify/c.json:353	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof function . function	/tmp/verify/c.json:360	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof function . new	/tmp/verify/c.json:366	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof function . typeof	/tmp/verify/c.json:372	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof function . keyof	/tmp/verify/c.json:378	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof function . module	/tmp/verify/c.json:384	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof new . A	/tmp/verify/c.json:390	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof new . b.c	/tmp/verify/c.json:396	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof new . function	/tmp/verify/c.json:403	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof new . new	/tmp/verify/c.json:409	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof new . typeof	/tmp/verify/c.json:415	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof new . keyof	/tmp/verify/c.json:421	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof new . module	/tmp/verify/c.json:427	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof typeof . A	/tmp/verify/c.json:433	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof typeof . b.c	/tmp/verify/c.json:439	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof typeof . function	/tmp/verify/c.json:446	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof typeof . new	/tmp/verify/c.json:452	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof typeof . typeof	/tmp/verify/c.json:458	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof typeof . keyof	/tmp/verify/c.json:464	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof typeof . module	/tmp/verify/c.json:470	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof keyof . A	/tmp/verify/c.json:476	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof keyof . b.c	/tmp/verify/c.json:482	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof keyof . function	/tmp/verify/c.json:489	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof keyof . new	/tmp/verify/c.json:495	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof keyof . typeof	/tmp/verify/c.json:501	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof keyof . keyof	/tmp/verify/c.json:507	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof keyof . module	/tmp/verify/c.json:513	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof module . A	/tmp/verify/c.json:519	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof module . b.c	/tmp/verify/c.json:525	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof module . function	/tmp/verify/c.json:532	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof module . new	/tmp/verify/c.json:538	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof module . typeof	/tmp/verify/c.json:544	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof module . keyof	/tmp/verify/c.json:550	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+typeof module . module	/tmp/verify/c.json:556	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+keyof | typeof b.c	/tmp/verify/c.json:562	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+keyof & typeof b.c	/tmp/verify/c.json:568	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+keyof keyof typeof b.c	/tmp/verify/c.json:580	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
+module | typeof b.c	/tmp/verify/c.json:586	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,closure,typescript）; traverse が NAME を訪問しない
+module & typeof b.c	/tmp/verify/c.json:592	—	検査の出力（写しの /tmp/verify）: P4-traverse（permissive,typescript）; traverse が NAME を訪問しない
