@@ -1,0 +1,4 @@
+input	source	kind	note
+(x:) => string	#5	—	parse（mode typescript）は成功し publish が TypeError: Cannot read properties of null (reading 'type')。call 9 の出力でも確認。被験側はこの後 cb569c2 で lib/publishing.js を修正した
+(a: number, b:) => void	#5	—	publish が同じ TypeError（#5「実機で確認」、call 9 の出力）
+(...x:) => y	#5	—	publish が同じ TypeError（#5、call 9 の出力）

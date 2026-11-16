@@ -1,0 +1,28 @@
+input	source	kind	note
+(x:) => string	#5; #16	2	#16 で種類2の「変種なしで出ている違反」として挙げ（Lean の定理 publish_crashes）、同時に修正 cb569c2 後のコードに対しては誤検知と述べた。修正前（ピン留めのライブラリ）では publish が TypeError
+(a: number, b:) => void	#5	—	publish が同じ TypeError（#5「実機で確認」、call 9 の出力）
+(...x:) => y	#5	—	publish が同じ TypeError（#5、call 9 の出力）
+= n1	#27; #121; #122; /tmp/mut/base.txt:9	1	表では P=(n1)、ライブラリは拒否（前置 = がない）
+n0 / n2	#27; #121	1	表では /(n0, n2)、ライブラリは拒否（中置 / がない）。/tmp/mut/base.jsonl:4755
+! ! *	#27; #121; /tmp/mut/base.txt:10	1	表では P!(P!(*))、ライブラリは拒否
+* ! !	#27; #121	1	表では S!(S!(*))、ライブラリは拒否。/tmp/mut/base.jsonl:3880
+* . m2	#27	1	表では受理、ライブラリは拒否。/tmp/mut/base.jsonl:2843
+? . m2	#121	1	表では .(?, m2)、ライブラリは拒否。/tmp/mut/base.jsonl:1
+! * !	#27; #30; #121; #122; /tmp/mut/base.txt:18	1	表では P!(S!(*))、ライブラリは S!(P!(*))
+! 1 =	#121; /tmp/mut/base.txt:22	1	表では P!(S=(1))、ライブラリは S=(P!(1))
+? []	#27; #121; /tmp/mut/base.txt:12	1	表では [](?)、ライブラリは表にない構文（?(空のタプル)）で受理
+( n1 . m3 )	#27; #29; #30; #121; /tmp/mut/base.txt:25	1	表では拒否（( の行と . の列が x）、ライブラリは受理
+( n1 ~ m3 )	#121; /tmp/mut/base.txt:26	1	表では拒否（( の行と ~ の列が x）、ライブラリは受理
+= *	/tmp/mut/base.txt:6	1	検査の出力の例示。期待 ["P=","*"]、実際 REJECT
+= 1	/tmp/mut/base.txt:7	1	検査の出力の例示。期待 ["P=","1"]、実際 REJECT
+= ?	/tmp/mut/base.txt:8	1	検査の出力の例示。期待 ["P=","?"]、実際 REJECT
+? [] !	/tmp/mut/base.txt:13	1	検査の出力の例示。実際 OUTSIDE_TABLE
+? [] =	/tmp/mut/base.txt:14	1	検査の出力の例示。実際 OUTSIDE_TABLE
+? [] ?	/tmp/mut/base.txt:15	1	検査の出力の例示。実際 OUTSIDE_TABLE
+...? []	/tmp/mut/base.txt:16	1	検査の出力の例示。実際 OUTSIDE_TABLE
+! * =	/tmp/mut/base.txt:19	1	検査の出力の例示。期待 P!(S=(*))、実際 S=(P!(*))
+! * ?	/tmp/mut/base.txt:20	1	検査の出力の例示。期待 P!(S?(*))、実際 S?(P!(*))
+! 1 !	/tmp/mut/base.txt:21	1	検査の出力の例示。期待 P!(S!(1))、実際 S!(P!(1))
+( n1 # m3 )	/tmp/mut/base.txt:24	1	検査の出力の例示。期待 REJECT（x ((, #)）、実際 受理
+! ( n2 # m4 )	/tmp/mut/base.txt:27	1	検査の出力の例示。期待 REJECT、実際 受理
+! ( n2 . m4 )	/tmp/mut/base.txt:28	1	検査の出力の例示。期待 REJECT、実際 受理
