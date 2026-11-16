@@ -1,0 +1,33 @@
+bundle	run	msg	oracle_classes	gap_oracle	note
+U1	run-04	#2,#8	汎用(再parse); リポジトリ内(schemas/MemberNode.json, README); 自作(traverse の完全性)	なし	
+U1	run-06	#5	汎用(再parse); リポジトリ内(schemas/MemberNode.json, README); 自作(traverse の完全性)	なし	
+U1	run-07	#8	汎用(再parse); リポジトリ内(schemas/MemberNode.json, README); 自作(traverse の完全性)	なし	
+U1	run-09	#3	汎用(再parse); リポジトリ内(schemas/MemberNode.json, README); 自作(traverse の完全性)	なし	
+U1	run-10	#7	汎用(再parse); リポジトリ内(schemas/MemberNode.json, README); 自作(traverse の完全性)	なし	
+U2	run-04	#8	汎用(内部エラーで落ちない)	なし	
+U2	run-07	#8	汎用(内部エラーで落ちない)	なし	
+U2	run-10	#7	汎用(内部エラーで落ちない)	なし	
+U3	run-03	#1	汎用(再parse)	なし	
+U3	run-04	#8	汎用(再parse)	なし	
+U3	run-06	#6	汎用(再parse)	なし	
+U3	run-07	#8	汎用(再parse)	なし	
+U3	run-09	#9	汎用(再parse)	超えた	変更3の2
+U3	run-10	#7	汎用(再parse)	なし	
+U4	run-03	#1	自作(往復で同じ木)	超えた	
+U4	run-04	#8	自作(往復で同じ木)	超えた	
+U4	run-06	#6	自作(往復で同じ木)	超えた	
+U4	run-07	#8	自作(往復で同じ木)	超えた	
+U4	run-10	#7	自作(往復で同じ木)	超えた	
+U5	run-04	#8	汎用(再parse); 自作(RoundTrip)	なし	
+U5	run-06	#6	汎用(再parse); 自作(RoundTrip)	なし	
+U5	run-10	#7	汎用(再parse); 自作(RoundTrip)	なし	
+U6	run-04	#8	自作(往復で同じ木)	超えた	
+U6	run-09	#9	自作(往復で同じ木)	超えた	
+U6	run-10	#7	自作(往復で同じ木)	超えた	
+U7	run-10	#31	汎用(再parse); 自作(RoundTrip)	なし	
+U8	run-10	#7	自作(ParenCongruence ほか)	超えた	
+U9	run-10	#7	自作(ReturnCongruence)	超えた	
+U10	run-07	#8	リポジトリ内(文法); 外部(JSDoc の string[]=)	なし	
+U11	run-07	#8	リポジトリ内(README, schemas の required)	なし	
+U12	run-07	#8	リポジトリ内(文法のコメント)	なし	
+U25	run-10	#31（F14 のみ「不具合」）	自作(RoundTrip, P6); 汎用(再parse)	超えた	

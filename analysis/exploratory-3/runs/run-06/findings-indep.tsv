@@ -1,0 +1,7 @@
+run	id	oracle_class	asserted_defect	note
+run-06	F1	汎用	yes #5	#5「明確なバグです」。publish の出力が再び parse できない（call 7）。
+run-06	F2	リポジトリ内	yes #6	#6 項目1の見出し「AST が壊れる(重大)」と「バグ1(文法の修正)」。schemas/MemberNode.json の name: string（call 9）。F1・F3 と同じ箇所（158行）。
+run-06	F3	自作	yes #6	#6 の行「これは P3 の違反です」自体は挙動の記述だが、同じ箇所の項目1（「AST が壊れる」「バグ1」）の一部として述べられている。束で読むと断定あり（迷い）。走査の完全性は汎用に入らない。
+run-06	F4	汎用	yes #6	#6「バグ2・3(publisher で meta.syntax を尊重する…)」と「見つかったバグ」の項目2。再パースで SyntaxError。
+run-06	F5	汎用	yes #6	#6 項目2の中の「似た例として」。原因は KeyQueryExprOperand（文法側）で、修正案の「バグ2・3(publisher…)」とは原因が違う。項目2と「見つかったバグ」の節に含まれるので yes とした（迷い）。
+run-06	F6	自作	yes #6	#6 項目3と「バグ2・3」。照らしたのは meta を除いた AST の一致（自作）だけで、`!??` は再パースできる。リポジトリのテスト（tests/test_publishing.js の 'Object!'→'!Object' など）は後置を前置に正規化する出力を期待しており、この不一致の原因の挙動を期待している面がある（【リポジトリ内のオラクルと逆】に当たるかは迷い）。

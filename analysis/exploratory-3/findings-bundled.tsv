@@ -1,0 +1,26 @@
+bundle	summary	members	oracle_classes	asserted_defect	gap_oracle_of_assertion	note	author_judgement
+U1	typeof a.b で MEMBER.name が文字列でなく NAME ノードになる（publish の出力を再 parse できない、traverse が訪問しない、スキーマ・README と食い違う）	04 F2,F3; 06 F1,F2,F3; 07 F1; 09 F1a,F1b,F1c; 10 F2	汎用(再parse); リポジトリ内(schemas/MemberNode.json, README); 自作(traverse の完全性)	04 #2,#8; 06 #5; 07 #8; 09 #3; 10 #7	なし		
+U2	(a:) => A を parse した木で publish が TypeError を投げる	04 F4; 07 F2; 10 F1	汎用(内部エラーで落ちない)	04 #8; 07 #8; 10 #7	なし	10 は (a:) の受理が意図かを #7 Q4 で尋ねた	
+U3	前置と後置の ?・! が重なる名前型（?A?、?A!、!A!、!Foo?）の publish の出力を再 parse できない	03 F1,F2; 04 F1(P2); 06 F4; 07 F3(PublishReparses); 09 F2a; 10 F3(PublishInSameMode)	汎用(再parse)	03 #1; 04 #8; 06 #6; 07 #8; 09 #9; 10 #7	なし（run-09 の断定は超えた：変更3の2）	run-09 は U3 と U6 をまとめて「バグ2」と断定し、修正で既存テスト3件の期待値を書き換えた【リポジトリ内のオラクルと逆】。変更3の2により run-09 の断定は超えた	
+U4	??! が publish で !?? になり、再 parse すると別の木になる	03 F3; 04 F1(P3); 06 F6; 07 F3(RoundTripStable); 10 F3(RoundTrip)	自作(往復で同じ木)	03 #1; 04 #8; 06 #6; 07 #8; 10 #7	超えた	往復で同じ木に戻ることは汎用に入れない（変更2の1）	
+U5	keyof A? が keyof ?A になり再 parse できない	04 F5; 06 F5; 10 F4	汎用(再parse); 自作(RoundTrip)	04 #8; 06 #6; 10 #7	なし		
+U6	関数の戻り値の配列（() => A![]、new () => A![]、function(): A?[]）が publish で前置になり、再 parse すると別の木（関数の配列など）になる	04 F6; 09 F2b; 10 F5	自作(往復で同じ木)	04 #8; 09 #9; 10 #7	超えた	09 F2b：被験側は U3 と合わせて「バグ2」と断定し、修正で既存テスト3件の期待値（単独の後置を前置に書き換える）を書き換えた【リポジトリ内のオラクルと逆】	
+U7	() => A?=[] が () => ?A=[] になり再 parse できない	10 F6	汎用(再parse); 自作(RoundTrip)	10 #31	なし		
+U8	括弧で囲んだ型が配列や型引数の位置で拒否される（([A][])、X<(A)[]>、X<(A).b>）	10 F7	自作(ParenCongruence ほか)	10 #7	超えた		
+U9	function(): (A)[] が「関数の配列」になり、function(): A[] と意味が変わる	10 F8	自作(ReturnCongruence)	10 #7	超えた	#31 で Q7 として尋ねた（断定のあと尋ねた）	
+U10	?string[]、string[]= などが全モードで SyntaxError（文法の ArrayTypeExpr の枝に届かない）	07 F4	リポジトリ内(文法); 外部(JSDoc の string[]=)	07 #8	なし		
+U11	README の publish・traverse の例が TypeError で落ちる	07 F5	リポジトリ内(README, schemas の required)	07 #8	なし		
+U12	文法コメントの Examples（external:path/to/file、0cff）が parse できない	07 F6	リポジトリ内(文法のコメント)	07 #8	なし		
+U13	?[] の木がモードで違い、permissive がほかのモードを包含しない	04 F7; 07 F7; 10 F9	自作(モード間の包含)	—	—	04、10 は人に尋ねた。07 は報告に第三者宛ての問いとして書いた	
+U14	jsdoc/closure で keyof ? が NULLABLE(NAME keyof) になり、モードで木が違う	10 F10	自作(StrictImpliesPermissive)	—	—	人に尋ねた	
+U15	() => A | B、A|B&C の結合が TypeScript と違う	04 F8; 07 F11	外部(TypeScript)	—	—		
+U16	{readonly : string} が parse できない	04 F9	自作(一貫性)	—	—		
+U17	不正な引数のときのエラーの型が一貫しない	04 F12; 10 F12	自作(一貫性)	—	—		
+U18	ARROW の new が typedef（AstNode）と食い違う	04 F11; 10 F13	リポジトリ内(lib/parsing.js の typedef)	—	—		
+U19	+0x8 は拒否、-0x8 は受理（符号の非対称）	07 F8	自作(対称性)	—	—		
+U20	ルートの型名とメンバー名で使える文字が違う（a-b.c は受理、a.b-c は拒否）	07 F9	自作(対称性)	—	—		
+U21	大文字 E の指数（1E5、0E0）が SyntaxError	07 F10	外部(JS の数値リテラルの文法)	—	—		
+U22	schemas/ がどこからも参照されず、内容がコードと食い違う	07 F12	リポジトリ内(schemas とコード)	—	—		
+U23	"文字列のエスケープ（""\n""）が publish で ""\\n"" になる"	02 F1; 10 F11	自作(原文の保存、正準形)	—	—	02 は「既知の非対称性」として自分で外した	
+U24	単独の後置（A?、A!、A...、function():A?）が前置に書き換えられる	03 F4; 04 F10; 09 F3	自作(構文の形の保存、meta まで同じ木)	—	—	3回とも被験側が自分で意図を決めて不一致から外した。既存テスト（:417、:478、:490）は ?・! の前置への書き換えを期待している	
+U25	被験側の修正案で生じた不一致（() => keyof ?A[] の往復、keyof(A)? の再 parse、keyof A?? の再 parse、keyof ? のモード差）	04 F13; 10 F14,F15,F16	自作(RoundTrip, P6); 汎用(再parse)	10 #31（F14 のみ「不具合」）	超えた（10 F14）	from_own_fix。元のコミットのコードにはない	

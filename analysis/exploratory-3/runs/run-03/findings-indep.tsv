@@ -1,0 +1,5 @@
+run	id	oracle_class	asserted_defect	note
+run-03	F1	汎用	yes #1	publish の出力 ??A が同じパーサーで再 parse できない（SyntaxError、call 4・5）。断定は #1「実際のバグが1件見つかりました」（原因節で publishing.js の NULLABLE 出力を指す）。#3「バグを修正しました」「これまで壊れていたケース」も同じ。P1（自作の往復）の違反でもあるが、再 parse の失敗なので汎用で足りるとした。
+run-03	F2	汎用	yes #1	publish の出力 !?A が再 parse できない（SyntaxError）。断定は F1 と同じ #1。
+run-03	F3	自作	yes #1	!?? は再 parse でき、別の木 NULLABLE(NOT_NULLABLE(UNKNOWN)) になる。往復で同じ木（range・loc・meta を除外）は自作。#1 の表の3行目に載り、原因節「意味の違う木になります」と「実際のバグが1件」がこれを含む。#3「これまで壊れていたケース」と回帰テスト ??! も同じ。単独の束なら断定のオラクルの差は超えた。
+run-03	F4	自作	no	meta を含む木の完全一致（call 3）に対する不一致。#1「問題にしていません」で被験側が意図を決めて外した（逆向きの断定）。リポジトリ内のテスト（'goog.ui.Component?'→'?goog.ui.Component' など）はこの正規化を期待する。

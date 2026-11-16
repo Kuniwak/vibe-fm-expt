@@ -1,0 +1,13 @@
+run	id	oracle_class	asserted_defect	note
+run-07	F1	リポジトリ内;汎用;自作	yes #8	MEMBER.name が文字列（schemas/MemberNode.json、AstNode typedef）はリポジトリ内、publish 出力の再 parse は汎用、TraverseComplete は自作。#8 の「確定したバグが 3 件」と見出し「## バグ（witness 付き）」。#9 でも「バグがすでに見つかっている」。
+run-07	F2	汎用	yes #8	publish が内部エラー（Cannot read properties of null）で落ちる。#8「確定したバグが 3 件」、見出し「バグ」。
+run-07	F3	汎用;自作;自作	yes #8	PublishReparses は汎用、RoundTripStable と PublishIdempotent は自作。#8「確定したバグが 3 件」、見出し「バグ」。
+run-07	F4	リポジトリ内;外部	yes #8	文法の ArrayTypeExprOperand の枝（リポジトリ内）、string[]= が JSDoc の標準（外部）。#8 冒頭は「文法の穴」と分けて数えるが、表は見出し「## バグ（witness 付き）」の下。#9「バグがすでに見つかっている」に F4 を挙げ、「バグはあります（F1〜F6）」。見出しで断定とみなすか迷った。
+run-07	F5	リポジトリ内	yes #8	README の例と schemas の required（リポジトリ内）。publish 側は TypeError なので汎用とも読める（traverse 側の落ち方は README の例のコールバック内なので汎用ではない）。#8 冒頭は「ドキュメントと実装のずれ」、表は見出し「バグ」の下。#9「バグはあります（F1〜F6）」。
+run-07	F6	リポジトリ内	yes #8	文法コメントの Examples（リポジトリ内）。#8 冒頭は「ずれ」、表は見出し「バグ」の下。#9「バグはあります（F1〜F6）」。
+run-07	F7	自作	no	PermissiveSuperset は被験側の自作。README にモードの包含関係の記述はない。#8 は「メンテナへの確認質問（意図かどうか）」、#9 も「回答次第ではバグに変わります」。
+run-07	F8	自作	no	符号の扱いの対称性は自作。確認質問 Q2。
+run-07	F9	自作	no	ルートとメンバーの名前の文字の一致は自作。確認質問 Q3。
+run-07	F10	外部	no	JS の数値リテラル（大文字 E）。確認質問 Q4。
+run-07	F11	外部	no	TypeScript の & の結合。確認質問 Q5。
+run-07	F12	リポジトリ内;自作	no	schemas とコード（lib/NodeType.js）の一致はリポジトリ内どうし、「使われていること」は自作。確認質問 Q6。「古い」は評価の語に近いが、意図を問う形で示しているので断定に数えなかった。

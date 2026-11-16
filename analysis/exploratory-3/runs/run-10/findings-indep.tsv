@@ -1,0 +1,17 @@
+run	id	oracle_class	asserted_defect	note
+run-10	F1	汎用	yes #7	PublishTotal（publish が例外を投げない）は内部エラーで落ちないこと。#7「## 見つかったバグ」の B1、#31「曖昧さのないバグ5件(B1・…)」。
+run-10	F2	リポジトリ内;自作;自作;汎用	yes #7	README の MEMBER「name: string」（リポジトリ内）、RoundTrip・TraverseComplete（自作）、PublishInSameMode（汎用：publish の出力が再 parse できない）。#7 の B2。
+run-10	F3	自作;汎用	yes #7	RoundTrip（??! の入れ替わり：再 parse はできるので自作）、PublishInSameMode（??A が再 parse できない：汎用）。#7 の B3。
+run-10	F4	汎用;自作	yes #7	PublishInSameMode（keyof ?A が再 parse できない：汎用）、RoundTrip（自作）。#7 の「見つかったバグ」の B4。のち #37 は B4 を「バグの報告ではなく…確認事項」と扱い直すが、#7 で断定済み。
+run-10	F5	自作	yes #7	RoundTrip のみ（function(): ?A[] は再 parse でき、別の AST になる）。#7 の B5、#7「最も深刻なのは B5 と B6」。
+run-10	F6	汎用;自作	yes #31	PublishInSameMode（() => ?A=[] が再 parse できない：汎用）、RoundTrip（自作）。#31 の B5 行に入れ、「曖昧さのないバグ5件(B1・B2・B3・B5・B6)を直しました」。発見は #24〜#27 の検査（final4.txt）による。
+run-10	F7	自作;自作;自作	yes #7	Paren／GenericArg／ReturnCongruence は被験側が grammar の Operand リストから立てた性質（LEDGER「主張の出所: grammar の各 Operand リスト」）で、grammar 自体はその性質を述べていないので自作とした。拒否は SyntaxError で汎用の違反に当たらない。#7 の B6。
+run-10	F8	自作	yes #7	ReturnCongruence（自作）。#7 の B6 の例に function(): (A)[] がある。のち #31 では Q7 として意図を尋ねる。
+run-10	F9	自作	no	StrictImpliesPermissive（LEDGER「モード名からの推測 (要確認)」）。Q1 として尋ねただけで、評価の語による断定はない。
+run-10	F10	自作	no	StrictImpliesPermissive。Q2 として尋ねた（#7「意図どおりですか?」）。#31 の「B4 と Q2」は B4（F4）の断定で、F10 の断定ではないと読んだ。
+run-10	F11	自作	no	受理した綴りが publish 後も保たれる（正準形）。Q3「仕様ですか?」。
+run-10	F12	自作	no	エラーの型の一貫性（被験側の立てた期待）。Q5 として台帳に載せただけ。
+run-10	F13	リポジトリ内	no	lib/parsing.js の typedef「@property {AstNode} [new]」。Q6「食い違っている」は挙動の記述で、評価の語ではない。
+run-10	F14	自作	yes #31	RoundTrip のみ（() => keyof A?[] は再 parse でき、別の AST）。#31「最初の B4 の修正は、別の不具合を生んでいました」。被験側の修正案で生じた不一致。
+run-10	F15	汎用	no	PublishInSameMode（?keyof(A) が再 parse できない：汎用）。#38「副作用が出ました」は評価の語として弱く、断定に数えなかった（notes.md）。被験側の修正案で生じた不一致。
+run-10	F16	汎用;自作	no	PublishInSameMode（?keyof ?A が再 parse できない：汎用）、RoundTrip（自作）。#39「まだ20件の違反が残っています」は挙動の記述。被験側の提案ブランチで生じた不一致。

@@ -1,0 +1,14 @@
+run	id	oracle_class	asserted_defect	note
+run-04	F1	汎用;自作	yes #8	?A? → ??A の再 parse 失敗は P2（同じパーサーで再 parse できる、汎用）。??! → !?? の AST 違いは P3（meta を正規化した AST の一致、自作）。#2「往復が壊れるだけの R1」の「壊れる」は往復の不成立の記述と読み、断定は #8「R1〜R5 の5つのバグ」とした
+run-04	F2	汎用;自作;リポジトリ内	yes #2	P2（再 parse、汎用）、P5（traverse の完全性、自作）、MEMBER.name は文字列（schemas/MemberNode.json、tests のヘルパ createMemberTypeNode。リポジトリ内）。#2「AST の形が壊れている R2」が評価の語。#8「5つのバグ」でも断定している
+run-04	F3	自作	yes #8	P5（traverse が型付きのノードを丁度1回ずつ訪問する）は汎用に入れない（変更2の1）。F2 と同じ箇所、同じ入力（typeof X.Y）なので、束ねると汎用とリポジトリ内のオラクルが加わる。断定は #8「R1〜R5 の5つのバグ」と、R2 の行の「publish と traverse の両方が直る」
+run-04	F4	汎用	yes #8	publish が TypeError（Cannot read properties of null）を投げる。内部エラーで落ちないこと（汎用）
+run-04	F5	汎用;自作	yes #8	P2（keyof A? → keyof ?A を再 parse できない、汎用）。入力の行には P2 だけが書かれているが、call 18/38 では P3（自作）の R4 も4件ある（例 new () => keyof "v"?[]）ので加えた
+run-04	F6	自作;汎用	yes #8	P3（AST の一致、自作）。入力の行には P3 だけが書かれているが、call 18/38 の P2 の原因別の件数に「R5 …: 9 (e.g. "?new () => *?[]")」があり、再 parse できない（汎用）違反も同じ分類に入るので加えた。汎用を加えない場合、R5 は自作のオラクルだけになり、C46a の判定が変わる
+run-04	F7	自作	no	P6（permissive は他のモードを包含する）は被験側の仮定。README に permissive の説明はない（call 12 は出力なし）。#1 では確認の質問として扱い、#8 でも「仕様の判断が必要」として手を付けていない
+run-04	F8	外部	no	TypeScript の演算子の優先順位。#1 は確認の質問で、#8 は「手を付けていないもの」。「逆です」は記述で、評価の語はない
+run-04	F9	自作	no	キー名によらず同じ形が parse できること（一貫性）は、被験側が立てた性質。確認の質問として扱っている
+run-04	F10	自作	no	【リポジトリ内のオラクルと逆】構文の形（後置／前置）が保存されることは、被験側が立てた性質。既存の tests/test_publishing.js は、後置を前置に書き換えること（goog.ui.Component? → ?goog.ui.Component、Object! → !Object）を期待している。#5 では「想定どおりの差」として、自分で意図を決めて不一致から外している
+run-04	F11	リポジトリ内	no	AstNode の typedef（lib/parsing.js の @property {AstNode} [new]）と比べている。#1 は「細かい点」と述べただけで、「合っていない」は LEDGER.md に書かれ、発言には出ていない。実行で再生した記録はない（文法を読んだだけ）
+run-04	F12	自作	no	不正な引数でも、各モードの SyntaxError で統一すること（一貫性）は、被験側が立てた性質。参考：typescript モードで startRule に ExternalNameExpr を渡すと Error になる。ParseOptions の typedef はこの startRule を許しているので、リポジトリ内のオラクルとの不一致とも読める。ただし発言ではその観点で述べていない
+run-04	F13	自作	no	被験側の R4 の修正で生じた不一致（from_own_fix）。#8 は「互換性に影響する変化」「副作用」と記述しており、評価の語はない

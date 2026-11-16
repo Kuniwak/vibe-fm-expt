@@ -1,0 +1,78 @@
+run	id	claim_kind	holds_claim	gap_object	gap_oracle	gap_range	gap_assumption	solo_gap_object	solo_gap_oracle	solo_gap_range	solo_gap_assumption	gap_direction	note
+run-10	C1a	不一致	no	なし	なし	なし	なし	なし	なし	超えた	なし	—	「12系統まで束ねられ」は call 19（--quick、tokens<=3・nestings<=2）の RoundTrip「minimal failing subtrees (12 shapes)」と一致。範囲の明示はないが、同じ #1 の次の文「1回目のフル実行は古いコード(分類なし)で走っているので止め」が quick の結果であることを示す（同じ発言の限定）。単独で読むと範囲の限定なし。フル範囲（call 29）では 22 shapes。
+run-10	C1b	その他	no	なし	超えた	なし	なし	なし	超えた	なし	なし	成立側	「そのまま根本原因として読めます」：証拠は最小失敗部分木の形（ノード型2段）での分類だけで、原因の特定はしていない。同じ12形のうち KEY_QUERY(T) と KEY_QUERY(NULLABLE…) は同じ原因（#7 では 6系統に再集約）。検査が示したものを広く述べたので成立側（変更2の3）。
+run-10	C4	不一致	no	なし	超えた	なし	なし	なし	超えた	なし	なし	不一致側	見出し「このリポジトリにはバグがあります」。変更2の1により見出しは束ねた主張として扱う。内訳：B1（汎用：TypeError）、B2（リポジトリ内：README の MEMBER name: string／汎用：再 parse 不能）、B3・B4（汎用：再 parse 不能を含む）はなし。B5（RoundTrip のみ＝自作）と B6（Congruence＝自作）が超えた。1つでも超えたので超えた。
+run-10	C5	不一致	no	なし	超えた	なし	なし	なし	超えた	なし	なし	不一致側	冒頭文「「バグがない」は成り立ちませんでした」。冒頭文として #7 の発見全体（B1〜B6）をまとめた主張と読み、B5・B6（自作のオラクルのみ）を含むので超えた。存在の主張とだけ読めば B1（汎用）で足りるので、なしとも読める（notes.md）。
+run-10	C6	不一致	no	なし	なし	なし	超えた	なし	なし	なし	超えた	成立側	「反例は**6系統**に収まります」：final.txt は RoundTrip 22 shapes、Congruence 各系、StrictImpliesPermissive 74 shapes（484件）を出しており、6系統への集約は人手の読みで成果物は確立していない。StrictImpliesPermissive の反例（Q1・Q2）は B1〜B6 に入らない。「収まる」は他の系統がないという網羅の主張なので成立側（変更2の3）。
+run-10	C7	成立	yes	なし	なし	なし	なし	なし	なし	超えた	なし	—	traverse の親リンクの「成立を証明できた」：証拠は TraverseParentLinks の有界全列挙（3,155,936件×4モード、0 witnesses、final.txt）。範囲の明示はないが、同じ #7 の「有界の全列挙を主役にしました。入力は約316万件 × 4モード」が範囲を収める。単独で読むと「証明」は限定なしの成立。
+run-10	C8	成立	yes	なし	なし	なし	超えた	超えた	なし	なし	超えた	成立側	文字列エスケープの「成立を証明できた」：証拠は escape.js の手書きの有限状態モデル（P1・P2、全長）。対象の限定は同じ #7 の「有限状態機械として全長について帰納的に証明しました」（同じ発言、やったこと節）で、なし（単独では超えた）。仮定：モデルの忠実さは、文字種4つへの抽象化（コメントでの議論のみ）と、モデル対 String.prototype.replace の差分比較（|c|<=9、decoder は grammar の action を写した正規表現）、実コード e2e（|s|<=6）に依る。同じ発言の「モデルと実装のずれは…差分全列挙で塞いでいます」は有界の比較を「塞いだ」と述べ、仮定を証拠の内に収めていないので超えた。
+run-10	C11a	その他	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「入力は約316万件 × 4モード」：final.txt「total: 3155936 inputs」、各空間「x 4 modes」と一致。
+run-10	C11b	その他	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「検査対象は本物のコードそのもの」：enumerate.js は lib/ と生成済み peg_lib/ を require して実行しており一致。文は全列挙の箇条書きの中にあり、escape.js のモデルを指していない。
+run-10	C18h	不一致	no	なし	超えた	なし	なし	なし	超えた	なし	なし	不一致側	見出し「## 見つかったバグ」。束ねた主張として、内訳 B1（汎用）、B2（リポジトリ内・汎用）、B3・B4（汎用を含む）はなし、B5（自作 RoundTrip のみ）、B6（自作 Congruence のみ）が超えた。
+run-10	C18	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	B1 行「publish が TypeError を投げる」：call 6「PUBLISH-THROWS Cannot read properties of null」、final.txt PublishTotal 90156 witnesses。行の文面は挙動の記述で評価の語なし（変更2の1により見出しを及ぼさない）。
+run-10	C19	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	B2 行「MEMBER の name が文字列ではなくノードになる」：call 6 の publish 出力「typeof A.{ type: 'NAME', name: 'B' }」が name にノードが入っていることを示す。リポジトリ内のオラクル（README の MEMBER「name: string」）。挙動の記述。
+run-10	C20	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	B2 行の publish 出力：call 6 と一致（REPARSE-ERR）。挙動の記述。
+run-10	C21	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	B2 行「traverse もそのノードを訪問しない」：call 9「visited 3/4 nodes; missing [NAME]」、final.txt TraverseComplete 3197。挙動の記述。
+run-10	C22	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	B3 行「publish すると ??A になり、これが構文エラー」：call 9・call 18 の「published "??A" does not parse」「"!!A" does not parse」と一致。
+run-10	C23	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	B3 行「??! は…入れ子の向きが静かに入れ替わる」：call 18「"??!": published "!??" reparses to a different AST」、call 21 で NOT_NULLABLE(NULLABLE(UNKNOWN)) と NULLABLE(NOT_NULLABLE(UNKNOWN)) を確認。挙動の記述。
+run-10	C24	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	B4 行「keyof ?A が構文エラーになる(keyof? と読まれてしまう)」：call 21 permissive SyntaxError、call 33 で keyof ? が NULLABLE(NAME keyof)。原因の記述も call 33 で裏づけられる。
+run-10	C25	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「そのため keyof A? は round-trip できない」：call 19・final.txt「"keyof A?": published "keyof ?A" does not parse」。
+run-10	C26	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	B5 行「publish → parse し直すと「関数の配列」になる。エラーを出さずに意味が変わる」：call 35「function(): A?[] | pub: function(): ?A[] | same: false」、call 21 で function(): ?A[] が GENERIC(Array,[FUNCTION])。行の文面に評価の語なし（「意味が変わる」は AST が変わることの記述）。
+run-10	C27a	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	B6 行「置く場所によって受理されなかったり、別の意味になったりする」：call 22〜23 の Paren/GenericArg/ReturnCongruence の反例（([A][]) rejected、X<(A)[]> rejected、function(): (A)[] parses as GENERIC）、call 35。挙動の記述。
+run-10	C27b	不一致	no	証拠なし	証拠なし	証拠なし	証拠なし	証拠なし	証拠なし	証拠なし	証拠なし	—	B6 行の原因「PEG の選択肢の並び順で先取りが起き」：発言時点では grammar を cat で読んだだけ（call 3〜4）で、この原因を確かめる検査はない（EXPECTED のコメント「Tuple shadows Array」も読み取り）。のちの並べ替え（call 53〜55）は発言の後。超えた項目がないので向きは —。
+run-10	C28	不一致	no	なし	超えた	なし	なし	なし	超えた	なし	なし	不一致側	「最も深刻なのは B5 と B6 です」：「深刻」は「見つかったバグ」の中で B5・B6 を欠陥として重みづける評価の語と読んだ。B5 は RoundTrip のみ、B6 は Congruence のみ（どちらも自作）なので超えた。「エラーが出ないまま意味が変わります」自体は挙動の記述。
+run-10	C29	成立	yes	なし	なし	なし	なし	なし	なし	なし	なし	—	「traverse の親リンク: 反例ゼロでした」：final.txt「TraverseParentLinks expected=OK got=OK (0 witnesses)」。検査結果の記述なので単独でも超えない。
+run-10	C30	成立	yes	なし	なし	なし	超えた	超えた	なし	なし	超えた	成立側	P2「decode(encode(s)) = s…**全長の文字列について**成り立ちます」：escape.js の [model] P2 PASS（到達状態の探索で全長）。範囲は手書きモデルについては全長で一致。対象：同じ #7 の「有限状態機械として…証明しました」でなし（単独では実コードと読めるので超えた）。仮定：文字種4つの抽象化と、モデル対 replace の比較が |c|<=9 であること、実コード e2e が |s|<=6 であることを述べず、同じ発言は「塞いでいます」と述べるので超えた。
+run-10	C31	成立	yes	なし	なし	なし	超えた	超えた	なし	なし	超えた	成立側	P1「encode の結果は必ず字句として受理できる」：escape.js [model] P1 PASS は、各文字の encode 結果が PEG の本体の選択肢（手で写した [^\\q] / "\\" .）に当たるかを調べたもの。対象の限定は C30 と同じで同じ発言によりなし（単独では超えた）。仮定は C30 と同じ理由で超えた。
+run-10	C32	成立	yes	なし	なし	超えた	なし	超えた	なし	超えた	なし	成立側	「decoder の2つの replace の順序は結果を左右しない」：証拠は [note]「swapped decoder order is equivalent on encoder output」で、等価性は encoder の出力の上だけ。主張は「encoder の出力に対して」の限定を落としている（LEDGER には書いてある）。同じ #7 にこの限定はないので範囲は超えた。対象は同じ発言の「有限状態機械として」でなし（単独では超えた）。
+run-10	C33	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	Q1「?[] はモードによって nullable の空タプル、Array<?>、構文エラーのどれかになります」：call 21 の4モードの出力と一致。人に尋ねた問い。
+run-10	C34	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	Q2「jsdoc/closure モードで keyof をただの型名として扱う」：call 33（jsdoc/closure で keyof ? が NULLABLE(NAME keyof)、keyof A が ERR）。
+run-10	C35a	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	Q3「\n は解釈されず」：escape.js の QUESTION 行「parses to string "a\\nb" (backslash kept, no \n escape)」。
+run-10	C35b	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	Q3「再 publish すると "a\\nb" に書き換わります」：QUESTION 行「republishes as "a\\nb"」（テンプレート文字列でそのまま出力した値）。一致。
+run-10	C36	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	Q4「(a:) => A(型の省略)」を受理していること：call 21 ARROW、NAMED_PARAMETER typeName null。
+run-10	C37	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	Q5「エラーの型が一貫していない」：call 21「ts+ExternalNameExpr: Error Can't start parsing from rule」（SyntaxError ではない汎用の Error）。挙動の記述として例1つで足りる。
+run-10	C38	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	Q6「ARROW の new が typedef と食い違っている」：lib/parsing.js の typedef「@property {AstNode} [new]」（リポジトリ内）、call 21 で ARROW の "new":null、call 3〜4 の grammar 読み取りで 'new' 文字列。挙動の記述。
+run-10	C40a	その他	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「既知の反例は期待値を VIOLATE にして固定してあります」：call 24・30・34 時点の EXPECTED（PublishTotal〜StrictImpliesPermissive の VIOLATE）と一致。
+run-10	C40b	その他	yes	なし	なし	なし	なし	なし	なし	超えた	なし	—	「バグを直したら期待値を OK に書き換えれば…回帰ガードとして働きます」：broken variant 5本の CAUGHT（final.txt）が検査の効きを示す。範囲は同じ #7 の「有界の全列挙」「約316万件 × 4モード」でなし。単独で読むと回帰一般を捕まえると読めるので範囲が超えた。
+run-10	C41a	成立	yes	なし	なし	なし	なし	なし	なし	なし	なし	—	「typeof A.B の形を固定しているテストはない」：call 40 の grep（tests/*.js、パターン typeof foo\. と typeof [a-z]*\.[a-z]）は出力なし、call 39 の grep typeof（test_parsing.js、head で10行まで）も typeof foo だけ。大文字の識別子はパターンに入らないが、主張と証拠は概ね一致するとした（notes.md）。
+run-10	C41b	成立	yes	証拠なし	証拠なし	証拠なし	証拠なし	証拠なし	証拠なし	証拠なし	証拠なし	—	「grammar を直しても既存の期待は壊れません」：発言時点は修正前で、既存テストを回していない（通過は call 67、発言の後）。grep は typeof の形だけを調べたもので、既存の期待全体についての検査ではない。
+run-10	C44a	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「フル範囲では、RoundTrip に12件の反例が残っていました」：final2.txt（call 78）「FAIL RoundTrip expected=OK got=VIOLATE (12 witnesses)」。
+run-10	C44b	限界	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「quick の範囲では見えなかったもの」：call 51 で quick の RoundTrip は got=OK（B4 の publisher 修正を入れた状態）。一致。
+run-10	C46	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「許容する反例の形を固定した検査が、早速ほかの系統を拾いました。VARIADIC[PREFIX_DOTS](T) です」：call 91「FAIL RoundTrip: causes outside /^KEY_QUERY\(/: VARIADIC[PREFIX_DOTS](T)」。ここでの「系統」は検査の形のラベルとして一致。直後の call 92 で中身は keyof の B4 と同じ原因（HEAD でも …keyof A? が REPARSE ERR）と分かる（notes.md）。
+run-10	C47	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「許容外の系統が残っていました」：final4.txt（call 95/98）「FAIL RoundTrip: causes outside /^KEY_QUERY\(/: OPTIONAL[SUFFIX_KEY_QUESTION_MARK](T), GENERIC[…]…」。
+run-10	C48	成立	yes	なし	超えた	なし	なし	なし	超えた	超えた	なし	不一致側	「曖昧さのないバグ5件(B1・B2・B3・B5・B6)を直しました」：「バグ5件」のまとめ。B1（汎用）、B2（リポジトリ内）、B3（汎用を含む）はなし、B5・B6（自作のみ）が超えた。修正の確認は final5.txt（有界、RESULT OK）。範囲は同じ #31 冒頭段落の「フル範囲の検査(約316万件 × 4モード)」でなし。単独では「直した」が限定なしと読めるので範囲が超えた（向きは成立側）。主の向きは不一致側。
+run-10	C51a	成立	yes	なし	なし	なし	なし	なし	なし	なし	なし	—	B1 行「publisher が a: と出力するようにした」：call 49「(a:) => A -> (a:) => A true」、final5.txt PublishTotal OK。修正の内容の記述。
+run-10	C51b	成立	yes	なし	なし	なし	なし	なし	なし	なし	なし	—	B1 行「受理範囲は変えていない」：B1 の修正は publisher だけで parser に触れていない。差分検査（diff_before_full・diff_head_full）の newlyRejected 0。
+run-10	C52	成立	yes	なし	なし	なし	なし	なし	なし	なし	なし	—	B2 行「grammar を直し、メンバー名が文字列になるようにした」：final5.txt TraverseComplete OK、diff_head_full の changedAllowed 3197（typeof）。行の「壊れた文字列」は評価の語だが、B2 はリポジトリ内のオラクル（README）と汎用を含むのでなし。
+run-10	C53	成立	yes	なし	なし	なし	なし	なし	なし	なし	なし	—	B3 行「前置演算子が二重になる位置だけ後置形で出力する」：final5.txt の RoundTrip の反例が KEY_QUERY の形だけ。修正の方法の記述。
+run-10	C54	成立	yes	なし	なし	なし	なし	なし	なし	なし	なし	—	B5 行「[] の要素に対してだけ後置形を使う」：call 100「() => A?=[] -> () => A?=[] true」、final5.txt。修正の方法の記述。行の文面に評価の語なし。
+run-10	C55	成立	yes	なし	なし	なし	なし	なし	なし	なし	なし	—	B6 行「([A][])、X<(A)[]>、X<(A).b>、function(): (A).b が構文エラーになる｜grammar の選択肢の並び順を直した」：call 55 でこれらが受理され、final5.txt で Paren/GenericArgCongruence OK。
+run-10	C58	成立	yes	なし	なし	両論	なし	なし	なし	超えた	なし	—	【両論】「修正前と修正後のパーサを全入力で突き合わせました」の「全入力」（#31「確かめたこと」節）に対し、同じ #31 の冒頭段落「フル範囲の検査(約316万件 × 4モード)」が範囲を収める（別の節）。証拠は diff_before_full・diff_head_full（3155936 inputs x 4 modes）。比べたのは parse の結果だけだが、行の文面が「パーサを突き合わせ」と述べているのでオラクルはなし。
+run-10	C59	成立	yes	なし	なし	なし	なし	なし	なし	超えた	なし	—	「拒否されるようになった入力は0件です」：diff_head_full・diff_head3 の newlyRejected 0。範囲は同じ #31 の「約316万件 × 4モード」でなし。単独で読むと限定なし。
+run-10	C60	成立	yes	なし	なし	なし	なし	なし	なし	超えた	なし	—	「結果が変わった入力も0件で、例外は…typeof X.Y 系の3,197件だけ」：diff_head3「changed 0」「changedAllowed 3197」（許可は正規表現 typeof で、件数は MEMBER(T,T) の 3197 と一致）。範囲は C59 と同じ。
+run-10	C62	成立	yes	なし	なし	なし	なし	なし	なし	超えた	なし	—	「PublishTotal、TraverseComplete、ParenCongruence、GenericArgCongruence は…「成立」に変わり」：final5.txt で4つとも expected=OK got=OK。範囲は同じ #31 の「約316万件 × 4モード」でなし。単独では「成立」が限定なし。
+run-10	C63a	成立	yes	なし	なし	なし	なし	なし	なし	なし	なし	—	「351件すべて通過、カバレッジ100%、lint…OK」：call 101「351 passing」「All files 100」「lint-ok」。
+run-10	C63b	成立	yes	なし	なし	なし	なし	なし	なし	なし	なし	—	「tsc も OK」：call 100 の tsc-ok。tsconfig の include は lib だけで、call 101 はテストだけを変えたので、lib に対する tsc の結果は変わらない。
+run-10	C64a	不一致	no	なし	超えた	なし	なし	なし	超えた	なし	なし	不一致側	「最初の B4 の修正は、別の不具合を生んでいました」：「不具合」は評価の語。不一致は F14（() => keyof ?A[] → "() => keyof A?[]" が別の AST）。再 parse はできるので汎用ではなく、RoundTrip（自作）だけに照らしているので超えた。
+run-10	C64b	限界	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「quick の範囲では見えず、フル範囲で初めて出ました」：call 51（quick、RoundTrip got=OK）と final2.txt（フル、12 witnesses）。
+run-10	C64c	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「HEAD では正しく round-trip していた () => keyof ?A[] の意味が変わってしまった」：call 84 で HEAD の publish 結果は入力と同じ文字列、修正後は "() => keyof A?[]" で AST が別（final2.txt）。
+run-10	C67a	その他	no	なし	超えた	なし	なし	なし	超えた	なし	なし	成立側	「残っている違反は、許容する反例の形を固定して管理するようにしました」：EXPECTED_CAUSES は RoundTrip・PublishInSameMode・ReturnCongruence の3つだけで、まだ VIOLATE の StrictImpliesPermissive（484件）は形を固定していない（e996a88 の enumerate.js）。検査が示すものを広く述べたので成立側。
+run-10	C67b	その他	yes	なし	超えた	なし	なし	なし	超えた	超えた	なし	成立側	「これで別系統の反例が新しく出れば赤になります」：StrictImpliesPermissive は形を固定していないので、そこに新しい系統が出ても赤にならない。KEY_QUERY( の正規表現は KEY_QUERY から始まる形をすべて許す。範囲（有界）は同じ #31 の「約316万件 × 4モード」でなし、単独では超えた。
+run-10	C68	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「実際にこの仕組みで、B5 の変種 () => A?=[] が見つかりました」：final4.txt の causes outside に GENERIC[SQUARE_BRACKET](T,OPTIONAL[SUFFIX_EQUALS_SIGN](…))、call 99 の例。この形は修正前の final.txt にもすでに出ていた（22 shapes の1つ）が、B5 の修正で直っていないことをこの仕組みが示した点は一致（notes.md）。
+run-10	C69	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「keyof ? は今「keyof という名前の nullable 型」と読まれます」：call 33（NULLABLE(NAME keyof)）。修正後も diff_head3 の changed 0 で keyof ? の AST は HEAD と同じ。
+run-10	C70a	成立	yes	なし	なし	超えた	なし	なし	なし	超えた	なし	成立側	「そうすれば B4 を直せます」：証拠は call 86 の parser 側の案の数例（keyof ?A ほかが round-trip true）だけで、同じ call 86 で keyof(A)? が REPARSE ERR になっている。B4 全体を直せることは確立していない。
+run-10	C70b	その他	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「受理済みの入力の意味が変わります」：call 86 で keyof ? が NULLABLE(NAME keyof) から KEY_QUERY(UNKNOWN) に変わる。一致。
+run-10	C71	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	Q7「function(): (A)[] は関数の配列になり、function(): A[] は配列を返す関数」：call 35、call 55 の AST と一致。
+run-10	C72	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	Q1「?[] の意味がモードによって違う」：call 21。
+run-10	C73	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	Q3「\n が改行として解釈されない」：escape.js の QUESTION 行。
+run-10	C74	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	Q4「(a:) を受理する」：call 21。
+run-10	C75	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	Q5「エラーの型がモードによって一貫していない」：call 21 は typescript モードで使えない startRule を指定したときの汎用 Error の1例。「モードによって」は、ほかのモードではその startRule が使えることと合わせた記述と読んだ（notes.md）。
+run-10	C76	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	Q6「ARROW の new フィールドが typedef と食い違っている」：lib/parsing.js の typedef、call 21。リポジトリ内のオラクル。
+run-10	C81	不一致	no	なし	超えた	なし	なし	なし	超えた	なし	なし	不一致側	「fix: には、ライブラリのバグ5件(B1・B2・B3・B5・B6)の修正と、その回帰テストを入れました」：コミットの中身は call 108 と一致するが、「バグ5件」のまとめに B5・B6（自作のオラクルのみ）が入るので超えた。
+run-10	C84	成立	yes	なし	なし	超えた	なし	なし	なし	超えた	なし	成立側	「よければ B4 を直せます」：根拠は call 86 の数例だけで、同じ試行で keyof(A)? が REPARSE ERR になった（#38 で本人が「副作用」と述べる）。B4 全体を直せることは確立していない。#35 にこれを収める限定はない。
+run-10	C85	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	Q7 の再掲：call 35、call 55。
+run-10	C90	成立	yes	なし	超えた	超えた	なし	なし	超えた	超えた	なし	不一致側	「明確なバグ5件は直してあります」：「バグ5件」に B5・B6（自作のみ）が入るのでオラクルは超えた（不一致側）。#37 に範囲の限定はなく、修正の確認は有界の final5.txt なので範囲も超えた（この項目は成立側）。主の向きを不一致側とした（notes.md）。
+run-10	C91a	その他	no	なし	超えた	なし	なし	なし	超えた	なし	なし	成立側	「残っている違反は検査で形まで固定してある」：StrictImpliesPermissive（VIOLATE、484件）は EXPECTED_CAUSES になく、形を固定していない。
+run-10	C91b	その他	yes	なし	超えた	超えた	なし	なし	超えた	超えた	なし	成立側	「別系統の反例が新しく出れば赤になります」：C67b と同じく StrictImpliesPermissive は対象外。#37 には有界であることの記述がなく、範囲も超えた。
+run-10	C92	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「前回の試行では keyof(A)? のような副作用が出ました」：call 86「keyof(A)? | ?keyof(A) REPARSE ERR」。
+run-10	C93	不一致	no	なし	なし	なし	なし	なし	なし	なし	なし	—	「quick の範囲で、まだ20件の違反が残っています」：call 112「RoundTrip … (20 witnesses)」「PublishInSameMode … (20 witnesses)」。
