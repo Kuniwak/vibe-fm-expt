@@ -32,7 +32,8 @@ one() {
   tar --no-mac-metadata --no-xattrs -C "$ROOT/reference/patches" -cf - . | docker exec -i "$name" tar -x -C /tmp/confirm-tools/patches
   docker exec -i "$name" sh -c 'cat > /tmp/confirm-tools/inside.sh' < "$ROOT/confirm/inside.sh"
   [ "$WHAT" = suite ] || docker exec -i "$name" sh -c 'cat > /tmp/confirm-tools/recipe.sh' < "$RECIPE"
-  docker exec "$name" bash /tmp/confirm-tools/inside.sh "$v" "$([ "$WHAT" = suite ] && echo suite || echo recipe)" "$mode" > "$OUT/$mode-$v.txt" 2>&1
+  # inside.sh exits non-zero when a variant does not apply or the build fails; record it and go on.
+  docker exec "$name" bash /tmp/confirm-tools/inside.sh "$v" "$([ "$WHAT" = suite ] && echo suite || echo recipe)" "$mode" > "$OUT/$mode-$v.txt" 2>&1 || true
   docker rm -f "$name" >/dev/null
 }
 for mode in "${modes[@]}"; do
