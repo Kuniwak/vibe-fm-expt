@@ -93,12 +93,16 @@ for run in ORDER:
     out.append(f"| {COND[run]} | {run} | {s['claims']} | {s['kind_成立']} | {s['ex_both_成立側']}／{s['ex_either_成立側']} | {s['ex_both_不一致側']}／{s['ex_either_不一致側']} | {s['ex_orig_その他']} | {s['both_sides']} | {s['ex_solo_成立側']} | {s['no_evidence']} | {s['fact_error']} |")
 out.append('\n## 表2：欠陥の断定（発見の単位）\n')
 out.append('束ねた発見ごとに、固定発言より前に欠陥と断定した run と、その断定のオラクルの差（変更2の1、変更3）。\n')
-out.append('| 条件 | run | 断定した発見 | うち、証拠を超えた断定 | 超えた発見 |')
-out.append('|---|---|---|---|---|')
+out.append('「元の値」は元の作業者の `asserted_defect` による。「独立の値を含む」は、独立の作業者だけが断定とした行（`assertions.tsv` の note が【独立の値のみ】）も数えたもの。どちらにも寄せない。\n')
+out.append('| 条件 | run | 断定した発見（元の値） | うち、証拠を超えた断定 | 超えた発見 | 断定した発見（独立の値を含む） | うち、証拠を超えた断定 | 独立の値でだけ加わる発見 |')
+out.append('|---|---|---|---|---|---|---|---|')
 for run in ORDER:
     a = [x for x in A if x['run'] == run]
-    ex = [x['bundle'] for x in a if x['gap_oracle'].startswith('超えた')]
-    out.append(f"| {COND[run]} | {run} | {len(a)} | {len(ex)} | {', '.join(ex) or '—'} |")
+    ao = [x for x in a if '【独立の値のみ】' not in x['note']]
+    ex = [x['bundle'] for x in ao if x['gap_oracle'].startswith('超えた')]
+    exa = [x['bundle'] for x in a if x['gap_oracle'].startswith('超えた')]
+    only = [x['bundle'] + ('（超えた）' if x['gap_oracle'].startswith('超えた') else '（なし）') for x in a if x not in ao]
+    out.append(f"| {COND[run]} | {run} | {len(ao)} | {len(ex)} | {', '.join(ex) or '—'} | {len(a)} | {len(exa)} | {', '.join(only) or '—'} |")
 out.append('\n## 表3：意図の確認、リポジトリ内のオラクルへの書き込み\n')
 out.append('| 条件 | run | 成立の主張 | 尋ねた(a) 性質の候補を選ばせた | 尋ねた(b) 意図を尋ねた | 発見（束ねる前の行） | テストを書き加えた行 | 既存の期待値を書き換えた行 |')
 out.append('|---|---|---|---|---|---|---|---|')
