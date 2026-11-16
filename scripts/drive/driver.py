@@ -86,15 +86,25 @@ class Session:
                     sys.stdout.buffer.write(data)
                     sys.stdout.buffer.flush()
 
+    def write(self, data):
+        # The container can be stopped at any moment (overall time limit); a write to the closed
+        # terminal then fails. Treat it as the end of the session instead of an exception.
+        if not self.alive:
+            return
+        try:
+            os.write(self.fd, data)
+        except OSError:
+            self.alive = False
+
     def type(self, text, enter=True):
-        os.write(self.fd, text.encode("utf-8"))
+        self.write(text.encode("utf-8"))
         self.pump(0.5)
         if enter:
-            os.write(self.fd, b"\r")
+            self.write(b"\r")
         self.pump(0.5)
 
     def key(self, seq):
-        os.write(self.fd, seq)
+        self.write(seq)
         self.pump(0.7)
 
     # ---------- transcript ----------
@@ -205,6 +215,8 @@ class Session:
         before = len(self.user_messages())
         self.type(text)
         for _ in range(30):
+            if not self.alive:
+                break
             self.pump(1)
             self.poll()
             msgs = self.user_messages()
@@ -247,7 +259,8 @@ class Session:
                 if not self.dialog_open(qid):
                     break
             else:
-                self.record(event="dialog_still_open", tool_use_id=qid)
+                if self.alive:   # a closed terminal is recorded as pty_closed, not as a dialog problem
+                    self.record(event="dialog_still_open", tool_use_id=qid)
         self.handled_questions.add(qid)
 
     def dialog_open(self, qid):

@@ -113,7 +113,9 @@ python3 -I "$ROOT/scripts/drive/staged.py" --container "$NAME" --log-dir "$RUN_D
   ${MIRROR:+--mirror} -- "${CMD[@]}"
 rc=$?
 set -e
+wd_kids=$(pgrep -P "$WATCHDOG" || true)   # the sleep; killed after its shell so the shell cannot go on
 kill "$WATCHDOG" 2>/dev/null || true
+[ -z "$wd_kids" ] || kill $wd_kids 2>/dev/null || true
 net_down "$OPNET"
 {
   echo "end=$(now)"

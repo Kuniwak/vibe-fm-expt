@@ -152,7 +152,7 @@ class StagedSession(Session):
         before = self.delivered(text)
         self.type(text)
         end = time.time() + wait
-        while time.time() < end:
+        while time.time() < end and self.alive:
             self.pump(1)
             self.poll()
             if self.delivered(text) > before:
