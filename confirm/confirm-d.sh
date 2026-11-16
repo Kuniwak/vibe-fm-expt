@@ -24,7 +24,7 @@ modes=(tree)
 git -C "$REPO" diff --quiet "$BASE" -- lib peg_src peg_lib index.js || modes+=(orig)
 one() {
   local v="$1" mode="$2" name; name="$(new_name)"
-  docker create --name "$name" --network none --user "$IN_USER" -w "$IN_HOME" "$IMAGE" sleep infinity >/dev/null
+  docker create --name "$name" --cpus 1 --network none --user "$IN_USER" -w "$IN_HOME" "$IMAGE" sleep infinity >/dev/null
   docker start "$name" >/dev/null
   tar --no-mac-metadata --no-xattrs -C "$SRC/home/dev" -cf - . | docker exec -i "$name" tar -x -C /home/dev
   [ -d "$SRC/tmp" ] && { tar --no-mac-metadata --no-xattrs -C "$SRC/tmp" --exclude ./cc-socks -cf - . | docker exec -i "$name" tar -x -C /tmp 2>/dev/null || true; }
