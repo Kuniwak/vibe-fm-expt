@@ -25,7 +25,7 @@ if [ "$COND" = TEST ]; then
   STAGE_DIR="${TEST_STAGE_DIR:?TEST needs TEST_STAGE_DIR with neutral stage texts}"
   ROLE_PROMPT="${TEST_ROLE_PROMPT:-$ROOT/config/user-role-prompt.txt}"
   TIMEOUT_UNIT="${TEST_TIMEOUT_UNIT_SECS:-60}"   # harness check only: shorten the overall limit
-  STAGED_EXTRA=(--remake-text "{n}番を作り直してください。" --evidence-text "{n}番の結果を見せてください。" --stage4-minutes "${TEST_STAGE4_MINUTES:-60}")
+  STAGED_EXTRA=(--remake-text "{n}番を作り直してください。" --evidence-text "{n}番の結果を見せてください。" --stage4-minutes "${TEST_STAGE4_MINUTES:-60}" --busy-grace-secs "${TEST_BUSY_GRACE_SECS:-600}")
 else
   row="$(awk -F'\t' -v c="$COND" '$1 == c' "$ROOT/config/conditions.tsv")"
   [ -n "$row" ] || { echo "error: unknown condition $COND" >&2; exit 1; }

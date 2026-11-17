@@ -6,8 +6,10 @@
 #   remake : stage-3 instructions up to "could not be made", then the stage-4 limit (1 min) is reached
 #            while the agent is in a long turn, so the closing text is queued inside the turn
 #   garbage: the user role never answers validly; the session ends cleanly
+#   grace  : the agent ends its turn with a background process running; with the grace shortened
+#            to 60 s the user role is still called (busy() in the real container, run-30)
 # Run them only while no experimental run is active (they share docker and the API).
-# Usage: scripts/prepilot/prepilot.sh [dialog] [timeout] [remake] [garbage]   (default: all). Exit 0 only if all checks pass.
+# Usage: scripts/prepilot/prepilot.sh [dialog] [timeout] [remake] [garbage] [grace]   (default: all). Exit 0 only if all checks pass.
 set -u
 cd "$(dirname "$0")/../.." || exit 1
 export PATH="$HOME/.docker/bin:$PATH"
@@ -22,7 +24,7 @@ python3 -I -W ignore -m unittest discover -s scripts/drive/tests >/dev/null 2>&1
 session() {  # name prompt mock-mode timeout-unit-secs [stage-dir]
   local before after
   before=$(ls -d runs/_test/test-* 2>/dev/null | sort | tail -1)
-  COND=TEST OFF_PROTOCOL=1 MODEL=claude-opus-5-5 PROMPT_FILE="$D/$2" TEST_STAGE_DIR="$D/${5:-stage}" \
+  TEST_BUSY_GRACE_SECS="${TEST_BUSY_GRACE_SECS:-600}" COND=TEST OFF_PROTOCOL=1 MODEL=claude-opus-5-5 PROMPT_FILE="$D/$2" TEST_STAGE_DIR="$D/${5:-stage}" \
     TEST_STAGE4_MINUTES="${STAGE4_MIN:-2}" TEST_TIMEOUT_UNIT_SECS="$4" MOCK_ROLE="$3" \
     OPCMD_OVERRIDE="[\"python3\", \"-I\", \"$PWD/$D/mock_role.py\"]" \
     scripts/run-staged.sh > "runs/_test/prepilot-$1.log" 2>&1
@@ -32,7 +34,7 @@ session() {  # name prompt mock-mode timeout-unit-secs [stage-dir]
 }
 
 mkdir -p runs/_test
-for s in "${@:-dialog timeout remake garbage}"; do for name in $s; do
+for s in "${@:-dialog timeout remake garbage grace}"; do for name in $s; do
   echo "== $name"
   case $name in
     dialog)
@@ -69,6 +71,14 @@ for s in "${@:-dialog timeout remake garbage}"; do for name in $s; do
       check "role_error recorded"      "grep -q '\"event\": \"role_error\"' $R/operator.jsonl"
       check "three attempts"           "grep -q '\"role_attempts\": 3' $R/operator.jsonl"
       check "no traceback"             "! grep -q Traceback runs/_test/prepilot-garbage.log"
+      ;;
+    grace)
+      TEST_BUSY_GRACE_SECS=60 session grace prompt-bg.txt complete 60 || continue
+      check "driver exit 0"            "grep -q '^driver_exit=0$' $R/run.env"
+      check "grace elapsed recorded"   "grep -q '\"event\": \"busy_grace_elapsed\"' $R/operator.jsonl"
+      check "stage 1 ended after grace" "grep -q '\"label\": \"S1\"' $R/operator.jsonl"
+      check "fixed message sent"       "grep -q '^fixed_sent=True$' $R/run.env"
+      check "no traceback"             "! grep -q Traceback runs/_test/prepilot-grace.log"
       ;;
     *) echo "unknown: $name"; fail=1 ;;
   esac
