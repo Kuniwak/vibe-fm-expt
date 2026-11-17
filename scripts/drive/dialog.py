@@ -11,7 +11,7 @@ QUESTION_PAUSE = 1.5     # after each question
 CONFIRM_POLLS = 5        # polls (1 s each) for the result before, and again after, the fallback Enter
 
 
-def keystrokes(qinput, reply):
+def keystrokes(qinput, reply, pause=QUESTION_PAUSE):
     # Layout per question: options 1..k, then "k+1. Type something." (free text), then a
     # separator and "Chat about this". The cursor starts on option 1, so k presses of the
     # down arrow land on the free-text entry; typing there and pressing Enter answers it.
@@ -26,7 +26,7 @@ def keystrokes(qinput, reply):
             ops += [("type", reply, False), ("key", DOWN), ("key", ENTER)]
         else:
             ops.append(("type", reply, True))
-        ops.append(("pump", QUESTION_PAUSE))
+        ops.append(("pump", pause))
     return ops
 
 

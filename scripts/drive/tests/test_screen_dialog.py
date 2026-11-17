@@ -53,6 +53,9 @@ class Keystrokes(unittest.TestCase):
     def test_question_without_options(self):
         self.assertEqual(self.keys({"questions": [{}]}), [("type", "お任せします", True), PAUSE])
 
+    def test_pause_is_injectable(self):
+        self.assertEqual(dialog.keystrokes({}, "x", pause=0.1)[-1], ("pump", 0.1))
+
     def test_multi_select_false_is_single(self):
         self.assertEqual(self.keys({"questions": [{"options": [{}], "multiSelect": False}]}),
                          [DOWN, ("type", "お任せします", True), PAUSE])
