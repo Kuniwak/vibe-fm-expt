@@ -1,0 +1,684 @@
+{
+ "scenario": "transcript_oddities",
+ "rc": 0,
+ "trace": [
+  [
+   0.0,
+   "fork"
+  ],
+  [
+   0.0,
+   "ioctl",
+   2148037735,
+   "3200c80000000000"
+  ],
+  [
+   2.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ls -1tr \"$HOME\"/.claude/projects/*/*.jsonl 2>/dev/null | head -1",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   2.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +1 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   4.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +61 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   6.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +172 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   8.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +172 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   10.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +324 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   12.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +371 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   14.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +371 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   16.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +371 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   18.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +371 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   20.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +435 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   22.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +587 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   24.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +587 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   26.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +587 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   28.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +587 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   30.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +587 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   32.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +587 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   34.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +587 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   36.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +587 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   38.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +587 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   40.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +587 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   40.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   40.0,
+   "run",
+   [
+    "role-model",
+    "-p",
+    "--system-prompt",
+    "役割の指示\n"
+   ],
+   "現在の段階: 1\n\nアシスタントの最後の発言:\n\n前半\n\n後半\n\n通知を処理しました",
+   {
+    "capture_output": true,
+    "check": false,
+    "timeout": 300
+   }
+  ],
+  [
+   43.0,
+   "write",
+   "お任せします"
+  ],
+  [
+   43.5,
+   "write",
+   "\r"
+  ],
+  [
+   45.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +587 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   47.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +746 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   49.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +793 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   51.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +793 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   53.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +793 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   55.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +793 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   57.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +793 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   59.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +793 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   61.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +793 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   63.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +793 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   65.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +793 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   67.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +793 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   67.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   67.0,
+   "run",
+   [
+    "role-model",
+    "-p",
+    "--system-prompt",
+    "役割の指示\n"
+   ],
+   "現在の段階: 1\n\nアシスタントの最後の発言:\n\n（台本なし）",
+   {
+    "capture_output": true,
+    "check": false,
+    "timeout": 300
+   }
+  ],
+  [
+   70.0,
+   "run",
+   [
+    "role-model",
+    "-p",
+    "--system-prompt",
+    "役割の指示\n"
+   ],
+   "現在の段階: 1\n\nアシスタントの最後の発言:\n\n（台本なし）",
+   {
+    "capture_output": true,
+    "check": false,
+    "timeout": 300
+   }
+  ],
+  [
+   73.0,
+   "run",
+   [
+    "role-model",
+    "-p",
+    "--system-prompt",
+    "役割の指示\n"
+   ],
+   "現在の段階: 1\n\nアシスタントの最後の発言:\n\n（台本なし）",
+   {
+    "capture_output": true,
+    "check": false,
+    "timeout": 300
+   }
+  ],
+  [
+   76.0,
+   "write",
+   "/exit"
+  ],
+  [
+   76.5,
+   "write",
+   "\r"
+  ],
+  [
+   77.5,
+   "kill",
+   1
+  ],
+  [
+   77.5,
+   "waitpid"
+  ]
+ ],
+ "fine_sha256": "b842410c21aca78cc9cfe0774cafdf5a870483e153edffc4862609ea079efd67",
+ "operator_jsonl": "{\"event\": \"sent\", \"stage\": 1, \"sent\": \"お任せします\", \"confirmed\": true, \"confirm_secs\": 2.0, \"pty_alive\": true, \"rule\": \"規則による「お任せします」\", \"after_message\": 3, \"role_input\": \"現在の段階: 1\\n\\nアシスタントの最後の発言:\\n\\n前半\\n\\n後半\\n\\n通知を処理しました\", \"role_output\": \"REPLY\", \"role_attempts\": 1, \"time\": \"2027-01-15T08:00:45Z\"}\n{\"event\": \"role_error\", \"stage\": 1, \"after_message\": 4, \"role_input\": \"現在の段階: 1\\n\\nアシスタントの最後の発言:\\n\\n（台本なし）\", \"role_output\": \"x\", \"role_attempts\": 3, \"time\": \"2027-01-15T08:01:16Z\"}\n{\"event\": \"pty_closed\", \"stage\": 1, \"time\": \"2027-01-15T08:01:17Z\"}\n",
+ "summary": "{\n  \"final_stage\": 1,\n  \"verdicts\": {\n    \"1\": null,\n    \"2\": null,\n    \"3\": null\n  },\n  \"instructions\": {\n    \"1\": 0,\n    \"2\": 0,\n    \"3\": 0\n  },\n  \"fixed_sent\": false,\n  \"agent_messages\": 4,\n  \"turns\": 3,\n  \"stage_times\": {\n    \"stage1_start\": \"2027-01-15T08:00:00Z\"\n  },\n  \"exit_status\": 0\n}",
+ "terminal_log": "> 最初の依頼\n[raw]\n[record]\n[raw]\n[raw]\n[end]\n[record]\n[text]\n[end]\n> お任せします\n[text]\n[end]\n",
+ "files": [
+  "driver-summary.json",
+  "operator.jsonl",
+  "prompt.txt",
+  "stage",
+  "stage/done",
+  "stage/stage2",
+  "stage/stage4",
+  "stage/timeup",
+  "terminal.log"
+ ]
+}
