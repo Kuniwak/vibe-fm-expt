@@ -1,0 +1,9618 @@
+{
+ "scenario": "busy_grace",
+ "rc": 0,
+ "trace": [
+  [
+   0.0,
+   "fork"
+  ],
+  [
+   0.0,
+   "ioctl",
+   2148037735,
+   "3200c80000000000"
+  ],
+  [
+   2.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ls -1tr \"$HOME\"/.claude/projects/*/*.jsonl 2>/dev/null | head -1",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   2.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +1 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   4.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +61 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   6.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +61 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   8.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   10.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   12.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   14.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   16.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   18.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   20.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   22.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   24.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   26.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   26.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   28.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   28.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   30.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   30.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   32.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   32.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   34.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   34.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   36.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   36.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   38.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   38.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   40.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   40.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   42.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   42.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   44.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   44.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   46.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   46.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   48.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   48.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   50.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   50.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   52.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   52.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   54.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   54.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   56.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   56.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   58.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   58.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   60.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   60.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   62.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   62.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   64.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   64.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   66.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   66.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   68.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   68.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   70.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   70.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   72.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   72.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   74.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   74.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   76.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   76.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   78.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   78.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   80.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   80.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   82.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   82.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   84.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   84.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   86.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   86.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   88.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   88.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   90.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   90.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   92.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   92.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   94.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   94.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   96.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   96.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   98.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   98.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   100.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   100.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   102.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   102.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   104.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   104.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   106.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   106.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   108.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   108.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   110.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   110.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   112.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   112.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   114.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   114.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   116.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   116.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   118.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   118.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   120.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   120.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   122.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   122.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   124.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   124.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   126.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   126.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   128.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   128.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   130.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   130.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   132.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   132.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   134.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   134.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   136.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   136.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   138.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   138.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   140.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   140.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   142.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   142.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   144.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   144.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   146.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   146.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   148.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   148.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   150.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   150.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   152.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   152.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   154.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   154.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   156.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   156.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   158.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   158.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   160.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   160.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   162.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   162.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   164.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   164.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   166.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   166.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   168.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   168.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   170.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   170.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   172.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   172.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   174.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   174.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   176.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   176.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   178.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   178.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   180.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   180.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   182.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   182.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   184.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   184.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   186.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   186.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   188.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   188.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   190.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   190.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   192.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   192.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   194.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   194.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   196.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   196.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   198.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   198.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   200.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   200.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   202.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   202.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   204.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   204.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   206.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   206.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   208.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   208.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   210.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   210.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   212.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   212.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   214.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   214.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   216.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   216.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   218.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   218.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   220.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   220.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   222.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   222.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   224.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   224.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   226.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   226.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   228.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   228.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   230.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   230.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   232.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   232.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   234.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   234.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   236.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   236.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   238.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   238.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   240.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   240.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   242.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   242.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   244.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   244.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   246.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   246.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   248.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   248.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   250.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   250.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   252.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   252.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   254.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   254.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   256.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   256.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   258.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   258.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   260.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   260.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   262.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   262.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   264.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   264.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   266.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   266.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   268.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   268.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   270.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   270.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   272.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   272.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   274.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   274.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   276.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   276.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   278.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   278.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   280.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   280.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   282.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   282.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   284.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   284.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   286.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   286.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   288.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   288.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   290.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   290.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   292.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   292.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   294.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   294.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   296.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   296.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   298.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   298.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   300.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   300.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   302.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   302.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   304.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   304.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   306.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   306.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   308.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   308.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   310.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   310.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   312.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   312.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   314.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   314.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   316.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   316.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   318.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   318.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   320.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   320.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   322.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   322.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   324.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   324.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   326.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   326.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   328.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   328.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   330.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   330.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   332.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   332.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   334.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   334.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   336.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   336.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   338.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   338.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   340.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   340.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   342.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   342.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   344.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   344.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   346.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   346.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   348.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   348.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   350.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   350.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   352.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   352.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   354.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   354.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   356.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   356.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   358.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   358.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   360.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   360.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   362.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   362.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   364.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   364.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   366.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   366.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   368.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   368.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   370.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   370.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   372.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   372.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   374.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   374.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   376.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   376.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   378.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   378.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   380.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   380.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   382.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   382.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   384.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   384.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   386.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   386.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   388.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   388.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   390.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   390.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   392.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   392.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   394.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   394.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   396.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   396.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   398.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   398.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   400.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   400.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   402.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   402.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   404.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   404.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   406.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   406.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   408.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   408.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   410.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   410.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   412.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   412.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   414.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   414.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   416.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   416.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   418.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   418.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   420.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   420.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   422.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   422.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   424.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   424.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   426.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   426.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   428.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   428.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   430.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   430.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   432.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   432.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   434.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   434.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   436.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   436.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   438.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   438.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   440.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   440.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   442.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   442.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   444.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   444.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   446.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   446.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   448.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   448.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   450.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   450.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   452.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   452.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   454.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   454.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   456.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   456.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   458.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   458.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   460.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   460.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   462.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   462.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   464.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   464.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   466.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   466.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   468.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   468.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   470.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   470.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   472.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   472.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   474.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   474.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   476.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   476.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   478.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   478.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   480.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   480.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   482.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   482.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   484.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   484.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   486.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   486.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   488.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   488.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   490.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   490.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   492.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   492.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   494.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   494.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   496.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   496.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   498.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   498.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   500.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   500.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   502.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   502.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   504.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   504.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   506.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   506.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   508.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   508.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   510.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   510.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   512.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   512.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   514.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   514.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   516.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   516.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   518.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   518.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   520.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   520.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   522.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   522.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   524.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   524.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   526.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   526.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   528.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   528.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   530.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   530.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   532.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   532.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   534.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   534.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   536.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   536.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   538.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   538.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   540.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   540.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   542.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   542.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   544.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   544.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   546.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   546.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   548.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   548.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   550.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   550.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   552.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   552.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   554.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   554.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   556.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   556.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   558.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   558.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   560.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   560.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   562.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   562.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   564.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   564.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   566.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   566.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   568.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   568.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   570.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   570.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   572.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   572.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   574.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   574.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   576.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   576.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   578.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   578.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   580.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   580.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   582.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   582.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   584.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   584.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   586.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   586.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   588.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   588.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   590.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   590.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   592.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   592.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   594.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   594.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   596.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   596.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   598.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   598.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   600.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   600.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   602.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   602.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   604.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   604.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   606.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "tail -c +204 '/home/dev/.claude/projects/p/s.jsonl'",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   606.0,
+   "exec",
+   [
+    "docker",
+    "exec",
+    "ctr",
+    "sh",
+    "-c"
+   ],
+   "ps -eo comm= | sort | uniq -c",
+   {
+    "capture_output": true,
+    "check": false
+   }
+  ],
+  [
+   606.0,
+   "run",
+   [
+    "role-model",
+    "-p",
+    "--system-prompt",
+    "役割の指示\n"
+   ],
+   "現在の段階: 1\n\nアシスタントの最後の発言:\n\n待っています",
+   {
+    "capture_output": true,
+    "check": false,
+    "timeout": 300
+   }
+  ],
+  [
+   609.0,
+   "run",
+   [
+    "role-model",
+    "-p",
+    "--system-prompt",
+    "役割の指示\n"
+   ],
+   "現在の段階: 1\n\nアシスタントの最後の発言:\n\n待っています",
+   {
+    "capture_output": true,
+    "check": false,
+    "timeout": 300
+   }
+  ],
+  [
+   612.0,
+   "run",
+   [
+    "role-model",
+    "-p",
+    "--system-prompt",
+    "役割の指示\n"
+   ],
+   "現在の段階: 1\n\nアシスタントの最後の発言:\n\n待っています",
+   {
+    "capture_output": true,
+    "check": false,
+    "timeout": 300
+   }
+  ],
+  [
+   615.0,
+   "write",
+   "/exit"
+  ],
+  [
+   615.5,
+   "write",
+   "\r"
+  ],
+  [
+   616.5,
+   "kill",
+   1
+  ],
+  [
+   616.5,
+   "waitpid"
+  ]
+ ],
+ "fine_sha256": "1a4b8159a25e7b28d3f1467be4915eb0cc21e5fa8bcfbc77b776145d4a78eed8",
+ "operator_jsonl": "{\"event\": \"busy_grace_elapsed\", \"turn\": 1, \"seconds_since_turn_end\": 600, \"processes\": [\"sleep\"], \"time\": \"2027-01-15T08:10:06Z\"}\n{\"event\": \"role_error\", \"stage\": 1, \"after_message\": 1, \"role_input\": \"現在の段階: 1\\n\\nアシスタントの最後の発言:\\n\\n待っています\", \"role_output\": \"x\", \"role_attempts\": 3, \"time\": \"2027-01-15T08:10:15Z\"}\n{\"event\": \"pty_closed\", \"stage\": 1, \"time\": \"2027-01-15T08:10:16Z\"}\n",
+ "summary": "{\n  \"final_stage\": 1,\n  \"verdicts\": {\n    \"1\": null,\n    \"2\": null,\n    \"3\": null\n  },\n  \"instructions\": {\n    \"1\": 0,\n    \"2\": 0,\n    \"3\": 0\n  },\n  \"fixed_sent\": false,\n  \"agent_messages\": 1,\n  \"turns\": 1,\n  \"stage_times\": {\n    \"stage1_start\": \"2027-01-15T08:00:00Z\"\n  },\n  \"exit_status\": 0\n}",
+ "terminal_log": "> 最初の依頼\n[procs]\n[text]\n[end]\n",
+ "files": [
+  "driver-summary.json",
+  "operator.jsonl",
+  "prompt.txt",
+  "stage",
+  "stage/done",
+  "stage/stage2",
+  "stage/stage4",
+  "stage/timeup",
+  "terminal.log"
+ ]
+}
