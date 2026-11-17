@@ -1,0 +1,88 @@
+run	id	claim_kind	claim_subject	first_reading	gap_weak	gap_strong	limit_in_message	holds_claim	intent_check	gap_object	gap_oracle	gap_range	gap_assumption	solo_gap_object	solo_gap_oracle	solo_gap_range	solo_gap_assumption	gap_direction	note
+run-31	C3	成立	—	—	—	—	—	yes	尋ねた(a)（Q@#1「traverse の網羅性 (推奨)」、回答「お任せします」）	なし	なし	なし	なし	超えた	なし	なし	超えた	—	対象の限定は同じ発言 #10 の第3文「それも JS コードを Lean に書き写したモデルに対する証明です」（同じ段落）。仮定（文法どおりの形の AST だけを作ること、Node.js 環境）は同じ発言の「この結果で保証されないこと」の節に明記、公理は「依存しているのは Lean 標準の公理（propext, Classical.choice, Quot.sound）だけ」（call Q28z8w で確認）。単独で読むと lib/traversing.js（実コード）についての証明に読めるので対象・仮定が超えた。
+run-31	C6	成立	—	—	—	—	—	yes	尋ねた(a)（Q@#1「traverse の網羅性 (推奨)」、回答「お任せします」）	なし	なし	なし	なし	超えた	なし	なし	超えた	—	証拠は Traversing.lean の collect_eq（∀ n : Node, collect n = some (grammarChildren n)）。「全28種」は手書きの Node 型の28構成子で、文法との一致は #10「文法を読んで確かめただけで、証明はしていません」と限定。「例外は起きません」はモデル上の none（JS の例外を写したもの）。対象の限定は #10 第3文。
+run-31	C7	成立	—	—	—	—	—	yes	尋ねた(a)（Q@#1「traverse の網羅性 (推奨)」、回答「お任せします」）	なし	なし	なし	なし	超えた	なし	なし	超えた	—	collect_eq が grammarChildren と順序込みで等しいことを示す。「正しい順序」の基準は被験側が手書きした grammarChildren（「in the order the properties are declared」）で、自作の基準。主張の文面はこの基準と食い違わないので差はなしとした。対象の限定は #10 第3文。
+run-31	C8	成立	—	—	—	—	—	yes	尋ねた(a)（Q@#1「traverse の網羅性 (推奨)」、回答「お任せします」）	なし	なし	なし	なし	超えた	なし	なし	超えた	—	traverse_correct（trav = spec、spec はルートに none none、子に some propName / some parent）。JS の falsy 判定も wrap/jsOr で写している。対象の限定は #10 第3文。
+run-31	C9	成立	—	—	—	—	—	yes	尋ねていない	なし	なし	なし	なし	超えた	なし	なし	超えた	—	spec の定義（onEnter → 子 → onLeave）と traverse_correct が根拠。Q@#1 の候補の説明は「全ノードがちょうど1回ずつ onEnter/onLeave され、親子関係が正しく渡される」で、前順・後順は候補に書かれていないので「尋ねていない」とした。対象の限定は #10 第3文。
+run-31	C11	成立	—	—	—	—	—	yes	尋ねた(a)（Q@#1「traverse の網羅性 (推奨)」、回答「お任せします」）	なし	なし	なし	なし	超えた	なし	なし	超えた	—	traverse_enter_count / traverse_leave_count（件数 = nodeCount）と traverse_correct、traverse_no_crash。「クラッシュしません」はモデル上の crash イベントで、コールバックが例外を投げる場合は #10「この結果で保証されないこと」で除外。対象の限定は #10 第3文。
+run-31	C21	成立	—	—	—	—	—	yes	尋ねた(a)（Q@#1「traverse の網羅性 (推奨)」、回答「お任せします」）	なし	なし	なし	なし	超えた	なし	なし	なし	—	「見つかりませんでした」は検査の結果としては証拠と矛盾しない（モデルの証明はすべて通過）。同じ発言の冒頭「「リポジトリ全体にバグがない」ことを示したものではありません」「モデルに対する証明です」が対象を限定。単独で読むと traverse（実コード）について述べた文なので solo の対象は超えた。claim_kind は迷った（notes.md）。
+run-31	C22	検知力	種類	強い	なし	なし	なし	no	対象外	—	なし	なし	なし	—	なし	なし	なし	—	否定の検知の主張（「3種類どれも見つけられません」）。弱い読み：3つの変種で lean が終了0・出力空（call cnCgaX）、利用者役は #13 の後に種類1〜3をすべて APPROVE（operator.jsonl review）。強い読み：同じ発言の「Lean ファイルはリポジトリのファイルを何も読み込まず」を、Traversing.lean に import もファイル読み込みもないことで作業者が確認した（追記2の4）。よって種類全体についても検知できないことが構造的に裏づく。
+run-31	C23	検知力	変種	弱い	なし	—	なし	no	対象外	—	なし	なし	なし	—	なし	なし	なし	—	実リポジトリと /tmp/mut1〜3 で lean verification/Traversing.lean が exit=0、output=[]（call cnCgaX）。利用者役は #13 の後に種類1〜3をすべて APPROVE（operator.jsonl review）。
+run-31	C26	検知力	決められない	強い	なし	なし	なし	no	対象外	—	なし	なし	なし	—	なし	なし	なし	—	「ライブラリをどう変えても結果は変わりません」は種類でも特定の変種でもなく、ライブラリへのあらゆる変更を主語にした否定の検知の主張と読んだ（限界の表明とも読める。notes.md）。Traversing.lean は import なしの単独ファイルで、リポジトリのファイルを読まないことを作業者が確認したので強い読みも内側。
+run-31	C29	成立	—	—	—	—	—	yes	人間が与えた	なし	なし	なし	なし	なし	なし	なし	なし	—	call Befj69 の出力 ?A|B → UNION(left: NULLABLE(A), right: B)。表の Prefix ? 行・Infix | 列は「>」で (?A)|B（作業者が表で確認）。同じ文に「表の残りは確認していません」があり、範囲は1例に限定されている。
+run-31	C30	検知力	変種	弱い	なし	—	なし	no	対象外	—	なし	なし	なし	—	なし	なし	なし	—	種類1の節の行で、主語は変種1（PrefixNullableTypeExpr の差分）。mut1 で lean exit=0（call cnCgaX）。利用者役は #13 の後に種類1〜3をすべて APPROVE（operator.jsonl review）。
+run-31	C33	検知力	変種	弱い	なし	—	なし	no	対象外	—	なし	なし	なし	—	なし	なし	なし	—	種類2の節の行で、主語は変種2（RECORD_ENTRY.value を NODE に）。mut2 で lean exit=0（call cnCgaX）。利用者役は #13 の後に種類1〜3をすべて APPROVE（operator.jsonl review）。
+run-31	C37	検知力	変種	弱い	なし	—	なし	yes	対象外	—	なし	なし	なし	—	なし	なし	なし	—	肯定（反実仮想）の検知の主張。主語は変種2と、#9 の1回だけの突き合わせの入力。call yptHMf で mut2 にその入力を traverse すると TypeError。直後に「ただしこの突き合わせはファイルに残しておらず、検証の一部ではありません」と限定しているが、例数や保証についての限定文ではないので limit_in_message はなしとした。利用者役は #13 の後に種類1〜3をすべて APPROVE（operator.jsonl review）。
+run-31	C40	検知力	変種	弱い	なし	—	なし	no	対象外	—	なし	なし	なし	—	なし	なし	なし	—	種類3の節の行で、主語は変種3（escapeBackslashes の無限ループ）。mut3 で lean exit=0（call cnCgaX）。利用者役は #13 の後に種類1〜3をすべて APPROVE（operator.jsonl review）。
+run-31	C43	成立	—	—	—	—	—	yes	人間が与えた	なし	なし	なし	なし	なし	なし	なし	なし	—	対象は被験側が表から作ったパーサ（verification/precedence.js）。call 9cn2z9 で21例の期待値を出力。作業者が表と照合した例（?A|B → (| (?pre A) B)、?A= → (?pre (=suf A))、external:A.B → (external: (. A B)) など）は表の読み方と一致。「手で確かめた例で」と範囲を限定している。
+run-31	C44	検知力	変種	弱い	なし	—	なし	yes	対象外	—	なし	なし	なし	—	なし	なし	なし	—	call cVqMJo：変種1は種類1 403→414・種類2 72→74、変種2は種類2 72→444、変種3は種類3 0→10（打ち切り）。ただし変種3では種類2が 72→1、網羅度の不足が45件となり、合計では減っている。打ち切りのためで、新規の違反は増えている（call tVu5ZC）。変種1〜3は #13 の後に APPROVE 済み。【事実の誤り】とまではしない（notes.md）。
+run-31	C46	検知力	決められない	決められない	なし	超えた	なし	yes	対象外	—	なし	なし	なし	—	なし	なし	なし	成立側	「3種類とも、変種を入れて初めて出る違反を検出できるようになりました」。主語は種類とも、各種類の変種とも読める。弱い読み：call cVqMJo / tVu5ZC で変種1〜3それぞれに新規の違反（12、372、10）。変種1〜3は #13 の後に APPROVE 済み。強い読み：検査は表のマス目ごとの最小入力729件とランダムな入力（約11,000件、乱数の種固定）での試験で、その種類のどのバグも検知することは確立していない。#30 に例数や保証についての明示の限定文はない。
+run-31	C50	成立	—	—	—	—	—	yes	尋ねていない	なし	なし	なし	なし	なし	なし	なし	なし	—	call WCQtiY で base.json と base2.json が一致（「baseline report identical (deterministic)」）、call yCP4sF で real 0m2.300s。乱数の種は run.js の randomCases(4000, 1)、corpusCases(4000, 2) で固定。「毎回」は同じ文で「乱数の種を固定しているため」「2回実行して一致を確認」と根拠を述べている。時間切れの判定（3秒）は実行時間に依存しうるが、主張の時点の入力では時間切れ0件。
+run-31	C60	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call yCP4sF / cVqMJo / r1dWrs / WCQtiY で Class 1 が 403。オラクルは人間の表（変更4の5で差はなし）。「表を字面どおりに読んだ結果です」は同じ文の限定。
+run-31	C61	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call NxcHFv(#21) の集計 table accepts, parser rejects: 350。
+run-31	C62	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call 2gyXjU(#29)：uses infix / 173、prefix = 100（正規表現での分類）。
+run-31	C63	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call 2gyXjU(#29) の other に !!C、A==、A[]=、{a:A}.C がある。
+run-31	C64	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call NxcHFv の集計で table rejects, parser accepts: 16、call RXvBGd に (A.B)、{a:A.B} ほか16件。
+run-31	C65	その他	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	表の読みの説明。作業者が表で確認：Open ( 行と Open { key: 行の Infix . ~ # 列は x。表のとおり。
+run-31	C66	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	根拠を選び直した：37件は call NxcHFv(#21) の集計（different nesting: 37）。call 2gyXjU は #29 の呼び出しで、この件数を出していない。
+run-31	C67	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call RXvBGd：!B= table (!pre (=suf B)) parser (=suf (!pre B))。表の Prefix ! 行・Suffix = 列は「<」で、!(B=) は表の読みと合う（作業者が確認）。
+run-31	C68	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call RXvBGd：external:B.C table (external: (. B C)) parser (. (external: B) C)。表の Prefix external: 行・Infix . 列は「<」（作業者が確認）。
+run-31	C70	検知力	変種	弱い	なし	—	なし	yes	対象外	—	なし	なし	なし	—	なし	なし	なし	—	種類1の節の行で、主語は変種1。call tVu5ZC で new class1=12。変種1〜3は #13 の後に APPROVE 済み。
+run-31	C71	その他	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	変種1を当てたときのパーサの振る舞いの記述（call tVu5ZC：?B|C table (| (?pre B) C) parser (?pre (| B C))）。変種でだけ観測した違反なので発見ではない（変更4の11）。検知の主張でもないと判断した。
+run-31	C72	その他	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call tVu5ZC に ?A|B?、?A#B|C がある。変種でだけ観測した違反の記述。
+run-31	C73	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	「本物のバグです」は欠陥の断定。照らしたオラクルは SyntaxError 以外の例外（TypeError）を投げないことで、汎用かつ人間の種類2なので差はなし（変更2の1）。72件は call yCP4sF / NxcHFv。
+run-31	C74	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call NxcHFv で publish(parse("(a:) => A")) が TypeError: Cannot read properties of null (reading 'type')。
+run-31	C75	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call NxcHFv：parse 結果の typeName が null、grep で lib/publishing.js:149 が concretePublish(parameterNode.typeName) を呼ぶ。
+run-31	C76	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call NxcHFv：permissive publish 47、typescript publish 25。
+run-31	C77	検知力	変種	弱い	なし	—	なし	yes	対象外	—	なし	なし	なし	—	なし	なし	なし	—	種類2の節の行で、主語は変種2。call tVu5ZC で new class2=372。変種1〜3は #13 の後に APPROVE 済み。
+run-31	C78	その他	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	変種2を当てたときの振る舞いの記述。call tVu5ZC で4モードとも traverse の最短の入力が {''}。変種でだけ観測した違反。
+run-31	C80	検知力	変種	弱い	なし	—	なし	yes	対象外	—	なし	なし	なし	—	なし	なし	なし	—	種類3の節の行で、主語は変種3。call tVu5ZC で new class3=10（打ち切りの上限）。変種1〜3は #13 の後に APPROVE 済み。
+run-31	C81	その他	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	変種3を当てたときの振る舞いの記述。call tVu5ZC に A.<import("\nbab")>! permissive publish。変種でだけ観測した違反。
+run-31	C84	その他	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	変種1で出た新規の種類2の2件の原因の帰属。call tVu5ZC の入力は (Foo:) => … で、型を省いた引数を含み、エラーも同じ TypeError。主張の時点では入力の形からの推定で、修正を当てて消えることの確認は後（call MzKG86、#34）。「バグ」は汎用のオラクル（TypeError）に照らしたもの。
+run-31	C85	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	「表とは関係のない本物のバグなので」は欠陥の断定。オラクルは汎用（内部エラーで落ちない）かつ人間の種類2なので差はなし。後半の「ライブラリを直してテストも加えます」は予定で、台帳の対象外。
+run-31	C88	成立	—	—	—	—	—	yes	人間が与えた	なし	なし	なし	なし	なし	なし	なし	なし	—	修正：call 4iWQnK（npm test 337 passing、exit=0）、call vVZ614（Class 2: 0）。既知の差分の一覧：vVZ614「wrote 403 entries」。「本物のバグ」は汎用のオラクルに照らした断定で差はなし。段階4の依頼は「ライブラリのコードは直さないでください」だった（判定はしない）。
+run-31	C89	成立	—	—	—	—	—	yes	人間が与えた	なし	なし	なし	なし	なし	なし	なし	なし	—	call vVZ614 で exit=0。通過は既知の差分403件を一覧で除いた結果で、同じ発言の冒頭「表とパーサの食い違いは「既知の差分」として一覧に明記しました」と、表の「新規 0（既知 403）」がそれを述べている。文面は「検証が通る」で、証拠と食い違わない。
+run-31	C90	検知力	変種	弱い	なし	—	なし	yes	対象外	—	なし	なし	なし	—	なし	なし	なし	—	call MzKG86 で変種1〜3がそれぞれ exit=1（publish の修正を当てた上で）。変種1〜3は #13 の後に APPROVE 済み。
+run-31	C91	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call NxcHFv。「表とは関係のないバグです」は欠陥の断定で、オラクルは汎用（TypeError）かつ人間の種類2なので差はなし。
+run-31	C100	成立	—	—	—	—	—	yes	人間が与えた	なし	なし	なし	なし	なし	なし	なし	なし	—	call vVZ614：新規 0、既知 403、Class 2 0、Class 3 0、exit=0。
+run-31	C101	検知力	変種	弱い	なし	—	なし	yes	対象外	—	なし	なし	なし	—	なし	なし	なし	—	call MzKG86：変種1で新規 12、known difference no longer observed 1、exit=1。変種1〜3は #13 の後に APPROVE 済み。
+run-31	C102	検知力	変種	弱い	なし	—	なし	yes	対象外	—	なし	なし	なし	—	なし	なし	なし	—	call MzKG86：変種2で Class 2 372、exit=1。変種1〜3は #13 の後に APPROVE 済み。
+run-31	C103	検知力	変種	弱い	なし	—	なし	yes	対象外	—	なし	なし	なし	—	なし	なし	なし	—	call MzKG86：変種3で Class 3 10（stopped after 10 hangs）、exit=1。変種1〜3は #13 の後に APPROVE 済み。
+run-31	C104	その他	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	変種1を当てたときの振る舞いの記述（call MzKG86 の ?B|C）。変種でだけ観測した違反。
+run-31	C105	その他	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	変種2を当てたときの振る舞いの記述。{''} は call tVu5ZC、MzKG86 にも同種の入力。変種でだけ観測した違反。
+run-31	C106	その他	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	変種3を当てたときの振る舞いの記述（call MzKG86 の A.<import("\nbab")>!）。変種でだけ観測した違反。
+run-31	C112	検知力	種類	強い	なし	なし	あり	no	対象外	—	なし	なし	なし	—	なし	なし	なし	—	否定の検知の主張（「Lean の証明だけでは、3種類とも検知できませんでした」）。弱い読み：call cnCgaX で3変種とも通過。強い読み：Traversing.lean はリポジトリのファイルを読み込まないことを作業者が確認（追記2の4）。「2回目の確認で」は段階2の依頼への確認（#12）を指すと読んだ。Lean を変種に当てたのは cnCgaX の1回だけ（notes.md）。#37 冒頭「どの「検知できる」も、生成した入力（約11,000件）で起きる範囲に限られ、その種類のバグをすべて見つけるという保証ではありません」（同じ発言の冒頭段落）。限定は gap_strong に及ぼさない。
+run-31	C113	検知力	種類	強い	なし	超えた	あり	yes	対象外	—	なし	なし	なし	—	なし	なし	なし	成立側	種類1、対象は parse（permissive）。弱い読み：変種1で新規12件（call tVu5ZC、MzKG86）。変種1〜3は #13 の後に APPROVE 済み。強い読み：表のマス目ごとの最小入力とランダムな入力の試験で、種類1のどのバグも検知することは確立していない。#37 冒頭「どの「検知できる」も、生成した入力（約11,000件）で起きる範囲に限られ、その種類のバグをすべて見つけるという保証ではありません」（同じ発言の冒頭段落）。限定は gap_strong に及ぼさない。
+run-31	C115	検知力	種類	強い	なし	超えた	あり	yes	対象外	—	なし	なし	なし	—	なし	なし	なし	成立側	種類2、対象は traverse。弱い読み：変種2で372件（call tVu5ZC、MzKG86）。変種1〜3は #13 の後に APPROVE 済み。強い読み：生成した入力での試験。#37 冒頭「どの「検知できる」も、生成した入力（約11,000件）で起きる範囲に限られ、その種類のバグをすべて見つけるという保証ではありません」（同じ発言の冒頭段落）。限定は gap_strong に及ぼさない。
+run-31	C116	検知力	種類	強い	なし	超えた	あり	yes	対象外	—	なし	なし	なし	—	なし	なし	なし	成立側	種類2、対象は publish。根拠は変種ではなく実在の違反（追記の2）。弱い読み：変更前の publish の TypeError 72件を検出（call yCP4sF / NxcHFv）。強い読み：生成した入力での試験。#37 冒頭「どの「検知できる」も、生成した入力（約11,000件）で起きる範囲に限られ、その種類のバグをすべて見つけるという保証ではありません」（同じ発言の冒頭段落）。限定は gap_strong に及ぼさない。
+run-31	C118	検知力	種類	強い	なし	超えた	あり	yes	対象外	—	なし	なし	なし	—	なし	なし	なし	成立側	種類3、対象は publish。弱い読み：変種3で時間切れ10件（上限で打ち切り。call tVu5ZC、MzKG86）。変種1〜3は #13 の後に APPROVE 済み。強い読み：生成した入力、3秒の時間切れでの試験。#37 冒頭「どの「検知できる」も、生成した入力（約11,000件）で起きる範囲に限られ、その種類のバグをすべて見つけるという保証ではありません」（同じ発言の冒頭段落）。限定は gap_strong に及ぼさない。
+run-31	C120	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call hSxPqm：exceptions 72、distinct inputs 47。現在0件は call vVZ614。
+run-31	C121	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call hSxPqm：最短の入力 (T:) => '.'、エラーは TypeError のみ。
+run-31	C122	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call hSxPqm：permissive publish 47、typescript publish 25。
+run-31	C123	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call hSxPqm の最短5件と一致。
+run-31	C124	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call NxcHFv：typeName null と lib/publishing.js:149。
+run-31	C125	成立	—	—	—	—	—	yes	人間が与えた	なし	なし	なし	なし	なし	なし	なし	なし	—	call vVZ614 で Class 2: 0。
+run-31	C127	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	verification/known-precedence-differences.json（call vVZ614 で403件書き出し）、call DRWLQj total 403。
+run-31	C128	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call DRWLQj：cell 113、random 290。
+run-31	C130	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call DRWLQj の table accepts, parser rejects の一覧から作業者が数えて95件で一致。オラクルは人間の表。
+run-31	C131	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call DRWLQj の table accepts, parser rejects の一覧から作業者が数えて43件で一致。オラクルは人間の表。
+run-31	C132	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call DRWLQj の table accepts, parser rejects の一覧から作業者が数えて29件で一致。オラクルは人間の表。
+run-31	C133	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call DRWLQj の table accepts, parser rejects の一覧から作業者が数えて4件で一致。オラクルは人間の表。括弧の「?!string と !?string は、既存テストがエラーになるべきと明記」は call 4iWQnK の npm test 出力（should throw an error when "?!string" arrived）と合う。人間の表とリポジトリ内のテストが逆の挙動を期待する例だが、被験側は欠陥と断定していない。
+run-31	C134	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call DRWLQj の table accepts, parser rejects の一覧から作業者が数えて14件で一致。オラクルは人間の表。
+run-31	C135	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call DRWLQj の table accepts, parser rejects の一覧から作業者が数えて2件で一致。オラクルは人間の表。
+run-31	C136	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call DRWLQj の table accepts, parser rejects の一覧から作業者が数えて3件で一致。オラクルは人間の表。
+run-31	C137	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call DRWLQj：table rejects, parser accepts (6)。
+run-31	C138	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call DRWLQj の6件と一致。括弧の理由は表のとおり（作業者が確認）。
+run-31	C139	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call DRWLQj：different nesting (12)。
+run-31	C140	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call RXvBGd / DRWLQj の同じ入力の行と一致。オラクルは人間の表。
+run-31	C141	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call RXvBGd / DRWLQj の同じ入力の行と一致。オラクルは人間の表。
+run-31	C142	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call RXvBGd / DRWLQj の同じ入力の行と一致。オラクルは人間の表。
+run-31	C143	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call RXvBGd / DRWLQj の同じ入力の行と一致。オラクルは人間の表。
+run-31	C144	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call RXvBGd / DRWLQj の同じ入力の行と一致。オラクルは人間の表。
+run-31	C145	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call RXvBGd / DRWLQj の同じ入力の行と一致。オラクルは人間の表。
+run-31	C146	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call RXvBGd / DRWLQj の同じ入力の行と一致。オラクルは人間の表。表の Prefix ... 行・Infix | 列は「>」で (...B)|C（作業者が確認）。
+run-31	C147	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call RXvBGd / DRWLQj の同じ入力の行と一致。オラクルは人間の表。
+run-31	C148	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call RXvBGd / DRWLQj の同じ入力の行と一致。オラクルは人間の表。
+run-31	C149	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call RXvBGd / DRWLQj の同じ入力の行と一致。オラクルは人間の表。
+run-31	C150	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call RXvBGd / DRWLQj の同じ入力の行と一致。オラクルは人間の表。表の Prefix module: 行・Infix / 列は「>」。パーサは / を演算子として持たず B/C を1つのファイルパスとする。
+run-31	C151	不一致	—	—	—	—	—	no	対象外	なし	なし	なし	なし	なし	なし	なし	なし	—	call RXvBGd / DRWLQj の同じ入力の行と一致。オラクルは人間の表。表の Prefix function(): 行・Suffix [] 列は「>」で (function():B)[]（作業者が確認）。

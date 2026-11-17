@@ -1,0 +1,6 @@
+run	id	oracle_class	asserted_defect	later_human_table	note
+run-30	F1	自作	no	表の対象外	照らしたのは meta を含む往復の AST の一致（call 4 の check.js の当初の P1）。被験側は #1 で「intentional canonicalization in the publisher」として P1 を定義し直し、欠陥と断定していない。`a?`→`?a` は publish の正規化で、表は parse の入れ子と受理だけを定めるので対象外と読んだ（`a?` の parse そのものは表と食い違わない）。
+run-30	F2	汎用	yes #4	合う	出力器の出力を同じパーサーで再 parse できる（汎用）。#4「性質に反する実在のバグが2件」「バグ1: …publish の出力を再解析できない」。表では（前置 ?、前置 ?）が < で `??a` は受理されるべきもの、（前置 ?、後置 ?）も < で `?a?` は ?(a?) の入れ子になるべきもの。表も同じ入力に食い違いを示す（ただし食い違いの場所は parse の側で、被験側は publisher を直した）。
+run-30	F3	自作;自作	yes #4	合う	P1（meta を除く往復の AST の一致）と P2（冪等性）。どちらも自作で、`!??` は再 parse できるので汎用には当たらない。行 C15 の文面に評価の語はないが、#4 の見出し「バグ1」と冒頭文「バグが2件」がこの行を含むので断定に数えた。表では（前置 ?、後置 !）が < で、`??!` は NULLABLE(NOT_NULLABLE(UNKNOWN)) になるべきもの。元の parse の NOT_NULLABLE(NULLABLE(UNKNOWN)) は表と食い違う。
+run-30	F4	汎用;自作;リポジトリ内	yes #3	表の対象外	再 parse 不可（汎用、call 7/8）、traverse の完全性 P3（自作、call 10）、通常の MEMBER ノードと同じ形（リポジトリ内：文法の MemberName と tests/test_parsing.js の createMemberTypeNode が name を文字列にしている、call 9、call 14）。最初の断定は #3「A second, separate bug」。typeof と修飾名の AST の形は表にない。
+run-30	F5	人間の表	no	—	段階2の表の（前置 ...、|）は >（段階2の文で確認）。call 21、27 base で VARIADIC(UNION(a, b))。#13 は「食い違う」「見逃しています」と挙動を述べるだけで、「弱点」の主語は検証の側（追記の8）なので断定に数えない。被験側の表の読み方（被演算子の行と列を読み飛ばす通常の演算子順位法）は検査に直されておらず、手での照合だけに使われた。
