@@ -65,6 +65,7 @@ class World:
         self.busy_turn = False
         self.queued = []
         self.dialog = None          # [enters_needed, enters, remaining steps]
+        self.drop = list(sc.get("drop", []))   # submissions lost once each (never reach the transcript)
         self.trace = []
         self.fine = hashlib.sha256()
         self.after(1.0, lambda: self.start_turn(sc.get("prompt", "最初の依頼")))
@@ -186,8 +187,11 @@ class World:
                 self.inbuf = bytearray()
                 if not text:
                     continue
-                if text == "/exit":
-                    self.after(1.0, self.close)
+                if text in self.drop:
+                    self.drop.remove(text)
+                elif text == "/exit":
+                    if not self.sc.get("ignore_exit"):
+                        self.after(1.0, self.close)
                 elif self.busy_turn:
                     self.queued.append(text)
                 else:
@@ -420,7 +424,7 @@ SCENARIOS = {
         "turns": [DONE_TURN, [(4, "text", "変種です。"), (1, "end")],
                   [(3, "text", "質問です"), (1, "end")],
                   [(2, "tool"), (90, "result"), (1, "end"),
-                   (20, "record", {"type": "user", "message": {"content": "<task-notification>"}}),
+                   (40, "record", {"type": "user", "message": {"content": "<task-notification>"}}),
                    (3, "text", "要約"), (1, "end")],
                   [(4, "text", "最後の答え。"), (1, "end")]],
         "role": [R("COMPLETE"), R("1: APPROVE\n2: APPROVE\n3: APPROVE"), R("REPLY")]},
@@ -431,6 +435,39 @@ SCENARIOS = {
                   [(2, "tool"), (50, "screen", "☐ a  Enter to select"),
                    (30, "ask", "q4", {"questions": [{"options": [{"label": "a"}, {"label": "b"}]}]}, 1),
                    (2, "text", "了解"), (20, "text", "要約"), (1, "end")],
+                  [(4, "text", "最後の答え。"), (1, "end")]],
+        "role": [R("COMPLETE"), R("1: APPROVE\n2: APPROVE\n3: APPROVE")]},
+    # the grace elapses at a stage-4 break, the reply is lost, then the limit: busy() is asked again
+    # for the same turn end (no second grace record) and the unconfirmed send waits 120 s
+    "grace_then_timeup": {
+        "argv": ["--stage4-minutes", "13"], "drop": ["お任せします"],
+        "turns": [DONE_TURN, [(4, "text", "変種です。"), (1, "end")],
+                  [(2, "procs", ["sleep"]), (3, "text", "裏で動かしています。"), (1, "end")],
+                  [(1, "procs", []), (4, "text", "要約です。"), (1, "end")],
+                  [(4, "text", "最後の答え。"), (1, "end")]],
+        "role": [R("COMPLETE"), R("1: APPROVE\n2: APPROVE\n3: APPROVE"), R("REPLY")]},
+    # a dialog drawn and declined before the limit does not hold the time-up text back
+    "timeup_after_declined_dialog": {
+        "argv": ["--stage4-minutes", "1"],
+        "turns": [DONE_TURN, [(4, "text", "変種です。"), (1, "end")],
+                  [(2, "tool"), (5, "screen", "☐ a  Enter to select"),
+                   (3, "screen", "User declined to answer questions"), (100, "result"),
+                   (3, "text", "要約です。"), (1, "end")],
+                  [(4, "text", "最後の答え。"), (1, "end")]],
+        "role": [R("COMPLETE"), R("1: APPROVE\n2: APPROVE\n3: APPROVE")]},
+    # the terminal closes while the harness waits for a dialog to close
+    "dialog_terminal_closes": {
+        "turns": [[(1, "ask", "q1", {"questions": [{"options": [{"label": "a"}]}]}, 99)]], "close_at": 14},
+    # the limit passes while an AskUserQuestion record is pending (< 5 s quiet) but not drawn
+    "timeup_pending_question_not_drawn": {
+        "argv": ["--stage4-minutes", "1"],
+        "turns": [DONE_TURN, [(4, "text", "変種です。"), (1, "end")],
+                  [(2, "tool"),
+                   (55, "record", {"type": "assistant", "message": {"content": [
+                       {"type": "tool_use", "name": "AskUserQuestion", "id": "q7", "input": {}}]}}),
+                   (8, "record", {"type": "user", "message": {"content": [
+                       {"type": "tool_result", "tool_use_id": "q7"}]}}),
+                   (20, "text", "要約です。"), (1, "end")],
                   [(4, "text", "最後の答え。"), (1, "end")]],
         "role": [R("COMPLETE"), R("1: APPROVE\n2: APPROVE\n3: APPROVE")]},
     # a multi-select + single-select dialog, closed by the two Enters
@@ -483,6 +520,21 @@ SCENARIOS = {
         "kind": "simple", "argv": ["--max-replies", "3"],
         "turns": [[(1, "ask", "q1", Q2, 2), (2, "text", "了解"), (1, "end")]],
         "role": [R("3"), "x", R("")]},
+    # simple driver: a reply that never arrives (30 polls), then /exit that does not end the session.
+    # A notification turn ends in the middle of those 30 polls, so the quiet time and the grace
+    # are measured from a poll that is not on the 2-s grid of the main loop.
+    "simple_unconfirmed_exit_ignored": {
+        "kind": "simple", "argv": ["--max-replies", "3"], "drop": ["お任せします"], "ignore_exit": True,
+        "turns": [[(3, "text", "どうしますか?"), (1, "end"),
+                   (45, "record", {"type": "user", "message": {"content": "<task-notification>"}}),
+                   (0, "procs", ["sleep"]), (2, "text", "通知"), (1, "end"), (700, "procs", [])],
+                  [(3, "text", "答え"), (1, "end")]],
+        "role": [R("1\n質問"), R("2")]},
+    # simple driver: the terminal closes before the reply arrives
+    "simple_closed_while_confirming": {
+        "kind": "simple", "argv": ["--max-replies", "3"], "drop": ["お任せします"], "close_at": 40,
+        "turns": [[(3, "text", "どうしますか?"), (1, "end")]],
+        "role": [R("1")]},
     # simple driver: terminal closes while confirming, leftover processes
     "simple_closed": {
         "kind": "simple", "argv": ["--max-replies", "3"],
