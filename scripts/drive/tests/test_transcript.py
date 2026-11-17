@@ -92,9 +92,8 @@ class Feed(unittest.TestCase):
         t.feed(b"\n" + json.dumps(text("a")).encode() + b"\r\n", now=1)
         self.assertEqual(t.texts, [(1, "a")])
 
-    @unittest.expectedFailure
     def test_non_object_json_line_is_skipped(self):
-        # Kept bug (also in 85624a4): a JSON line that is not an object (e.g. `1`) raises
+        # Fixed after the refactor (bug in 85624a4): a JSON line that is not an object (e.g. `1`) raises
         # AttributeError in feed instead of being skipped like other unreadable lines.
         t = Transcript(now=0)
         t.feed(b"1\n" + j(text("a")), now=1)

@@ -73,9 +73,8 @@ class Record(unittest.TestCase):
         r = dialog.record_fields("q1", {}, "x")
         self.assertEqual((r["questions"], r["action"]), (None, "typed 'x' into the free-text option of 1 question(s)"))
 
-    @unittest.expectedFailure
     def test_null_questions(self):
-        # Kept bug (also in 85624a4): "questions": null makes len(None) raise, so the harness stops
+        # Fixed after the refactor (bug in 85624a4): "questions": null makes len(None) raise, so the harness stops
         # at the dialog record; the keystrokes themselves would treat it like no questions.
         self.assertIn("1 question(s)", dialog.record_fields("q1", {"questions": None}, "x")["action"])
 

@@ -29,9 +29,8 @@ class ModelResult(unittest.TestCase):
         self.assertEqual(role.model_result(b"\xff"), ("�", "�"))
         self.assertEqual(role.model_result(b""), ("", ""))
 
-    @unittest.expectedFailure
     def test_json_that_is_not_an_object(self):
-        # Kept bug (also in 85624a4): stdout that is a JSON scalar or list (e.g. a bare "1" or
+        # Fixed after the refactor (bug in 85624a4): stdout that is a JSON scalar or list (e.g. a bare "1" or
         # "null") makes .get raise AttributeError, which stops the harness instead of a retry.
         self.assertEqual(role.model_result(b"1"), ("1", "1"))
 

@@ -47,6 +47,8 @@ class Transcript:
                 d = json.loads(raw)
             except ValueError:
                 continue
+            if not isinstance(d, dict):
+                continue
             if d.get("isSidechain"):
                 continue
             self.lines.append(d)

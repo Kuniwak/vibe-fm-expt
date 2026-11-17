@@ -14,9 +14,10 @@ def model_result(stdout):
     """(raw, result): stdout decoded, and its "result" field (or the whole text if not JSON)."""
     raw = stdout.decode("utf-8", "replace")
     try:
-        result = json.loads(raw).get("result", "")
+        d = json.loads(raw)
     except ValueError:
-        result = raw
+        d = None
+    result = d.get("result", "") if isinstance(d, dict) else raw
     return raw, result
 
 

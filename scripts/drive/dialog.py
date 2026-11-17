@@ -32,6 +32,6 @@ def keystrokes(qinput, reply, pause=QUESTION_PAUSE):
 
 def record_fields(qid, qinput, reply):
     """Fields of the "dialog" record (without the event name)."""
-    n = len(qinput.get("questions", [])) or 1
+    n = len(qinput.get("questions") or []) or 1
     return {"tool_use_id": qid, "questions": qinput.get("questions"),
             "action": f"typed {reply!r} into the free-text option of {n} question(s)"}
