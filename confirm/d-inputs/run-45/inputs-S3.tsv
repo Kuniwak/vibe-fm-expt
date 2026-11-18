@@ -1,0 +1,37 @@
+input	source	kind	note
+?A!	#2, #5; call 6/11 の check.js 出力; #15, #22 (b), #23; call 29	1	表では NULLABLE(NOT_NULLABLE(A)) だが、ライブラリは入れ子が逆（種類1、#15・#22）。段階1（#2・#5）では publish の往復の不具合として挙げ（分類なし）、出力側を修正済みと報告
+!A?	#2; call 6/11 の check.js 出力; #15, #22 (b); call 29	1	表では NOT_NULLABLE(NULLABLE(A)) だが、ライブラリは入れ子が逆（種類1、#15・#22）。段階1（#2・#5）では publish の往復の不具合として挙げ（分類なし）、出力側を修正済みと報告
+?A?=	#2; call 11 の check.js 出力	—	publish が ??A= を出し再パースで SyntaxError（P3）。修正済みと報告
+??!	#2, #5; call 5/6 の check.js 出力	—	publish が !?? を出し、再パースで NULLABLE(NOT_NULLABLE(UNKNOWN)) と内外が逆転（P3）。修正済みと報告
+keyof A?	#5; call 20（commands.md の番号）の check.js 出力	—	publish が keyof ?A を出し再パース不能（permissive / typescript）。修正済みと報告
+?A?	#5 の「上の反例9件」（call 16 の回帰テスト）; call 5/6/11 の check.js 出力	—	publish が ??A を出し再パース不能。#5 の本文には入力として書かれず、回帰テストとして追加
+!A!	#5 の「上の反例9件」（call 16 の回帰テスト）; call 6/11 の check.js 出力	—	publish が !!A を出し再パース不能。回帰テストとして追加
+...?A!	#5 の「上の反例9件」（call 16 の回帰テスト）	—	回帰テストとして追加（nullable の二重指定の往復）
+keyof A!	#5 の「上の反例9件」（call 23 の回帰テスト）; call 20 の check.js 出力	—	publish が keyof !A を出し再パース不能。回帰テストとして追加
+??A	#15, #22 (a), #23; call 29	1	表は NULLABLE(NULLABLE(A)) として受理、ライブラリは SyntaxError
+?!A	#15, #22 (a); call 29	1	表は NULLABLE(NOT_NULLABLE(A)) として受理、ライブラリは SyntaxError
+?A[]	#15; call 29	1	表は ARRAY(NULLABLE(A)) として受理、ライブラリは SyntaxError
+=A	#22 (a), #23	1	表は OPTIONAL(A)、ライブラリは拒否
+!!A	#22 (a)	1	表は NOT_NULLABLE(NOT_NULLABLE(A))、ライブラリは拒否
+A??	#22 (a)	1	表は NULLABLE(NULLABLE(A))、ライブラリは拒否
+A!?	#22 (a)	1	表は NULLABLE(NOT_NULLABLE(A))、ライブラリは拒否
+A==	#22 (a)	1	表は OPTIONAL(OPTIONAL(A))、ライブラリは拒否
+!A[]	#22 (a)	1	表は ARRAY(NOT_NULLABLE(A))、ライブラリは拒否
+A/A	#22 (a); call 51 の出力	1	表は PATH(A, A)、ライブラリは拒否
+'x'.A	#22 (a)	1	表は MEMBER.('x', A)、ライブラリは拒否
+?.A	#22 (a)	1	表は MEMBER.(?, A)、ライブラリは拒否
+?A=	#22 (b)	1	表は NULLABLE(OPTIONAL(A))、ライブラリは OPTIONAL(NULLABLE(A))
+!A=	#22 (b)	1	表は NOT_NULLABLE(OPTIONAL(A))、ライブラリは OPTIONAL(NOT_NULLABLE(A))
+?A.A!	#22 (b)	1	表は NULLABLE(NOT_NULLABLE(MEMBER.(A, A)))、ライブラリは NOT_NULLABLE(NULLABLE(MEMBER.(A, A)))
+...A|A	#22 (b)	1	表は UNION(VARIADIC(A), A)、ライブラリは VARIADIC(UNION(A, A))
+...	#22 (c)	1	表は拒否、ライブラリは受理（VARIADIC(ANY)）。被験側は「いずれも表のセルの定義どおりの判定」と付記
+(A.A)	#22 (c)	1	表は拒否（( の行・. の列が x）、ライブラリは受理
+(A~A)	#22 (c)	1	表は拒否、ライブラリは受理
+(A#A)	#22 (c)	1	表は拒否、ライブラリは受理
+{a:A.A}	#22 (c)	1	表は拒否、ライブラリは受理
+{a:A~A}	#22 (c)	1	表は拒否、ライブラリは受理
+{a:A#A}	#22 (c)	1	表は拒否、ライブラリは受理
+module:/	#22 (c)	1	表は拒否、ライブラリは受理
+module:A/	#22 (c)	1	表は拒否、ライブラリは受理
+function():A?[]	#22, #23	その他	3種類以外の違反（出力の往復）。function(): ?A[] と出力され、再パースすると別の形になる
+?function():A?[]	#22, #23	その他	3種類以外の違反（出力の往復）。?function(): ?A[] と出力され、再パースできない

@@ -1,0 +1,29 @@
+input	source	kind	note
+?A=	#20	1	段階3で手で見た。OPTIONAL(NULLABLE(A))、表では ?(A=)。検証の出力ではないと被験側が明記
+!A=	#20	1	段階3で手で見た。OPTIONAL(NOT_NULLABLE(A))、表では !(A=)。検証の出力ではないと被験側が明記
+! A =	#31, #34, #35; call 68 の出力	1	入れ子：ライブラリ S=(P!(A))、表 P!(S=(A))
+? A =	call 68 の出力（base）	1	入れ子：ライブラリ ["S=",["P?","A"]]、表 ["P?",["S=","A"]]
+= A	#31, #34	1	前置 = が SyntaxError、表は P=(A) で受理
+= A / A	#34	1	前置 = と / の両方。SyntaxError、表は (P=A) / A
+A / A	#31, #34	1	SyntaxError、表は受理
+! ! A	#31, #34	1	前置の重ね。SyntaxError、表は P!(P!(A))
+! ? A	#34	1	前置の重ね。SyntaxError、表は P!(P?(A))
+A = !	#31	1	前置・後置の重ね。SyntaxError、表は受理
+...? | A	#34	1	入れ子：ライブラリ P...(? | A)、表 (P...?) | A
+function(): A []	#34	1	入れ子：ライブラリ function():(A[])、表 (function():A)[]
+external: E . b	#34	1	入れ子：ライブラリ (external:E).b、表 external:(E.b)
+( ? A ? )	#34	1	括弧の中での前置・後置の入れ子の違い
+* .< ! * ? >	#34	1	型引数の中での前置・後置の入れ子の違い
+( A . b )	#31, #34	1	表は拒否（( 行 × . 列 = x）、ライブラリは受理。被験側は表の誤りかもしれないと述べた
+{a: A ~ b }	#34	1	表は拒否、ライブラリは受理
+( A # b < A > )	#34	1	表は拒否、ライブラリは受理
+( ( A # b ) )...	#34	1	表は拒否、ライブラリは受理
+= ?	call 66 の出力（run.js の要約、変種なし）	1	SyntaxError, table accepts as ["P=","?"]
+! ? =	call 66 の出力（run.js の要約、変種なし）	1	nesting: library ["S=",["P!","?"]], table ["P!",["S=","?"]]
+(a:) => B	#31, #34, #35	2	parse は受理（typeName が null の引数）、publish で TypeError: Cannot read properties of null (reading 'type')。検証は AST の直接生成で検出、文字列からは手で再現
+typeof core.Dict	#31, #34, #35; call 66 の出力	その他	TRAV：traverse が MEMBER の name のノードを訪問しない（visited 3, expected 4）
+typeof _.identity	#34	その他	TRAV
+typeof shelljs.ln	#34	その他	TRAV
+typeof core.Symbol.for	call 66 の出力（run.js の要約、変種なし）	その他	TRAV：visited 4 nodes, expected 6
+typeof fractal.api.variants.Variant	call 66 の出力（run.js の要約、変種なし）	その他	TRAV：visited 5 nodes, expected 8
+ReactNativeThemedStyledFunction<typeof ReactNative.Button, T>	call 66 の出力（run.js の要約、変種なし）	その他	TRAV：visited 6 nodes, expected 7

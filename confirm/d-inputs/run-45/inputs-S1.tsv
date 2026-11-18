@@ -1,0 +1,10 @@
+input	source	kind	note
+?A!	#2, #5; call 6/11 の check.js 出力	—	publish が !?A を出し再パースで SyntaxError（P3）。被験側が lib/publishing.js を直し、S1 時点では違反なしと報告
+!A?	#2; call 6/11 の check.js 出力	—	publish が ?!A を出し再パースで SyntaxError（P3）。修正済みと報告
+?A?=	#2; call 11 の check.js 出力	—	publish が ??A= を出し再パースで SyntaxError（P3）。修正済みと報告
+??!	#2, #5; call 5/6 の check.js 出力	—	publish が !?? を出し、再パースで NULLABLE(NOT_NULLABLE(UNKNOWN)) と内外が逆転（P3）。修正済みと報告
+keyof A?	#5; call 20（commands.md の番号）の check.js 出力	—	publish が keyof ?A を出し再パース不能（permissive / typescript）。修正済みと報告
+?A?	#5 の「上の反例9件」（call 16 の回帰テスト）; call 5/6/11 の check.js 出力	—	publish が ??A を出し再パース不能。#5 の本文には入力として書かれず、回帰テストとして追加
+!A!	#5 の「上の反例9件」（call 16 の回帰テスト）; call 6/11 の check.js 出力	—	publish が !!A を出し再パース不能。回帰テストとして追加
+...?A!	#5 の「上の反例9件」（call 16 の回帰テスト）	—	回帰テストとして追加（nullable の二重指定の往復）
+keyof A!	#5 の「上の反例9件」（call 23 の回帰テスト）; call 20 の check.js 出力	—	publish が keyof !A を出し再パース不能。回帰テストとして追加
