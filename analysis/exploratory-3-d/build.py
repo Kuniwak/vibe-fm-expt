@@ -9,7 +9,10 @@ import csv
 import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-RUNS = [f"run-{n}" for n in range(27, 33)]
+# argv[1] == "y": the added runs of preregistration 12.5 (s2-y), tabled apart from s2-d (run-27..32)
+import sys
+ADDED = len(sys.argv) > 1 and sys.argv[1] == "y"
+RUNS = [f"run-{n}" for n in ((39, 40, 41, 43, 44, 45) if ADDED else range(27, 33))]
 GAPS = ["gap_object", "gap_oracle", "gap_range", "gap_assumption"]
 CATS = ["両方の読みで内側", "強い読みでだけ超える", "弱い読みでも超える", "その他"]
 
@@ -63,9 +66,9 @@ for r in RUNS:
     find[r] = tsv(os.path.join(d, "findings.tsv"))
     find_i[r] = {x["id"]: x for x in tsv(os.path.join(d, "findings-indep.tsv"))}
     STAGE.update({(r, x["id"]): x["stage"] for x in orig[r]})
-reader = {(x["run"], x["id"]): x for x in tsv(os.path.join(HERE, "first-reading.tsv"))}
+reader = {(x["run"], x["id"]): x for x in tsv(os.path.join(HERE, "first-reading-y.tsv" if ADDED else "first-reading.tsv"))}
 
-print("# 探索的分析3（条件D、D2）：集計表\n")
+print("# 探索的分析3（条件D、D2）：集計表" + ("（追加の run、s2-y）" if ADDED else "") + "\n")
 print("`build.py` が作る。手で直さない。\n")
 
 # Table 1: detection claims in stages 2-4, two readings
