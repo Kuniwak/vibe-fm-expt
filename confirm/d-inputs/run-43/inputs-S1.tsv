@@ -1,0 +1,147 @@
+input	source	kind	note
+?a?	#9	—	publish すると `??a`（SyntaxError）。段階1で lib/publishing.js を修正済み（ほか 4 箇所で同じ入力・種類）
+??!	#9	—	publish すると `!??` になり別の AST として再パースされる。段階1で修正済み（ほか 4 箇所で同じ入力・種類）
+typeof x.y	#9	—	MEMBER ノードの name にノードが入る（publish が壊れる、traverse が見落とす）。段階1で peg_src を修正済み（ほか 6 箇所で同じ入力・種類）
+keyof a?	#9, #12	—	publish すると `keyof ?a`（パースできない）。未修正（ほか 4 箇所で同じ入力・種類）
+function(): Object?[]	#9, #12	—	publish 結果 `function(): ?Object[]` が「関数の配列」として再パースされる。未修正
+?Object[]	#9	—	トップレベルで SyntaxError（被験側は「未修正の問題」の中で述べた）
+Object?[]	#9	—	トップレベルで SyntaxError（同上）
+?[][]	#9, #12	—	jsdoc では受理、permissive では SyntaxError（ほか 4 箇所で同じ入力・種類）
+?[]	#9, #12	—	jsdoc では `?` の配列、permissive では nullable の空タプル（ほか 10 箇所で同じ入力・種類）
+? a ?	S1/tmp/verify/n3.json:14	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 3 箇所で同じ入力・種類）
+?a!	S1/tmp/verify/n3.json:18	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 3 箇所で同じ入力・種類）
+? a !	S1/tmp/verify/n3.json:22	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 3 箇所で同じ入力・種類）
+?b?	S1/tmp/verify/n3.json:26	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 3 箇所で同じ入力・種類）
+? ? !	S1/tmp/verify/n3.json:126	—	P3-roundtrip-AST (permissive, TopTypeExpr)（ほか 3 箇所で同じ入力・種類）
+? [ ]	S1/tmp/verify/n3.json:190	—	P5-inclusion(sameAST) (jsdoc, TopTypeExpr)（ほか 2 箇所で同じ入力・種類）
+keyof [ ]	S1/tmp/verify/n3.json:194	—	P5-inclusion(sameAST) (jsdoc, TopTypeExpr)（ほか 2 箇所で同じ入力・種類）
+keyof a ?	S1/tmp/verify/n3fixed.json:30	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 5 箇所で同じ入力・種類）
+keyof a !	S1/tmp/verify/n3fixed.json:34	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 3 箇所で同じ入力・種類）
+keyof b ?	S1/tmp/verify/n3fixed.json:38	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 3 箇所で同じ入力・種類）
+keyof b !	S1/tmp/verify/n3fixed.json:42	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 3 箇所で同じ入力・種類）
+keyof * ?	S1/tmp/verify/n3fixed.json:46	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 3 箇所で同じ入力・種類）
+?[]...	S1/tmp/verify/n4.json:14	—	P5-inclusion(sameAST) (jsdoc, TopTypeExpr)（ほか 2 箇所で同じ入力・種類）
+?[] 	S1/tmp/verify/n4.json:18	—	P5-inclusion(sameAST) (jsdoc, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+?[ ]	S1/tmp/verify/n4.json:22	—	P5-inclusion(sameAST) (jsdoc, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+? []	S1/tmp/verify/n4.json:26	—	P5-inclusion(sameAST) (jsdoc, TopTypeExpr)（ほか 4 箇所で同じ入力・種類）
+keyof a!	S1/tmp/verify/n4.json:42	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 3 箇所で同じ入力・種類）
+keyof function?	S1/tmp/verify/n4.json:46	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 3 箇所で同じ入力・種類）
+keyof function!	S1/tmp/verify/n4.json:50	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 3 箇所で同じ入力・種類）
+keyof typeof?	S1/tmp/verify/n4.json:54	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 3 箇所で同じ入力・種類）
+typeof goog.ui[]	S1/tmp/verify/rand.json:10	—	P4-traverse-complete (permissive, TopTypeExpr)（ほか 3 箇所で同じ入力・種類）
+function(new:{},(keyof event?))	S1/tmp/verify/rand.json:30	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+keyof goog.ui !	S1/tmp/verify/rand.json:38	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+keyof undefined?	S1/tmp/verify/rand.json:42	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+keyof external:"q.r"#'r'?	S1/tmp/verify/r1.json:10	—	P3-roundtrip-reparse (permissive, TopTypeExpr)
+keyof module:true?	S1/tmp/verify/r1.json:14	—	P3-roundtrip-reparse (permissive, TopTypeExpr)
+keyof [] ?	S1/tmp/verify/r1.json:18	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+function(this:!import('x'),undefined):undefined ![] ?	S1/tmp/verify/r1.json:22	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+keyof external:number!& (import[])?	S1/tmp/verify/r1.json:26	—	P3-roundtrip-reparse (permissive, TopTypeExpr)
+keyof []	S1/tmp/verify/r1.json:38	—	P5-inclusion(sameAST) (jsdoc, TopTypeExpr)（ほか 3 箇所で同じ入力・種類）
+...?[]	S1/tmp/verify/r1.json:42	—	P5-inclusion(sameAST) (jsdoc, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+(keyof [])	S1/tmp/verify/r1.json:46	—	P5-inclusion(sameAST) (jsdoc, TopTypeExpr)（ほか 4 箇所で同じ入力・種類）
+({'r': ?[], readonly k?:this})	S1/tmp/verify/r1.json:54	—	P5-inclusion(sameAST) (jsdoc, TopTypeExpr)（ほか 2 箇所で同じ入力・種類）
+keyof a."k"! =	S1/tmp/verify/r1.json:74	—	P3-roundtrip-reparse (typescript, TopTypeExpr)
+keyof goog.ui?	S1/tmp/verify/r1.json:78	—	P3-roundtrip-reparse (typescript, TopTypeExpr)
+true | ! function(undefined):1?[]	S1/tmp/verify/r1.json:82	—	P3-roundtrip-reparse (typescript, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+(?[])	S1/tmp/verify/r1.json:102	—	P5-inclusion(sameAST) (jsdoc, NamepathExpr)（ほか 5 箇所で同じ入力・種類）
+(module:keyofstring| ?[])	S1/tmp/verify/r1.json:106	—	P5-inclusion(sameAST) (jsdoc, NamepathExpr)（ほか 1 箇所で同じ入力・種類）
+function(this:function(a."k"),"s",1):"a\\"?[]=	S1/tmp/verify/r1.json:146	—	P3-roundtrip-reparse (jsdoc, TopTypeExpr)
+...?[][]	S1/tmp/verify/r1.json:162	—	P5-inclusion(accept) (jsdoc, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+(keyof Foo<true>!|([]))	S1/tmp/verify/r1.json:174	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 3 箇所で同じ入力・種類）
+(keyof this?=)	S1/tmp/verify/r1.json:178	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 3 箇所で同じ入力・種類）
+(keyof true? =)	S1/tmp/verify/r1.json:182	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 3 箇所で同じ入力・種類）
+(function(this:keyof keyof a#event:c?,import("./m")):import("./m"))	S1/tmp/verify/r1.json:186	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 3 箇所で同じ入力・種類）
+(() => "a\\" ?[])	S1/tmp/verify/r1.json:190	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 3 箇所で同じ入力・種類）
+new ()=>module:undefined?[]	S1/tmp/verify/r1.json:286	—	P3-roundtrip-AST (permissive, TopTypeExpr)
+(...p: "a\\")=>Object?[]	S1/tmp/verify/r1.json:290	—	P3-roundtrip-AST (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+new () =>undefined ![]	S1/tmp/verify/r1.json:294	—	P3-roundtrip-AST (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+new ()=> -0x1F?[]	S1/tmp/verify/r1.json:298	—	P3-roundtrip-AST (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+new (...p:[external:new[],Object!])=> -0x1F?[]	S1/tmp/verify/r1.json:302	—	P3-roundtrip-AST (permissive, TopTypeExpr)
+function(new:function(this:? a~b,string),):new ()=> -0x1F?[]	S1/tmp/verify/r1.json:326	—	P3-roundtrip-AST (typescript, TopTypeExpr)
+new () => "a\\"?[]	S1/tmp/verify/r1.json:330	—	P3-roundtrip-AST (typescript, TopTypeExpr)
+function():keyof ?	S1/tmp/verify/r1.json:342	—	P5-inclusion(sameAST) (closure, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+function(this:keyof ?,{"q"})	S1/tmp/verify/r1.json:346	—	P5-inclusion(sameAST) (closure, TopTypeExpr)
+function(new:keyof ?,):{}	S1/tmp/verify/r1.json:350	—	P5-inclusion(sameAST) (closure, TopTypeExpr)
+function(this:"a\\",Foo,Foo):? ![]	S1/tmp/verify/r1.json:362	—	P3-roundtrip-AST (jsdoc, TopTypeExpr)
+function(1):import ![]	S1/tmp/verify/r1.json:366	—	P3-roundtrip-AST (jsdoc, TopTypeExpr)
+keyof keyof ?	S1/tmp/verify/r2.json:14	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+keyof module:1!=	S1/tmp/verify/r2.json:18	—	P3-roundtrip-reparse (permissive, TopTypeExpr)
+keyof typeof!	S1/tmp/verify/r2.json:22	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+keyof (goog.ui)?	S1/tmp/verify/r2.json:26	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+keyof event?| "s"	S1/tmp/verify/r2.json:54	—	P3-roundtrip-reparse (typescript, TopTypeExpr)
+function(?[], !module:number~event:m)	S1/tmp/verify/r2.json:70	—	P5-inclusion(sameAST) (jsdoc, TopTypeExpr)
+keyof [][]	S1/tmp/verify/r2.json:82	—	P5-inclusion(sameAST) (jsdoc, TopTypeExpr)
+(keyof external:a~b?)	S1/tmp/verify/r2.json:94	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 1 箇所で同じ入力・種類）
+(keyof this?)	S1/tmp/verify/r2.json:98	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 3 箇所で同じ入力・種類）
+(keyof *!)	S1/tmp/verify/r2.json:102	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 7 箇所で同じ入力・種類）
+(keyof x.y ?| external:Foo)	S1/tmp/verify/r2.json:106	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 1 箇所で同じ入力・種類）
+(keyof {} ?)	S1/tmp/verify/r2.json:110	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 3 箇所で同じ入力・種類）
+keyof function(this:module:x.y!,):"s"!=[]	S1/tmp/verify/r2.json:150	—	P3-roundtrip-AST (permissive, TopTypeExpr)
+()=>typeof#m?[]	S1/tmp/verify/r2.json:154	—	P3-roundtrip-AST (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+(p:this)=> a~b ![]	S1/tmp/verify/r2.json:158	—	P3-roundtrip-AST (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+()=>external:new ?[]	S1/tmp/verify/r2.json:162	—	P3-roundtrip-AST (permissive, TopTypeExpr)
+keyof function(Object =,true=):keyof Foo![]	S1/tmp/verify/r2.json:166	—	P3-roundtrip-AST (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+(?[]|?'t')."q"	S1/tmp/verify/r2.json:182	—	P5-inclusion(sameAST) (jsdoc, NamepathExpr)（ほか 1 箇所で同じ入力・種類）
+? [][]	S1/tmp/verify/r2.json:214	—	P5-inclusion(accept) (jsdoc, TopTypeExpr)
+function(import):?[][] =	S1/tmp/verify/r2.json:218	—	P5-inclusion(accept) (jsdoc, TopTypeExpr)
+(p:x.y) => typeof ?[]	S1/tmp/verify/r2.json:242	—	P3-roundtrip-AST (typescript, TopTypeExpr)
+(...p:null)=>true![]	S1/tmp/verify/r2.json:246	—	P3-roundtrip-AST (typescript, TopTypeExpr)
+(keyof readonly ?)	S1/tmp/verify/r2.json:270	—	P3-roundtrip-reparse (typescript, NamepathExpr)（ほか 1 箇所で同じ入力・種類）
+((keyof 1?))	S1/tmp/verify/r2.json:274	—	P3-roundtrip-reparse (typescript, NamepathExpr)（ほか 1 箇所で同じ入力・種類）
+function(new:keyof ?,1...):undefined<new,this>	S1/tmp/verify/r2.json:318	—	P5-inclusion(sameAST) (closure, TopTypeExpr)
+function(this:new,x.y,a#event:c):x.y ?[]	S1/tmp/verify/r2.json:330	—	P3-roundtrip-AST (jsdoc, TopTypeExpr)
+function(-0x1F,a."k"):1 ?[]	S1/tmp/verify/r2.json:334	—	P3-roundtrip-AST (jsdoc, TopTypeExpr)
+function(a.'k\'','t'):null?[]	S1/tmp/verify/r2.json:338	—	P3-roundtrip-AST (jsdoc, TopTypeExpr)
+function(this:*| number,undefined,external<typeof, event>):event?[]	S1/tmp/verify/r2.json:342	—	P3-roundtrip-AST (jsdoc, TopTypeExpr)
+function(function(this:event,Array)):external:"q.r" !=[]	S1/tmp/verify/r2.json:354	—	P3-roundtrip-reparse (jsdoc, TopTypeExpr)
+...keyof []	S1/tmp/verify/r3.json:18	—	P5-inclusion(sameAST) (jsdoc, TopTypeExpr)
+()=>(?-0x1F) =|keyof function() !	S1/tmp/verify/r3.json:38	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+keyof new!	S1/tmp/verify/r3.json:42	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+keyof Object#event:"q"!	S1/tmp/verify/r3.json:46	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+[[1,keyof a#event:c !]]!	S1/tmp/verify/r3.json:50	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+keyof new (p:?,...p: a~b) => typeof#event:"q" !	S1/tmp/verify/r3.json:54	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+keyof keyof function(this:"a\\",):"a\\"![]	S1/tmp/verify/r3.json:94	—	P3-roundtrip-AST (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+function(new:import,):keyof external:keyof![]	S1/tmp/verify/r3.json:98	—	P3-roundtrip-AST (permissive, TopTypeExpr)
+function():"a\\"![]	S1/tmp/verify/r3.json:102	—	P3-roundtrip-AST (permissive, TopTypeExpr)（ほか 2 箇所で同じ入力・種類）
+new (p: [], ...p:a.'k\'')=>new ?[]	S1/tmp/verify/r3.json:106	—	P3-roundtrip-AST (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+function(this:"a\\" =,"a\\"[]):undefined![]	S1/tmp/verify/r3.json:110	—	P3-roundtrip-AST (permissive, TopTypeExpr)（ほか 2 箇所で同じ入力・種類）
+new ()=> new ?[]	S1/tmp/verify/r3.json:138	—	P3-roundtrip-AST (typescript, TopTypeExpr)
+function(external:true|Foo,?[][]):number	S1/tmp/verify/r3.json:154	—	P5-inclusion(accept) (jsdoc, TopTypeExpr)
+{readonly "q":keyof [], readonly "q": keyof}	S1/tmp/verify/r3.json:158	—	P5-inclusion(accept) (jsdoc, TopTypeExpr)
+function(this:keyof ?,)	S1/tmp/verify/r3.json:170	—	P5-inclusion(sameAST) (closure, TopTypeExpr)
+function(this:keyof ?,):?null?	S1/tmp/verify/r3.json:174	—	P5-inclusion(sameAST) (closure, TopTypeExpr)
+function(..."a\\"):keyof ?	S1/tmp/verify/r3.json:178	—	P5-inclusion(sameAST) (closure, TopTypeExpr)
+((keyof "a\\"?))	S1/tmp/verify/r3.json:206	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 3 箇所で同じ入力・種類）
+(keyof import("./m")?)	S1/tmp/verify/r3.json:210	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 3 箇所で同じ入力・種類）
+(keyof number!)	S1/tmp/verify/r3.json:218	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 3 箇所で同じ入力・種類）
+(keyof new !)	S1/tmp/verify/r3.json:222	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 3 箇所で同じ入力・種類）
+(? [])	S1/tmp/verify/r3.json:322	—	P5-inclusion(sameAST) (jsdoc, NamepathExpr)（ほか 1 箇所で同じ入力・種類）
+(! function(?[]):{})	S1/tmp/verify/r3.json:330	—	P5-inclusion(sameAST) (jsdoc, NamepathExpr)（ほか 1 箇所で同じ入力・種類）
+function(this:?,):module:a/b?[] ?	S1/tmp/verify/r3.json:366	—	P3-roundtrip-reparse (jsdoc, TopTypeExpr)
+...function(new:"a\\",):import![]	S1/tmp/verify/r3.json:370	—	P3-roundtrip-reparse (jsdoc, TopTypeExpr)
+function():'t'?=[]	S1/tmp/verify/r3.json:374	—	P3-roundtrip-reparse (jsdoc, TopTypeExpr)
+keyof import?...	S1/tmp/verify/r4.json:10	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+keyof (typeof& "a\\") ?	S1/tmp/verify/r4.json:14	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+keyof a."k" ?	S1/tmp/verify/r4.json:18	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+keyof [this,string &Foo]?	S1/tmp/verify/r4.json:22	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+keyof null?[]	S1/tmp/verify/r4.json:26	—	P3-roundtrip-reparse (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+()=> ?![][]	S1/tmp/verify/r4.json:66	—	P3-roundtrip-AST (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+()=>module ![]	S1/tmp/verify/r4.json:70	—	P3-roundtrip-AST (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+new ()=> a~b?[]	S1/tmp/verify/r4.json:74	—	P3-roundtrip-AST (permissive, TopTypeExpr)（ほか 1 箇所で同じ入力・種類）
+function():typeof ?[]	S1/tmp/verify/r4.json:78	—	P3-roundtrip-AST (permissive, TopTypeExpr)（ほか 2 箇所で同じ入力・種類）
+function(new:undefined,):1 ?[]	S1/tmp/verify/r4.json:82	—	P3-roundtrip-AST (permissive, TopTypeExpr)（ほか 2 箇所で同じ入力・種類）
+?function(?[],!a."k")!	S1/tmp/verify/r4.json:134	—	P5-inclusion(sameAST) (jsdoc, TopTypeExpr)
+!function(this:event,):*?[]	S1/tmp/verify/r4.json:150	—	P3-roundtrip-reparse (jsdoc, TopTypeExpr)
+number<function(new:external !,external:"q.r"=):true ![]>	S1/tmp/verify/r4.json:154	—	P3-roundtrip-reparse (jsdoc, TopTypeExpr)
+(keyof function():readonly?)	S1/tmp/verify/r4.json:166	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 3 箇所で同じ入力・種類）
+(external&keyof import?)	S1/tmp/verify/r4.json:170	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 3 箇所で同じ入力・種類）
+(new () =>event![])	S1/tmp/verify/r4.json:174	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 3 箇所で同じ入力・種類）
+(keyof number?)	S1/tmp/verify/r4.json:178	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 3 箇所で同じ入力・種類）
+(keyof *?)	S1/tmp/verify/r4.json:182	—	P3-roundtrip-reparse (permissive, NamepathExpr)（ほか 3 箇所で同じ入力・種類）
+function(this:a,):"a\\"![]	S1/tmp/verify/r4.json:286	—	P3-roundtrip-AST (jsdoc, TopTypeExpr)
+function(this:keyof,...*):readonly ![]	S1/tmp/verify/r4.json:290	—	P3-roundtrip-AST (jsdoc, TopTypeExpr)
+function():?![]	S1/tmp/verify/r4.json:294	—	P3-roundtrip-AST (jsdoc, TopTypeExpr)
+(function(?[]))	S1/tmp/verify/r4.json:306	—	P5-inclusion(sameAST) (jsdoc, NamepathExpr)（ほか 1 箇所で同じ入力・種類）
+(*.<?[]>)	S1/tmp/verify/r4.json:310	—	P5-inclusion(sameAST) (jsdoc, NamepathExpr)（ほか 1 箇所で同じ入力・種類）
+...!module:a/b|Foo | keyof [][]	S1/tmp/verify/r4.json:346	—	P5-inclusion(accept) (jsdoc, TopTypeExpr)
