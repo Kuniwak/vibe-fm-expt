@@ -11,7 +11,9 @@ import re
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-OUT = pathlib.Path(__file__).with_name("tables.md")
+# argv[1] = sequence prefix: s2-d (default, tables.md) or s2-y (the added runs of 12.5, tables-s2-y.md)
+PREFIX = sys.argv[1] if len(sys.argv) > 1 else "s2-d"
+OUT = pathlib.Path(__file__).with_name("tables.md" if PREFIX == "s2-d" else f"tables-{PREFIX}.md")
 FAMILIES = ["F1", "F2", "F3", "F4", "F5", "F6"]
 VARIANTS = ["M1", "M2", "M3"]
 
@@ -70,8 +72,9 @@ def cell2(rows, mode, v):
 def main():
     runs = sorted(p.name for p in (ROOT / "runs").glob("run-*") if (p / "confirm").is_dir())
     runs = [r for r in runs if env(r).get("condition") in ("D", "D2")
-            and env(r).get("sequence_index", "").startswith("s2-d")]
-    out = ["# 条件D、D2 の独立な確認の結果（系列2、s2-d1〜s2-d6）", "",
+            and env(r).get("sequence_index", "").startswith(PREFIX)]
+    label = "s2-d1〜s2-d6" if PREFIX == "s2-d" else "追加の run、" + PREFIX + "*"
+    out = [f"# 条件D、D2 の独立な確認の結果（系列2、{label}）", "",
            "`build.py` が `runs/run-NN/confirm/` から作る。手で編集しない。", "",
            "種類2：参照変種 M1〜M3 を当てたときにだけ現れる違反があれば「検知」。",
            "`tree` は写しのライブラリ（被験側の変更を含む）に当てたもの、`orig` は対象のコミットのライブラリに当てたもの。",

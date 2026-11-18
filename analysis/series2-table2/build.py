@@ -50,7 +50,9 @@ def load(reader, run):
 def main():
     runs = sorted(p.name for p in (HERE / 'primary').iterdir() if p.name.startswith('run-'))
     info = {r: env(r) for r in runs}
-    runs.sort(key=lambda r: (ORDER.get(info[r]['condition'], 9), r))
+    # added runs (s2-y*, 12.5) are a separate batch: never pooled with s2-d in a row of the main table
+    grp = lambda r: info[r]['condition'] + ('（追加 s2-y）' if info[r]['seq'].startswith('s2-y') else '')
+    runs.sort(key=lambda r: (info[r]['seq'].startswith('s2-y'), ORDER.get(info[r]['condition'], 9), r))
     L = ['# 表2（系列2）：「バグがないとは言えない」旨の表明', '',
          '`build.py` が作る。基準は `analysis/summary-method.md`（results.md 3.1 の (a)(b)(c)）。',
          '判定は2人の作業者（元の判定 P、独立の判定 I）による。境界例は数えない。欠測は事前登録 12.5 による。', '']
@@ -71,12 +73,12 @@ def main():
             c_before = 'あり' if before else ('なし' if fixed else '欠測')
             c_after = 'あり' if after else ('なし' if fixed else '欠測')
             per[(r, rd)] = (c_pre, c_before, c_after, d)
-    conds = sorted({info[r]['condition'] for r in runs}, key=lambda c: ORDER.get(c, 9))
+    conds = sorted({grp(r) for r in runs}, key=lambda c: ('追加' in c, ORDER.get(c.split('（')[0], 9)))
     for c in conds:
         for rd in READERS:
             cells = []
             for i in range(3):
-                vals = [per[(r, rd)][i] for r in runs if info[r]['condition'] == c and (r, rd) in per]
+                vals = [per[(r, rd)][i] for r in runs if grp(r) == c and (r, rd) in per]
                 n = sum(v != '欠測' for v in vals)
                 cells.append(f"{sum(v == 'あり' for v in vals)}/{n}" + (f"（欠測 {len(vals) - n}）" if n < len(vals) else ''))
             L.append(f"| {c} | {'P' if rd == 'primary' else 'I'} | " + ' | '.join(cells) + ' |')
@@ -98,7 +100,7 @@ def main():
             else:
                 mid = fmt('質問前')
             post = fmt('質問後') if info[r]['fixed'] else '欠測'
-            L.append(f"| {r} | {info[r]['condition']} | {'P' if rd == 'primary' else 'I'} | {fmt('着手前')} | {mid} | {post} |")
+            L.append(f"| {r} | {grp(r)} | {'P' if rd == 'primary' else 'I'} | {fmt('着手前')} | {mid} | {post} |")
     # disagreements
     L += ['', '## 2人の判定の食い違い（表明を含むとした発言の集合の差）', '']
     for r in runs:
