@@ -1,0 +1,30 @@
+input	source	kind	note
+typeof _.map	#10; /tmp/fuzz1.txt:14,19,24,29,34,39	—	P2-reparse-fails/P3-traverse（バグ1、MEMBER.name が NAME ノード）。publish が typeof _.{ type: 'NAME', name: 'map' }。段階1で修正済み
+typeof A.b	#10 見出し; #17	—	バグ1の型（実在コード1,050件）。段階1で修正済み
+typeof a.b	#21（PR 本文）	—	バグ1の型。段階1で修正済み
+typeof _.head	/tmp/fuzz1.txt:15,20,25,30,35,40	—	P2-reparse-fails/P3-traverse（バグ1）
+typeof core._	/tmp/fuzz1.txt:16,21,26,31,36,41	—	P2-reparse-fails/P3-traverse（バグ1）
+typeof RSVP.on	/tmp/fuzz1.txt:17,22,27,32,37,42	—	P2-reparse-fails/P3-traverse（バグ1）
+(x: ) => boolean	#10; /tmp/fuzz1.txt:4	—	P1-publish-throws（バグ2）：TypeError: Cannot read properties of null。段階1で修正済み
+(x:) => T	#17; #21	—	バグ2の例。段階1で修正済み
+(a:) => A	commands.md call 10 の出力	—	publish が Cannot read properties of null (reading 'type')（バグ2、被験側の手での確認）
+?A?	#10; /tmp/n4.txt:3	—	P2-reparse-fails（バグ3）：??A になり再パース失敗。段階1で修正済み
+??!	#10; /tmp/n4.txt:27	—	P2-roundtrip-ast/P2b-idempotent（バグ3）：!?? → ?!? と変わる。段階1で修正済み
+?A!	/tmp/n4.txt:4	—	P2-reparse-fails（バグ3）：!?A
+?b?	/tmp/n4.txt:5	—	P2-reparse-fails（バグ3）
+?b!	/tmp/n4.txt:6	—	P2-reparse-fails（バグ3）
+?*?	/tmp/n4.txt:7	—	P2-reparse-fails（バグ3）
+??!=	/tmp/n4.txt:28	—	P2-roundtrip-ast/P2b-idempotent（バグ3）
+??! 	/tmp/n4.txt:29	—	P2-roundtrip-ast（バグ3）。末尾に空白1つ
+?? !	/tmp/n4.txt:30	—	P2-roundtrip-ast（バグ3）
+? ?!	/tmp/n4.txt:31	—	P2-roundtrip-ast（バグ3）
+keyof A?	#17; #21; commands.md call 38 の出力	—	P2-reparse-fails：keyof ?A になる（最初の狭い修正の後に出た反例）。段階1で修正済み
+keyof A!	commands.md call 38 の出力	—	P2-reparse-fails：keyof !A
+keyof b?	commands.md call 38 の出力	—	P2-reparse-fails
+keyof b!	commands.md call 38 の出力	—	P2-reparse-fails
+keyof *?	commands.md call 38 の出力	—	P2-reparse-fails
+?[]	#10; #17; /tmp/r4.txt:3	—	P4-same-ast [jsdoc]：jsdoc では Array<?>、permissive では nullable な空タプル。被験側は「仕様上の論点」「バグではない可能性」とし、修正していない
+?[] 	/tmp/r4.txt:4	—	P4-same-ast（?[] 系8件の1つ）。末尾に空白1つ
+?[ ]	/tmp/r4.txt:5	—	P4-same-ast（?[] 系）
+? []	/tmp/r4.txt:6	—	P4-same-ast（?[] 系）
+ ?[]	/tmp/r4.txt:7	—	P4-same-ast（?[] 系）。先頭に空白1つ
