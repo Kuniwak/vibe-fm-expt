@@ -12,12 +12,16 @@ if os.path.exists(recipe):
     m = re.search(r'^# VIOLATION_RE: (.*)$', pathlib.Path(recipe).read_text(encoding='utf-8'), re.MULTILINE)
     if m: vre = m.group(1)
 VRE = re.compile(vre)
+def kind(line):
+    """A violation line's kind: digits replaced by '#'. A trailing comma is dropped so that a JSON
+    count line does not become a new kind only because its key moved to or from the last place."""
+    return re.sub(r'[0-9]+', '#', line.strip()).rstrip(',')
 def read(p):
     t = pathlib.Path(p).read_text(encoding='utf-8', errors='replace')
     m = re.search(r'@@ recipe exit=(\d+)', t)
     rc = int(m.group(1)) if m else None
     body = [l for l in t.splitlines() if not l.startswith('@@')]
-    kinds = {re.sub(r'[0-9]+', '#', l.strip()) for l in body if VRE.search(l) and not re.search(r'\b0 failing\b', l)}
+    kinds = {kind(l) for l in body if VRE.search(l) and not re.search(r'\b0 failing\b', l)}
     return t, rc, kinds
 print(f'# {os.path.basename(os.path.dirname(os.path.dirname(out)))} / {os.path.basename(out)}\n')
 print(f'violation pattern: `{vre}`\n')
