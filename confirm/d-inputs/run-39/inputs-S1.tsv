@@ -1,0 +1,13 @@
+input	source	kind	note
+?A?	#12（表のバグ1）; call 7 の min.js 出力 `"?A?" -> "??A"`	—	publish が `??A` を出し再パースできない（被験側が lib/publishing.js で修正）
+!A?	#12（表のバグ1）; call 8 の min.js 出力 `"!A?" -> "?!A"`	—	publish が `?!A` を出し再パースできない（修正済み）
+?A!	#12（表のバグ1）; call 8 の min.js 出力 `"?A!" -> "!?A"`	—	publish が `!?A` を出し再パースできない（修正済み）
+() => A?[]	#12（表のバグ2）; call 8 の min.js 出力 `"() => A?[]" -> "() => ?A[]"`	—	publish 結果 `() => ?A[]` が別の型 `(() => ?A)[]` として読まれる（修正済み）
+typeof A.b	#12（表のバグ3）; call 20 の fuzz2.js 出力 `REPARSE_FAIL "typeof A.b" => "typeof A.{ type: 'NAME', name: 'b' }"`	—	publish の出力が壊れる。MEMBER の name が NAME ノード（被験側が peg_src で修正）
+[?*?]	call 6 の fuzz2.js 出力 `REPARSE_FAIL "[?*?]" => "[??*]"`; call 8 の min.js 出力	—	往復で再パースできない（バグ1と同じ原因）
+?*?	call 8 の min.js 出力 `"?*?" -> "??*"`	—	往復で再パースできない（バグ1と同じ原因）
+function(): A?[]	call 8 の min.js 出力 `"function(): A?[]" -> "function(): ?A[]"`	—	往復で AST が変わる（バグ2と同じ原因）
+?b#b?=	call 6 の fuzz2.js 出力 `REPARSE_FAIL "?b#b?=" => "??b#b="`（permissive/jsdoc/closure/typescript）	—	往復で再パースできない（バグ1と同じ原因）
+() => import?[]	call 6 の fuzz2.js 出力 `AST_DIFF:ARROW "() => import?[]" => "() => ?import[]"`（permissive/typescript）	—	往復で AST が変わる（バグ2と同じ原因）
+() => () => A#"x"?[]	call 6 の fuzz2.js 出力 `AST_DIFF:ARROW "() => () => A#\"x\"?[]" => "() => () => ?A#\"x\"[]"`	—	往復で AST が変わる（バグ2と同じ原因）
+?0x1F?	call 6 の fuzz2.js 出力 `REPARSE_FAIL "?0x1F?" => "??0x1F"`（jsdoc/closure）	—	往復で再パースできない（バグ1と同じ原因）
