@@ -1,0 +1,334 @@
+Parser BroadNamepathExpr types Multipart should return a member type node when "owner . Member" arrived
+Parser BroadNamepathExpr types Multipart should return a member type node when "owner.''" arrived
+Parser BroadNamepathExpr types Multipart should return a member type node when "owner.'Mem\ber'" arrived
+Parser BroadNamepathExpr types Multipart should return a member type node when "owner.'\a'" arrived
+Parser BroadNamepathExpr types Multipart should return a member type node when "owner.Member" arrived
+Parser BroadNamepathExpr types Multipart should return a member type node when "owner.event:Member" arrived
+Parser BroadNamepathExpr types Multipart should return a member type node when "superOwner.owner.Member" arrived
+Parser BroadNamepathExpr types Multipart should return a member type node when "superOwner.owner.Member=" arrived
+Parser BroadNamepathExpr types Multipart should return a member type node when 'owner."Me\m\\ber"' arrived
+Parser BroadNamepathExpr types Multipart should return a member type node when 'owner."Mem.ber"' arrived
+Parser BroadNamepathExpr types Multipart should return a member type node when 'owner."Mem.ber\""' arrived
+Parser BroadNamepathExpr types Multipart should return a member type node when 'owner."Mem\\ber\""' arrived
+Parser BroadNamepathExpr types Multipart should return a member type node when 'owner."Mem\ber"' arrived
+Parser BroadNamepathExpr types Multipart should return an inner member type node when "owner ~ innerMember" arrived
+Parser BroadNamepathExpr types Multipart should return an inner member type node when "owner~innerMember" arrived
+Parser BroadNamepathExpr types Multipart should return an inner member type node when "superOwner~owner~innerMember" arrived
+Parser BroadNamepathExpr types Multipart should return an inner member type node when "superOwner~owner~innerMember=" arrived
+Parser BroadNamepathExpr types Multipart should return an instance member type node when "owner # instanceMember" arrived
+Parser BroadNamepathExpr types Multipart should return an instance member type node when "owner#instanceMember" arrived
+Parser BroadNamepathExpr types Multipart should return an instance member type node when "superOwner#owner#instanceMember" arrived
+Parser BroadNamepathExpr types Multipart should return an instance member type node when "superOwner#owner#instanceMember=" arrived
+Parser BroadNamepathExpr types Multipart should throw when 'owner."Mem.ber\"' arrived
+Parser BroadNamepathExpr types Single component should return a type name node when "$" arrived
+Parser BroadNamepathExpr types Single component should return a type name node when "TypeName" arrived
+Parser BroadNamepathExpr types Single component should return a type name node when "_" arrived
+Parser BroadNamepathExpr types Single component should return a type name node when "my-type" arrived
+Parser BroadNamepathExpr types external should return an external name node when "external : String#rot13" arrived
+Parser BroadNamepathExpr types external should return an external name node when "external : String~rot13" arrived
+Parser BroadNamepathExpr types external should return an external name node when "external:string" arrived
+Parser BroadNamepathExpr types external should return an external name node when `external:"jQuery.fn"#event:abc` arrived
+Parser BroadNamepathExpr types external should return an external name node when `external:"jQuery.fn".someMethod#abc` arrived
+Parser BroadNamepathExpr types external should return an external name node when `external:"jQuery.fn".someMethod#event:abc` arrived
+Parser BroadNamepathExpr types external should return an external name node when `external:"jQuery.fn"` arrived
+Parser BroadNamepathExpr types module should return a member node when "(module:path/to/file).member" arrived
+Parser BroadNamepathExpr types module should return a member node when "module:'\path'.event:member" arrived
+Parser BroadNamepathExpr types module should return a member node when "module:'path/to/file'.event:member" arrived
+Parser BroadNamepathExpr types module should return a member node when "module:'path\\to\file\''.event:member" arrived
+Parser BroadNamepathExpr types module should return a member node when "module:path/to#file#event:member" arrived
+Parser BroadNamepathExpr types module should return a member node when "module:path/to/file.event:member" arrived
+Parser BroadNamepathExpr types module should return a member node when "module:path/to/file.member" arrived
+Parser BroadNamepathExpr types module should return a member node when 'module:"path/to/file".event:member' arrived
+Parser BroadNamepathExpr types module should return a member node when 'module:"path\\to\file\"".event:member' arrived
+Parser BroadNamepathExpr types module should return a module name node when "module : path/to/file" arrived
+Parser BroadNamepathExpr types module should return a module name node when "module:path/to/file" arrived
+Parser BroadNamepathExpr types module should throw when 'module:"path/t"o/file".event:member' arrived
+Parser BroadNamepathExpr types module should throw when 'module:"path/t\\"o/file".event:member
+Parser Function/Constructor/Arrow types should return a function type node as a constructor when "function(new:NewObject)" arrived
+Parser Function/Constructor/Arrow types should return a function type node as a constructor when "function(new:NewObject, param1)" arrived
+Parser Function/Constructor/Arrow types should return a function type node when "function( Param1 , Param2 ) : Returned" arrived
+Parser Function/Constructor/Arrow types should return a function type node when "function()" arrived
+Parser Function/Constructor/Arrow types should return a function type node with a context type when "function(this:ThisObject)" arrived
+Parser Function/Constructor/Arrow types should return a function type node with a context type when "function(this:ThisObject, param1)" arrived
+Parser Function/Constructor/Arrow types should return a function type node with a param when "function(Param)" arrived
+Parser Function/Constructor/Arrow types should return a function type node with returns when "function():Returned" arrived
+Parser Function/Constructor/Arrow types should return a function type node with several params when "function(Param1,Param2)" arrived
+Parser Function/Constructor/Arrow types should return a function type node with variadic params when "function(...VariadicParam)" arrived
+Parser Function/Constructor/Arrow types should return a function type node with variadic params when "function(Param,...VariadicParam)" arrived
+Parser Function/Constructor/Arrow types should return an arrow function type node when "() => string" arrived
+Parser Function/Constructor/Arrow types should throw an error when "function(...VariadicParam, UnexpectedLastParam)" arrived
+Parser Function/Constructor/Arrow types should throw an error when "function(new:NewObject, this:ThisObject)" arrived
+Parser Function/Constructor/Arrow types should throw an error when "function(this:ThisObject, new:NewObject)" arrived
+Parser Generic types should return a generic type node when "Generic .< ParamType1 , ParamType2 >" arrived
+Parser Generic types should return a generic type node when "Generic < ParamType1 , ParamType2 >" arrived
+Parser Generic types should return a generic type node when "Generic.<ParamType1,ParamType2>" arrived
+Parser Generic types should return a generic type node when "Generic.<ParamType>" arrived
+Parser Generic types should return a generic type node when "Generic<Inner<ParamType>>" arrived
+Parser Generic types should return a generic type node when "Generic<ParamType1,ParamType2>" arrived
+Parser Generic types should return a generic type node when "Generic<ParamType>" arrived
+Parser Generic types should return a generic type node when "ParamType [ ] [ ]" arrived
+Parser Generic types should return a generic type node when "ParamType[]" arrived
+Parser Generic types should return a generic type node when "ParamType[][]" arrived
+Parser Generic types should return a generic type node when "[TupleType1, TupleType2][]" arrived
+Parser Generic types should return a generic type node when "[TupleType][]" arrived
+Parser Generic types should return a generic type node when "[][]" arrived
+Parser Generic types should throw a syntax error when "Promise*Error" arrived
+Parser Primitive types should return a number value type node when "+0" arrived
+Parser Primitive types should return a number value type node when "-0" arrived
+Parser Primitive types should return a number value type node when ".0" arrived
+Parser Primitive types should return a number value type node when ".05" arrived
+Parser Primitive types should return a number value type node when "0.0" arrived
+Parser Primitive types should return a number value type node when "0123456789" arrived
+Parser Primitive types should return a number value type node when "0b01" arrived
+Parser Primitive types should return a number value type node when "0o01234567" arrived
+Parser Primitive types should return a number value type node when "0x0123456789abcdef" arrived
+Parser Primitive types should return a number value type node when "3.14e5" arrived
+Parser Primitive types should return a number value type node when "3.14e54" arrived
+Parser Primitive types should return a number value type node when "3e+5" arrived
+Parser Primitive types should return a number value type node when "3e-5" arrived
+Parser Primitive types should return a number value type node when "3e5" arrived
+Parser Primitive types should return a string value type node when "''" arrived
+Parser Primitive types should return a string value type node when "'\a'" arrived
+Parser Primitive types should return a string value type node when "'\a\''" arrived
+Parser Primitive types should return a string value type node when '""' arrived
+Parser Primitive types should return a string value type node when '"\n\"\t"' arrived
+Parser Primitive types should return a string value type node when '"\string with\ \"escapes\\"' arrived
+Parser Primitive types should return a string value type node when '"string"' arrived
+Parser Primitive types should return a string value type node when '"マルチバイト"' arrived
+Parser Primitive types should throw a syntax error when "" arrived
+Parser Primitive types should throw a syntax error when "Invalid type" arrived
+Parser Primitive types should throw for string value type node with unescaped quotes
+Parser Primitive types should throw for string value type node with unescaped quotes (preceded by escaped backslash)
+Parser Record types should return a record type node when "{ key1 : ValueType1 , key2 : ValueType2  }" arrived
+Parser Record types should return a record type node when "{ key1 : ValueType1 , key2 : ValueType2 }" arrived
+Parser Record types should return a record type node when "{'\quoted-key':ValueType}" arrived
+Parser Record types should return a record type node when "{'keyOnly'}" arrived
+Parser Record types should return a record type node when "{'q\uoted-key':ValueType}" arrived
+Parser Record types should return a record type node when "{'quoted-key':ValueType}" arrived
+Parser Record types should return a record type node when "{key1:ValueType1,key2:ValueType2
+}" arrived
+Parser Record types should return a record type node when "{key1:ValueType1,key2:ValueType2}" arrived
+Parser Record types should return a record type node when "{key:ValueType1,keyOnly}" arrived
+Parser Record types should return a record type node when "{key:ValueType}" arrived
+Parser Record types should return a record type node when "{keyOnly}" arrived
+Parser Record types should return a record type node when "{readonly key:ValueType}" arrived
+Parser Record types should return a record type node when "{readonly keyOnly}" arrived
+Parser Record types should return a record type node when "{}" arrived
+Parser Record types should return a record type node when '{"ke\\y\Only\""}' arrived
+Parser Record types should return a record type node when '{"keyOnly"}' arrived
+Parser Record types should throw when '{"key"Only"}' arrived
+Parser Record types should throw when '{"key\\"Only"}' arrived
+Parser Tuple types should return a tuple type node when "[TupleAnyVarargs, ...]" arrived
+Parser Tuple types should return a tuple type node when "[TupleConcreteType, ...TupleVarargsType]" arrived
+Parser Tuple types should return a tuple type node when "[TupleConcreteType, TupleBrokenVarargsType...]" arrived
+Parser Tuple types should return a tuple type node when "[TupleType1, TupleType2]" arrived
+Parser Tuple types should return a tuple type node when "[TupleType]" arrived
+Parser Tuple types should return a tuple type node when "[]" arrived
+Parser Type combinations should return a union type when "( LeftType | RightType )" arrived
+Parser Type combinations should return a union type when "(LeftType|RightType)" arrived
+Parser Type combinations should return a union type when "LeftType|MiddleType|RightType" arrived
+Parser Type combinations should return a union type when "LeftType|RightType" arrived
+Parser Type combinations should return an intersection type when "( LeftType & RightType )" arrived
+Parser Type combinations should return an intersection type when "(LeftType&RightType)" arrived
+Parser Type combinations should return an intersection type when "LeftType&MiddleType&RightType" arrived
+Parser Type combinations should return an intersection type when "LeftType&RightType" arrived
+Parser Type combinations should throw a syntax error when "(unclosedParenthesis, " arrived
+Parser Types with modifiers should return a not nullable type node when "! Object" arrived
+Parser Types with modifiers should return a not nullable type node when "!Object" arrived
+Parser Types with modifiers should return a not nullable type node when "Object !" arrived
+Parser Types with modifiers should return a not nullable type node when "Object!" arrived
+Parser Types with modifiers should return a nullable type node when "? string" arrived
+Parser Types with modifiers should return a nullable type node when "?string" arrived
+Parser Types with modifiers should return a nullable type node when "string ?" arrived (deprecated)
+Parser Types with modifiers should return a nullable type node when "string?" arrived (deprecated)
+Parser Types with modifiers should return a variadic type node when "...!Object" arrived
+Parser Types with modifiers should return a variadic type node when "..." arrived
+Parser Types with modifiers should return a variadic type node when "...?" arrived
+Parser Types with modifiers should return a variadic type node when "...PrefixVariadic" arrived
+Parser Types with modifiers should return a variadic type node when "SuffixVariadic..." arrived
+Parser Types with modifiers should return an optional type node when "?string=" arrived
+Parser Types with modifiers should return an optional type node when "string =" arrived
+Parser Types with modifiers should return an optional type node when "string=" arrived
+Parser Types with modifiers should return an optional type node when "string?=" arrived
+Parser Types with modifiers should return an optional unknown type node when "?=" arrived
+Parser Types with modifiers should throw an error when "!?string" arrived
+Parser Types with modifiers should throw an error when "?!string" arrived
+Parser Wildcard types should return an any type node when "*" arrived
+Parser Wildcard types should return an unknown type node when "?" arrived
+Parser modes Closure should return a function type node when "function()" arrived
+Parser modes Closure should return a module name node when "module:path/to/file" arrived
+Parser modes Closure should return a record type node when "{key:ValueType}" arrived
+Parser modes Closure should return a record type node when "{key?:ValueType}" arrived
+Parser modes Closure should return a type query type node when "typeof foo" arrived
+Parser modes Closure should return an external name node when "external:string" arrived
+Parser modes Closure should throw when "() => string" arrived
+Parser modes Closure should throw when "ParamType[]" arrived
+Parser modes Closure should throw when "[TupleType1, TupleType2]" arrived
+Parser modes Closure should throw when "import("foo")" arrived
+Parser modes Closure should throw when "keyof foo" arrived
+Parser modes TypeScript should return a function type node when "function()" arrived
+Parser modes TypeScript should return a key query type node when "keyof foo" arrived
+Parser modes TypeScript should return a module name node when "module:path/to/file" arrived
+Parser modes TypeScript should return a record type node when "{key:ValueType}" arrived
+Parser modes TypeScript should return a record type node when "{key?:ValueType}" arrived
+Parser modes TypeScript should return a tuple type node when "[TupleType1, TupleType2]" arrived
+Parser modes TypeScript should return a type query type node when "typeof foo" arrived
+Parser modes TypeScript should return an arrow function type node when "() => string" arrived
+Parser modes TypeScript should return an import node when "import("foo")" arrived
+Parser modes TypeScript should throw when "external:string" arrived
+Parser modes `startRule` option should return a member node when 'module:"path/to/file".event:member' arrived
+Parser modes `startRule` option should throw when 'abc<' arrived with `BroadNamepathExpr`
+Parser modes jsdoc should return a module name node when "module:path/to/file" arrived
+Parser modes jsdoc should return a record type node when "{key:ValueType}" arrived
+Parser modes jsdoc should return an external name node when "external:string" arrived
+Parser modes jsdoc should throw when "() => string" arrived
+Parser modes jsdoc should throw when "[TupleType1, TupleType2]" arrived
+Parser modes jsdoc should throw when "import("foo")" arrived
+Parser modes jsdoc should throw when "keyof foo" arrived
+Parser modes jsdoc should throw when "typeof foo" arrived
+Parser modes should throw when invalid mode is specified
+Parser operator precedence when "Foo|function():Returned?" arrived should parse as "Foo|((function():Returned)?)"
+Parser should not hang when parsing tests/fixtures/*
+Parser should not throw any errors when parsing tests/fixtures/catharsis-types
+Parser should not throw any errors when parsing tests/fixtures/closure-library-types
+Parser should not throw any errors when parsing tests/fixtures/jsdoc-types
+Parser should not throw any errors when parsing tests/fixtures/typescript-types
+Parser should return a key query type node when "keyof foo" arrived
+Parser should return a key query type node when "keyof typeof foo" arrived
+Parser should return a key query type node when "keyof(foo)" arrived
+Parser should return a type query type node when "typeof foo" arrived
+Parser should throw errors when parsing erring tests/fixtures/*
+jsdoctypeparser .JSDocTypeSyntaxError should be exported
+jsdoctypeparser .NodeType should be exported
+jsdoctypeparser .SyntaxType should be exported
+jsdoctypeparser .createDefaultPublisher should be exported
+jsdoctypeparser .parse should be exported
+jsdoctypeparser .publish should be exported
+jsdoctypeparser .traverse should be exported
+publish BroadNamepathExpr types Multipart should return a quoted `MemberName` type
+publish BroadNamepathExpr types Multipart should return a quoted `MemberName` type (single quotes)
+publish BroadNamepathExpr types Multipart should return a quoted `MemberName` type with escaped quote
+publish BroadNamepathExpr types Multipart should return a quoted `MemberName` type with single extra backslash for odd count backslash series not before a quote
+publish BroadNamepathExpr types Multipart should return a quoted `MemberName` type without adding backslashes for escaped backslash sequences (i.e., even count)
+publish BroadNamepathExpr types Multipart should return a user-defined type name
+publish BroadNamepathExpr types Multipart should return a user-defined type name with event member
+publish BroadNamepathExpr types Multipart should return a user-defined type name with inner event member
+publish BroadNamepathExpr types Multipart should return a user-defined type name with inner member
+publish BroadNamepathExpr types Single component should return a global type name
+publish BroadNamepathExpr types external should return a quoted external node type
+publish BroadNamepathExpr types external should return a quoted external node type with a static member method and event
+publish BroadNamepathExpr types external should return an external node type
+publish BroadNamepathExpr types external should return an external node type with an instance member method
+publish BroadNamepathExpr types module should return a module type
+publish BroadNamepathExpr types module should return a module type with a generic type operator
+publish BroadNamepathExpr types module should return a module type with a postfix nullable type operator
+publish BroadNamepathExpr types module should return a module type with a prefix nullable type operator
+publish BroadNamepathExpr types module should return a module type with event member
+publish BroadNamepathExpr types module should return a module type with member
+publish BroadNamepathExpr types module should return a quoted module type
+publish BroadNamepathExpr types module should return a quoted module type (single quotes)
+publish BroadNamepathExpr types module should return a quoted module type with escaped quote
+publish BroadNamepathExpr types module should return a quoted module type with single extra backslash for odd count backslash series not before a quote
+publish BroadNamepathExpr types module should return a quoted module type without adding backslashes for escaped backslash sequences (i.e., even count)
+publish Function/Constructor/Arrow types should return a construct signature with one parameter
+publish Function/Constructor/Arrow types should return a constructor type
+publish Function/Constructor/Arrow types should return a function type
+publish Function/Constructor/Arrow types should return a function type having parameters with some type operators
+publish Function/Constructor/Arrow types should return a function type with 2 parameters
+publish Function/Constructor/Arrow types should return a function type with a context
+publish Function/Constructor/Arrow types should return a function type with a parameter
+publish Function/Constructor/Arrow types should return a function type with a return
+publish Function/Constructor/Arrow types should return a function type with a variable parameter
+publish Function/Constructor/Arrow types should return a function type with no parameters
+publish Function/Constructor/Arrow types should return a function type with variadic
+publish Function/Constructor/Arrow types should return a function type with variadic and no operand
+publish Function/Constructor/Arrow types should return a goog.ui.Component#forEachChild
+publish Function/Constructor/Arrow types should return an arrow type with no parameters
+publish Function/Constructor/Arrow types should return an arrow type with one parameter
+publish Function/Constructor/Arrow types should return an arrow type with one variadic parameter
+publish Function/Constructor/Arrow types should return an arrow type with two parameters
+publish Generics should return a JsDoc-formal generic type
+publish Generics should return a generic type with 2 parameters
+publish Generics should return a generic type with a parameter
+publish Primitive types should return a bin number value type
+publish Primitive types should return a hex number value type
+publish Primitive types should return a null type with an "null" keyword
+publish Primitive types should return a number value type
+publish Primitive types should return a primitive (boolean) type name
+publish Primitive types should return a string value type
+publish Primitive types should return a string value type (single quotes)
+publish Primitive types should return a string value type with escaped quote
+publish Primitive types should return a string value type with single extra backslash for odd count backslash series not before a quote
+publish Primitive types should return a string value type without adding backslashes for escaped backslash sequences (i.e., even count)
+publish Primitive types should return an oct number value type
+publish Primitive types should return an undefined type with an "undefined" keyword
+publish Publishers should can take a custom publisher by the 2nd argument
+publish Publishers should have a default publisher for each node type
+publish Record types should return a quoted record type key
+publish Record types should return a quoted record type key (single quotes)
+publish Record types should return a quoted record type key with escaped quote
+publish Record types should return a quoted record type key with single extra backslash for odd count backslash series not before a quote
+publish Record types should return a quoted record type key without adding backslashes for escaped backslash sequences (i.e., even count)
+publish Record types should return a record type with 2 entries
+publish Record types should return a record type with a readonly entry
+publish Record types should return a record type with an entry
+publish Record types should return an optional record type by key
+publish Record types should return an optional record type by type
+publish Tuple types should return a generic type with a parameter as a record type
+publish Tuple types should return a generic type with a parameter as a tuple type
+publish Tuple types should return a tuple type
+publish Tuple types should return a tuple type with 2 entries
+publish Tuple types should return a tuple type with an entry
+publish Type combinations should return a formal type union
+publish Type combinations should return a informal type union
+publish Type combinations should return a type intersection
+publish Types with modifiers should return a non-nullable type with a nullable type operator on the head
+publish Types with modifiers should return a non-nullable type with a nullable type operator on the tail
+publish Types with modifiers should return a nullable type with a nullable type operator on the head
+publish Types with modifiers should return a nullable type with a nullable type operator on the tail
+publish Types with modifiers should return a variable type
+publish Types with modifiers should return an optional type with an optional type operator on the tail
+publish Types with operations should return a key query node
+publish Types with operations should return a parenthesized key query node (with no whitespace)
+publish Types with operations should return a type query node
+publish Types with operations should return an import type node
+publish Wildcard types should return an all type
+publish Wildcard types should return an unknown type
+traversing External should visit an external node
+traversing Function/Constructor/Arrow types should visit a function node that has few params and a returns and "this" and "new"
+traversing Function/Constructor/Arrow types should visit a function node that has no params and no returns
+traversing Function/Constructor/Arrow types should visit an arrow function that has one variadic param and a returns
+traversing Function/Constructor/Arrow types should visit an arrow function that has two params and a returns
+traversing Function/Constructor/Arrow types should visit an arrow function with no params and `new`
+traversing Generic types should visit a generic node that has multiple objects
+traversing Generic types should visit a generic node that is empty
+traversing Modules should visit a module node
+traversing NamepathExpr types should visit a member node
+traversing NamepathExpr types should visit a name node
+traversing NamepathExpr types should visit a nested inner member node
+traversing NamepathExpr types should visit a nested instance member node
+traversing NamepathExpr types should visit a nested member node
+traversing NamepathExpr types should visit an inner member node
+traversing NamepathExpr types should visit an instance member node
+traversing Primitive types should visit a number value node
+traversing Primitive types should visit a string value node
+traversing Record types should visit a record node that has multiple entries
+traversing Record types should visit a record node that is empty
+traversing Tuple types should visit a tuple node that has multiple entries
+traversing Tuple types should visit a tuple node that is empty
+traversing Type combinations should visit a nested intersection node
+traversing Type combinations should visit a nested union node
+traversing Type combinations should visit a union node
+traversing Type combinations should visit an intersection node
+traversing Types with modifiers should visit a non-nullable node
+traversing Types with modifiers should visit a nullable node
+traversing Types with modifiers should visit a variadic node
+traversing Types with modifiers should visit an empty variadic node
+traversing Types with modifiers should visit an optional node
+traversing Types with operations should visit a key query node
+traversing Types with operations should visit a parenthesized key query node
+traversing Types with operations should visit a type query node
+traversing Types with operations should visit an import type node
+traversing Wildcard types should visit an any node
+traversing Wildcard types should visit an unknown node
+traversing can be called with missing enter callback
