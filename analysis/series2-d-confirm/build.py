@@ -12,9 +12,11 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 # argv[1] = sequence prefix: s2-d (default, tables.md) or s2-y (the added runs of 12.5, tables-s2-y.md),
-# or s2-a: series-2 conditions A and A2 (preregistration 12, 2026-11-19; snapshot FINAL, tables-s2-a.md)
+# or s2-a: series-2 conditions A and A2 (preregistration 12, 2026-11-19; snapshot FINAL, tables-s2-a.md),
+# or s2-b: series-2 condition B (preregistration 12, 2026-11-19; snapshot FINAL, one per reading for run-23, tables-s2-b.md)
 PREFIX = sys.argv[1] if len(sys.argv) > 1 else "s2-d"
-CONDS = ("A", "A2") if PREFIX == "s2-a" else ("D", "D2")
+CONDS = {"s2-a": ("A", "A2"), "s2-b": ("B",)}.get(PREFIX, ("D", "D2"))
+FINAL_ONLY = PREFIX in ("s2-a", "s2-b")
 OUT = pathlib.Path(__file__).with_name("tables.md" if PREFIX == "s2-d" else f"tables-{PREFIX}.md")
 FAMILIES = ["F1", "F2", "F3", "F4", "F5", "F6"]
 VARIANTS = ["M1", "M2", "M3"]
@@ -85,8 +87,8 @@ def main():
     runs = sorted(p.name for p in (ROOT / "runs").glob("run-*") if (p / "confirm").is_dir())
     seq = lambda r: env(r).get("sequence_index", "")
     runs = [r for r in runs if env(r).get("condition") in CONDS
-            and (seq(r).startswith(PREFIX) if PREFIX != "s2-a" else seq(r)[3:4].isdigit())]
-    label = {"s2-d": "s2-d1〜s2-d6", "s2-a": "s2-1〜s2-9 のうち A、A2"}.get(PREFIX, "追加の run、" + PREFIX + "*")
+            and (seq(r).startswith(PREFIX) if not FINAL_ONLY else seq(r)[3:4].isdigit())]
+    label = {"s2-d": "s2-d1〜s2-d6", "s2-a": "s2-1〜s2-9 のうち A、A2", "s2-b": "s2-1〜s2-9 のうち B"}.get(PREFIX, "追加の run、" + PREFIX + "*")
     out = [f"# 条件{'、'.join(CONDS)} の独立な確認の結果（系列2、{label}）", "",
            "`build.py` が `runs/run-NN/confirm/` から作る。手で編集しない。", "",
            "種類2：参照変種 M1〜M3 を当てたときにだけ現れる違反があれば「検知」。",
@@ -95,10 +97,13 @@ def main():
            "正式は入力のまま、補助は名前を1文字に置き換えたもの。", ""]
     if PREFIX == "s2-a":
         out += ["写しは run の終わりの作業ディレクトリ（FINAL）。条件A、A2 には段階がない。", ""]
-    out += [] if PREFIX == "s2-a" else ["## 段階の時刻", "",
+    if PREFIX == "s2-b":
+        out += ["写しは run の終わりの作業ディレクトリ（FINAL）。条件B には段階がない。",
+                "run-23 は最後の報告の読み方が規則と先例から1つに決まらないので、読み方ごとに確認した（FINAL-r27、FINAL-r27v、FINAL-r25。`confirm/d-inputs/run-23/notes.md`）。", ""]
+    out += [] if FINAL_ONLY else ["## 段階の時刻", "",
             "| run | 条件 | seq | 開始 | S1（段階2の直前） | S2（段階4の直前） | S3（終了） | 打ち切り |",
             "|---|---|---|---|---|---|---|---|"]
-    for r in ([] if PREFIX == "s2-a" else runs):
+    for r in ([] if FINAL_ONLY else runs):
         e, s = env(r), stage_times(r)
         out.append(f"| {r} | {e.get('condition')} | {e.get('sequence_index')} | {e.get('start','')[11:16]} | "
                    f"{s.get('1','—')[11:16] or '—'} | {s.get('3','—')[11:16] or '—'} | {s.get('5','—')[11:16] or '—'} | "
