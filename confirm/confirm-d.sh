@@ -22,6 +22,9 @@ git -C "$REPO" cat-file -e "$BASE^{commit}" 2>/dev/null || BASE=5166cc4ac8f1ccfa
 # Does the agent's tree differ from the pinned commit in the library? Then also run on the original library.
 modes=(tree)
 git -C "$REPO" diff --quiet "$BASE" -- lib peg_src peg_lib index.js || modes+=(orig)
+# Re-running some outputs only (preregistration 12, M1 fix): ONLY_MODES="orig" VARIANTS="M1". Defaults run everything.
+[ -n "${ONLY_MODES:-}" ] && read -ra modes <<< "$ONLY_MODES"
+read -ra variants <<< "${VARIANTS:-base M1 M2 M3}"
 one() {
   local v="$1" mode="$2" name; name="$(new_name)"
   docker create --name "$name" --cpus 1 --network none --user "$IN_USER" -w "$IN_HOME" "$IMAGE" sleep infinity >/dev/null
@@ -37,7 +40,7 @@ one() {
   docker rm -f "$name" >/dev/null
 }
 for mode in "${modes[@]}"; do
-  for v in base M1 M2 M3; do
+  for v in "${variants[@]}"; do
     echo "--- $RUN $WHAT $mode $v $(now)"
     one "$v" "$mode"
   done
