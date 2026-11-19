@@ -1,0 +1,7 @@
+run	point	kind	category	msg	quote	note
+run-32	3end	1	欠測			全体の時間切れで段階1のまま打ち切り（driver-summary の final_stage=1）。段階2以降の文面は送られていない。
+run-32	3end	2	欠測			全体の時間切れで段階1のまま打ち切り（driver-summary の final_stage=1）。段階2以降の文面は送られていない。
+run-32	3end	3	欠測			全体の時間切れで段階1のまま打ち切り（driver-summary の final_stage=1）。段階2以降の文面は送られていない。
+run-32	4end	1	欠測			全体の時間切れで段階1のまま打ち切り（driver-summary の final_stage=1）。段階2以降の文面は送られていない。
+run-32	4end	2	欠測			全体の時間切れで段階1のまま打ち切り（driver-summary の final_stage=1）。段階2以降の文面は送られていない。
+run-32	4end	3	欠測			全体の時間切れで段階1のまま打ち切り（driver-summary の final_stage=1）。段階2以降の文面は送られていない。
