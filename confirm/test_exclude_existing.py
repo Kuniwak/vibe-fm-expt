@@ -130,5 +130,66 @@ class Title(unittest.TestCase):
         self.assertEqual(X.block_title(block), 'Parser Tuple types should x when "a: b" arrived')
 
 
+class Crash(unittest.TestCase):
+    CRASH = ['/home/dev/x/lib/publishing.js:42', '  return publisher[node.type](node)', '         ^',
+             "TypeError: Cannot read properties of null (reading 'type')",
+             '    at publish (/home/dev/x/lib/publishing.js:42:7)', '    at Object.<anonymous> (/tmp/rt.js:9:1)', 'Node.js v22.1.0']
+
+    def test_uncaught_exception_of_own_check_is_detected_with_a_suite(self):
+        base = out(['done'] + mocha([]))
+        var = out(self.CRASH + mocha([]), rc=1)
+        self.assertEqual(X.verdict(base, var, VRE, TITLES), '検知')
+
+    def test_exception_line_without_stack_is_not_counted(self):
+        base = out(['done'] + mocha([]))
+        var = out(['TypeError: expected in a message'] + mocha([]), rc=1)
+        self.assertEqual(X.verdict(base, var, VRE, TITLES), '非検知')
+
+    def test_exception_inside_existing_block_is_not_counted(self):
+        base = out(mocha([]))
+        block = mocha([EXISTING], inline=[(1, EXISTING[-1])])
+        i = block.index('      AssertionError: expected 1 to equal 2')
+        block[i] = "      TypeError: Cannot read properties of null (reading 'type')"
+        self.assertEqual(X.verdict(base, out(block, rc=1), VRE, TITLES), '非検知')
+
+    def test_same_crash_in_base_is_not_new(self):
+        self.assertEqual(X.verdict(out(self.CRASH + mocha([])), out(self.CRASH + mocha([]), rc=1), VRE, TITLES), '非検知')
+
+
+class Unattributed(unittest.TestCase):
+    def test_new_failing_count_without_titles_is_undecidable(self):
+        base = out(['  345 passing (7s)'])
+        var = out(['  345 passing (7s)', '  1 failing', 'ERROR: "coverage" exited with 1.'], rc=1)
+        self.assertEqual(X.verdict(base, var, VRE, TITLES), '判定できない（失敗したテストの名前が出力にない）')
+
+    def test_same_unattributed_failing_as_base_is_not_detected(self):
+        lines = ['  344 passing (7s)', '  1 failing']
+        self.assertEqual(X.verdict(out(lines, rc=1), out(lines, rc=1), VRE, TITLES), '非検知')
+
+    def test_detection_by_own_check_wins_over_unattributed(self):
+        base = out(['  345 passing (7s)'])
+        var = out(['  345 passing (7s)', '  1 failing', 'P2-publish-throws closure "x"'], rc=1)
+        self.assertEqual(X.verdict(base, var, VRE, TITLES), '検知')
+
+
+class AddedByTitle(unittest.TestCase):
+    OTHER = ['Parser', 'Mine', 'should keep another property (seed: 1)']
+    SEED = ['Parser', 'Mine', 'should keep another property (seed: 42)']
+
+    def test_newly_failing_added_test_is_detected_even_if_its_suite_already_fails(self):
+        base = out(mocha([ADDED], inline=[(1, ADDED[-1])]), rc=1)
+        var = out(mocha([ADDED, self.OTHER], inline=[(1, ADDED[-1]), (2, self.OTHER[-1])]), rc=1)
+        self.assertEqual(X.verdict(base, var, VRE, TITLES), '検知')
+
+    def test_title_differing_only_in_digits_is_a_different_test(self):
+        base = out(mocha([self.OTHER], inline=[(1, self.OTHER[-1])]), rc=1)
+        var = out(mocha([self.SEED], inline=[(1, self.SEED[-1])]), rc=1)
+        self.assertEqual(X.verdict(base, var, VRE, TITLES), '検知')
+
+    def test_same_added_failures_are_not_detected(self):
+        lines = mocha([ADDED], inline=[(1, ADDED[-1])])
+        self.assertEqual(X.verdict(out(lines, rc=1), out(lines, rc=1), VRE, TITLES), '非検知')
+
+
 if __name__ == '__main__':
     unittest.main()

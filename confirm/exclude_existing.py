@@ -7,7 +7,13 @@ existing tests produced, then compares the same way:
   - mocha summary lines (N passing / failing / pending), which mix both;
   - npm-run-all and nyc threshold errors, which only say that the repository's test script failed.
 When either output contains a mocha summary, a change of the exit status is not used, because it
-cannot be told which step caused it.
+cannot be told which step caused it. An uncaught exception printed by the agent's own check (an
+unindented '...Error...' line followed by an 'at ...' stack line, outside the existing tests' blocks)
+counts as a violation line instead (added 2026-11-19 before any A/A2 result was read: run-41 S1 M1).
+A new 'N failing' line with no failure block after it (the recipe filtered mocha's output) cannot be
+attributed; if nothing else detects, the verdict is '判定できない' (added at the same time: run-29).
+A failing agent-added test whose full title did not fail in the base output counts as detected; titles
+are compared whole, digits included (added at the same time: run-28 S1, seeds of a property test).
 Usage: python3 -I confirm/exclude_existing.py OUTDIR RECIPE [TITLES]   (prints a table like summarize.py)
 """
 import os
@@ -19,6 +25,8 @@ SUMMARY = re.compile(r'^\s+\d+ (passing|failing|pending)\b')
 FAILING = re.compile(r'^\s+\d+ failing\b')
 HEADER = re.compile(r'^  (\d+)\) (.*)$')
 INLINE = re.compile(r'^\s{3,}(\d+)\) ')
+CRASH = re.compile(r'^[A-Za-z]*Error\b.*')
+STACK = re.compile(r'^\s+at ')
 PLUMBING = [re.compile(r'^ERROR: Coverage for '), re.compile(r'^ERROR: "[^"]+" exited with \d+\.?$')]
 
 
@@ -55,6 +63,21 @@ def _blocks(lines, i):
     return blocks, j
 
 
+def unattributed(lines):
+    """'N failing' lines (N > 0) not followed by any failure block: which tests failed is not in the output."""
+    return {kind(lines[i]) for i in range(len(lines))
+            if FAILING.match(lines[i]) and not re.match(r'^\s+0 failing', lines[i]) and not _blocks(lines, i)[0]}
+
+
+def added_failures(lines, titles):
+    """Full titles of failing tests that are not existing tests (the agent's own tests)."""
+    out = set()
+    for i in range(len(lines)):
+        if FAILING.match(lines[i]):
+            out |= {block_title(lines[s:e]) for n, s, e in _blocks(lines, i)[0]} - titles
+    return out
+
+
 def strip(lines, titles):
     """Lines without what the existing tests produced, and whether a mocha summary was seen."""
     drop, section_start, i = set(), 0, 0
@@ -84,7 +107,8 @@ def _read(text, vre, titles):
     body = [l for l in text.splitlines() if not l.startswith('@@')]
     kept, suite = strip(body, titles)
     kinds = {kind(l) for l in kept if vre.search(l) and not re.search(r'\b0 failing\b', l)}
-    return rc, kinds, suite
+    kinds |= {'UNCAUGHT ' + kind(l) for l, nxt in zip(kept, kept[1:] + ['']) if CRASH.match(l) and STACK.match(nxt)}
+    return rc, kinds, suite, unattributed(body), added_failures(body, titles)
 
 
 def verdict(base_text, var_text, vre, titles):
@@ -93,11 +117,13 @@ def verdict(base_text, var_text, vre, titles):
     if '@@ build failed' in var_text:
         return 'build failed'
     vre = re.compile(vre)
-    brc, bk, bs = _read(base_text, vre, titles)
-    rc, k, s = _read(var_text, vre, titles)
+    brc, bk, bs, bu, ba = _read(base_text, vre, titles)
+    rc, k, s, u, a = _read(var_text, vre, titles)
     if rc is None:
         return '実行不能 (no exit status)'
-    det = bool(k - bk) or (rc != 0 and brc == 0 and not (bs or s))
+    det = bool(k - bk) or bool(a - ba) or (rc != 0 and brc == 0 and not (bs or s))
+    if not det and u - bu:
+        return '判定できない（失敗したテストの名前が出力にない）'
     return ('検知' if det else '非検知') + (' (timeout)' if 124 in (rc, brc) else '')
 
 
