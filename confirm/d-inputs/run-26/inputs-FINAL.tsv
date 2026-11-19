@@ -1,0 +1,121 @@
+input	source	kind	note
+typeof A.B	#13 (1)	—	B1: publish が typeof a.{ type: 'NAME', name: 'b' } を出す。traverse も訪問しない。[被験側が修正済み]
+(x:) => a	#13 (2)	—	B2: publish が TypeError。[修正済み]
+!X?	#13 (3)	—	B3: publish が ?!X を出し、構文エラーになる。[修正済み]
+() => a![]	#13 (3)	—	B3: publish の出力 () => !a[] を読み戻すと別の構文木（関数の配列）。[修正済み]
+?string[]	#13 (4)	—	B4: どのモードでも構文エラー。[被験側が文法を変えて受理するようにした]
+!Foo[]	#13 (4)	—	B4: どのモードでも構文エラー。[同上]
+() => !a[]	#13 (5)	—	B5: () => a[] は配列を返す関数なのに、これは関数の配列になる。[修正済み]
+?[][]	#13 (6)	—	B6: jsdoc では受理、permissive では拒否（permissive が jsdoc を包含しない）。
+keyof ?	#13 (7)	—	B7: トップレベルでは NULLABLE、関数の引数の中では KEY_QUERY。
+Foo|function():Returned=	#13 確認事項	—	pegjs:927 のコメントと実装・テストの読み方が逆（被験側は意図か不明とした食い違い）。
+external:path/to/file	#13 確認事項	—	pegjs:216 のコメントの例を実装が拒否する（食い違い）。
+keyof a!	#24 (B3)	—	B3: publish が keyof !a を出し、読み戻せない。[修正済み]
+keyof a!|[]	#24 制約と残りの問題	—	B3 の残り: publish の出力 keyof !a | [] が読み戻せない（未修正、29件）。
+string?[]	#33 まだ残っているもの	—	構文エラーになる（後置側、文法の TODO）。
+string[]!	#33 まだ残っているもの	—	構文エラーになる（後置側）。
+?[]	#33 まだ残っているもの	—	B6: jsdoc では「? の配列」、permissive では「nullable な空タプル」。
+??[]	#33 まだ残っているもの	—	B6: 被験側の文法変更（B4）後のツリーで、jsdoc でだけ受理される。元のライブラリではどちらのモードでも拒否（call 115 の出力）。
+function(): !a[]	#33 変わったこと	—	B5: 以前は「関数の配列」と読まれていた。[修正済み]
+() => ?a[]	#33 変わったこと	—	B5: 同上。[修正済み]
+typeof a.b	home/dev/jsdoctypeparser/verification/LEDGER.md:52	—	B1 の再現。[修正済み]
+?X!	home/dev/jsdoctypeparser/verification/LEDGER.md:76	—	B3: publish が !?X（再パース不能）。[修正済み]
+?X?	home/dev/jsdoctypeparser/verification/LEDGER.md:76	—	B3: publish が ??X（再パース不能）。[修正済み]
+!X!	home/dev/jsdoctypeparser/verification/LEDGER.md:76	—	B3: publish が !!X（再パース不能）。[修正済み]
+a![]	home/dev/jsdoctypeparser/verification/LEDGER.md:76	—	B3: publish が !a[]（再パース不能）。[修正済み]
+??!	home/dev/jsdoctypeparser/verification/LEDGER.md:78	—	B3: 黙って意味が変わる（NOT_NULLABLE(NULLABLE) → NULLABLE(NOT_NULLABLE)）。[修正済み]
+keyof []?	home/dev/jsdoctypeparser/verification/LEDGER.md:80	—	B3: publish が keyof ?[]（KEY_QUERY→GENERIC）。[修正済み]
+function(): ?a[]	home/dev/jsdoctypeparser/verification/LEDGER.md:105	—	B5: 以前は Array<FUNCTION>。[修正済み]
+() => a[]	home/dev/jsdoctypeparser/verification/LEDGER.md:105	—	B5 の比較対象（これ自体は ARROW(returns Array<a>)）。違反は () => !a[] の側。
+!?[]	home/dev/jsdoctypeparser/verification/LEDGER.md:113	—	B6: B4 修正後のツリーで jsdoc でだけ受理。
+T?[]	home/dev/jsdoctypeparser/verification/LEDGER.md:102	—	後置側が構文エラー（被験側の記法 T のまま）。
+T[]?	home/dev/jsdoctypeparser/verification/LEDGER.md:102	—	後置側が構文エラー（同上）。
+function(this: keyof ?)	home/dev/jsdoctypeparser/verification/LEDGER.md:118	—	B7: この位置では KEY_QUERY(UNKNOWN)。
+keyof a ? =	home/dev/jsdoctypeparser/verification/check.js:471	—	SEEDS の B3（修正済み）の固定反例。
+keyof a!&keyof a	home/dev/jsdoctypeparser/verification/check.js:472	—	SEEDS の B3 の残り（未修正）。
+!Foo[][]	home/dev/jsdoctypeparser/verification/check.js:473	—	SEEDS の B4（修正済み）の固定反例。
+keyof []	home/dev/jsdoctypeparser/verification/check.js:474	—	SEEDS の B6 の固定反例（jsdoc と permissive で構文木が違う）。
+1	home/dev/jsdoctypeparser/verification/check.js:476	—	SEEDS の B8（スキーマ不一致、修正済み）の固定反例。
+module:m	home/dev/jsdoctypeparser/verification/check.js:476	—	SEEDS の B8 の固定反例。
+external:e	home/dev/jsdoctypeparser/verification/check.js:476	—	SEEDS の B8 の固定反例。
+...	home/dev/jsdoctypeparser/verification/check.js:476	—	SEEDS の B8 の固定反例。
+(x:) => *	tmp/full_run.txt:7	—	検査 PublishTotal の違反（permissive）：Cannot read properties of null (reading 'type')
+typeof b.c	tmp/full_run.txt:10	—	検査 PublishReparses の違反（closure）：minimal failing subtree MEMBER(NAME,NAME)
+!?!	tmp/full_run.txt:12	—	検査 PublishReparses の違反（jsdoc）：minimal failing subtree NOT_NULLABLE/SUFFIX_BANG(NOT_NULLABLE/PREFIX_BANG)
+?1?	tmp/full_run.txt:14	—	検査 PublishReparses の違反（jsdoc）：minimal failing subtree NULLABLE/SUFFIX_QUESTION_MARK(NULLABLE/PREFIX_QUESTION_MARK)
+!*?	tmp/full_run.txt:16	—	検査 PublishReparses の違反（jsdoc）：minimal failing subtree NULLABLE/SUFFIX_QUESTION_MARK(NOT_NULLABLE/PREFIX_BANG)
+?a!	tmp/full_run.txt:18	—	検査 PublishReparses の違反（jsdoc）：minimal failing subtree NOT_NULLABLE/SUFFIX_BANG(NULLABLE/PREFIX_QUESTION_MARK)
+keyof a?	tmp/full_run.txt:22	—	検査 PublishReparses の違反（permissive）：minimal failing subtree KEY_QUERY(NULLABLE/SUFFIX_QUESTION_MARK)
+!module:"x".Y?	tmp/full_run.txt:24	—	検査 PublishReparses の違反（jsdoc）：minimal failing subtree MEMBER(FILE_PATH)
+() => "s"?[]=	tmp/full_run.txt:28	—	検査 PublishReparses の違反（permissive）：minimal failing subtree GENERIC/SQUARE_BRACKET(NAME,NULLABLE/SUFFIX_QUESTION_MARK)
+!() => a#b![]	tmp/full_run.txt:30	—	検査 PublishReparses の違反（permissive）：minimal failing subtree GENERIC/SQUARE_BRACKET(NAME,NOT_NULLABLE/SUFFIX_BANG)
+? module:m #x ?	tmp/full_run.txt:32	—	検査 PublishReparses の違反（jsdoc）：minimal failing subtree INSTANCE_MEMBER(FILE_PATH)
+? module:m ~x ?	tmp/full_run.txt:34	—	検査 PublishReparses の違反（jsdoc）：minimal failing subtree INNER_MEMBER(FILE_PATH)
+{readonly a: function(this: function(new: keyof ?, typeof a.b): function(this: my-type)); 'k': a."d"}	tmp/full_run.txt:40	—	検査 PublishReparses の違反（permissive）：minimal failing subtree KEY_QUERY(UNKNOWN)
+new (x: typeof a) => Array.<a>!=[]	tmp/full_run.txt:42	—	検査 PublishReparses の違反（permissive）：minimal failing subtree GENERIC/SQUARE_BRACKET(NAME,OPTIONAL/SUFFIX_EQUALS_SIGN)
+(x: module:"x".Y, ...y: typeof a.b) => function(new: keyof !1, Foo.foo!): my-type	tmp/full_run.txt:44	—	検査 PublishReparses の違反（permissive）：minimal failing subtree KEY_QUERY(NOT_NULLABLE/PREFIX_BANG)
+(x: ?=) => a."d"![]	tmp/full_run.txt:47	—	検査 RoundTripEq の違反（permissive）：$: ARROW became GENERIC; minimal failing subtree GENERIC/SQUARE_BRACKET(NAME,NOT_NULLABLE/SUFFIX_BANG)
+() => a#b?[]	tmp/full_run.txt:49	—	検査 RoundTripEq の違反（permissive）：$: ARROW became GENERIC; minimal failing subtree GENERIC/SQUARE_BRACKET(NAME,NULLABLE/SUFFIX_QUESTION_MARK)
+(??!)	tmp/full_run.txt:51	—	検査 RoundTripEq の違反（jsdoc）：$.value: NOT_NULLABLE became NULLABLE; minimal failing subtree NOT_NULLABLE/SUFFIX_BANG(NULLABLE/PREFIX_QUESTION_MARK)
+function(?, ...a.<module:p/q>): import("m")![]	tmp/full_run.txt:55	—	検査 RoundTripEq の違反（permissive）：$: FUNCTION became GENERIC; minimal failing subtree GENERIC/SQUARE_BRACKET(NAME,NOT_NULLABLE/SUFFIX_BANG)
+{a: ??!}...	tmp/full_run.txt:57	—	検査 RoundTripEq の違反（jsdoc）：$.value.entries[].value: NOT_NULLABLE became NULLABLE; minimal failing subtree NOT_NULLABLE/SUFFIX_BANG(NULLABLE/PREFIX_QUESTION_MARK)
+function(new: "s"|??!, {1: {a: -0x1f}}|external:e?): module:p/q	tmp/full_run.txt:59	—	検査 RoundTripEq の違反（jsdoc）：$.new.right: NOT_NULLABLE became NULLABLE; minimal failing subtree NOT_NULLABLE/SUFFIX_BANG(NULLABLE/PREFIX_QUESTION_MARK)
+keyof keyof [] ?	tmp/full_run.txt:61	—	検査 RoundTripEq の違反（permissive）：$: KEY_QUERY became GENERIC; minimal failing subtree KEY_QUERY(NULLABLE/SUFFIX_QUESTION_MARK)
+keyof keyof [] !	tmp/full_run.txt:63	—	検査 RoundTripEq の違反（permissive）：$: KEY_QUERY became GENERIC; minimal failing subtree KEY_QUERY(NOT_NULLABLE/SUFFIX_BANG)
+??!&-0x1f	tmp/full_run.txt:65	—	検査 RoundTripEq の違反（permissive）：$.left: NOT_NULLABLE became NULLABLE; minimal failing subtree NOT_NULLABLE/SUFFIX_BANG(NULLABLE/PREFIX_QUESTION_MARK)
+function("s", ...a."d"!): external:"x'y"#z?[][]	tmp/full_run.txt:67	—	検査 RoundTripEq の違反（jsdoc）：$: FUNCTION became GENERIC; minimal failing subtree GENERIC/SQUARE_BRACKET(NAME,NULLABLE/SUFFIX_QUESTION_MARK)
+new (x: keyof a#b?) => keyof []?	tmp/full_run.txt:69	—	検査 RoundTripEq の違反（permissive）：$.returns: KEY_QUERY became GENERIC; minimal failing subtree KEY_QUERY(NULLABLE/SUFFIX_QUESTION_MARK)
+keyof function(new: "\\", -0x1f): "\\"![]	tmp/full_run.txt:71	—	検査 RoundTripEq の違反（permissive）：$: KEY_QUERY became GENERIC; minimal failing subtree GENERIC/SQUARE_BRACKET(NAME,NOT_NULLABLE/SUFFIX_BANG)
+(x: function()) => keyof a![]	tmp/full_run.txt:73	—	検査 RoundTripEq の違反（permissive）：$: ARROW became GENERIC; minimal failing subtree KEY_QUERY(NOT_NULLABLE/SUFFIX_BANG)
+*=&??!	tmp/full_run.txt:75	—	検査 RoundTripEq の違反（permissive）：$.right: NOT_NULLABLE became NULLABLE; minimal failing subtree NOT_NULLABLE/SUFFIX_BANG(NULLABLE/PREFIX_QUESTION_MARK)
+(??!).<[]>	tmp/full_run.txt:77	—	検査 RoundTripEq の違反（permissive）：$.subject.value: NOT_NULLABLE became NULLABLE; minimal failing subtree NOT_NULLABLE/SUFFIX_BANG(NULLABLE/PREFIX_QUESTION_MARK)
+(x: .5e3, ...y: ?) => module:"x".Y![]	tmp/full_run.txt:79	—	検査 RoundTripEq の違反（permissive）：$: ARROW became GENERIC; minimal failing subtree MEMBER(FILE_PATH)
+(x: function(new: ??!, function(new: external:e, external:"x'y"#z): keyof a.<a~b>): my-type) => ?a."d"	tmp/full_run.txt:81	—	検査 RoundTripEq の違反（permissive）：$.params[].typeName.new: NOT_NULLABLE became NULLABLE; minimal failing subtree NOT_NULLABLE/SUFFIX_BANG(NULLABLE/PREFIX_QUESTION_MARK)
+""	tmp/full_run.txt:89	—	検査 SchemaConforms の違反（B8 スキーマ不一致、修正済み。このファイルでは一部の分類行が grep で除かれているので分類は書かない）
+(x: ?) => *	tmp/full_run.txt:90	—	検査 SchemaConforms の違反（B8 スキーマ不一致、修正済み。このファイルでは一部の分類行が grep で除かれているので分類は書かない）
+() => ?	tmp/full_run.txt:92	—	検査 SchemaConforms の違反（B8 スキーマ不一致、修正済み。このファイルでは一部の分類行が grep で除かれているので分類は書かない）
+(a)	tmp/full_run.txt:94	—	検査 SchemaConforms の違反（B8 スキーマ不一致、修正済み。このファイルでは一部の分類行が grep で除かれているので分類は書かない）
+keyof a	tmp/full_run.txt:99	—	検査 SchemaConforms の違反（B8 スキーマ不一致、修正済み。このファイルでは一部の分類行が grep で除かれているので分類は書かない）
+?&a	tmp/full_run.txt:101	—	検査 SchemaConforms の違反（B8 スキーマ不一致、修正済み。このファイルでは一部の分類行が grep で除かれているので分類は書かない）
+typeof a	tmp/full_run.txt:102	—	検査 SchemaConforms の違反（B8 スキーマ不一致、修正済み。このファイルでは一部の分類行が grep で除かれているので分類は書かない）
+import("m")	tmp/full_run.txt:113	—	検査 SchemaConforms の違反（B8 スキーマ不一致、修正済み。このファイルでは一部の分類行が grep で除かれているので分類は書かない）
+a | keyof []	tmp/full_run.txt:121	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.right: GENERIC became KEY_QUERY
+keyof []|a	tmp/full_run.txt:123	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $: UNION became KEY_QUERY
+a | ? []	tmp/full_run.txt:125	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.right: GENERIC became NULLABLE
+? [] | a	tmp/full_run.txt:127	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.left: GENERIC became NULLABLE
+keyof [][]	tmp/full_run.txt:129	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.objects[]: GENERIC became KEY_QUERY
+(?[])	tmp/full_run.txt:131	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.value: GENERIC became NULLABLE
+(keyof [])	tmp/full_run.txt:133	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.value: GENERIC became KEY_QUERY
+function(1, ...?[]): !a."d"	tmp/full_run.txt:137	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.params[].value: GENERIC became NULLABLE
+(?[])~baz	tmp/full_run.txt:141	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.owner.value: GENERIC became NULLABLE
+function(keyof [])	tmp/full_run.txt:143	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.params[]: GENERIC became KEY_QUERY
+{a: ?[]}	tmp/full_run.txt:145	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.entries[].value: GENERIC became NULLABLE
+{a: (?[])}[]	tmp/full_run.txt:147	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.objects[].entries[].value.value: GENERIC became NULLABLE
+keyof [] [] []	tmp/full_run.txt:149	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.objects[].objects[]: GENERIC became KEY_QUERY
+(function(Array.<a>!, ...function()): keyof []).event:e	tmp/full_run.txt:151	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.owner.value.returns: GENERIC became KEY_QUERY
+function(this: !{a?: ?[], b})	tmp/full_run.txt:157	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.this.value.entries[].value.value: GENERIC became NULLABLE
+function(function(...)|?[])	tmp/full_run.txt:159	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.params[].right: GENERIC became NULLABLE
+{a?: ?[], b}	tmp/full_run.txt:161	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.entries[].value.value: GENERIC became NULLABLE
+function(Array.<a>, ...{1: ?[]}): module:p/q	tmp/full_run.txt:163	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.params[].value.entries[].value: GENERIC became NULLABLE
+({readonly a: ?[]; 'k': 's'}).event:e	tmp/full_run.txt:165	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.owner.value.entries[].value: GENERIC became NULLABLE
+function(this: ?[])	tmp/full_run.txt:167	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.this: GENERIC became NULLABLE
+{a: {a: ?[]}}	tmp/full_run.txt:169	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.entries[].value.entries[].value: GENERIC became NULLABLE
+{a: function(keyof ?=, ...{a: external:"x'y"#z}): {a: my-type}}	tmp/full_run.txt:171	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.entries[].value.params[]: OPTIONAL became KEY_QUERY
+function(?[])	tmp/full_run.txt:175	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.params[]: GENERIC became NULLABLE
+?{a: ?[]}=	tmp/full_run.txt:177	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.value.value.entries[].value: GENERIC became NULLABLE
+function(new: ?[], Foo|-0x1f.<'s'>): "\\"=	tmp/full_run.txt:181	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.value.new: GENERIC became NULLABLE
+(keyof []).event:e	tmp/full_run.txt:183	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.owner.value: GENERIC became KEY_QUERY
+(.5e3.<?[]>)~baz	tmp/full_run.txt:185	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.owner.value.objects[]: GENERIC became NULLABLE
+...function(keyof [])	tmp/full_run.txt:187	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.value.params[]: GENERIC became KEY_QUERY
+module:p/q<function(this: keyof ?)>=	tmp/full_run.txt:189	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.value.objects[].this: NULLABLE became KEY_QUERY
+!function(this: ?[])!	tmp/full_run.txt:193	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.value.value.this: GENERIC became NULLABLE
+function(new: a, function(this: ?)): ?[]?	tmp/full_run.txt:195	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.value.returns: GENERIC became NULLABLE
+..."s"=|?[]	tmp/full_run.txt:197	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.value.right: GENERIC became NULLABLE
+a#b<?[], function(...)>	tmp/full_run.txt:199	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.objects[]: GENERIC became NULLABLE
+function(new: function(-0x1f...), -0x1f): ?[]	tmp/full_run.txt:201	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.returns: GENERIC became NULLABLE
+(function(new: {}, ?[]): ?Array.<a>?)	tmp/full_run.txt:203	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.value.value.params[]: GENERIC became NULLABLE
+function(this: {readonly a: a.b; 'k': ?[]})?	tmp/full_run.txt:205	—	検査 ModeSubset の違反（jsdoc）：jsdoc and permissive differ: $.value.this.entries[].value: GENERIC became NULLABLE
+? ? !	call 21 の出力（記録 transcripts）	—	検査 RoundTripEq の違反（jsdoc）
+? [] []	call 21 の出力（記録 transcripts）	—	検査 ModeSubset の違反（jsdoc）
+keyof [] []	call 92 の出力（記録 transcripts）	—	検査 ModeSubset の違反（jsdoc）
+(?[]).event:e	call 92 の出力（記録 transcripts）	—	検査 ModeSubset の違反（jsdoc）

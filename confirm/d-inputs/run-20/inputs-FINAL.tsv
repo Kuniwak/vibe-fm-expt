@@ -1,0 +1,109 @@
+input	source	kind	note
+typeof a.b	#15 R1; /tmp/final.log:41; probe call 8	—	R1 MEMBER.name に NAME ノード（WellFormed/TraverseComplete/RoundTrip）
+!A?	#15 R2; call 8 出力; call 13 出力; verify/LEDGER.md R2	—	R2 publish が ?!A（再 parse 不能）
+??!	#15 R2; #11/call 34; call 13 出力	—	R2 publish が !?? で別 AST
+keyof A?	#15 R3; call 13 出力; verify/LEDGER.md R3	—	R3 publish が keyof ?A（再 parse 不能）
+function(): A?[]	#15 R4; call 16 出力; call 15 出力; verify/LEDGER.md R4	—	R4 publish 後に別の型
+?A?	/tmp/final.log:27; call 13 出力; verify/LEDGER.md R2	—	R2 RoundTrip
+?A!	call 11 出力; call 13 出力; verify/LEDGER.md R2	—	R2 RoundTrip
+!A!	call 13 出力; verify/LEDGER.md R2	—	R2 RoundTrip
+keyof A!	call 13 出力; verify/LEDGER.md R3	—	R3 RoundTrip
+keyof A?=	#13; call 37 出力; verify/LEDGER.md R3	—	R3 RoundTrip
+() => A![]	call 16 出力; verify/LEDGER.md R4	—	R4 再 parse で別 AST
+typeof Base.Month	/tmp/final.log:5; call 12 出力	—	R1
+typeof AMap.DomUtil	/tmp/final.log:8	—	R1
+typeof A.m	/tmp/final.log:44	—	R1
+typeof A.A	/tmp/deep.log:22	—	R1
+keyof typeof tween.elem	call 12 出力 (## RoundTrip)	—	R1 RoundTrip（コーパス由来）
+Promise<typeof google.maps>	call 12 出力 (## RoundTrip)	—	R1 RoundTrip（コーパス由来）
+(typeof loopback.PersistedModel)	call 12 出力 (## RoundTrip)	—	R1 RoundTrip（コーパス由来）
+RSVP.Resolved<typeof element.value>	call 12 出力 (## RoundTrip)	—	R1 RoundTrip（コーパス由来）
+ToStringLiteral<typeof app.runtime.ActionType>[]	call 12 出力 (## RoundTrip)	—	R1 RoundTrip（コーパス由来）
+(() => typeof Backbone.View) | typeof Backbone.View	call 12 出力 (## RoundTrip)	—	R1 RoundTrip（コーパス由来）
+false | null | undefined | 0 | "" | typeof document.all	call 12 出力 (## RoundTrip)	—	R1 RoundTrip（コーパス由来）
+ReactNativeThemedStyledFunction<typeof ReactNative.Text, T>	call 12 出力 (## RoundTrip)	—	R1 RoundTrip（コーパス由来）
+chrome.ToStringLiteral<typeof chrome.contextMenus.ItemType>	call 12 出力 (## RoundTrip)	—	R1 RoundTrip（コーパス由来）
+(previousValue: T) => T | PromiseLike<T> | typeof pForever.end	call 12 出力 (## RoundTrip)	—	R1 RoundTrip（コーパス由来）
+((model: TModel) => typeof Backbone.View) | typeof Backbone.View	call 12 出力 (## RoundTrip)	—	R1 RoundTrip（コーパス由来）
+?*?	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+?*!	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+?"x"?	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+?"x"!	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+?1?	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+?1!	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+!??	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+!?!	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+!*?	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+!*!	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+!"x"?	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+!"x"!	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+!1?	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+!1!	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+?[]?	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+?[]!	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+![]?	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+![]!	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+?a.b?	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+?a.b!	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+!a.b?	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+!a.b!	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+?module:m?	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+?module:m!	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+!module:m?	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+!module:m!	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+?import("p")?	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+?import("p")!	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+!import("p")?	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+!import("p")!	call 13 出力	—	R2 RoundTrip（再 parse 不能 / 別 AST）
+keyof *?	call 13 出力	—	R3 RoundTrip（再 parse 不能）
+keyof *!	call 13 出力	—	R3 RoundTrip（再 parse 不能）
+keyof "x"?	call 13 出力	—	R3 RoundTrip（再 parse 不能）
+keyof "x"!	call 13 出力	—	R3 RoundTrip（再 parse 不能）
+keyof 1?	call 13 出力	—	R3 RoundTrip（再 parse 不能）
+keyof 1!	call 13 出力	—	R3 RoundTrip（再 parse 不能）
+keyof []?	call 13 出力	—	R3 RoundTrip（再 parse 不能）
+keyof []!	call 13 出力	—	R3 RoundTrip（再 parse 不能）
+keyof a.b?	call 13 出力	—	R3 RoundTrip（再 parse 不能）
+keyof a.b!	call 13 出力	—	R3 RoundTrip（再 parse 不能）
+keyof module:m?	call 13 出力	—	R3 RoundTrip（再 parse 不能）
+keyof module:m!	call 13 出力	—	R3 RoundTrip（再 parse 不能）
+keyof import("p")?	call 13 出力	—	R3 RoundTrip（再 parse 不能）
+keyof import("p")!	call 13 出力	—	R3 RoundTrip（再 parse 不能）
+keyof A!=	call 37 出力 (unclassified)	—	R3 に = が重なった形（#13）
+keyof B?=	call 37 出力 (unclassified)	—	R3 に = が重なった形（#13）
+keyof B!=	call 37 出力 (unclassified)	—	R3 に = が重なった形（#13）
+keyof []?=	call 37 出力 (unclassified)	—	R3 に = が重なった形（#13）
+keyof []!=	call 37 出力 (unclassified)	—	R3 に = が重なった形（#13）
+keyof function?=	call 37 出力 (unclassified)	—	R3 に = が重なった形（#13）
+keyof function!=	call 37 出力 (unclassified)	—	R3 に = が重なった形（#13）
+function(): A![]	call 15 出力	—	R4 と同じ形として表示（publish 後 function(): !A[]、出力上は reparses）
+() => A?[]	call 15 出力	—	R4 と同じ形として表示（publish 後 () => ?A[]、出力上は reparses）
+?[]	/tmp/final.log:33; call 11/12/14/39 出力; verify/LEDGER.md Q-M1	—	ModeSubset jsdoc と permissive で AST が異なる（#15 では確認質問2）
+?[][]	/tmp/final.log:58; call 11/12/14/39 出力; #15 確認質問2; verify/LEDGER.md Q-M1	—	ModeSubset jsdoc は受理、permissive は拒否
+?[] 	/tmp/final.log:35; call 14/39 出力	—	ModeSubset jsdoc と permissive で AST が異なる（前後の空白も入力の一部）
+? []	/tmp/final.log:36; call 14/39 出力	—	ModeSubset jsdoc と permissive で AST が異なる（前後の空白も入力の一部）
+ ?[]	call 11/14 出力	—	ModeSubset jsdoc と permissive で AST が異なる（前後の空白も入力の一部）
+(?[])	/tmp/final.log:59; call 14 出力	—	ModeSubset jsdoc と permissive で AST が異なる（前後の空白も入力の一部）
+?[]|A	/tmp/final.log:60; call 14 出力	—	ModeSubset jsdoc と permissive で AST が異なる（前後の空白も入力の一部）
+A|?[]	call 11 出力	—	ModeSubset jsdoc と permissive で AST が異なる（前後の空白も入力の一部）
+...?[]	call 11/12 出力	—	ModeSubset jsdoc と permissive で AST が異なる（前後の空白も入力の一部）
+?[]...	call 12 出力	—	ModeSubset jsdoc と permissive で AST が異なる（前後の空白も入力の一部）
+?[]|new 	call 39 出力	—	ModeSubset jsdoc と permissive で AST が異なる（前後の空白も入力の一部）
+new |?[]	call 39 出力	—	ModeSubset jsdoc と permissive で AST が異なる（前後の空白も入力の一部）
+?[][] 	call 39 出力	—	ModeSubset jsdoc は受理、permissive は拒否
+?[] []	call 39 出力	—	ModeSubset jsdoc は受理、permissive は拒否
+...keyof [][]	call 39 出力	—	ModeSubset jsdoc は受理、permissive は拒否
+keyof [][]...	call 39 出力	—	ModeSubset jsdoc は受理、permissive は拒否
+keyof []	call 12/39 出力	—	ModeSubset jsdoc で keyof が型名として読まれる（Q-M2）
+keyof [][]	call 12 出力	—	ModeSubset jsdoc で keyof が型名として読まれる（Q-M2）
+...keyof []	call 12 出力	—	ModeSubset jsdoc で keyof が型名として読まれる（Q-M2）
+keyof []...	call 12 出力	—	ModeSubset jsdoc で keyof が型名として読まれる（Q-M2）
+function(): keyof ?	call 14/39 出力; verify/LEDGER.md Q-M2	—	ModeSubset closure で AST が異なる（Q-M2）
+function(new: keyof ?)	call 14 出力	—	ModeSubset closure で AST が異なる（Q-M2）
+function(this: keyof ?)	call 14 出力	—	ModeSubset closure で AST が異なる（Q-M2）
+function(): keyof ?=	call 39 出力	—	ModeSubset closure で AST が異なる（Q-M2）
+?function(): keyof ?	call 39 出力	—	ModeSubset closure で AST が異なる（Q-M2）
+string[]=	#15 確認質問1; call 14 出力; verify/LEDGER.md Q-A1	—	全4モードで構文エラー。被験側は意図かを問う確認質問として挙げた（違反と断定していない）
+?string[]	#15 確認質問1; call 14 出力; verify/LEDGER.md Q-A1	—	全4モードで構文エラー。被験側は意図かを問う確認質問として挙げた（違反と断定していない）
+string[]?	#15 確認質問1; call 14 出力; verify/LEDGER.md Q-A1	—	全4モードで構文エラー。被験側は意図かを問う確認質問として挙げた（違反と断定していない）
+!Array[]	call 14 出力; verify/LEDGER.md Q-A1	—	全4モードで構文エラー。確認質問（違反と断定していない）
