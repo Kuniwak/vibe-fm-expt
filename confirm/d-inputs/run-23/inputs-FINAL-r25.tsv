@@ -1,0 +1,98 @@
+input	source	kind	note
+typeof a.b	#15（確定バグ 1）; commands.md call 6, call 11 の出力	—	publish が typeof a.{ type: 'NAME', name: 'b' } になる。traverse が b を訪問しない（TraverseAll）、MEMBER.name がオブジェクト（NameIsString）。permissive/closure/typescript
+(a:) => X	#15（確定バグ 2）; call 11 の出力	—	publish が Cannot read properties of null で例外（PublishTotal）。permissive,typescript
+(x:) => X	call 6 の出力（/tmp/probe.js）	—	PUBLISH THROW Cannot read properties of null (reading 'type')。(a:) => X と同じ原因
+!Foo?	#15（確定バグ 3）; call 6 の出力	—	publish -> ?!Foo を parse し直せない（RoundTrip）
+?Foo!	#15（確定バグ 3）; call 6 の出力	—	publish -> !?Foo を parse し直せない（RoundTrip）
+??!	#15（確定バグ 3）; call 11 の出力	—	publish -> !?? が別の意味（RoundTrip）、publish を繰り返すと !?? -> ?!?（PublishFixed）。全モード
+keyof a?	#15（確定バグ 4）; call 12 の出力	—	publish -> keyof ?a が拒否される（RoundTrip）。permissive,typescript
+keyof ?	#15（keyof ? はトップレベルと関数の戻り値の中とで解釈が変わる）; call 64 の出力	—	call 64（keyof 修正後）では ModeSubset [jsdoc,closure] AST differs。被験側は方言の衝突として仕様扱い（#25）
+function(): keyof ?	verification/README.md 31 行目; call 11 の出力	—	ModeSubset：permissive では KEY_QUERY、jsdoc/closure では NULLABLE(FUNCTION→NAME keyof)。被験側は仕様扱い
+?Foo[]	#15（確認したい点）; call 6 の出力	—	全モードで構文エラー（PARSE ERR）。被験側は意図か判断できないとし、#25 で現状維持
+!Foo[]	#15（確認したい点）; call 15 の出力	—	全モードで構文エラー（REJECT）
+Foo?[]	#15（確認したい点）; call 15 の出力	—	全モードで構文エラー（REJECT）
+string[]=	#15（確認したい点）; call 6 の出力	—	全モードで構文エラー（PARSE ERR）
+Foo[]?	verification/README.md 32 行目	—	README で「rejected in all modes」と挙げたもの。記録の出力では確認できない（call 15 の出力は途中で切れている）
+?[][]	#15（確認したい点）; call 11 の出力	—	ModeSubset：jsdoc では通るが permissive で拒否。被験側は仕様扱い（#25）
+?[]	#15（確認したい点）; call 11 の出力	—	ModeSubset：jsdoc では Array(?)、permissive では nullable の空タプル。被験側は仕様扱い
+typeof a.b|typeof a.b	call 11 の出力	—	TraverseAll not visited: NAME,NAME
+?*?	call 11 の出力	—	RoundTrip：publish -> ??* が拒否。全モード
+?*!	call 12 の出力	—	RoundTrip：publish -> !?* が拒否。全モード
+!??	call 12 の出力	—	RoundTrip：publish -> ?!? が拒否。全モード
+!*?	call 12 の出力	—	RoundTrip：publish -> ?!* が拒否。全モード
+!*!	call 12 の出力	—	RoundTrip：publish -> !!* が拒否。全モード
+!?!	call 12 の出力	—	RoundTrip：publish -> !!? が拒否。全モード
+?[]?	call 12 の出力	—	RoundTrip：publish -> ??[] が拒否。permissive,typescript
+?[]!	call 12 の出力	—	RoundTrip：publish -> !?[] が拒否。permissive,typescript
+keyof a!	call 12 の出力	—	RoundTrip：publish -> keyof !a が拒否。permissive,typescript
+?keyof ?	call 12 の出力; call 64 の出力	—	call 12：RoundTrip publish -> ??keyof が拒否（全モード）。call 64：ModeSubset [jsdoc,closure] permissive rejects
+!keyof ?	call 12 の出力; call 64 の出力	—	call 12：RoundTrip publish -> ?!keyof が拒否（全モード）。call 64：ModeSubset [jsdoc,closure] permissive rejects
+keyof a?=	call 12 の出力	—	RoundTrip：publish -> keyof ?a= が拒否。permissive,typescript
+keyof a!=	call 12 の出力	—	RoundTrip：publish -> keyof !a= が拒否。permissive,typescript
+typeof a.b[]	call 12 の出力	—	TraverseAll / NameIsString。permissive,typescript
+(typeof a.b)	call 12 の出力	—	TraverseAll / NameIsString
+[typeof a.b]	call 12 の出力	—	TraverseAll / NameIsString
+*|typeof a.b	call 12 の出力	—	TraverseAll / NameIsString
+?|typeof a.b	call 12 の出力	—	TraverseAll / NameIsString
+typeof a.b|?	call 12 の出力	—	TraverseAll / NameIsString
+*&typeof a.b	call 12 の出力	—	TraverseAll / NameIsString
+?&typeof a.b	call 12 の出力	—	TraverseAll / NameIsString
+typeof a.b&?	call 12 の出力	—	TraverseAll / NameIsString
+...typeof a.b	call 12 の出力	—	TraverseAll / NameIsString
+typeof a.b...	call 12 の出力	—	TraverseAll / NameIsString
+?(typeof a.b)	call 12 の出力	—	TraverseAll / NameIsString
+?[typeof a.b]	call 12 の出力	—	TraverseAll / NameIsString
+!(typeof a.b)	call 12 の出力	—	TraverseAll / NameIsString
+(?[])	call 12 の出力	—	ModeSubset [jsdoc] AST differs（被験側は仕様扱い）
+?[]|*	call 12 の出力	—	ModeSubset [jsdoc] AST differs（被験側は仕様扱い）
+*|?[]	call 12 の出力	—	ModeSubset [jsdoc] AST differs（被験側は仕様扱い）
+?[]|?	call 12 の出力	—	ModeSubset [jsdoc] AST differs（被験側は仕様扱い）
+?|?[]	call 12 の出力	—	ModeSubset [jsdoc] AST differs（被験側は仕様扱い）
+...?[]	call 12 の出力	—	ModeSubset [jsdoc] AST differs（被験側は仕様扱い）
+?[]...	call 12 の出力	—	ModeSubset [jsdoc] AST differs（被験側は仕様扱い）
+(?[]).m	call 12 の出力	—	ModeSubset [jsdoc] AST differs（被験側は仕様扱い）
+Foo<?[]>	call 12 の出力	—	ModeSubset [jsdoc] AST differs（被験側は仕様扱い）
+{a: ?[]}	call 12 の出力	—	ModeSubset [jsdoc] AST differs（被験側は仕様扱い）
+{a?: ?[]}	call 12 の出力	—	ModeSubset [jsdoc] AST differs（被験側は仕様扱い）
+function(?[])	call 12 の出力	—	ModeSubset [jsdoc] AST differs（被験側は仕様扱い）
+function(): ?[]	call 12 の出力	—	ModeSubset [jsdoc] AST differs（被験側は仕様扱い）
+keyof a?|*	call 14 の出力（--causes）	—	RoundTrip：-> keyof ?a | *。permissive,typescript
+keyof a?&*	call 14 の出力（--causes）	—	RoundTrip：-> keyof ?a & *。permissive,typescript
+{a?: a.b}|typeof a.b	call 14 の出力（--causes）	—	RoundTrip。原因の分類の初版が拾った入力で、失敗は typeof a.b による（被験側は call 15 で分類から外した）
+(...a: a.b) => Y|typeof a.b	call 14 の出力（--causes）	—	同上
+{a?: "s"}|typeof a.b	call 14 の出力（--causes）	—	同上
+{a?: 1}|typeof a.b	call 14 の出力（--causes）	—	同上
+(...a: "s") => Y|typeof a.b	call 14 の出力（--causes）	—	同上
+(...a: 1) => Y|typeof a.b	call 14 の出力（--causes）	—	同上
+{a?: Foo}|typeof a.b	call 14 の出力（--causes）	—	同上
+{a?: a~b}|typeof a.b	call 14 の出力（--causes）	—	同上
+{a?: a#b}|typeof a.b	call 14 の出力（--causes）	—	同上
+{a?: *}|typeof a.b	call 14 の出力（--causes）	—	同上
+{a?: ?}|typeof a.b	call 14 の出力（--causes）	—	同上
+(...a: Foo) => Y|typeof a.b	call 14 の出力（--causes）	—	同上
+(...a: a~b) => Y|typeof a.b	call 14 の出力（--causes）	—	同上
+(...a: a#b) => Y|typeof a.b	call 14 の出力（--causes）	—	同上
+(...a: *) => Y|typeof a.b	call 14 の出力（--causes）	—	同上
+(...a: ?) => Y|typeof a.b	call 14 の出力（--causes）	—	同上
+(...a: typeof a) => Y|typeof a.b	call 14 の出力（--causes）	—	同上
+(...a: import("x")) => Y|typeof a.b	call 14 の出力（--causes）	—	同上
+(...a: keyof a) => Y|typeof a.b	call 14 の出力（--causes）	—	同上
+{a?: import("x")}|typeof a.b	call 14 の出力（--causes）	—	同上
+{a?: module:x/y}|typeof a.b	call 14 の出力（--causes）	—	同上
+{a?: external:x}|typeof a.b	call 14 の出力（--causes）	—	同上
+(...a: module:x/y) => Y|typeof a.b	call 14 の出力（--causes）	—	同上
+(...a: external:x) => Y|typeof a.b	call 14 の出力（--causes）	—	同上
+keyof a?[]	call 53 の出力	—	RoundTrip：publish -> keyof ?a[] が拒否。permissive,typescript（バグ 1〜3 修正後の被験側のツリー）
+keyof a![]	call 53 の出力	—	RoundTrip：publish -> keyof !a[] が拒否（同上）
+(keyof a?)	call 53 の出力	—	RoundTrip：publish -> (keyof ?a) が拒否（同上）
+(keyof a!)	call 53 の出力	—	RoundTrip：publish -> (keyof !a) が拒否（同上）
+[keyof a?]	call 53 の出力	—	RoundTrip：publish -> [keyof ?a] が拒否（同上）
+[keyof a!]	call 53 の出力	—	RoundTrip：publish -> [keyof !a] が拒否（同上）
+*|keyof a?	call 53 の出力	—	RoundTrip：publish -> * | keyof ?a が拒否（同上）
+keyof a?|?	call 53 の出力	—	RoundTrip：publish -> keyof ?a | ? が拒否（同上）
+?|keyof a?	call 53 の出力	—	RoundTrip：publish -> ? | keyof ?a が拒否（同上）
+keyof a!|*	call 53 の出力	—	RoundTrip：publish -> keyof !a | * が拒否（同上）
+keyof ?=	call 64 の出力	—	ModeSubset [jsdoc,closure] AST differs（keyof 修正後。被験側は仕様扱い）
+"\'"	/tmp/run.log 25 行目（escape_enum.js、call 33 の出力にも同じ）	—	EncodeDecode [VIOLATE]：republish が "\\'" になる。被験側は期待どおりの違反（未知のエスケープを残す暗黙の仕様、#15「エスケープは非可逆」）
+' \ \\'	/tmp/run.log 31 行目（escape_z3.py の反例を実コードで再生、call 43 の出力にも同じ）	—	EncodeDecode [VIOLATE]：republish が ' \\ \\' になる。期待どおりの違反として扱われている
+"d\ \\u0002"	/tmp/run.log 33 行目（escape_z3.py の反例の再生）	—	EncodeDecode [VIOLATE]。\u0002 は記録の JSON の表記のまま（実際は制御文字 U+0002 の 1 文字）。期待どおりの違反として扱われている
