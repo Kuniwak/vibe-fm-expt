@@ -1,0 +1,38 @@
+input	source	kind	note
+?a?	#4; /tmp/verify/out4.txt:4	—	P2（publish → "??a" が SyntaxError）。#4 で不具合として挙げた
+?a!	#4; /tmp/verify/out4.txt:5	—	P2（publish → "!?a" が SyntaxError）。#4 で不具合として挙げた
+??!	#4; /tmp/verify/out4.txt:44	—	P3（publish → "!??"、NOT_NULLABLE(NULLABLE(UNKNOWN)) が NULLABLE(NOT_NULLABLE(UNKNOWN)) に変わる）。#4 で不具合として挙げた
+?b?	/tmp/verify/out4.txt:6	—	P2（publish の出力 "??b" が再パースできない）。修正前のライブラリでの check.js の出力
+?b!	/tmp/verify/out4.txt:7	—	P2（publish の出力 "!?b" が再パースできない）。修正前のライブラリでの check.js の出力
+?*?	/tmp/verify/out4.txt:8	—	P2（publish の出力 "??*" が再パースできない）。修正前のライブラリでの check.js の出力
+?*!	/tmp/verify/out4.txt:9	—	P2（publish の出力 "!?*" が再パースできない）。修正前のライブラリでの check.js の出力
+?function?	/tmp/verify/out4.txt:10	—	P2（publish の出力 "??function" が再パースできない）。修正前のライブラリでの check.js の出力
+?function!	/tmp/verify/out4.txt:11	—	P2（publish の出力 "!?function" が再パースできない）。修正前のライブラリでの check.js の出力
+??!=	/tmp/verify/out4.txt:47	—	P3（publish の出力 "!??=" を読み直すと AST が変わる）。修正前のライブラリでの check.js の出力
+??!...	/tmp/verify/out4.txt:50	—	P3（publish の出力 "...!??" を読み直すと AST が変わる）。修正前のライブラリでの check.js の出力
+??! 	/tmp/verify/out4.txt:53	—	P3（publish の出力 "!??" を読み直すと AST が変わる）。修正前のライブラリでの check.js の出力。末尾に空白1つ
+?? !	/tmp/verify/out4.txt:56	—	P3（publish の出力 "!??" を読み直すと AST が変わる）。修正前のライブラリでの check.js の出力
+? ?!	/tmp/verify/out4.txt:59	—	P3（publish の出力 "!??" を読み直すと AST が変わる）。修正前のライブラリでの check.js の出力
+...??!	/tmp/verify/out4.txt:62	—	P3（publish の出力 "...!??" を読み直すと AST が変わる）。修正前のライブラリでの check.js の出力
+ ??!	/tmp/verify/out4.txt:65	—	P3（publish の出力 "!??" を読み直すと AST が変わる）。修正前のライブラリでの check.js の出力。先頭に空白1つ
+?keyof ?	call 26 の出力（修正前の lib/publishing.js に git stash で戻して tests/test_roundtrip.js を実行）「"?keyof ?" -> "??keyof"」	—	往復で元に戻らない。修正前のライブラリでの被験側のテストの失敗
+?keyof !	call 26 の出力「"?keyof !" -> "!?keyof"」	—	同上
+!a?	call 26 の出力「"!a?" -> "?!a"」	—	同上
+keyof a?	#11; call 12 の出力「- src="keyof a?" published="keyof ?a"」	—	P2（permissive と typescript）。#11 の表で修正前の出力 keyof ?a が「再パース不可」。call 12 は ?/! の修正だけを当てた状態だが、keyof の出力は元のまま
+keyof a!	#11; call 12 の出力「- src="keyof a!" published="keyof !a"」	—	同上
+keyof b?	call 12 の出力	—	P2（published="keyof ?b"）。同上
+keyof b!	call 12 の出力	—	P2（published="keyof !b"）。同上
+keyof *?	call 12 の出力	—	P2（published="keyof ?*"）。同上
+keyof *!	call 12 の出力	—	P2（published="keyof !*"）。同上
+keyof function?	call 12 の出力	—	P2（published="keyof ?function"）。同上
+keyof function!	call 12 の出力	—	P2（published="keyof !function"）。同上
+keyof a?=	#11; call 20 の出力（bpl8fggja.output）「- src="keyof a?=" published="keyof ?a="」	—	P2（permissive と typescript、各 total 394）。#11 の表で「keyof a?= など → keyof ?a=（再パース不可）」
+keyof a!=	call 20 の出力	—	P2（published="keyof !a="）。同上
+keyof keyof ?=	call 20 の出力	—	P2（published="keyof ?keyof="）。同上
+keyof keyof !=	call 20 の出力	—	P2（published="keyof !keyof="）。同上
+...keyof a?=	call 20 の出力	—	P2（published="...keyof ?a="）。同上
+...keyof a!=	call 20 の出力	—	P2（published="...keyof !a="）。同上
+...keyof keyof ?=	call 20 の出力	—	P2（published="...keyof ?keyof="）。同上
+...keyof keyof !=	call 20 の出力	—	P2（published="...keyof !keyof="）。同上
+keyof ?a	#13、#14、#18; call 13 の出力「keyof ?a ERR Expected ...」	—	parse が SyntaxError（文法側の問題として #13 で「keyof ?a がパースできない問題」、#18 で修正）
+keyof !a	#18; call 14 の出力「keyof !a ERR Expected ...」	—	同上（#18「keyof ?a / keyof !a をパースできるように文法を直し」）

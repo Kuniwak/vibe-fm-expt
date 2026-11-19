@@ -1,0 +1,563 @@
+input	source	kind	note
+?a?	#4 バグ1; call 5 の出力 4行目; /tmp/verify/out4.txt 4行目; ほか3か所	—	#4：NULLABLE(NULLABLE(a)) が "??a" と出力され、パースできない
+!??	#4 バグ1; call 5 の出力 38行目; /tmp/verify/out4.txt 84行目; ほか3か所	—	#4：NULLABLE(NOT_NULLABLE(?)) が "?!?" と出力され、別の AST になる
+??!	#4 バグ1; call 5 の出力 62行目; /tmp/verify/out4.txt 2010行目; ほか3か所	—	#4：往復で ? と ! の入れ子が逆転する
+keyof a?	#4 バグ2; call 8 の出力 6行目; /tmp/verify/out4.txt 1828行目; ほか1か所	—	#4：KEY_QUERY(NULLABLE(a)) が "keyof ?a" と出力され、パースできない（permissive / typescript）
+?a!	call 5 の出力 5行目; /tmp/verify/out4.txt 8行目; /tmp/verify/out4.txt 9行目; ほか2か所	—	publish 結果 !?a、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?b?	call 5 の出力 6行目	—	publish 結果 ??b、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?b!	call 5 の出力 7行目	—	publish 結果 !?b、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?[]?	call 5 の出力 8行目; /tmp/verify/out4.txt 12行目; /tmp/verify/out4.txt 13行目	—	publish 結果 ??[]、再パース失敗（permissive/TopTypeExpr,typescript/TopTypeExpr）
+?[]!	call 5 の出力 9行目; /tmp/verify/out4.txt 14行目; /tmp/verify/out4.txt 15行目	—	publish 結果 !?[]、再パース失敗（permissive/TopTypeExpr,typescript/TopTypeExpr）
+?*?	call 5 の出力 10行目	—	publish 結果 ??*、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?*!	call 5 の出力 11行目	—	publish 結果 !?*、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?function?	call 5 の出力 12行目; /tmp/verify/out4.txt 16行目; /tmp/verify/out4.txt 17行目; ほか2か所	—	publish 結果 ??function、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?function!	call 5 の出力 13行目; /tmp/verify/out4.txt 20行目; /tmp/verify/out4.txt 21行目; ほか2か所	—	publish 結果 !?function、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?new?	call 5 の出力 14行目; /tmp/verify/out4.txt 24行目; /tmp/verify/out4.txt 25行目; ほか2か所	—	publish 結果 ??new、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?new!	call 5 の出力 15行目; /tmp/verify/out4.txt 28行目; /tmp/verify/out4.txt 29行目; ほか2か所	—	publish 結果 !?new、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?this?	call 5 の出力 16行目	—	publish 結果 ??this、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?this!	call 5 の出力 17行目	—	publish 結果 !?this、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?typeof?	call 5 の出力 18行目; /tmp/verify/out4.txt 40行目; /tmp/verify/out4.txt 41行目; ほか2か所	—	publish 結果 ??typeof、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?typeof!	call 5 の出力 19行目; /tmp/verify/out4.txt 44行目; /tmp/verify/out4.txt 45行目; ほか2か所	—	publish 結果 !?typeof、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?keyof?	call 5 の出力 20行目; /tmp/verify/out4.txt 48行目; /tmp/verify/out4.txt 49行目; ほか2か所	—	publish 結果 ??keyof、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?keyof!	call 5 の出力 21行目; /tmp/verify/out4.txt 52行目; /tmp/verify/out4.txt 53行目; ほか2か所	—	publish 結果 !?keyof、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?import?	call 5 の出力 22行目; /tmp/verify/out4.txt 56行目; /tmp/verify/out4.txt 57行目; ほか2か所	—	publish 結果 ??import、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?import!	call 5 の出力 23行目; /tmp/verify/out4.txt 60行目; /tmp/verify/out4.txt 61行目; ほか2か所	—	publish 結果 !?import、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?readonly?	call 5 の出力 24行目	—	publish 結果 ??readonly、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?readonly!	call 5 の出力 25行目	—	publish 結果 !?readonly、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?'x'?	call 5 の出力 26行目; /tmp/verify/out4.txt 32行目; /tmp/verify/out4.txt 33行目; ほか2か所	—	publish 結果 ??'x'、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?'x'!	call 5 の出力 27行目; /tmp/verify/out4.txt 36行目; /tmp/verify/out4.txt 37行目; ほか2か所	—	publish 結果 !?'x'、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?"y"?	call 5 の出力 28行目	—	publish 結果 ??"y"、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?"y"!	call 5 の出力 29行目	—	publish 結果 !?"y"、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?1?	call 5 の出力 30行目; /tmp/verify/out4.txt 64行目; /tmp/verify/out4.txt 65行目; ほか2か所	—	publish 結果 ??1、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+?1!	call 5 の出力 31行目; /tmp/verify/out4.txt 68行目; /tmp/verify/out4.txt 69行目; ほか2か所	—	publish 結果 !?1、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!a?	call 5 の出力 32行目; /tmp/verify/out4.txt 72行目; /tmp/verify/out4.txt 73行目; ほか2か所	—	publish 結果 ?!a、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!a!	call 5 の出力 33行目; /tmp/verify/out4.txt 76行目; /tmp/verify/out4.txt 77行目; ほか2か所	—	publish 結果 !!a、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!b?	call 5 の出力 34行目	—	publish 結果 ?!b、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!b!	call 5 の出力 35行目	—	publish 結果 !!b、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+![]?	call 5 の出力 36行目; /tmp/verify/out4.txt 80行目; /tmp/verify/out4.txt 81行目	—	publish 結果 ?![]、再パース失敗（permissive/TopTypeExpr,typescript/TopTypeExpr）
+![]!	call 5 の出力 37行目; /tmp/verify/out4.txt 82行目; /tmp/verify/out4.txt 83行目	—	publish 結果 !![]、再パース失敗（permissive/TopTypeExpr,typescript/TopTypeExpr）
+!?!	call 5 の出力 39行目; /tmp/verify/out4.txt 88行目; /tmp/verify/out4.txt 89行目; ほか2か所	—	publish 結果 !!?、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!*?	call 5 の出力 40行目	—	publish 結果 ?!*、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!*!	call 5 の出力 41行目	—	publish 結果 !!*、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!function?	call 5 の出力 42行目; /tmp/verify/out4.txt 92行目; /tmp/verify/out4.txt 93行目; ほか2か所	—	publish 結果 ?!function、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!function!	call 5 の出力 43行目; /tmp/verify/out4.txt 96行目; /tmp/verify/out4.txt 97行目; ほか2か所	—	publish 結果 !!function、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!new?	call 5 の出力 44行目; /tmp/verify/out4.txt 100行目; /tmp/verify/out4.txt 101行目; ほか2か所	—	publish 結果 ?!new、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!new!	call 5 の出力 45行目; /tmp/verify/out4.txt 104行目; /tmp/verify/out4.txt 105行目; ほか2か所	—	publish 結果 !!new、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!this?	call 5 の出力 46行目	—	publish 結果 ?!this、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!this!	call 5 の出力 47行目	—	publish 結果 !!this、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!typeof?	call 5 の出力 48行目; /tmp/verify/out4.txt 116行目; /tmp/verify/out4.txt 117行目; ほか2か所	—	publish 結果 ?!typeof、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!typeof!	call 5 の出力 49行目; /tmp/verify/out4.txt 120行目; /tmp/verify/out4.txt 121行目; ほか2か所	—	publish 結果 !!typeof、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!keyof?	call 5 の出力 50行目; /tmp/verify/out4.txt 124行目; /tmp/verify/out4.txt 125行目; ほか2か所	—	publish 結果 ?!keyof、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!keyof!	call 5 の出力 51行目; /tmp/verify/out4.txt 128行目; /tmp/verify/out4.txt 129行目; ほか2か所	—	publish 結果 !!keyof、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!import?	call 5 の出力 52行目; /tmp/verify/out4.txt 132行目; /tmp/verify/out4.txt 133行目; ほか2か所	—	publish 結果 ?!import、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!import!	call 5 の出力 53行目; /tmp/verify/out4.txt 136行目; /tmp/verify/out4.txt 137行目; ほか2か所	—	publish 結果 !!import、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!readonly?	call 5 の出力 54行目	—	publish 結果 ?!readonly、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!readonly!	call 5 の出力 55行目	—	publish 結果 !!readonly、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!'x'?	call 5 の出力 56行目; /tmp/verify/out4.txt 108行目; /tmp/verify/out4.txt 109行目; ほか2か所	—	publish 結果 ?!'x'、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!'x'!	call 5 の出力 57行目; /tmp/verify/out4.txt 112行目; /tmp/verify/out4.txt 113行目; ほか2か所	—	publish 結果 !!'x'、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!"y"?	call 5 の出力 58行目	—	publish 結果 ?!"y"、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!"y"!	call 5 の出力 59行目	—	publish 結果 !!"y"、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!1?	call 5 の出力 60行目; /tmp/verify/out4.txt 140行目; /tmp/verify/out4.txt 141行目; ほか2か所	—	publish 結果 ?!1、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+!1!	call 5 の出力 61行目; /tmp/verify/out4.txt 144行目; /tmp/verify/out4.txt 145行目; ほか2か所	—	publish 結果 !!1、再パース失敗（permissive/TopTypeExpr,jsdoc/TopTypeExpr,closure/TopTypeExpr,typescript/TopTypeExpr）
+keyof a!	call 8 の出力 7行目; /tmp/verify/out4.txt 1830行目; /tmp/verify/out4.txt 1831行目	—	publish 結果 keyof !a、再パース失敗（permissive/TopTypeExpr REPARSE-FAIL,typescript/TopTypeExpr REPARSE-FAIL）
+keyof []?	call 8 の出力 8行目; /tmp/verify/out4.txt 1832行目; /tmp/verify/out4.txt 1833行目	—	publish 結果 keyof ?[]、再パース失敗（permissive/TopTypeExpr REPARSE-FAIL,typescript/TopTypeExpr REPARSE-FAIL）
+keyof []!	call 8 の出力 9行目; /tmp/verify/out4.txt 1834行目; /tmp/verify/out4.txt 1835行目	—	publish 結果 keyof ![]、再パース失敗（permissive/TopTypeExpr REPARSE-FAIL,typescript/TopTypeExpr REPARSE-FAIL）
+keyof function?	call 8 の出力 10行目; /tmp/verify/out4.txt 1836行目; /tmp/verify/out4.txt 1837行目	—	publish 結果 keyof ?function、再パース失敗（permissive/TopTypeExpr REPARSE-FAIL,typescript/TopTypeExpr REPARSE-FAIL）
+keyof function!	call 8 の出力 11行目; /tmp/verify/out4.txt 1838行目; /tmp/verify/out4.txt 1839行目	—	publish 結果 keyof !function、再パース失敗（permissive/TopTypeExpr REPARSE-FAIL,typescript/TopTypeExpr REPARSE-FAIL）
+keyof new?	call 8 の出力 12行目; /tmp/verify/out4.txt 1840行目; /tmp/verify/out4.txt 1841行目	—	publish 結果 keyof ?new、再パース失敗（permissive/TopTypeExpr REPARSE-FAIL,typescript/TopTypeExpr REPARSE-FAIL）
+keyof new!	call 8 の出力 13行目; /tmp/verify/out4.txt 1842行目; /tmp/verify/out4.txt 1843行目	—	publish 結果 keyof !new、再パース失敗（permissive/TopTypeExpr REPARSE-FAIL,typescript/TopTypeExpr REPARSE-FAIL）
+keyof 'x'?	call 8 の出力 14行目; /tmp/verify/out4.txt 1844行目; /tmp/verify/out4.txt 1845行目	—	publish 結果 keyof ?'x'、再パース失敗（permissive/TopTypeExpr REPARSE-FAIL,typescript/TopTypeExpr REPARSE-FAIL）
+keyof 'x'!	call 8 の出力 15行目; /tmp/verify/out4.txt 1846行目; /tmp/verify/out4.txt 1847行目	—	publish 結果 keyof !'x'、再パース失敗（permissive/TopTypeExpr REPARSE-FAIL,typescript/TopTypeExpr REPARSE-FAIL）
+keyof typeof?	call 8 の出力 16行目; /tmp/verify/out4.txt 1848行目; /tmp/verify/out4.txt 1849行目	—	publish 結果 keyof ?typeof、再パース失敗（permissive/TopTypeExpr REPARSE-FAIL,typescript/TopTypeExpr REPARSE-FAIL）
+keyof typeof!	call 8 の出力 17行目; /tmp/verify/out4.txt 1850行目; /tmp/verify/out4.txt 1851行目	—	publish 結果 keyof !typeof、再パース失敗（permissive/TopTypeExpr REPARSE-FAIL,typescript/TopTypeExpr REPARSE-FAIL）
+keyof keyof?	call 8 の出力 18行目; /tmp/verify/out4.txt 1852行目; /tmp/verify/out4.txt 1853行目	—	publish 結果 keyof ?keyof、再パース失敗（permissive/TopTypeExpr REPARSE-FAIL,typescript/TopTypeExpr REPARSE-FAIL）
+keyof keyof!	call 8 の出力 19行目; /tmp/verify/out4.txt 1854行目; /tmp/verify/out4.txt 1855行目	—	publish 結果 keyof !keyof、再パース失敗（permissive/TopTypeExpr REPARSE-FAIL,typescript/TopTypeExpr REPARSE-FAIL）
+keyof import?	call 8 の出力 20行目; /tmp/verify/out4.txt 1856行目; /tmp/verify/out4.txt 1857行目	—	publish 結果 keyof ?import、再パース失敗（permissive/TopTypeExpr REPARSE-FAIL,typescript/TopTypeExpr REPARSE-FAIL）
+keyof import!	call 8 の出力 21行目; /tmp/verify/out4.txt 1858行目; /tmp/verify/out4.txt 1859行目	—	publish 結果 keyof !import、再パース失敗（permissive/TopTypeExpr REPARSE-FAIL,typescript/TopTypeExpr REPARSE-FAIL）
+keyof 1?	call 8 の出力 22行目; /tmp/verify/out4.txt 1860行目; /tmp/verify/out4.txt 1861行目	—	publish 結果 keyof ?1、再パース失敗（permissive/TopTypeExpr REPARSE-FAIL,typescript/TopTypeExpr REPARSE-FAIL）
+keyof 1!	call 8 の出力 23行目; /tmp/verify/out4.txt 1862行目; /tmp/verify/out4.txt 1863行目	—	publish 結果 keyof !1、再パース失敗（permissive/TopTypeExpr REPARSE-FAIL,typescript/TopTypeExpr REPARSE-FAIL）
+?aa?	/tmp/verify/out4.txt 148行目; /tmp/verify/out4.txt 149行目; /tmp/verify/out4.txt 150行目; ほか1か所	—	publish 結果 ??aa、P3-reparse（permissive/TopTypeExpr）
+?aa!	/tmp/verify/out4.txt 152行目; /tmp/verify/out4.txt 153行目; /tmp/verify/out4.txt 154行目; ほか1か所	—	publish 結果 !?aa、P3-reparse（permissive/TopTypeExpr）
+?a?=	/tmp/verify/out4.txt 156行目; /tmp/verify/out4.txt 157行目; /tmp/verify/out4.txt 158行目; ほか1か所	—	publish 結果 ??a=、P3-reparse（permissive/TopTypeExpr）
+?a?...	/tmp/verify/out4.txt 160行目; /tmp/verify/out4.txt 161行目; /tmp/verify/out4.txt 162行目; ほか1か所	—	publish 結果 ...??a、P3-reparse（permissive/TopTypeExpr）
+?a? 	/tmp/verify/out4.txt 164行目; /tmp/verify/out4.txt 165行目; /tmp/verify/out4.txt 166行目; ほか1か所	—	publish 結果 ??a、P3-reparse（permissive/TopTypeExpr）
+?a!=	/tmp/verify/out4.txt 168行目; /tmp/verify/out4.txt 169行目; /tmp/verify/out4.txt 170行目; ほか1か所	—	publish 結果 !?a=、P3-reparse（permissive/TopTypeExpr）
+?a!...	/tmp/verify/out4.txt 172行目; /tmp/verify/out4.txt 173行目; /tmp/verify/out4.txt 174行目; ほか1か所	—	publish 結果 ...!?a、P3-reparse（permissive/TopTypeExpr）
+?a! 	/tmp/verify/out4.txt 176行目; /tmp/verify/out4.txt 177行目; /tmp/verify/out4.txt 178行目; ほか1か所	—	publish 結果 !?a、P3-reparse（permissive/TopTypeExpr）
+?afunction?	/tmp/verify/out4.txt 180行目; /tmp/verify/out4.txt 181行目; /tmp/verify/out4.txt 182行目; ほか1か所	—	publish 結果 ??afunction、P3-reparse（permissive/TopTypeExpr）
+?afunction!	/tmp/verify/out4.txt 184行目; /tmp/verify/out4.txt 185行目; /tmp/verify/out4.txt 186行目; ほか1か所	—	publish 結果 !?afunction、P3-reparse（permissive/TopTypeExpr）
+?anew?	/tmp/verify/out4.txt 188行目; /tmp/verify/out4.txt 189行目; /tmp/verify/out4.txt 190行目; ほか1か所	—	publish 結果 ??anew、P3-reparse（permissive/TopTypeExpr）
+?anew!	/tmp/verify/out4.txt 192行目; /tmp/verify/out4.txt 193行目; /tmp/verify/out4.txt 194行目; ほか1か所	—	publish 結果 !?anew、P3-reparse（permissive/TopTypeExpr）
+?atypeof?	/tmp/verify/out4.txt 196行目; /tmp/verify/out4.txt 197行目; /tmp/verify/out4.txt 198行目; ほか1か所	—	publish 結果 ??atypeof、P3-reparse（permissive/TopTypeExpr）
+?atypeof!	/tmp/verify/out4.txt 200行目; /tmp/verify/out4.txt 201行目; /tmp/verify/out4.txt 202行目; ほか1か所	—	publish 結果 !?atypeof、P3-reparse（permissive/TopTypeExpr）
+?akeyof?	/tmp/verify/out4.txt 204行目; /tmp/verify/out4.txt 205行目; /tmp/verify/out4.txt 206行目; ほか1か所	—	publish 結果 ??akeyof、P3-reparse（permissive/TopTypeExpr）
+?akeyof!	/tmp/verify/out4.txt 208行目; /tmp/verify/out4.txt 209行目; /tmp/verify/out4.txt 210行目; ほか1か所	—	publish 結果 !?akeyof、P3-reparse（permissive/TopTypeExpr）
+?aimport?	/tmp/verify/out4.txt 212行目; /tmp/verify/out4.txt 213行目; /tmp/verify/out4.txt 214行目; ほか1か所	—	publish 結果 ??aimport、P3-reparse（permissive/TopTypeExpr）
+?aimport!	/tmp/verify/out4.txt 216行目; /tmp/verify/out4.txt 217行目; /tmp/verify/out4.txt 218行目; ほか1か所	—	publish 結果 !?aimport、P3-reparse（permissive/TopTypeExpr）
+?a1?	/tmp/verify/out4.txt 220行目; /tmp/verify/out4.txt 221行目; /tmp/verify/out4.txt 222行目; ほか1か所	—	publish 結果 ??a1、P3-reparse（permissive/TopTypeExpr）
+?a1!	/tmp/verify/out4.txt 224行目; /tmp/verify/out4.txt 225行目; /tmp/verify/out4.txt 226行目; ほか1か所	—	publish 結果 !?a1、P3-reparse（permissive/TopTypeExpr）
+?a ?	/tmp/verify/out4.txt 228行目; /tmp/verify/out4.txt 229行目; /tmp/verify/out4.txt 230行目; ほか1か所	—	publish 結果 ??a、P3-reparse（permissive/TopTypeExpr）
+?a !	/tmp/verify/out4.txt 232行目; /tmp/verify/out4.txt 233行目; /tmp/verify/out4.txt 234行目; ほか1か所	—	publish 結果 !?a、P3-reparse（permissive/TopTypeExpr）
+?.1?	/tmp/verify/out4.txt 236行目; /tmp/verify/out4.txt 237行目; /tmp/verify/out4.txt 238行目; ほか1か所	—	publish 結果 ??.1、P3-reparse（permissive/TopTypeExpr）
+?.1!	/tmp/verify/out4.txt 240行目; /tmp/verify/out4.txt 241行目; /tmp/verify/out4.txt 242行目; ほか1か所	—	publish 結果 !?.1、P3-reparse（permissive/TopTypeExpr）
+?[]?=	/tmp/verify/out4.txt 244行目; /tmp/verify/out4.txt 245行目	—	publish 結果 ??[]=、P3-reparse（permissive/TopTypeExpr）
+?[]?...	/tmp/verify/out4.txt 246行目; /tmp/verify/out4.txt 247行目	—	publish 結果 ...??[]、P3-reparse（permissive/TopTypeExpr）
+?[]? 	/tmp/verify/out4.txt 248行目; /tmp/verify/out4.txt 249行目	—	publish 結果 ??[]、P3-reparse（permissive/TopTypeExpr）
+?[]!=	/tmp/verify/out4.txt 250行目; /tmp/verify/out4.txt 251行目	—	publish 結果 !?[]=、P3-reparse（permissive/TopTypeExpr）
+?[]!...	/tmp/verify/out4.txt 252行目; /tmp/verify/out4.txt 253行目	—	publish 結果 ...!?[]、P3-reparse（permissive/TopTypeExpr）
+?[]! 	/tmp/verify/out4.txt 254行目; /tmp/verify/out4.txt 255行目	—	publish 結果 !?[]、P3-reparse（permissive/TopTypeExpr）
+?[] ?	/tmp/verify/out4.txt 256行目; /tmp/verify/out4.txt 257行目	—	publish 結果 ??[]、P3-reparse（permissive/TopTypeExpr）
+?[] !	/tmp/verify/out4.txt 258行目; /tmp/verify/out4.txt 259行目	—	publish 結果 !?[]、P3-reparse（permissive/TopTypeExpr）
+?{}?	/tmp/verify/out4.txt 260行目; /tmp/verify/out4.txt 261行目; /tmp/verify/out4.txt 262行目; ほか1か所	—	publish 結果 ??{}、P3-reparse（permissive/TopTypeExpr）
+?{}!	/tmp/verify/out4.txt 264行目; /tmp/verify/out4.txt 265行目; /tmp/verify/out4.txt 266行目; ほか1か所	—	publish 結果 !?{}、P3-reparse（permissive/TopTypeExpr）
+?functiona?	/tmp/verify/out4.txt 268行目; /tmp/verify/out4.txt 269行目; /tmp/verify/out4.txt 270行目; ほか1か所	—	publish 結果 ??functiona、P3-reparse（permissive/TopTypeExpr）
+?functiona!	/tmp/verify/out4.txt 272行目; /tmp/verify/out4.txt 273行目; /tmp/verify/out4.txt 274行目; ほか1か所	—	publish 結果 !?functiona、P3-reparse（permissive/TopTypeExpr）
+?function?=	/tmp/verify/out4.txt 276行目; /tmp/verify/out4.txt 277行目; /tmp/verify/out4.txt 278行目; ほか1か所	—	publish 結果 ??function=、P3-reparse（permissive/TopTypeExpr）
+?function?...	/tmp/verify/out4.txt 280行目; /tmp/verify/out4.txt 281行目; /tmp/verify/out4.txt 282行目; ほか1か所	—	publish 結果 ...??function、P3-reparse（permissive/TopTypeExpr）
+?function? 	/tmp/verify/out4.txt 284行目; /tmp/verify/out4.txt 285行目; /tmp/verify/out4.txt 286行目; ほか1か所	—	publish 結果 ??function、P3-reparse（permissive/TopTypeExpr）
+?function!=	/tmp/verify/out4.txt 288行目; /tmp/verify/out4.txt 289行目; /tmp/verify/out4.txt 290行目; ほか1か所	—	publish 結果 !?function=、P3-reparse（permissive/TopTypeExpr）
+?function!...	/tmp/verify/out4.txt 292行目; /tmp/verify/out4.txt 293行目; /tmp/verify/out4.txt 294行目; ほか1か所	—	publish 結果 ...!?function、P3-reparse（permissive/TopTypeExpr）
+?function! 	/tmp/verify/out4.txt 296行目; /tmp/verify/out4.txt 297行目; /tmp/verify/out4.txt 298行目; ほか1か所	—	publish 結果 !?function、P3-reparse（permissive/TopTypeExpr）
+?functionfunction?	/tmp/verify/out4.txt 300行目; /tmp/verify/out4.txt 301行目; /tmp/verify/out4.txt 302行目; ほか1か所	—	publish 結果 ??functionfunction、P3-reparse（permissive/TopTypeExpr）
+?functionfunction!	/tmp/verify/out4.txt 304行目; /tmp/verify/out4.txt 305行目; /tmp/verify/out4.txt 306行目; ほか1か所	—	publish 結果 !?functionfunction、P3-reparse（permissive/TopTypeExpr）
+?functionnew?	/tmp/verify/out4.txt 308行目; /tmp/verify/out4.txt 309行目; /tmp/verify/out4.txt 310行目; ほか1か所	—	publish 結果 ??functionnew、P3-reparse（permissive/TopTypeExpr）
+?functionnew!	/tmp/verify/out4.txt 312行目; /tmp/verify/out4.txt 313行目; /tmp/verify/out4.txt 314行目; ほか1か所	—	publish 結果 !?functionnew、P3-reparse（permissive/TopTypeExpr）
+?functiontypeof?	/tmp/verify/out4.txt 316行目; /tmp/verify/out4.txt 317行目; /tmp/verify/out4.txt 318行目; ほか1か所	—	publish 結果 ??functiontypeof、P3-reparse（permissive/TopTypeExpr）
+?functiontypeof!	/tmp/verify/out4.txt 320行目; /tmp/verify/out4.txt 321行目; /tmp/verify/out4.txt 322行目; ほか1か所	—	publish 結果 !?functiontypeof、P3-reparse（permissive/TopTypeExpr）
+?functionkeyof?	/tmp/verify/out4.txt 324行目; /tmp/verify/out4.txt 325行目; /tmp/verify/out4.txt 326行目; ほか1か所	—	publish 結果 ??functionkeyof、P3-reparse（permissive/TopTypeExpr）
+?functionkeyof!	/tmp/verify/out4.txt 328行目; /tmp/verify/out4.txt 329行目; /tmp/verify/out4.txt 330行目; ほか1か所	—	publish 結果 !?functionkeyof、P3-reparse（permissive/TopTypeExpr）
+?functionimport?	/tmp/verify/out4.txt 332行目; /tmp/verify/out4.txt 333行目; /tmp/verify/out4.txt 334行目; ほか1か所	—	publish 結果 ??functionimport、P3-reparse（permissive/TopTypeExpr）
+?functionimport!	/tmp/verify/out4.txt 336行目; /tmp/verify/out4.txt 337行目; /tmp/verify/out4.txt 338行目; ほか1か所	—	publish 結果 !?functionimport、P3-reparse（permissive/TopTypeExpr）
+?function1?	/tmp/verify/out4.txt 340行目; /tmp/verify/out4.txt 341行目; /tmp/verify/out4.txt 342行目; ほか1か所	—	publish 結果 ??function1、P3-reparse（permissive/TopTypeExpr）
+?function1!	/tmp/verify/out4.txt 344行目; /tmp/verify/out4.txt 345行目; /tmp/verify/out4.txt 346行目; ほか1か所	—	publish 結果 !?function1、P3-reparse（permissive/TopTypeExpr）
+?function ?	/tmp/verify/out4.txt 348行目; /tmp/verify/out4.txt 349行目; /tmp/verify/out4.txt 350行目; ほか1か所	—	publish 結果 ??function、P3-reparse（permissive/TopTypeExpr）
+?function !	/tmp/verify/out4.txt 352行目; /tmp/verify/out4.txt 353行目; /tmp/verify/out4.txt 354行目; ほか1か所	—	publish 結果 !?function、P3-reparse（permissive/TopTypeExpr）
+?newa?	/tmp/verify/out4.txt 356行目; /tmp/verify/out4.txt 357行目; /tmp/verify/out4.txt 358行目; ほか1か所	—	publish 結果 ??newa、P3-reparse（permissive/TopTypeExpr）
+?newa!	/tmp/verify/out4.txt 360行目; /tmp/verify/out4.txt 361行目; /tmp/verify/out4.txt 362行目; ほか1か所	—	publish 結果 !?newa、P3-reparse（permissive/TopTypeExpr）
+?new?=	/tmp/verify/out4.txt 364行目; /tmp/verify/out4.txt 365行目; /tmp/verify/out4.txt 366行目; ほか1か所	—	publish 結果 ??new=、P3-reparse（permissive/TopTypeExpr）
+?new?...	/tmp/verify/out4.txt 368行目; /tmp/verify/out4.txt 369行目; /tmp/verify/out4.txt 370行目; ほか1か所	—	publish 結果 ...??new、P3-reparse（permissive/TopTypeExpr）
+?new? 	/tmp/verify/out4.txt 372行目; /tmp/verify/out4.txt 373行目; /tmp/verify/out4.txt 374行目; ほか1か所	—	publish 結果 ??new、P3-reparse（permissive/TopTypeExpr）
+?new!=	/tmp/verify/out4.txt 376行目; /tmp/verify/out4.txt 377行目; /tmp/verify/out4.txt 378行目; ほか1か所	—	publish 結果 !?new=、P3-reparse（permissive/TopTypeExpr）
+?new!...	/tmp/verify/out4.txt 380行目; /tmp/verify/out4.txt 381行目; /tmp/verify/out4.txt 382行目; ほか1か所	—	publish 結果 ...!?new、P3-reparse（permissive/TopTypeExpr）
+?new! 	/tmp/verify/out4.txt 384行目; /tmp/verify/out4.txt 385行目; /tmp/verify/out4.txt 386行目; ほか1か所	—	publish 結果 !?new、P3-reparse（permissive/TopTypeExpr）
+?newfunction?	/tmp/verify/out4.txt 388行目; /tmp/verify/out4.txt 389行目; /tmp/verify/out4.txt 390行目; ほか1か所	—	publish 結果 ??newfunction、P3-reparse（permissive/TopTypeExpr）
+?newfunction!	/tmp/verify/out4.txt 392行目; /tmp/verify/out4.txt 393行目; /tmp/verify/out4.txt 394行目; ほか1か所	—	publish 結果 !?newfunction、P3-reparse（permissive/TopTypeExpr）
+?newnew?	/tmp/verify/out4.txt 396行目; /tmp/verify/out4.txt 397行目; /tmp/verify/out4.txt 398行目; ほか1か所	—	publish 結果 ??newnew、P3-reparse（permissive/TopTypeExpr）
+?newnew!	/tmp/verify/out4.txt 400行目; /tmp/verify/out4.txt 401行目; /tmp/verify/out4.txt 402行目; ほか1か所	—	publish 結果 !?newnew、P3-reparse（permissive/TopTypeExpr）
+?newtypeof?	/tmp/verify/out4.txt 404行目; /tmp/verify/out4.txt 405行目; /tmp/verify/out4.txt 406行目; ほか1か所	—	publish 結果 ??newtypeof、P3-reparse（permissive/TopTypeExpr）
+?newtypeof!	/tmp/verify/out4.txt 408行目; /tmp/verify/out4.txt 409行目; /tmp/verify/out4.txt 410行目; ほか1か所	—	publish 結果 !?newtypeof、P3-reparse（permissive/TopTypeExpr）
+?newkeyof?	/tmp/verify/out4.txt 412行目; /tmp/verify/out4.txt 413行目; /tmp/verify/out4.txt 414行目; ほか1か所	—	publish 結果 ??newkeyof、P3-reparse（permissive/TopTypeExpr）
+?newkeyof!	/tmp/verify/out4.txt 416行目; /tmp/verify/out4.txt 417行目; /tmp/verify/out4.txt 418行目; ほか1か所	—	publish 結果 !?newkeyof、P3-reparse（permissive/TopTypeExpr）
+?newimport?	/tmp/verify/out4.txt 420行目; /tmp/verify/out4.txt 421行目; /tmp/verify/out4.txt 422行目; ほか1か所	—	publish 結果 ??newimport、P3-reparse（permissive/TopTypeExpr）
+?newimport!	/tmp/verify/out4.txt 424行目; /tmp/verify/out4.txt 425行目; /tmp/verify/out4.txt 426行目; ほか1か所	—	publish 結果 !?newimport、P3-reparse（permissive/TopTypeExpr）
+?new1?	/tmp/verify/out4.txt 428行目; /tmp/verify/out4.txt 429行目; /tmp/verify/out4.txt 430行目; ほか1か所	—	publish 結果 ??new1、P3-reparse（permissive/TopTypeExpr）
+?new1!	/tmp/verify/out4.txt 432行目; /tmp/verify/out4.txt 433行目; /tmp/verify/out4.txt 434行目; ほか1か所	—	publish 結果 !?new1、P3-reparse（permissive/TopTypeExpr）
+?new ?	/tmp/verify/out4.txt 436行目; /tmp/verify/out4.txt 437行目; /tmp/verify/out4.txt 438行目; ほか1か所	—	publish 結果 ??new、P3-reparse（permissive/TopTypeExpr）
+?new !	/tmp/verify/out4.txt 440行目; /tmp/verify/out4.txt 441行目; /tmp/verify/out4.txt 442行目; ほか1か所	—	publish 結果 !?new、P3-reparse（permissive/TopTypeExpr）
+?'x'?=	/tmp/verify/out4.txt 444行目; /tmp/verify/out4.txt 445行目; /tmp/verify/out4.txt 446行目; ほか1か所	—	publish 結果 ??'x'=、P3-reparse（permissive/TopTypeExpr）
+?'x'?...	/tmp/verify/out4.txt 448行目; /tmp/verify/out4.txt 449行目; /tmp/verify/out4.txt 450行目; ほか1か所	—	publish 結果 ...??'x'、P3-reparse（permissive/TopTypeExpr）
+?'x'? 	/tmp/verify/out4.txt 452行目; /tmp/verify/out4.txt 453行目; /tmp/verify/out4.txt 454行目; ほか1か所	—	publish 結果 ??'x'、P3-reparse（permissive/TopTypeExpr）
+?'x'!=	/tmp/verify/out4.txt 456行目; /tmp/verify/out4.txt 457行目; /tmp/verify/out4.txt 458行目; ほか1か所	—	publish 結果 !?'x'=、P3-reparse（permissive/TopTypeExpr）
+?'x'!...	/tmp/verify/out4.txt 460行目; /tmp/verify/out4.txt 461行目; /tmp/verify/out4.txt 462行目; ほか1か所	—	publish 結果 ...!?'x'、P3-reparse（permissive/TopTypeExpr）
+?'x'! 	/tmp/verify/out4.txt 464行目; /tmp/verify/out4.txt 465行目; /tmp/verify/out4.txt 466行目; ほか1か所	—	publish 結果 !?'x'、P3-reparse（permissive/TopTypeExpr）
+?'x' ?	/tmp/verify/out4.txt 468行目; /tmp/verify/out4.txt 469行目; /tmp/verify/out4.txt 470行目; ほか1か所	—	publish 結果 ??'x'、P3-reparse（permissive/TopTypeExpr）
+?'x' !	/tmp/verify/out4.txt 472行目; /tmp/verify/out4.txt 473行目; /tmp/verify/out4.txt 474行目; ほか1か所	—	publish 結果 !?'x'、P3-reparse（permissive/TopTypeExpr）
+?typeofa?	/tmp/verify/out4.txt 476行目; /tmp/verify/out4.txt 477行目; /tmp/verify/out4.txt 478行目; ほか1か所	—	publish 結果 ??typeofa、P3-reparse（permissive/TopTypeExpr）
+?typeofa!	/tmp/verify/out4.txt 480行目; /tmp/verify/out4.txt 481行目; /tmp/verify/out4.txt 482行目; ほか1か所	—	publish 結果 !?typeofa、P3-reparse（permissive/TopTypeExpr）
+?typeof?=	/tmp/verify/out4.txt 484行目; /tmp/verify/out4.txt 485行目; /tmp/verify/out4.txt 486行目; ほか1か所	—	publish 結果 ??typeof=、P3-reparse（permissive/TopTypeExpr）
+?typeof?...	/tmp/verify/out4.txt 488行目; /tmp/verify/out4.txt 489行目; /tmp/verify/out4.txt 490行目; ほか1か所	—	publish 結果 ...??typeof、P3-reparse（permissive/TopTypeExpr）
+?typeof? 	/tmp/verify/out4.txt 492行目; /tmp/verify/out4.txt 493行目; /tmp/verify/out4.txt 494行目; ほか1か所	—	publish 結果 ??typeof、P3-reparse（permissive/TopTypeExpr）
+?typeof!=	/tmp/verify/out4.txt 496行目; /tmp/verify/out4.txt 497行目; /tmp/verify/out4.txt 498行目; ほか1か所	—	publish 結果 !?typeof=、P3-reparse（permissive/TopTypeExpr）
+?typeof!...	/tmp/verify/out4.txt 500行目; /tmp/verify/out4.txt 501行目; /tmp/verify/out4.txt 502行目; ほか1か所	—	publish 結果 ...!?typeof、P3-reparse（permissive/TopTypeExpr）
+?typeof! 	/tmp/verify/out4.txt 504行目; /tmp/verify/out4.txt 505行目; /tmp/verify/out4.txt 506行目; ほか1か所	—	publish 結果 !?typeof、P3-reparse（permissive/TopTypeExpr）
+?typeoffunction?	/tmp/verify/out4.txt 508行目; /tmp/verify/out4.txt 509行目; /tmp/verify/out4.txt 510行目; ほか1か所	—	publish 結果 ??typeoffunction、P3-reparse（permissive/TopTypeExpr）
+?typeoffunction!	/tmp/verify/out4.txt 512行目; /tmp/verify/out4.txt 513行目; /tmp/verify/out4.txt 514行目; ほか1か所	—	publish 結果 !?typeoffunction、P3-reparse（permissive/TopTypeExpr）
+?typeofnew?	/tmp/verify/out4.txt 516行目; /tmp/verify/out4.txt 517行目; /tmp/verify/out4.txt 518行目; ほか1か所	—	publish 結果 ??typeofnew、P3-reparse（permissive/TopTypeExpr）
+?typeofnew!	/tmp/verify/out4.txt 520行目; /tmp/verify/out4.txt 521行目; /tmp/verify/out4.txt 522行目; ほか1か所	—	publish 結果 !?typeofnew、P3-reparse（permissive/TopTypeExpr）
+?typeoftypeof?	/tmp/verify/out4.txt 524行目; /tmp/verify/out4.txt 525行目; /tmp/verify/out4.txt 526行目; ほか1か所	—	publish 結果 ??typeoftypeof、P3-reparse（permissive/TopTypeExpr）
+?typeoftypeof!	/tmp/verify/out4.txt 528行目; /tmp/verify/out4.txt 529行目; /tmp/verify/out4.txt 530行目; ほか1か所	—	publish 結果 !?typeoftypeof、P3-reparse（permissive/TopTypeExpr）
+?typeofkeyof?	/tmp/verify/out4.txt 532行目; /tmp/verify/out4.txt 533行目; /tmp/verify/out4.txt 534行目; ほか1か所	—	publish 結果 ??typeofkeyof、P3-reparse（permissive/TopTypeExpr）
+?typeofkeyof!	/tmp/verify/out4.txt 536行目; /tmp/verify/out4.txt 537行目; /tmp/verify/out4.txt 538行目; ほか1か所	—	publish 結果 !?typeofkeyof、P3-reparse（permissive/TopTypeExpr）
+?typeofimport?	/tmp/verify/out4.txt 540行目; /tmp/verify/out4.txt 541行目; /tmp/verify/out4.txt 542行目; ほか1か所	—	publish 結果 ??typeofimport、P3-reparse（permissive/TopTypeExpr）
+?typeofimport!	/tmp/verify/out4.txt 544行目; /tmp/verify/out4.txt 545行目; /tmp/verify/out4.txt 546行目; ほか1か所	—	publish 結果 !?typeofimport、P3-reparse（permissive/TopTypeExpr）
+?typeof1?	/tmp/verify/out4.txt 548行目; /tmp/verify/out4.txt 549行目; /tmp/verify/out4.txt 550行目; ほか1か所	—	publish 結果 ??typeof1、P3-reparse（permissive/TopTypeExpr）
+?typeof1!	/tmp/verify/out4.txt 552行目; /tmp/verify/out4.txt 553行目; /tmp/verify/out4.txt 554行目; ほか1か所	—	publish 結果 !?typeof1、P3-reparse（permissive/TopTypeExpr）
+?typeof ?	/tmp/verify/out4.txt 556行目; /tmp/verify/out4.txt 557行目; /tmp/verify/out4.txt 558行目; ほか1か所	—	publish 結果 ??typeof、P3-reparse（permissive/TopTypeExpr）
+?typeof !	/tmp/verify/out4.txt 560行目; /tmp/verify/out4.txt 561行目; /tmp/verify/out4.txt 562行目; ほか1か所	—	publish 結果 !?typeof、P3-reparse（permissive/TopTypeExpr）
+?keyofa?	/tmp/verify/out4.txt 564行目; /tmp/verify/out4.txt 565行目; /tmp/verify/out4.txt 566行目; ほか1か所	—	publish 結果 ??keyofa、P3-reparse（permissive/TopTypeExpr）
+?keyofa!	/tmp/verify/out4.txt 568行目; /tmp/verify/out4.txt 569行目; /tmp/verify/out4.txt 570行目; ほか1か所	—	publish 結果 !?keyofa、P3-reparse（permissive/TopTypeExpr）
+?keyof?=	/tmp/verify/out4.txt 572行目; /tmp/verify/out4.txt 573行目; /tmp/verify/out4.txt 574行目; ほか1か所	—	publish 結果 ??keyof=、P3-reparse（permissive/TopTypeExpr）
+?keyof?...	/tmp/verify/out4.txt 576行目; /tmp/verify/out4.txt 577行目; /tmp/verify/out4.txt 578行目; ほか1か所	—	publish 結果 ...??keyof、P3-reparse（permissive/TopTypeExpr）
+?keyof? 	/tmp/verify/out4.txt 580行目; /tmp/verify/out4.txt 581行目; /tmp/verify/out4.txt 582行目; ほか1か所	—	publish 結果 ??keyof、P3-reparse（permissive/TopTypeExpr）
+?keyof!=	/tmp/verify/out4.txt 584行目; /tmp/verify/out4.txt 585行目; /tmp/verify/out4.txt 586行目; ほか1か所	—	publish 結果 !?keyof=、P3-reparse（permissive/TopTypeExpr）
+?keyof!...	/tmp/verify/out4.txt 588行目; /tmp/verify/out4.txt 589行目; /tmp/verify/out4.txt 590行目; ほか1か所	—	publish 結果 ...!?keyof、P3-reparse（permissive/TopTypeExpr）
+?keyof! 	/tmp/verify/out4.txt 592行目; /tmp/verify/out4.txt 593行目; /tmp/verify/out4.txt 594行目; ほか1か所	—	publish 結果 !?keyof、P3-reparse（permissive/TopTypeExpr）
+?keyoffunction?	/tmp/verify/out4.txt 596行目; /tmp/verify/out4.txt 597行目; /tmp/verify/out4.txt 598行目; ほか1か所	—	publish 結果 ??keyoffunction、P3-reparse（permissive/TopTypeExpr）
+?keyoffunction!	/tmp/verify/out4.txt 600行目; /tmp/verify/out4.txt 601行目; /tmp/verify/out4.txt 602行目; ほか1か所	—	publish 結果 !?keyoffunction、P3-reparse（permissive/TopTypeExpr）
+?keyofnew?	/tmp/verify/out4.txt 604行目; /tmp/verify/out4.txt 605行目; /tmp/verify/out4.txt 606行目; ほか1か所	—	publish 結果 ??keyofnew、P3-reparse（permissive/TopTypeExpr）
+?keyofnew!	/tmp/verify/out4.txt 608行目; /tmp/verify/out4.txt 609行目; /tmp/verify/out4.txt 610行目; ほか1か所	—	publish 結果 !?keyofnew、P3-reparse（permissive/TopTypeExpr）
+?keyoftypeof?	/tmp/verify/out4.txt 612行目; /tmp/verify/out4.txt 613行目; /tmp/verify/out4.txt 614行目; ほか1か所	—	publish 結果 ??keyoftypeof、P3-reparse（permissive/TopTypeExpr）
+?keyoftypeof!	/tmp/verify/out4.txt 616行目; /tmp/verify/out4.txt 617行目; /tmp/verify/out4.txt 618行目; ほか1か所	—	publish 結果 !?keyoftypeof、P3-reparse（permissive/TopTypeExpr）
+?keyofkeyof?	/tmp/verify/out4.txt 620行目; /tmp/verify/out4.txt 621行目; /tmp/verify/out4.txt 622行目; ほか1か所	—	publish 結果 ??keyofkeyof、P3-reparse（permissive/TopTypeExpr）
+?keyofkeyof!	/tmp/verify/out4.txt 624行目; /tmp/verify/out4.txt 625行目; /tmp/verify/out4.txt 626行目; ほか1か所	—	publish 結果 !?keyofkeyof、P3-reparse（permissive/TopTypeExpr）
+?keyofimport?	/tmp/verify/out4.txt 628行目; /tmp/verify/out4.txt 629行目; /tmp/verify/out4.txt 630行目; ほか1か所	—	publish 結果 ??keyofimport、P3-reparse（permissive/TopTypeExpr）
+?keyofimport!	/tmp/verify/out4.txt 632行目; /tmp/verify/out4.txt 633行目; /tmp/verify/out4.txt 634行目; ほか1か所	—	publish 結果 !?keyofimport、P3-reparse（permissive/TopTypeExpr）
+?keyof1?	/tmp/verify/out4.txt 636行目; /tmp/verify/out4.txt 637行目; /tmp/verify/out4.txt 638行目; ほか1か所	—	publish 結果 ??keyof1、P3-reparse（permissive/TopTypeExpr）
+?keyof1!	/tmp/verify/out4.txt 640行目; /tmp/verify/out4.txt 641行目; /tmp/verify/out4.txt 642行目; ほか1か所	—	publish 結果 !?keyof1、P3-reparse（permissive/TopTypeExpr）
+?keyof ?	/tmp/verify/out4.txt 644行目; /tmp/verify/out4.txt 645行目; /tmp/verify/out4.txt 646行目; ほか1か所	—	publish 結果 ??keyof、P3-reparse（permissive/TopTypeExpr）
+?keyof !	/tmp/verify/out4.txt 648行目; /tmp/verify/out4.txt 649行目; /tmp/verify/out4.txt 650行目; ほか1か所	—	publish 結果 !?keyof、P3-reparse（permissive/TopTypeExpr）
+?module:a?	/tmp/verify/out4.txt 652行目; /tmp/verify/out4.txt 653行目; /tmp/verify/out4.txt 654行目	—	publish 結果 ??module:a、P3-reparse（permissive/TopTypeExpr）
+?module:a!	/tmp/verify/out4.txt 655行目; /tmp/verify/out4.txt 656行目; /tmp/verify/out4.txt 657行目	—	publish 結果 !?module:a、P3-reparse（permissive/TopTypeExpr）
+?module:function?	/tmp/verify/out4.txt 658行目; /tmp/verify/out4.txt 659行目; /tmp/verify/out4.txt 660行目	—	publish 結果 ??module:function、P3-reparse（permissive/TopTypeExpr）
+?module:function!	/tmp/verify/out4.txt 661行目; /tmp/verify/out4.txt 662行目; /tmp/verify/out4.txt 663行目	—	publish 結果 !?module:function、P3-reparse（permissive/TopTypeExpr）
+?module:new?	/tmp/verify/out4.txt 664行目; /tmp/verify/out4.txt 665行目; /tmp/verify/out4.txt 666行目	—	publish 結果 ??module:new、P3-reparse（permissive/TopTypeExpr）
+?module:new!	/tmp/verify/out4.txt 667行目; /tmp/verify/out4.txt 668行目; /tmp/verify/out4.txt 669行目	—	publish 結果 !?module:new、P3-reparse（permissive/TopTypeExpr）
+?module:'x'?	/tmp/verify/out4.txt 670行目; /tmp/verify/out4.txt 671行目; /tmp/verify/out4.txt 672行目	—	publish 結果 ??module:'x'、P3-reparse（permissive/TopTypeExpr）
+?module:'x'!	/tmp/verify/out4.txt 673行目; /tmp/verify/out4.txt 674行目; /tmp/verify/out4.txt 675行目	—	publish 結果 !?module:'x'、P3-reparse（permissive/TopTypeExpr）
+?module:typeof?	/tmp/verify/out4.txt 676行目; /tmp/verify/out4.txt 677行目; /tmp/verify/out4.txt 678行目	—	publish 結果 ??module:typeof、P3-reparse（permissive/TopTypeExpr）
+?module:typeof!	/tmp/verify/out4.txt 679行目; /tmp/verify/out4.txt 680行目; /tmp/verify/out4.txt 681行目	—	publish 結果 !?module:typeof、P3-reparse（permissive/TopTypeExpr）
+?module:keyof?	/tmp/verify/out4.txt 682行目; /tmp/verify/out4.txt 683行目; /tmp/verify/out4.txt 684行目	—	publish 結果 ??module:keyof、P3-reparse（permissive/TopTypeExpr）
+?module:keyof!	/tmp/verify/out4.txt 685行目; /tmp/verify/out4.txt 686行目; /tmp/verify/out4.txt 687行目	—	publish 結果 !?module:keyof、P3-reparse（permissive/TopTypeExpr）
+?module:import?	/tmp/verify/out4.txt 688行目; /tmp/verify/out4.txt 689行目; /tmp/verify/out4.txt 690行目	—	publish 結果 ??module:import、P3-reparse（permissive/TopTypeExpr）
+?module:import!	/tmp/verify/out4.txt 691行目; /tmp/verify/out4.txt 692行目; /tmp/verify/out4.txt 693行目	—	publish 結果 !?module:import、P3-reparse（permissive/TopTypeExpr）
+?module:1?	/tmp/verify/out4.txt 694行目; /tmp/verify/out4.txt 695行目; /tmp/verify/out4.txt 696行目	—	publish 結果 ??module:1、P3-reparse（permissive/TopTypeExpr）
+?module:1!	/tmp/verify/out4.txt 697行目; /tmp/verify/out4.txt 698行目; /tmp/verify/out4.txt 699行目	—	publish 結果 !?module:1、P3-reparse（permissive/TopTypeExpr）
+?importa?	/tmp/verify/out4.txt 700行目; /tmp/verify/out4.txt 701行目; /tmp/verify/out4.txt 702行目; ほか1か所	—	publish 結果 ??importa、P3-reparse（permissive/TopTypeExpr）
+?importa!	/tmp/verify/out4.txt 704行目; /tmp/verify/out4.txt 705行目; /tmp/verify/out4.txt 706行目; ほか1か所	—	publish 結果 !?importa、P3-reparse（permissive/TopTypeExpr）
+?import?=	/tmp/verify/out4.txt 708行目; /tmp/verify/out4.txt 709行目; /tmp/verify/out4.txt 710行目; ほか1か所	—	publish 結果 ??import=、P3-reparse（permissive/TopTypeExpr）
+?import?...	/tmp/verify/out4.txt 712行目; /tmp/verify/out4.txt 713行目; /tmp/verify/out4.txt 714行目; ほか1か所	—	publish 結果 ...??import、P3-reparse（permissive/TopTypeExpr）
+?import? 	/tmp/verify/out4.txt 716行目; /tmp/verify/out4.txt 717行目; /tmp/verify/out4.txt 718行目; ほか1か所	—	publish 結果 ??import、P3-reparse（permissive/TopTypeExpr）
+?import!=	/tmp/verify/out4.txt 720行目; /tmp/verify/out4.txt 721行目; /tmp/verify/out4.txt 722行目; ほか1か所	—	publish 結果 !?import=、P3-reparse（permissive/TopTypeExpr）
+?import!...	/tmp/verify/out4.txt 724行目; /tmp/verify/out4.txt 725行目; /tmp/verify/out4.txt 726行目; ほか1か所	—	publish 結果 ...!?import、P3-reparse（permissive/TopTypeExpr）
+?import! 	/tmp/verify/out4.txt 728行目; /tmp/verify/out4.txt 729行目; /tmp/verify/out4.txt 730行目; ほか1か所	—	publish 結果 !?import、P3-reparse（permissive/TopTypeExpr）
+?importfunction?	/tmp/verify/out4.txt 732行目; /tmp/verify/out4.txt 733行目; /tmp/verify/out4.txt 734行目; ほか1か所	—	publish 結果 ??importfunction、P3-reparse（permissive/TopTypeExpr）
+?importfunction!	/tmp/verify/out4.txt 736行目; /tmp/verify/out4.txt 737行目; /tmp/verify/out4.txt 738行目; ほか1か所	—	publish 結果 !?importfunction、P3-reparse（permissive/TopTypeExpr）
+?importnew?	/tmp/verify/out4.txt 740行目; /tmp/verify/out4.txt 741行目; /tmp/verify/out4.txt 742行目; ほか1か所	—	publish 結果 ??importnew、P3-reparse（permissive/TopTypeExpr）
+?importnew!	/tmp/verify/out4.txt 744行目; /tmp/verify/out4.txt 745行目; /tmp/verify/out4.txt 746行目; ほか1か所	—	publish 結果 !?importnew、P3-reparse（permissive/TopTypeExpr）
+?importtypeof?	/tmp/verify/out4.txt 748行目; /tmp/verify/out4.txt 749行目; /tmp/verify/out4.txt 750行目; ほか1か所	—	publish 結果 ??importtypeof、P3-reparse（permissive/TopTypeExpr）
+?importtypeof!	/tmp/verify/out4.txt 752行目; /tmp/verify/out4.txt 753行目; /tmp/verify/out4.txt 754行目; ほか1か所	—	publish 結果 !?importtypeof、P3-reparse（permissive/TopTypeExpr）
+?importkeyof?	/tmp/verify/out4.txt 756行目; /tmp/verify/out4.txt 757行目; /tmp/verify/out4.txt 758行目; ほか1か所	—	publish 結果 ??importkeyof、P3-reparse（permissive/TopTypeExpr）
+?importkeyof!	/tmp/verify/out4.txt 760行目; /tmp/verify/out4.txt 761行目; /tmp/verify/out4.txt 762行目; ほか1か所	—	publish 結果 !?importkeyof、P3-reparse（permissive/TopTypeExpr）
+?importimport?	/tmp/verify/out4.txt 764行目; /tmp/verify/out4.txt 765行目; /tmp/verify/out4.txt 766行目; ほか1か所	—	publish 結果 ??importimport、P3-reparse（permissive/TopTypeExpr）
+?importimport!	/tmp/verify/out4.txt 768行目; /tmp/verify/out4.txt 769行目; /tmp/verify/out4.txt 770行目; ほか1か所	—	publish 結果 !?importimport、P3-reparse（permissive/TopTypeExpr）
+?import1?	/tmp/verify/out4.txt 772行目; /tmp/verify/out4.txt 773行目; /tmp/verify/out4.txt 774行目; ほか1か所	—	publish 結果 ??import1、P3-reparse（permissive/TopTypeExpr）
+?import1!	/tmp/verify/out4.txt 776行目; /tmp/verify/out4.txt 777行目; /tmp/verify/out4.txt 778行目; ほか1か所	—	publish 結果 !?import1、P3-reparse（permissive/TopTypeExpr）
+?import ?	/tmp/verify/out4.txt 780行目; /tmp/verify/out4.txt 781行目; /tmp/verify/out4.txt 782行目; ほか1か所	—	publish 結果 ??import、P3-reparse（permissive/TopTypeExpr）
+?import !	/tmp/verify/out4.txt 784行目; /tmp/verify/out4.txt 785行目; /tmp/verify/out4.txt 786行目; ほか1か所	—	publish 結果 !?import、P3-reparse（permissive/TopTypeExpr）
+?1?=	/tmp/verify/out4.txt 788行目; /tmp/verify/out4.txt 789行目; /tmp/verify/out4.txt 790行目; ほか1か所	—	publish 結果 ??1=、P3-reparse（permissive/TopTypeExpr）
+?1?...	/tmp/verify/out4.txt 792行目; /tmp/verify/out4.txt 793行目; /tmp/verify/out4.txt 794行目; ほか1か所	—	publish 結果 ...??1、P3-reparse（permissive/TopTypeExpr）
+?1? 	/tmp/verify/out4.txt 796行目; /tmp/verify/out4.txt 797行目; /tmp/verify/out4.txt 798行目; ほか1か所	—	publish 結果 ??1、P3-reparse（permissive/TopTypeExpr）
+?1!=	/tmp/verify/out4.txt 800行目; /tmp/verify/out4.txt 801行目; /tmp/verify/out4.txt 802行目; ほか1か所	—	publish 結果 !?1=、P3-reparse（permissive/TopTypeExpr）
+?1!...	/tmp/verify/out4.txt 804行目; /tmp/verify/out4.txt 805行目; /tmp/verify/out4.txt 806行目; ほか1か所	—	publish 結果 ...!?1、P3-reparse（permissive/TopTypeExpr）
+?1! 	/tmp/verify/out4.txt 808行目; /tmp/verify/out4.txt 809行目; /tmp/verify/out4.txt 810行目; ほか1か所	—	publish 結果 !?1、P3-reparse（permissive/TopTypeExpr）
+?11?	/tmp/verify/out4.txt 812行目; /tmp/verify/out4.txt 813行目; /tmp/verify/out4.txt 814行目; ほか1か所	—	publish 結果 ??11、P3-reparse（permissive/TopTypeExpr）
+?11!	/tmp/verify/out4.txt 816行目; /tmp/verify/out4.txt 817行目; /tmp/verify/out4.txt 818行目; ほか1か所	—	publish 結果 !?11、P3-reparse（permissive/TopTypeExpr）
+?1 ?	/tmp/verify/out4.txt 820行目; /tmp/verify/out4.txt 821行目; /tmp/verify/out4.txt 822行目; ほか1か所	—	publish 結果 ??1、P3-reparse（permissive/TopTypeExpr）
+?1 !	/tmp/verify/out4.txt 824行目; /tmp/verify/out4.txt 825行目; /tmp/verify/out4.txt 826行目; ほか1か所	—	publish 結果 !?1、P3-reparse（permissive/TopTypeExpr）
+? a?	/tmp/verify/out4.txt 828行目; /tmp/verify/out4.txt 829行目; /tmp/verify/out4.txt 830行目; ほか1か所	—	publish 結果 ??a、P3-reparse（permissive/TopTypeExpr）
+? a!	/tmp/verify/out4.txt 832行目; /tmp/verify/out4.txt 833行目; /tmp/verify/out4.txt 834行目; ほか1か所	—	publish 結果 !?a、P3-reparse（permissive/TopTypeExpr）
+? []?	/tmp/verify/out4.txt 836行目; /tmp/verify/out4.txt 837行目	—	publish 結果 ??[]、P3-reparse（permissive/TopTypeExpr）
+? []!	/tmp/verify/out4.txt 838行目; /tmp/verify/out4.txt 839行目	—	publish 結果 !?[]、P3-reparse（permissive/TopTypeExpr）
+? function?	/tmp/verify/out4.txt 840行目; /tmp/verify/out4.txt 841行目; /tmp/verify/out4.txt 842行目; ほか1か所	—	publish 結果 ??function、P3-reparse（permissive/TopTypeExpr）
+? function!	/tmp/verify/out4.txt 844行目; /tmp/verify/out4.txt 845行目; /tmp/verify/out4.txt 846行目; ほか1か所	—	publish 結果 !?function、P3-reparse（permissive/TopTypeExpr）
+? new?	/tmp/verify/out4.txt 848行目; /tmp/verify/out4.txt 849行目; /tmp/verify/out4.txt 850行目; ほか1か所	—	publish 結果 ??new、P3-reparse（permissive/TopTypeExpr）
+? new!	/tmp/verify/out4.txt 852行目; /tmp/verify/out4.txt 853行目; /tmp/verify/out4.txt 854行目; ほか1か所	—	publish 結果 !?new、P3-reparse（permissive/TopTypeExpr）
+? 'x'?	/tmp/verify/out4.txt 856行目; /tmp/verify/out4.txt 857行目; /tmp/verify/out4.txt 858行目; ほか1か所	—	publish 結果 ??'x'、P3-reparse（permissive/TopTypeExpr）
+? 'x'!	/tmp/verify/out4.txt 860行目; /tmp/verify/out4.txt 861行目; /tmp/verify/out4.txt 862行目; ほか1か所	—	publish 結果 !?'x'、P3-reparse（permissive/TopTypeExpr）
+? typeof?	/tmp/verify/out4.txt 864行目; /tmp/verify/out4.txt 865行目; /tmp/verify/out4.txt 866行目; ほか1か所	—	publish 結果 ??typeof、P3-reparse（permissive/TopTypeExpr）
+? typeof!	/tmp/verify/out4.txt 868行目; /tmp/verify/out4.txt 869行目; /tmp/verify/out4.txt 870行目; ほか1か所	—	publish 結果 !?typeof、P3-reparse（permissive/TopTypeExpr）
+? keyof?	/tmp/verify/out4.txt 872行目; /tmp/verify/out4.txt 873行目; /tmp/verify/out4.txt 874行目; ほか1か所	—	publish 結果 ??keyof、P3-reparse（permissive/TopTypeExpr）
+? keyof!	/tmp/verify/out4.txt 876行目; /tmp/verify/out4.txt 877行目; /tmp/verify/out4.txt 878行目; ほか1か所	—	publish 結果 !?keyof、P3-reparse（permissive/TopTypeExpr）
+? import?	/tmp/verify/out4.txt 880行目; /tmp/verify/out4.txt 881行目; /tmp/verify/out4.txt 882行目; ほか1か所	—	publish 結果 ??import、P3-reparse（permissive/TopTypeExpr）
+? import!	/tmp/verify/out4.txt 884行目; /tmp/verify/out4.txt 885行目; /tmp/verify/out4.txt 886行目; ほか1か所	—	publish 結果 !?import、P3-reparse（permissive/TopTypeExpr）
+? 1?	/tmp/verify/out4.txt 888行目; /tmp/verify/out4.txt 889行目; /tmp/verify/out4.txt 890行目; ほか1か所	—	publish 結果 ??1、P3-reparse（permissive/TopTypeExpr）
+? 1!	/tmp/verify/out4.txt 892行目; /tmp/verify/out4.txt 893行目; /tmp/verify/out4.txt 894行目; ほか1か所	—	publish 結果 !?1、P3-reparse（permissive/TopTypeExpr）
+!aa?	/tmp/verify/out4.txt 896行目; /tmp/verify/out4.txt 897行目; /tmp/verify/out4.txt 898行目; ほか1か所	—	publish 結果 ?!aa、P3-reparse（permissive/TopTypeExpr）
+!aa!	/tmp/verify/out4.txt 900行目; /tmp/verify/out4.txt 901行目; /tmp/verify/out4.txt 902行目; ほか1か所	—	publish 結果 !!aa、P3-reparse（permissive/TopTypeExpr）
+!a?=	/tmp/verify/out4.txt 904行目; /tmp/verify/out4.txt 905行目; /tmp/verify/out4.txt 906行目; ほか1か所	—	publish 結果 ?!a=、P3-reparse（permissive/TopTypeExpr）
+!a?...	/tmp/verify/out4.txt 908行目; /tmp/verify/out4.txt 909行目; /tmp/verify/out4.txt 910行目; ほか1か所	—	publish 結果 ...?!a、P3-reparse（permissive/TopTypeExpr）
+!a? 	/tmp/verify/out4.txt 912行目; /tmp/verify/out4.txt 913行目; /tmp/verify/out4.txt 914行目; ほか1か所	—	publish 結果 ?!a、P3-reparse（permissive/TopTypeExpr）
+!a!=	/tmp/verify/out4.txt 916行目; /tmp/verify/out4.txt 917行目; /tmp/verify/out4.txt 918行目; ほか1か所	—	publish 結果 !!a=、P3-reparse（permissive/TopTypeExpr）
+!a!...	/tmp/verify/out4.txt 920行目; /tmp/verify/out4.txt 921行目; /tmp/verify/out4.txt 922行目; ほか1か所	—	publish 結果 ...!!a、P3-reparse（permissive/TopTypeExpr）
+!a! 	/tmp/verify/out4.txt 924行目; /tmp/verify/out4.txt 925行目; /tmp/verify/out4.txt 926行目; ほか1か所	—	publish 結果 !!a、P3-reparse（permissive/TopTypeExpr）
+!afunction?	/tmp/verify/out4.txt 928行目; /tmp/verify/out4.txt 929行目; /tmp/verify/out4.txt 930行目; ほか1か所	—	publish 結果 ?!afunction、P3-reparse（permissive/TopTypeExpr）
+!afunction!	/tmp/verify/out4.txt 932行目; /tmp/verify/out4.txt 933行目; /tmp/verify/out4.txt 934行目; ほか1か所	—	publish 結果 !!afunction、P3-reparse（permissive/TopTypeExpr）
+!anew?	/tmp/verify/out4.txt 936行目; /tmp/verify/out4.txt 937行目; /tmp/verify/out4.txt 938行目; ほか1か所	—	publish 結果 ?!anew、P3-reparse（permissive/TopTypeExpr）
+!anew!	/tmp/verify/out4.txt 940行目; /tmp/verify/out4.txt 941行目; /tmp/verify/out4.txt 942行目; ほか1か所	—	publish 結果 !!anew、P3-reparse（permissive/TopTypeExpr）
+!atypeof?	/tmp/verify/out4.txt 944行目; /tmp/verify/out4.txt 945行目; /tmp/verify/out4.txt 946行目; ほか1か所	—	publish 結果 ?!atypeof、P3-reparse（permissive/TopTypeExpr）
+!atypeof!	/tmp/verify/out4.txt 948行目; /tmp/verify/out4.txt 949行目; /tmp/verify/out4.txt 950行目; ほか1か所	—	publish 結果 !!atypeof、P3-reparse（permissive/TopTypeExpr）
+!akeyof?	/tmp/verify/out4.txt 952行目; /tmp/verify/out4.txt 953行目; /tmp/verify/out4.txt 954行目; ほか1か所	—	publish 結果 ?!akeyof、P3-reparse（permissive/TopTypeExpr）
+!akeyof!	/tmp/verify/out4.txt 956行目; /tmp/verify/out4.txt 957行目; /tmp/verify/out4.txt 958行目; ほか1か所	—	publish 結果 !!akeyof、P3-reparse（permissive/TopTypeExpr）
+!aimport?	/tmp/verify/out4.txt 960行目; /tmp/verify/out4.txt 961行目; /tmp/verify/out4.txt 962行目; ほか1か所	—	publish 結果 ?!aimport、P3-reparse（permissive/TopTypeExpr）
+!aimport!	/tmp/verify/out4.txt 964行目; /tmp/verify/out4.txt 965行目; /tmp/verify/out4.txt 966行目; ほか1か所	—	publish 結果 !!aimport、P3-reparse（permissive/TopTypeExpr）
+!a1?	/tmp/verify/out4.txt 968行目; /tmp/verify/out4.txt 969行目; /tmp/verify/out4.txt 970行目; ほか1か所	—	publish 結果 ?!a1、P3-reparse（permissive/TopTypeExpr）
+!a1!	/tmp/verify/out4.txt 972行目; /tmp/verify/out4.txt 973行目; /tmp/verify/out4.txt 974行目; ほか1か所	—	publish 結果 !!a1、P3-reparse（permissive/TopTypeExpr）
+!a ?	/tmp/verify/out4.txt 976行目; /tmp/verify/out4.txt 977行目; /tmp/verify/out4.txt 978行目; ほか1か所	—	publish 結果 ?!a、P3-reparse（permissive/TopTypeExpr）
+!a !	/tmp/verify/out4.txt 980行目; /tmp/verify/out4.txt 981行目; /tmp/verify/out4.txt 982行目; ほか1か所	—	publish 結果 !!a、P3-reparse（permissive/TopTypeExpr）
+!.1?	/tmp/verify/out4.txt 984行目; /tmp/verify/out4.txt 985行目; /tmp/verify/out4.txt 986行目; ほか1か所	—	publish 結果 ?!.1、P3-reparse（permissive/TopTypeExpr）
+!.1!	/tmp/verify/out4.txt 988行目; /tmp/verify/out4.txt 989行目; /tmp/verify/out4.txt 990行目; ほか1か所	—	publish 結果 !!.1、P3-reparse（permissive/TopTypeExpr）
+![]?=	/tmp/verify/out4.txt 992行目; /tmp/verify/out4.txt 993行目	—	publish 結果 ?![]=、P3-reparse（permissive/TopTypeExpr）
+![]?...	/tmp/verify/out4.txt 994行目; /tmp/verify/out4.txt 995行目	—	publish 結果 ...?![]、P3-reparse（permissive/TopTypeExpr）
+![]? 	/tmp/verify/out4.txt 996行目; /tmp/verify/out4.txt 997行目	—	publish 結果 ?![]、P3-reparse（permissive/TopTypeExpr）
+![]!=	/tmp/verify/out4.txt 998行目; /tmp/verify/out4.txt 999行目	—	publish 結果 !![]=、P3-reparse（permissive/TopTypeExpr）
+![]!...	/tmp/verify/out4.txt 1000行目; /tmp/verify/out4.txt 1001行目	—	publish 結果 ...!![]、P3-reparse（permissive/TopTypeExpr）
+![]! 	/tmp/verify/out4.txt 1002行目; /tmp/verify/out4.txt 1003行目	—	publish 結果 !![]、P3-reparse（permissive/TopTypeExpr）
+![] ?	/tmp/verify/out4.txt 1004行目; /tmp/verify/out4.txt 1005行目	—	publish 結果 ?![]、P3-reparse（permissive/TopTypeExpr）
+![] !	/tmp/verify/out4.txt 1006行目; /tmp/verify/out4.txt 1007行目	—	publish 結果 !![]、P3-reparse（permissive/TopTypeExpr）
+!{}?	/tmp/verify/out4.txt 1008行目; /tmp/verify/out4.txt 1009行目; /tmp/verify/out4.txt 1010行目; ほか1か所	—	publish 結果 ?!{}、P3-reparse（permissive/TopTypeExpr）
+!{}!	/tmp/verify/out4.txt 1012行目; /tmp/verify/out4.txt 1013行目; /tmp/verify/out4.txt 1014行目; ほか1か所	—	publish 結果 !!{}、P3-reparse（permissive/TopTypeExpr）
+!??=	/tmp/verify/out4.txt 1016行目; /tmp/verify/out4.txt 1017行目; /tmp/verify/out4.txt 1018行目; ほか1か所	—	publish 結果 ?!?=、P3-reparse（permissive/TopTypeExpr）
+!??...	/tmp/verify/out4.txt 1020行目; /tmp/verify/out4.txt 1021行目; /tmp/verify/out4.txt 1022行目; ほか1か所	—	publish 結果 ...?!?、P3-reparse（permissive/TopTypeExpr）
+!?? 	/tmp/verify/out4.txt 1024行目; /tmp/verify/out4.txt 1025行目; /tmp/verify/out4.txt 1026行目; ほか1か所	—	publish 結果 ?!?、P3-reparse（permissive/TopTypeExpr）
+!?!=	/tmp/verify/out4.txt 1028行目; /tmp/verify/out4.txt 1029行目; /tmp/verify/out4.txt 1030行目; ほか1か所	—	publish 結果 !!?=、P3-reparse（permissive/TopTypeExpr）
+!?!...	/tmp/verify/out4.txt 1032行目; /tmp/verify/out4.txt 1033行目; /tmp/verify/out4.txt 1034行目; ほか1か所	—	publish 結果 ...!!?、P3-reparse（permissive/TopTypeExpr）
+!?! 	/tmp/verify/out4.txt 1036行目; /tmp/verify/out4.txt 1037行目; /tmp/verify/out4.txt 1038行目; ほか1か所	—	publish 結果 !!?、P3-reparse（permissive/TopTypeExpr）
+!? ?	/tmp/verify/out4.txt 1040行目; /tmp/verify/out4.txt 1041行目; /tmp/verify/out4.txt 1042行目; ほか1か所	—	publish 結果 ?!?、P3-reparse（permissive/TopTypeExpr）
+!? !	/tmp/verify/out4.txt 1044行目; /tmp/verify/out4.txt 1045行目; /tmp/verify/out4.txt 1046行目; ほか1か所	—	publish 結果 !!?、P3-reparse（permissive/TopTypeExpr）
+!functiona?	/tmp/verify/out4.txt 1048行目; /tmp/verify/out4.txt 1049行目; /tmp/verify/out4.txt 1050行目; ほか1か所	—	publish 結果 ?!functiona、P3-reparse（permissive/TopTypeExpr）
+!functiona!	/tmp/verify/out4.txt 1052行目; /tmp/verify/out4.txt 1053行目; /tmp/verify/out4.txt 1054行目; ほか1か所	—	publish 結果 !!functiona、P3-reparse（permissive/TopTypeExpr）
+!function?=	/tmp/verify/out4.txt 1056行目; /tmp/verify/out4.txt 1057行目; /tmp/verify/out4.txt 1058行目; ほか1か所	—	publish 結果 ?!function=、P3-reparse（permissive/TopTypeExpr）
+!function?...	/tmp/verify/out4.txt 1060行目; /tmp/verify/out4.txt 1061行目; /tmp/verify/out4.txt 1062行目; ほか1か所	—	publish 結果 ...?!function、P3-reparse（permissive/TopTypeExpr）
+!function? 	/tmp/verify/out4.txt 1064行目; /tmp/verify/out4.txt 1065行目; /tmp/verify/out4.txt 1066行目; ほか1か所	—	publish 結果 ?!function、P3-reparse（permissive/TopTypeExpr）
+!function!=	/tmp/verify/out4.txt 1068行目; /tmp/verify/out4.txt 1069行目; /tmp/verify/out4.txt 1070行目; ほか1か所	—	publish 結果 !!function=、P3-reparse（permissive/TopTypeExpr）
+!function!...	/tmp/verify/out4.txt 1072行目; /tmp/verify/out4.txt 1073行目; /tmp/verify/out4.txt 1074行目; ほか1か所	—	publish 結果 ...!!function、P3-reparse（permissive/TopTypeExpr）
+!function! 	/tmp/verify/out4.txt 1076行目; /tmp/verify/out4.txt 1077行目; /tmp/verify/out4.txt 1078行目; ほか1か所	—	publish 結果 !!function、P3-reparse（permissive/TopTypeExpr）
+!functionfunction?	/tmp/verify/out4.txt 1080行目; /tmp/verify/out4.txt 1081行目; /tmp/verify/out4.txt 1082行目; ほか1か所	—	publish 結果 ?!functionfunction、P3-reparse（permissive/TopTypeExpr）
+!functionfunction!	/tmp/verify/out4.txt 1084行目; /tmp/verify/out4.txt 1085行目; /tmp/verify/out4.txt 1086行目; ほか1か所	—	publish 結果 !!functionfunction、P3-reparse（permissive/TopTypeExpr）
+!functionnew?	/tmp/verify/out4.txt 1088行目; /tmp/verify/out4.txt 1089行目; /tmp/verify/out4.txt 1090行目; ほか1か所	—	publish 結果 ?!functionnew、P3-reparse（permissive/TopTypeExpr）
+!functionnew!	/tmp/verify/out4.txt 1092行目; /tmp/verify/out4.txt 1093行目; /tmp/verify/out4.txt 1094行目; ほか1か所	—	publish 結果 !!functionnew、P3-reparse（permissive/TopTypeExpr）
+!functiontypeof?	/tmp/verify/out4.txt 1096行目; /tmp/verify/out4.txt 1097行目; /tmp/verify/out4.txt 1098行目; ほか1か所	—	publish 結果 ?!functiontypeof、P3-reparse（permissive/TopTypeExpr）
+!functiontypeof!	/tmp/verify/out4.txt 1100行目; /tmp/verify/out4.txt 1101行目; /tmp/verify/out4.txt 1102行目; ほか1か所	—	publish 結果 !!functiontypeof、P3-reparse（permissive/TopTypeExpr）
+!functionkeyof?	/tmp/verify/out4.txt 1104行目; /tmp/verify/out4.txt 1105行目; /tmp/verify/out4.txt 1106行目; ほか1か所	—	publish 結果 ?!functionkeyof、P3-reparse（permissive/TopTypeExpr）
+!functionkeyof!	/tmp/verify/out4.txt 1108行目; /tmp/verify/out4.txt 1109行目; /tmp/verify/out4.txt 1110行目; ほか1か所	—	publish 結果 !!functionkeyof、P3-reparse（permissive/TopTypeExpr）
+!functionimport?	/tmp/verify/out4.txt 1112行目; /tmp/verify/out4.txt 1113行目; /tmp/verify/out4.txt 1114行目; ほか1か所	—	publish 結果 ?!functionimport、P3-reparse（permissive/TopTypeExpr）
+!functionimport!	/tmp/verify/out4.txt 1116行目; /tmp/verify/out4.txt 1117行目; /tmp/verify/out4.txt 1118行目; ほか1か所	—	publish 結果 !!functionimport、P3-reparse（permissive/TopTypeExpr）
+!function1?	/tmp/verify/out4.txt 1120行目; /tmp/verify/out4.txt 1121行目; /tmp/verify/out4.txt 1122行目; ほか1か所	—	publish 結果 ?!function1、P3-reparse（permissive/TopTypeExpr）
+!function1!	/tmp/verify/out4.txt 1124行目; /tmp/verify/out4.txt 1125行目; /tmp/verify/out4.txt 1126行目; ほか1か所	—	publish 結果 !!function1、P3-reparse（permissive/TopTypeExpr）
+!function ?	/tmp/verify/out4.txt 1128行目; /tmp/verify/out4.txt 1129行目; /tmp/verify/out4.txt 1130行目; ほか1か所	—	publish 結果 ?!function、P3-reparse（permissive/TopTypeExpr）
+!function !	/tmp/verify/out4.txt 1132行目; /tmp/verify/out4.txt 1133行目; /tmp/verify/out4.txt 1134行目; ほか1か所	—	publish 結果 !!function、P3-reparse（permissive/TopTypeExpr）
+!newa?	/tmp/verify/out4.txt 1136行目; /tmp/verify/out4.txt 1137行目; /tmp/verify/out4.txt 1138行目; ほか1か所	—	publish 結果 ?!newa、P3-reparse（permissive/TopTypeExpr）
+!newa!	/tmp/verify/out4.txt 1140行目; /tmp/verify/out4.txt 1141行目; /tmp/verify/out4.txt 1142行目; ほか1か所	—	publish 結果 !!newa、P3-reparse（permissive/TopTypeExpr）
+!new?=	/tmp/verify/out4.txt 1144行目; /tmp/verify/out4.txt 1145行目; /tmp/verify/out4.txt 1146行目; ほか1か所	—	publish 結果 ?!new=、P3-reparse（permissive/TopTypeExpr）
+!new?...	/tmp/verify/out4.txt 1148行目; /tmp/verify/out4.txt 1149行目; /tmp/verify/out4.txt 1150行目; ほか1か所	—	publish 結果 ...?!new、P3-reparse（permissive/TopTypeExpr）
+!new? 	/tmp/verify/out4.txt 1152行目; /tmp/verify/out4.txt 1153行目; /tmp/verify/out4.txt 1154行目; ほか1か所	—	publish 結果 ?!new、P3-reparse（permissive/TopTypeExpr）
+!new!=	/tmp/verify/out4.txt 1156行目; /tmp/verify/out4.txt 1157行目; /tmp/verify/out4.txt 1158行目; ほか1か所	—	publish 結果 !!new=、P3-reparse（permissive/TopTypeExpr）
+!new!...	/tmp/verify/out4.txt 1160行目; /tmp/verify/out4.txt 1161行目; /tmp/verify/out4.txt 1162行目; ほか1か所	—	publish 結果 ...!!new、P3-reparse（permissive/TopTypeExpr）
+!new! 	/tmp/verify/out4.txt 1164行目; /tmp/verify/out4.txt 1165行目; /tmp/verify/out4.txt 1166行目; ほか1か所	—	publish 結果 !!new、P3-reparse（permissive/TopTypeExpr）
+!newfunction?	/tmp/verify/out4.txt 1168行目; /tmp/verify/out4.txt 1169行目; /tmp/verify/out4.txt 1170行目; ほか1か所	—	publish 結果 ?!newfunction、P3-reparse（permissive/TopTypeExpr）
+!newfunction!	/tmp/verify/out4.txt 1172行目; /tmp/verify/out4.txt 1173行目; /tmp/verify/out4.txt 1174行目; ほか1か所	—	publish 結果 !!newfunction、P3-reparse（permissive/TopTypeExpr）
+!newnew?	/tmp/verify/out4.txt 1176行目; /tmp/verify/out4.txt 1177行目; /tmp/verify/out4.txt 1178行目; ほか1か所	—	publish 結果 ?!newnew、P3-reparse（permissive/TopTypeExpr）
+!newnew!	/tmp/verify/out4.txt 1180行目; /tmp/verify/out4.txt 1181行目; /tmp/verify/out4.txt 1182行目; ほか1か所	—	publish 結果 !!newnew、P3-reparse（permissive/TopTypeExpr）
+!newtypeof?	/tmp/verify/out4.txt 1184行目; /tmp/verify/out4.txt 1185行目; /tmp/verify/out4.txt 1186行目; ほか1か所	—	publish 結果 ?!newtypeof、P3-reparse（permissive/TopTypeExpr）
+!newtypeof!	/tmp/verify/out4.txt 1188行目; /tmp/verify/out4.txt 1189行目; /tmp/verify/out4.txt 1190行目; ほか1か所	—	publish 結果 !!newtypeof、P3-reparse（permissive/TopTypeExpr）
+!newkeyof?	/tmp/verify/out4.txt 1192行目; /tmp/verify/out4.txt 1193行目; /tmp/verify/out4.txt 1194行目; ほか1か所	—	publish 結果 ?!newkeyof、P3-reparse（permissive/TopTypeExpr）
+!newkeyof!	/tmp/verify/out4.txt 1196行目; /tmp/verify/out4.txt 1197行目; /tmp/verify/out4.txt 1198行目; ほか1か所	—	publish 結果 !!newkeyof、P3-reparse（permissive/TopTypeExpr）
+!newimport?	/tmp/verify/out4.txt 1200行目; /tmp/verify/out4.txt 1201行目; /tmp/verify/out4.txt 1202行目; ほか1か所	—	publish 結果 ?!newimport、P3-reparse（permissive/TopTypeExpr）
+!newimport!	/tmp/verify/out4.txt 1204行目; /tmp/verify/out4.txt 1205行目; /tmp/verify/out4.txt 1206行目; ほか1か所	—	publish 結果 !!newimport、P3-reparse（permissive/TopTypeExpr）
+!new1?	/tmp/verify/out4.txt 1208行目; /tmp/verify/out4.txt 1209行目; /tmp/verify/out4.txt 1210行目; ほか1か所	—	publish 結果 ?!new1、P3-reparse（permissive/TopTypeExpr）
+!new1!	/tmp/verify/out4.txt 1212行目; /tmp/verify/out4.txt 1213行目; /tmp/verify/out4.txt 1214行目; ほか1か所	—	publish 結果 !!new1、P3-reparse（permissive/TopTypeExpr）
+!new ?	/tmp/verify/out4.txt 1216行目; /tmp/verify/out4.txt 1217行目; /tmp/verify/out4.txt 1218行目; ほか1か所	—	publish 結果 ?!new、P3-reparse（permissive/TopTypeExpr）
+!new !	/tmp/verify/out4.txt 1220行目; /tmp/verify/out4.txt 1221行目; /tmp/verify/out4.txt 1222行目; ほか1か所	—	publish 結果 !!new、P3-reparse（permissive/TopTypeExpr）
+!'x'?=	/tmp/verify/out4.txt 1224行目; /tmp/verify/out4.txt 1225行目; /tmp/verify/out4.txt 1226行目; ほか1か所	—	publish 結果 ?!'x'=、P3-reparse（permissive/TopTypeExpr）
+!'x'?...	/tmp/verify/out4.txt 1228行目; /tmp/verify/out4.txt 1229行目; /tmp/verify/out4.txt 1230行目; ほか1か所	—	publish 結果 ...?!'x'、P3-reparse（permissive/TopTypeExpr）
+!'x'? 	/tmp/verify/out4.txt 1232行目; /tmp/verify/out4.txt 1233行目; /tmp/verify/out4.txt 1234行目; ほか1か所	—	publish 結果 ?!'x'、P3-reparse（permissive/TopTypeExpr）
+!'x'!=	/tmp/verify/out4.txt 1236行目; /tmp/verify/out4.txt 1237行目; /tmp/verify/out4.txt 1238行目; ほか1か所	—	publish 結果 !!'x'=、P3-reparse（permissive/TopTypeExpr）
+!'x'!...	/tmp/verify/out4.txt 1240行目; /tmp/verify/out4.txt 1241行目; /tmp/verify/out4.txt 1242行目; ほか1か所	—	publish 結果 ...!!'x'、P3-reparse（permissive/TopTypeExpr）
+!'x'! 	/tmp/verify/out4.txt 1244行目; /tmp/verify/out4.txt 1245行目; /tmp/verify/out4.txt 1246行目; ほか1か所	—	publish 結果 !!'x'、P3-reparse（permissive/TopTypeExpr）
+!'x' ?	/tmp/verify/out4.txt 1248行目; /tmp/verify/out4.txt 1249行目; /tmp/verify/out4.txt 1250行目; ほか1か所	—	publish 結果 ?!'x'、P3-reparse（permissive/TopTypeExpr）
+!'x' !	/tmp/verify/out4.txt 1252行目; /tmp/verify/out4.txt 1253行目; /tmp/verify/out4.txt 1254行目; ほか1か所	—	publish 結果 !!'x'、P3-reparse（permissive/TopTypeExpr）
+!typeofa?	/tmp/verify/out4.txt 1256行目; /tmp/verify/out4.txt 1257行目; /tmp/verify/out4.txt 1258行目; ほか1か所	—	publish 結果 ?!typeofa、P3-reparse（permissive/TopTypeExpr）
+!typeofa!	/tmp/verify/out4.txt 1260行目; /tmp/verify/out4.txt 1261行目; /tmp/verify/out4.txt 1262行目; ほか1か所	—	publish 結果 !!typeofa、P3-reparse（permissive/TopTypeExpr）
+!typeof?=	/tmp/verify/out4.txt 1264行目; /tmp/verify/out4.txt 1265行目; /tmp/verify/out4.txt 1266行目; ほか1か所	—	publish 結果 ?!typeof=、P3-reparse（permissive/TopTypeExpr）
+!typeof?...	/tmp/verify/out4.txt 1268行目; /tmp/verify/out4.txt 1269行目; /tmp/verify/out4.txt 1270行目; ほか1か所	—	publish 結果 ...?!typeof、P3-reparse（permissive/TopTypeExpr）
+!typeof? 	/tmp/verify/out4.txt 1272行目; /tmp/verify/out4.txt 1273行目; /tmp/verify/out4.txt 1274行目; ほか1か所	—	publish 結果 ?!typeof、P3-reparse（permissive/TopTypeExpr）
+!typeof!=	/tmp/verify/out4.txt 1276行目; /tmp/verify/out4.txt 1277行目; /tmp/verify/out4.txt 1278行目; ほか1か所	—	publish 結果 !!typeof=、P3-reparse（permissive/TopTypeExpr）
+!typeof!...	/tmp/verify/out4.txt 1280行目; /tmp/verify/out4.txt 1281行目; /tmp/verify/out4.txt 1282行目; ほか1か所	—	publish 結果 ...!!typeof、P3-reparse（permissive/TopTypeExpr）
+!typeof! 	/tmp/verify/out4.txt 1284行目; /tmp/verify/out4.txt 1285行目; /tmp/verify/out4.txt 1286行目; ほか1か所	—	publish 結果 !!typeof、P3-reparse（permissive/TopTypeExpr）
+!typeoffunction?	/tmp/verify/out4.txt 1288行目; /tmp/verify/out4.txt 1289行目; /tmp/verify/out4.txt 1290行目; ほか1か所	—	publish 結果 ?!typeoffunction、P3-reparse（permissive/TopTypeExpr）
+!typeoffunction!	/tmp/verify/out4.txt 1292行目; /tmp/verify/out4.txt 1293行目; /tmp/verify/out4.txt 1294行目; ほか1か所	—	publish 結果 !!typeoffunction、P3-reparse（permissive/TopTypeExpr）
+!typeofnew?	/tmp/verify/out4.txt 1296行目; /tmp/verify/out4.txt 1297行目; /tmp/verify/out4.txt 1298行目; ほか1か所	—	publish 結果 ?!typeofnew、P3-reparse（permissive/TopTypeExpr）
+!typeofnew!	/tmp/verify/out4.txt 1300行目; /tmp/verify/out4.txt 1301行目; /tmp/verify/out4.txt 1302行目; ほか1か所	—	publish 結果 !!typeofnew、P3-reparse（permissive/TopTypeExpr）
+!typeoftypeof?	/tmp/verify/out4.txt 1304行目; /tmp/verify/out4.txt 1305行目; /tmp/verify/out4.txt 1306行目; ほか1か所	—	publish 結果 ?!typeoftypeof、P3-reparse（permissive/TopTypeExpr）
+!typeoftypeof!	/tmp/verify/out4.txt 1308行目; /tmp/verify/out4.txt 1309行目; /tmp/verify/out4.txt 1310行目; ほか1か所	—	publish 結果 !!typeoftypeof、P3-reparse（permissive/TopTypeExpr）
+!typeofkeyof?	/tmp/verify/out4.txt 1312行目; /tmp/verify/out4.txt 1313行目; /tmp/verify/out4.txt 1314行目; ほか1か所	—	publish 結果 ?!typeofkeyof、P3-reparse（permissive/TopTypeExpr）
+!typeofkeyof!	/tmp/verify/out4.txt 1316行目; /tmp/verify/out4.txt 1317行目; /tmp/verify/out4.txt 1318行目; ほか1か所	—	publish 結果 !!typeofkeyof、P3-reparse（permissive/TopTypeExpr）
+!typeofimport?	/tmp/verify/out4.txt 1320行目; /tmp/verify/out4.txt 1321行目; /tmp/verify/out4.txt 1322行目; ほか1か所	—	publish 結果 ?!typeofimport、P3-reparse（permissive/TopTypeExpr）
+!typeofimport!	/tmp/verify/out4.txt 1324行目; /tmp/verify/out4.txt 1325行目; /tmp/verify/out4.txt 1326行目; ほか1か所	—	publish 結果 !!typeofimport、P3-reparse（permissive/TopTypeExpr）
+!typeof1?	/tmp/verify/out4.txt 1328行目; /tmp/verify/out4.txt 1329行目; /tmp/verify/out4.txt 1330行目; ほか1か所	—	publish 結果 ?!typeof1、P3-reparse（permissive/TopTypeExpr）
+!typeof1!	/tmp/verify/out4.txt 1332行目; /tmp/verify/out4.txt 1333行目; /tmp/verify/out4.txt 1334行目; ほか1か所	—	publish 結果 !!typeof1、P3-reparse（permissive/TopTypeExpr）
+!typeof ?	/tmp/verify/out4.txt 1336行目; /tmp/verify/out4.txt 1337行目; /tmp/verify/out4.txt 1338行目; ほか1か所	—	publish 結果 ?!typeof、P3-reparse（permissive/TopTypeExpr）
+!typeof !	/tmp/verify/out4.txt 1340行目; /tmp/verify/out4.txt 1341行目; /tmp/verify/out4.txt 1342行目; ほか1か所	—	publish 結果 !!typeof、P3-reparse（permissive/TopTypeExpr）
+!keyofa?	/tmp/verify/out4.txt 1344行目; /tmp/verify/out4.txt 1345行目; /tmp/verify/out4.txt 1346行目; ほか1か所	—	publish 結果 ?!keyofa、P3-reparse（permissive/TopTypeExpr）
+!keyofa!	/tmp/verify/out4.txt 1348行目; /tmp/verify/out4.txt 1349行目; /tmp/verify/out4.txt 1350行目; ほか1か所	—	publish 結果 !!keyofa、P3-reparse（permissive/TopTypeExpr）
+!keyof?=	/tmp/verify/out4.txt 1352行目; /tmp/verify/out4.txt 1353行目; /tmp/verify/out4.txt 1354行目; ほか1か所	—	publish 結果 ?!keyof=、P3-reparse（permissive/TopTypeExpr）
+!keyof?...	/tmp/verify/out4.txt 1356行目; /tmp/verify/out4.txt 1357行目; /tmp/verify/out4.txt 1358行目; ほか1か所	—	publish 結果 ...?!keyof、P3-reparse（permissive/TopTypeExpr）
+!keyof? 	/tmp/verify/out4.txt 1360行目; /tmp/verify/out4.txt 1361行目; /tmp/verify/out4.txt 1362行目; ほか1か所	—	publish 結果 ?!keyof、P3-reparse（permissive/TopTypeExpr）
+!keyof!=	/tmp/verify/out4.txt 1364行目; /tmp/verify/out4.txt 1365行目; /tmp/verify/out4.txt 1366行目; ほか1か所	—	publish 結果 !!keyof=、P3-reparse（permissive/TopTypeExpr）
+!keyof!...	/tmp/verify/out4.txt 1368行目; /tmp/verify/out4.txt 1369行目; /tmp/verify/out4.txt 1370行目; ほか1か所	—	publish 結果 ...!!keyof、P3-reparse（permissive/TopTypeExpr）
+!keyof! 	/tmp/verify/out4.txt 1372行目; /tmp/verify/out4.txt 1373行目; /tmp/verify/out4.txt 1374行目; ほか1か所	—	publish 結果 !!keyof、P3-reparse（permissive/TopTypeExpr）
+!keyoffunction?	/tmp/verify/out4.txt 1376行目; /tmp/verify/out4.txt 1377行目; /tmp/verify/out4.txt 1378行目; ほか1か所	—	publish 結果 ?!keyoffunction、P3-reparse（permissive/TopTypeExpr）
+!keyoffunction!	/tmp/verify/out4.txt 1380行目; /tmp/verify/out4.txt 1381行目; /tmp/verify/out4.txt 1382行目; ほか1か所	—	publish 結果 !!keyoffunction、P3-reparse（permissive/TopTypeExpr）
+!keyofnew?	/tmp/verify/out4.txt 1384行目; /tmp/verify/out4.txt 1385行目; /tmp/verify/out4.txt 1386行目; ほか1か所	—	publish 結果 ?!keyofnew、P3-reparse（permissive/TopTypeExpr）
+!keyofnew!	/tmp/verify/out4.txt 1388行目; /tmp/verify/out4.txt 1389行目; /tmp/verify/out4.txt 1390行目; ほか1か所	—	publish 結果 !!keyofnew、P3-reparse（permissive/TopTypeExpr）
+!keyoftypeof?	/tmp/verify/out4.txt 1392行目; /tmp/verify/out4.txt 1393行目; /tmp/verify/out4.txt 1394行目; ほか1か所	—	publish 結果 ?!keyoftypeof、P3-reparse（permissive/TopTypeExpr）
+!keyoftypeof!	/tmp/verify/out4.txt 1396行目; /tmp/verify/out4.txt 1397行目; /tmp/verify/out4.txt 1398行目; ほか1か所	—	publish 結果 !!keyoftypeof、P3-reparse（permissive/TopTypeExpr）
+!keyofkeyof?	/tmp/verify/out4.txt 1400行目; /tmp/verify/out4.txt 1401行目; /tmp/verify/out4.txt 1402行目; ほか1か所	—	publish 結果 ?!keyofkeyof、P3-reparse（permissive/TopTypeExpr）
+!keyofkeyof!	/tmp/verify/out4.txt 1404行目; /tmp/verify/out4.txt 1405行目; /tmp/verify/out4.txt 1406行目; ほか1か所	—	publish 結果 !!keyofkeyof、P3-reparse（permissive/TopTypeExpr）
+!keyofimport?	/tmp/verify/out4.txt 1408行目; /tmp/verify/out4.txt 1409行目; /tmp/verify/out4.txt 1410行目; ほか1か所	—	publish 結果 ?!keyofimport、P3-reparse（permissive/TopTypeExpr）
+!keyofimport!	/tmp/verify/out4.txt 1412行目; /tmp/verify/out4.txt 1413行目; /tmp/verify/out4.txt 1414行目; ほか1か所	—	publish 結果 !!keyofimport、P3-reparse（permissive/TopTypeExpr）
+!keyof1?	/tmp/verify/out4.txt 1416行目; /tmp/verify/out4.txt 1417行目; /tmp/verify/out4.txt 1418行目; ほか1か所	—	publish 結果 ?!keyof1、P3-reparse（permissive/TopTypeExpr）
+!keyof1!	/tmp/verify/out4.txt 1420行目; /tmp/verify/out4.txt 1421行目; /tmp/verify/out4.txt 1422行目; ほか1か所	—	publish 結果 !!keyof1、P3-reparse（permissive/TopTypeExpr）
+!keyof ?	/tmp/verify/out4.txt 1424行目; /tmp/verify/out4.txt 1425行目; /tmp/verify/out4.txt 1426行目; ほか1か所	—	publish 結果 ?!keyof、P3-reparse（permissive/TopTypeExpr）
+!keyof !	/tmp/verify/out4.txt 1428行目; /tmp/verify/out4.txt 1429行目; /tmp/verify/out4.txt 1430行目; ほか1か所	—	publish 結果 !!keyof、P3-reparse（permissive/TopTypeExpr）
+!module:a?	/tmp/verify/out4.txt 1432行目; /tmp/verify/out4.txt 1433行目; /tmp/verify/out4.txt 1434行目	—	publish 結果 ?!module:a、P3-reparse（permissive/TopTypeExpr）
+!module:a!	/tmp/verify/out4.txt 1435行目; /tmp/verify/out4.txt 1436行目; /tmp/verify/out4.txt 1437行目	—	publish 結果 !!module:a、P3-reparse（permissive/TopTypeExpr）
+!module:function?	/tmp/verify/out4.txt 1438行目; /tmp/verify/out4.txt 1439行目; /tmp/verify/out4.txt 1440行目	—	publish 結果 ?!module:function、P3-reparse（permissive/TopTypeExpr）
+!module:function!	/tmp/verify/out4.txt 1441行目; /tmp/verify/out4.txt 1442行目; /tmp/verify/out4.txt 1443行目	—	publish 結果 !!module:function、P3-reparse（permissive/TopTypeExpr）
+!module:new?	/tmp/verify/out4.txt 1444行目; /tmp/verify/out4.txt 1445行目; /tmp/verify/out4.txt 1446行目	—	publish 結果 ?!module:new、P3-reparse（permissive/TopTypeExpr）
+!module:new!	/tmp/verify/out4.txt 1447行目; /tmp/verify/out4.txt 1448行目; /tmp/verify/out4.txt 1449行目	—	publish 結果 !!module:new、P3-reparse（permissive/TopTypeExpr）
+!module:'x'?	/tmp/verify/out4.txt 1450行目; /tmp/verify/out4.txt 1451行目; /tmp/verify/out4.txt 1452行目	—	publish 結果 ?!module:'x'、P3-reparse（permissive/TopTypeExpr）
+!module:'x'!	/tmp/verify/out4.txt 1453行目; /tmp/verify/out4.txt 1454行目; /tmp/verify/out4.txt 1455行目	—	publish 結果 !!module:'x'、P3-reparse（permissive/TopTypeExpr）
+!module:typeof?	/tmp/verify/out4.txt 1456行目; /tmp/verify/out4.txt 1457行目; /tmp/verify/out4.txt 1458行目	—	publish 結果 ?!module:typeof、P3-reparse（permissive/TopTypeExpr）
+!module:typeof!	/tmp/verify/out4.txt 1459行目; /tmp/verify/out4.txt 1460行目; /tmp/verify/out4.txt 1461行目	—	publish 結果 !!module:typeof、P3-reparse（permissive/TopTypeExpr）
+!module:keyof?	/tmp/verify/out4.txt 1462行目; /tmp/verify/out4.txt 1463行目; /tmp/verify/out4.txt 1464行目	—	publish 結果 ?!module:keyof、P3-reparse（permissive/TopTypeExpr）
+!module:keyof!	/tmp/verify/out4.txt 1465行目; /tmp/verify/out4.txt 1466行目; /tmp/verify/out4.txt 1467行目	—	publish 結果 !!module:keyof、P3-reparse（permissive/TopTypeExpr）
+!module:import?	/tmp/verify/out4.txt 1468行目; /tmp/verify/out4.txt 1469行目; /tmp/verify/out4.txt 1470行目	—	publish 結果 ?!module:import、P3-reparse（permissive/TopTypeExpr）
+!module:import!	/tmp/verify/out4.txt 1471行目; /tmp/verify/out4.txt 1472行目; /tmp/verify/out4.txt 1473行目	—	publish 結果 !!module:import、P3-reparse（permissive/TopTypeExpr）
+!module:1?	/tmp/verify/out4.txt 1474行目; /tmp/verify/out4.txt 1475行目; /tmp/verify/out4.txt 1476行目	—	publish 結果 ?!module:1、P3-reparse（permissive/TopTypeExpr）
+!module:1!	/tmp/verify/out4.txt 1477行目; /tmp/verify/out4.txt 1478行目; /tmp/verify/out4.txt 1479行目	—	publish 結果 !!module:1、P3-reparse（permissive/TopTypeExpr）
+!importa?	/tmp/verify/out4.txt 1480行目; /tmp/verify/out4.txt 1481行目; /tmp/verify/out4.txt 1482行目; ほか1か所	—	publish 結果 ?!importa、P3-reparse（permissive/TopTypeExpr）
+!importa!	/tmp/verify/out4.txt 1484行目; /tmp/verify/out4.txt 1485行目; /tmp/verify/out4.txt 1486行目; ほか1か所	—	publish 結果 !!importa、P3-reparse（permissive/TopTypeExpr）
+!import?=	/tmp/verify/out4.txt 1488行目; /tmp/verify/out4.txt 1489行目; /tmp/verify/out4.txt 1490行目; ほか1か所	—	publish 結果 ?!import=、P3-reparse（permissive/TopTypeExpr）
+!import?...	/tmp/verify/out4.txt 1492行目; /tmp/verify/out4.txt 1493行目; /tmp/verify/out4.txt 1494行目; ほか1か所	—	publish 結果 ...?!import、P3-reparse（permissive/TopTypeExpr）
+!import? 	/tmp/verify/out4.txt 1496行目; /tmp/verify/out4.txt 1497行目; /tmp/verify/out4.txt 1498行目; ほか1か所	—	publish 結果 ?!import、P3-reparse（permissive/TopTypeExpr）
+!import!=	/tmp/verify/out4.txt 1500行目; /tmp/verify/out4.txt 1501行目; /tmp/verify/out4.txt 1502行目; ほか1か所	—	publish 結果 !!import=、P3-reparse（permissive/TopTypeExpr）
+!import!...	/tmp/verify/out4.txt 1504行目; /tmp/verify/out4.txt 1505行目; /tmp/verify/out4.txt 1506行目; ほか1か所	—	publish 結果 ...!!import、P3-reparse（permissive/TopTypeExpr）
+!import! 	/tmp/verify/out4.txt 1508行目; /tmp/verify/out4.txt 1509行目; /tmp/verify/out4.txt 1510行目; ほか1か所	—	publish 結果 !!import、P3-reparse（permissive/TopTypeExpr）
+!importfunction?	/tmp/verify/out4.txt 1512行目; /tmp/verify/out4.txt 1513行目; /tmp/verify/out4.txt 1514行目; ほか1か所	—	publish 結果 ?!importfunction、P3-reparse（permissive/TopTypeExpr）
+!importfunction!	/tmp/verify/out4.txt 1516行目; /tmp/verify/out4.txt 1517行目; /tmp/verify/out4.txt 1518行目; ほか1か所	—	publish 結果 !!importfunction、P3-reparse（permissive/TopTypeExpr）
+!importnew?	/tmp/verify/out4.txt 1520行目; /tmp/verify/out4.txt 1521行目; /tmp/verify/out4.txt 1522行目; ほか1か所	—	publish 結果 ?!importnew、P3-reparse（permissive/TopTypeExpr）
+!importnew!	/tmp/verify/out4.txt 1524行目; /tmp/verify/out4.txt 1525行目; /tmp/verify/out4.txt 1526行目; ほか1か所	—	publish 結果 !!importnew、P3-reparse（permissive/TopTypeExpr）
+!importtypeof?	/tmp/verify/out4.txt 1528行目; /tmp/verify/out4.txt 1529行目; /tmp/verify/out4.txt 1530行目; ほか1か所	—	publish 結果 ?!importtypeof、P3-reparse（permissive/TopTypeExpr）
+!importtypeof!	/tmp/verify/out4.txt 1532行目; /tmp/verify/out4.txt 1533行目; /tmp/verify/out4.txt 1534行目; ほか1か所	—	publish 結果 !!importtypeof、P3-reparse（permissive/TopTypeExpr）
+!importkeyof?	/tmp/verify/out4.txt 1536行目; /tmp/verify/out4.txt 1537行目; /tmp/verify/out4.txt 1538行目; ほか1か所	—	publish 結果 ?!importkeyof、P3-reparse（permissive/TopTypeExpr）
+!importkeyof!	/tmp/verify/out4.txt 1540行目; /tmp/verify/out4.txt 1541行目; /tmp/verify/out4.txt 1542行目; ほか1か所	—	publish 結果 !!importkeyof、P3-reparse（permissive/TopTypeExpr）
+!importimport?	/tmp/verify/out4.txt 1544行目; /tmp/verify/out4.txt 1545行目; /tmp/verify/out4.txt 1546行目; ほか1か所	—	publish 結果 ?!importimport、P3-reparse（permissive/TopTypeExpr）
+!importimport!	/tmp/verify/out4.txt 1548行目; /tmp/verify/out4.txt 1549行目; /tmp/verify/out4.txt 1550行目; ほか1か所	—	publish 結果 !!importimport、P3-reparse（permissive/TopTypeExpr）
+!import1?	/tmp/verify/out4.txt 1552行目; /tmp/verify/out4.txt 1553行目; /tmp/verify/out4.txt 1554行目; ほか1か所	—	publish 結果 ?!import1、P3-reparse（permissive/TopTypeExpr）
+!import1!	/tmp/verify/out4.txt 1556行目; /tmp/verify/out4.txt 1557行目; /tmp/verify/out4.txt 1558行目; ほか1か所	—	publish 結果 !!import1、P3-reparse（permissive/TopTypeExpr）
+!import ?	/tmp/verify/out4.txt 1560行目; /tmp/verify/out4.txt 1561行目; /tmp/verify/out4.txt 1562行目; ほか1か所	—	publish 結果 ?!import、P3-reparse（permissive/TopTypeExpr）
+!import !	/tmp/verify/out4.txt 1564行目; /tmp/verify/out4.txt 1565行目; /tmp/verify/out4.txt 1566行目; ほか1か所	—	publish 結果 !!import、P3-reparse（permissive/TopTypeExpr）
+!1?=	/tmp/verify/out4.txt 1568行目; /tmp/verify/out4.txt 1569行目; /tmp/verify/out4.txt 1570行目; ほか1か所	—	publish 結果 ?!1=、P3-reparse（permissive/TopTypeExpr）
+!1?...	/tmp/verify/out4.txt 1572行目; /tmp/verify/out4.txt 1573行目; /tmp/verify/out4.txt 1574行目; ほか1か所	—	publish 結果 ...?!1、P3-reparse（permissive/TopTypeExpr）
+!1? 	/tmp/verify/out4.txt 1576行目; /tmp/verify/out4.txt 1577行目; /tmp/verify/out4.txt 1578行目; ほか1か所	—	publish 結果 ?!1、P3-reparse（permissive/TopTypeExpr）
+!1!=	/tmp/verify/out4.txt 1580行目; /tmp/verify/out4.txt 1581行目; /tmp/verify/out4.txt 1582行目; ほか1か所	—	publish 結果 !!1=、P3-reparse（permissive/TopTypeExpr）
+!1!...	/tmp/verify/out4.txt 1584行目; /tmp/verify/out4.txt 1585行目; /tmp/verify/out4.txt 1586行目; ほか1か所	—	publish 結果 ...!!1、P3-reparse（permissive/TopTypeExpr）
+!1! 	/tmp/verify/out4.txt 1588行目; /tmp/verify/out4.txt 1589行目; /tmp/verify/out4.txt 1590行目; ほか1か所	—	publish 結果 !!1、P3-reparse（permissive/TopTypeExpr）
+!11?	/tmp/verify/out4.txt 1592行目; /tmp/verify/out4.txt 1593行目; /tmp/verify/out4.txt 1594行目; ほか1か所	—	publish 結果 ?!11、P3-reparse（permissive/TopTypeExpr）
+!11!	/tmp/verify/out4.txt 1596行目; /tmp/verify/out4.txt 1597行目; /tmp/verify/out4.txt 1598行目; ほか1か所	—	publish 結果 !!11、P3-reparse（permissive/TopTypeExpr）
+!1 ?	/tmp/verify/out4.txt 1600行目; /tmp/verify/out4.txt 1601行目; /tmp/verify/out4.txt 1602行目; ほか1か所	—	publish 結果 ?!1、P3-reparse（permissive/TopTypeExpr）
+!1 !	/tmp/verify/out4.txt 1604行目; /tmp/verify/out4.txt 1605行目; /tmp/verify/out4.txt 1606行目; ほか1か所	—	publish 結果 !!1、P3-reparse（permissive/TopTypeExpr）
+! a?	/tmp/verify/out4.txt 1608行目; /tmp/verify/out4.txt 1609行目; /tmp/verify/out4.txt 1610行目; ほか1か所	—	publish 結果 ?!a、P3-reparse（permissive/TopTypeExpr）
+! a!	/tmp/verify/out4.txt 1612行目; /tmp/verify/out4.txt 1613行目; /tmp/verify/out4.txt 1614行目; ほか1か所	—	publish 結果 !!a、P3-reparse（permissive/TopTypeExpr）
+! []?	/tmp/verify/out4.txt 1616行目; /tmp/verify/out4.txt 1617行目	—	publish 結果 ?![]、P3-reparse（permissive/TopTypeExpr）
+! []!	/tmp/verify/out4.txt 1618行目; /tmp/verify/out4.txt 1619行目	—	publish 結果 !![]、P3-reparse（permissive/TopTypeExpr）
+! ??	/tmp/verify/out4.txt 1620行目; /tmp/verify/out4.txt 1621行目; /tmp/verify/out4.txt 1622行目; ほか1か所	—	publish 結果 ?!?、P3-reparse（permissive/TopTypeExpr）
+! ?!	/tmp/verify/out4.txt 1624行目; /tmp/verify/out4.txt 1625行目; /tmp/verify/out4.txt 1626行目; ほか1か所	—	publish 結果 !!?、P3-reparse（permissive/TopTypeExpr）
+! function?	/tmp/verify/out4.txt 1628行目; /tmp/verify/out4.txt 1629行目; /tmp/verify/out4.txt 1630行目; ほか1か所	—	publish 結果 ?!function、P3-reparse（permissive/TopTypeExpr）
+! function!	/tmp/verify/out4.txt 1632行目; /tmp/verify/out4.txt 1633行目; /tmp/verify/out4.txt 1634行目; ほか1か所	—	publish 結果 !!function、P3-reparse（permissive/TopTypeExpr）
+! new?	/tmp/verify/out4.txt 1636行目; /tmp/verify/out4.txt 1637行目; /tmp/verify/out4.txt 1638行目; ほか1か所	—	publish 結果 ?!new、P3-reparse（permissive/TopTypeExpr）
+! new!	/tmp/verify/out4.txt 1640行目; /tmp/verify/out4.txt 1641行目; /tmp/verify/out4.txt 1642行目; ほか1か所	—	publish 結果 !!new、P3-reparse（permissive/TopTypeExpr）
+! 'x'?	/tmp/verify/out4.txt 1644行目; /tmp/verify/out4.txt 1645行目; /tmp/verify/out4.txt 1646行目; ほか1か所	—	publish 結果 ?!'x'、P3-reparse（permissive/TopTypeExpr）
+! 'x'!	/tmp/verify/out4.txt 1648行目; /tmp/verify/out4.txt 1649行目; /tmp/verify/out4.txt 1650行目; ほか1か所	—	publish 結果 !!'x'、P3-reparse（permissive/TopTypeExpr）
+! typeof?	/tmp/verify/out4.txt 1652行目; /tmp/verify/out4.txt 1653行目; /tmp/verify/out4.txt 1654行目; ほか1か所	—	publish 結果 ?!typeof、P3-reparse（permissive/TopTypeExpr）
+! typeof!	/tmp/verify/out4.txt 1656行目; /tmp/verify/out4.txt 1657行目; /tmp/verify/out4.txt 1658行目; ほか1か所	—	publish 結果 !!typeof、P3-reparse（permissive/TopTypeExpr）
+! keyof?	/tmp/verify/out4.txt 1660行目; /tmp/verify/out4.txt 1661行目; /tmp/verify/out4.txt 1662行目; ほか1か所	—	publish 結果 ?!keyof、P3-reparse（permissive/TopTypeExpr）
+! keyof!	/tmp/verify/out4.txt 1664行目; /tmp/verify/out4.txt 1665行目; /tmp/verify/out4.txt 1666行目; ほか1か所	—	publish 結果 !!keyof、P3-reparse（permissive/TopTypeExpr）
+! import?	/tmp/verify/out4.txt 1668行目; /tmp/verify/out4.txt 1669行目; /tmp/verify/out4.txt 1670行目; ほか1か所	—	publish 結果 ?!import、P3-reparse（permissive/TopTypeExpr）
+! import!	/tmp/verify/out4.txt 1672行目; /tmp/verify/out4.txt 1673行目; /tmp/verify/out4.txt 1674行目; ほか1か所	—	publish 結果 !!import、P3-reparse（permissive/TopTypeExpr）
+! 1?	/tmp/verify/out4.txt 1676行目; /tmp/verify/out4.txt 1677行目; /tmp/verify/out4.txt 1678行目; ほか1か所	—	publish 結果 ?!1、P3-reparse（permissive/TopTypeExpr）
+! 1!	/tmp/verify/out4.txt 1680行目; /tmp/verify/out4.txt 1681行目; /tmp/verify/out4.txt 1682行目; ほか1か所	—	publish 結果 !!1、P3-reparse（permissive/TopTypeExpr）
+...?a?	/tmp/verify/out4.txt 1684行目; /tmp/verify/out4.txt 1685行目; /tmp/verify/out4.txt 1686行目; ほか1か所	—	publish 結果 ...??a、P3-reparse（permissive/TopTypeExpr）
+...?a!	/tmp/verify/out4.txt 1688行目; /tmp/verify/out4.txt 1689行目; /tmp/verify/out4.txt 1690行目; ほか1か所	—	publish 結果 ...!?a、P3-reparse（permissive/TopTypeExpr）
+...?[]?	/tmp/verify/out4.txt 1692行目; /tmp/verify/out4.txt 1693行目	—	publish 結果 ...??[]、P3-reparse（permissive/TopTypeExpr）
+...?[]!	/tmp/verify/out4.txt 1694行目; /tmp/verify/out4.txt 1695行目	—	publish 結果 ...!?[]、P3-reparse（permissive/TopTypeExpr）
+...?function?	/tmp/verify/out4.txt 1696行目; /tmp/verify/out4.txt 1697行目; /tmp/verify/out4.txt 1698行目; ほか1か所	—	publish 結果 ...??function、P3-reparse（permissive/TopTypeExpr）
+...?function!	/tmp/verify/out4.txt 1700行目; /tmp/verify/out4.txt 1701行目; /tmp/verify/out4.txt 1702行目; ほか1か所	—	publish 結果 ...!?function、P3-reparse（permissive/TopTypeExpr）
+...?new?	/tmp/verify/out4.txt 1704行目; /tmp/verify/out4.txt 1705行目; /tmp/verify/out4.txt 1706行目; ほか1か所	—	publish 結果 ...??new、P3-reparse（permissive/TopTypeExpr）
+...?new!	/tmp/verify/out4.txt 1708行目; /tmp/verify/out4.txt 1709行目; /tmp/verify/out4.txt 1710行目; ほか1か所	—	publish 結果 ...!?new、P3-reparse（permissive/TopTypeExpr）
+...?'x'?	/tmp/verify/out4.txt 1712行目; /tmp/verify/out4.txt 1713行目; /tmp/verify/out4.txt 1714行目; ほか1か所	—	publish 結果 ...??'x'、P3-reparse（permissive/TopTypeExpr）
+...?'x'!	/tmp/verify/out4.txt 1716行目; /tmp/verify/out4.txt 1717行目; /tmp/verify/out4.txt 1718行目; ほか1か所	—	publish 結果 ...!?'x'、P3-reparse（permissive/TopTypeExpr）
+...?typeof?	/tmp/verify/out4.txt 1720行目; /tmp/verify/out4.txt 1721行目; /tmp/verify/out4.txt 1722行目; ほか1か所	—	publish 結果 ...??typeof、P3-reparse（permissive/TopTypeExpr）
+...?typeof!	/tmp/verify/out4.txt 1724行目; /tmp/verify/out4.txt 1725行目; /tmp/verify/out4.txt 1726行目; ほか1か所	—	publish 結果 ...!?typeof、P3-reparse（permissive/TopTypeExpr）
+...?keyof?	/tmp/verify/out4.txt 1728行目; /tmp/verify/out4.txt 1729行目; /tmp/verify/out4.txt 1730行目; ほか1か所	—	publish 結果 ...??keyof、P3-reparse（permissive/TopTypeExpr）
+...?keyof!	/tmp/verify/out4.txt 1732行目; /tmp/verify/out4.txt 1733行目; /tmp/verify/out4.txt 1734行目; ほか1か所	—	publish 結果 ...!?keyof、P3-reparse（permissive/TopTypeExpr）
+...?import?	/tmp/verify/out4.txt 1736行目; /tmp/verify/out4.txt 1737行目; /tmp/verify/out4.txt 1738行目; ほか1か所	—	publish 結果 ...??import、P3-reparse（permissive/TopTypeExpr）
+...?import!	/tmp/verify/out4.txt 1740行目; /tmp/verify/out4.txt 1741行目; /tmp/verify/out4.txt 1742行目; ほか1か所	—	publish 結果 ...!?import、P3-reparse（permissive/TopTypeExpr）
+...?1?	/tmp/verify/out4.txt 1744行目; /tmp/verify/out4.txt 1745行目; /tmp/verify/out4.txt 1746行目; ほか1か所	—	publish 結果 ...??1、P3-reparse（permissive/TopTypeExpr）
+...?1!	/tmp/verify/out4.txt 1748行目; /tmp/verify/out4.txt 1749行目; /tmp/verify/out4.txt 1750行目; ほか1か所	—	publish 結果 ...!?1、P3-reparse（permissive/TopTypeExpr）
+...!a?	/tmp/verify/out4.txt 1752行目; /tmp/verify/out4.txt 1753行目; /tmp/verify/out4.txt 1754行目; ほか1か所	—	publish 結果 ...?!a、P3-reparse（permissive/TopTypeExpr）
+...!a!	/tmp/verify/out4.txt 1756行目; /tmp/verify/out4.txt 1757行目; /tmp/verify/out4.txt 1758行目; ほか1か所	—	publish 結果 ...!!a、P3-reparse（permissive/TopTypeExpr）
+...![]?	/tmp/verify/out4.txt 1760行目; /tmp/verify/out4.txt 1761行目	—	publish 結果 ...?![]、P3-reparse（permissive/TopTypeExpr）
+...![]!	/tmp/verify/out4.txt 1762行目; /tmp/verify/out4.txt 1763行目	—	publish 結果 ...!![]、P3-reparse（permissive/TopTypeExpr）
+...!??	/tmp/verify/out4.txt 1764行目; /tmp/verify/out4.txt 1765行目; /tmp/verify/out4.txt 1766行目; ほか1か所	—	publish 結果 ...?!?、P3-reparse（permissive/TopTypeExpr）
+...!?!	/tmp/verify/out4.txt 1768行目; /tmp/verify/out4.txt 1769行目; /tmp/verify/out4.txt 1770行目; ほか1か所	—	publish 結果 ...!!?、P3-reparse（permissive/TopTypeExpr）
+...!function?	/tmp/verify/out4.txt 1772行目; /tmp/verify/out4.txt 1773行目; /tmp/verify/out4.txt 1774行目; ほか1か所	—	publish 結果 ...?!function、P3-reparse（permissive/TopTypeExpr）
+...!function!	/tmp/verify/out4.txt 1776行目; /tmp/verify/out4.txt 1777行目; /tmp/verify/out4.txt 1778行目; ほか1か所	—	publish 結果 ...!!function、P3-reparse（permissive/TopTypeExpr）
+...!new?	/tmp/verify/out4.txt 1780行目; /tmp/verify/out4.txt 1781行目; /tmp/verify/out4.txt 1782行目; ほか1か所	—	publish 結果 ...?!new、P3-reparse（permissive/TopTypeExpr）
+...!new!	/tmp/verify/out4.txt 1784行目; /tmp/verify/out4.txt 1785行目; /tmp/verify/out4.txt 1786行目; ほか1か所	—	publish 結果 ...!!new、P3-reparse（permissive/TopTypeExpr）
+...!'x'?	/tmp/verify/out4.txt 1788行目; /tmp/verify/out4.txt 1789行目; /tmp/verify/out4.txt 1790行目; ほか1か所	—	publish 結果 ...?!'x'、P3-reparse（permissive/TopTypeExpr）
+...!'x'!	/tmp/verify/out4.txt 1792行目; /tmp/verify/out4.txt 1793行目; /tmp/verify/out4.txt 1794行目; ほか1か所	—	publish 結果 ...!!'x'、P3-reparse（permissive/TopTypeExpr）
+...!typeof?	/tmp/verify/out4.txt 1796行目; /tmp/verify/out4.txt 1797行目; /tmp/verify/out4.txt 1798行目; ほか1か所	—	publish 結果 ...?!typeof、P3-reparse（permissive/TopTypeExpr）
+...!typeof!	/tmp/verify/out4.txt 1800行目; /tmp/verify/out4.txt 1801行目; /tmp/verify/out4.txt 1802行目; ほか1か所	—	publish 結果 ...!!typeof、P3-reparse（permissive/TopTypeExpr）
+...!keyof?	/tmp/verify/out4.txt 1804行目; /tmp/verify/out4.txt 1805行目; /tmp/verify/out4.txt 1806行目; ほか1か所	—	publish 結果 ...?!keyof、P3-reparse（permissive/TopTypeExpr）
+...!keyof!	/tmp/verify/out4.txt 1808行目; /tmp/verify/out4.txt 1809行目; /tmp/verify/out4.txt 1810行目; ほか1か所	—	publish 結果 ...!!keyof、P3-reparse（permissive/TopTypeExpr）
+...!import?	/tmp/verify/out4.txt 1812行目; /tmp/verify/out4.txt 1813行目; /tmp/verify/out4.txt 1814行目; ほか1か所	—	publish 結果 ...?!import、P3-reparse（permissive/TopTypeExpr）
+...!import!	/tmp/verify/out4.txt 1816行目; /tmp/verify/out4.txt 1817行目; /tmp/verify/out4.txt 1818行目; ほか1か所	—	publish 結果 ...!!import、P3-reparse（permissive/TopTypeExpr）
+...!1?	/tmp/verify/out4.txt 1820行目; /tmp/verify/out4.txt 1821行目; /tmp/verify/out4.txt 1822行目; ほか1か所	—	publish 結果 ...?!1、P3-reparse（permissive/TopTypeExpr）
+...!1!	/tmp/verify/out4.txt 1824行目; /tmp/verify/out4.txt 1825行目; /tmp/verify/out4.txt 1826行目; ほか1か所	—	publish 結果 ...!!1、P3-reparse（permissive/TopTypeExpr）
+ ?a?	/tmp/verify/out4.txt 1864行目; /tmp/verify/out4.txt 1865行目; /tmp/verify/out4.txt 1866行目; ほか1か所	—	publish 結果 ??a、P3-reparse（permissive/TopTypeExpr）
+ ?a!	/tmp/verify/out4.txt 1868行目; /tmp/verify/out4.txt 1869行目; /tmp/verify/out4.txt 1870行目; ほか1か所	—	publish 結果 !?a、P3-reparse（permissive/TopTypeExpr）
+ ?[]?	/tmp/verify/out4.txt 1872行目; /tmp/verify/out4.txt 1873行目	—	publish 結果 ??[]、P3-reparse（permissive/TopTypeExpr）
+ ?[]!	/tmp/verify/out4.txt 1874行目; /tmp/verify/out4.txt 1875行目	—	publish 結果 !?[]、P3-reparse（permissive/TopTypeExpr）
+ ?function?	/tmp/verify/out4.txt 1876行目; /tmp/verify/out4.txt 1877行目; /tmp/verify/out4.txt 1878行目; ほか1か所	—	publish 結果 ??function、P3-reparse（permissive/TopTypeExpr）
+ ?function!	/tmp/verify/out4.txt 1880行目; /tmp/verify/out4.txt 1881行目; /tmp/verify/out4.txt 1882行目; ほか1か所	—	publish 結果 !?function、P3-reparse（permissive/TopTypeExpr）
+ ?new?	/tmp/verify/out4.txt 1884行目; /tmp/verify/out4.txt 1885行目; /tmp/verify/out4.txt 1886行目; ほか1か所	—	publish 結果 ??new、P3-reparse（permissive/TopTypeExpr）
+ ?new!	/tmp/verify/out4.txt 1888行目; /tmp/verify/out4.txt 1889行目; /tmp/verify/out4.txt 1890行目; ほか1か所	—	publish 結果 !?new、P3-reparse（permissive/TopTypeExpr）
+ ?'x'?	/tmp/verify/out4.txt 1892行目; /tmp/verify/out4.txt 1893行目; /tmp/verify/out4.txt 1894行目; ほか1か所	—	publish 結果 ??'x'、P3-reparse（permissive/TopTypeExpr）
+ ?'x'!	/tmp/verify/out4.txt 1896行目; /tmp/verify/out4.txt 1897行目; /tmp/verify/out4.txt 1898行目; ほか1か所	—	publish 結果 !?'x'、P3-reparse（permissive/TopTypeExpr）
+ ?typeof?	/tmp/verify/out4.txt 1900行目; /tmp/verify/out4.txt 1901行目; /tmp/verify/out4.txt 1902行目; ほか1か所	—	publish 結果 ??typeof、P3-reparse（permissive/TopTypeExpr）
+ ?typeof!	/tmp/verify/out4.txt 1904行目; /tmp/verify/out4.txt 1905行目; /tmp/verify/out4.txt 1906行目; ほか1か所	—	publish 結果 !?typeof、P3-reparse（permissive/TopTypeExpr）
+ ?keyof?	/tmp/verify/out4.txt 1908行目; /tmp/verify/out4.txt 1909行目; /tmp/verify/out4.txt 1910行目; ほか1か所	—	publish 結果 ??keyof、P3-reparse（permissive/TopTypeExpr）
+ ?keyof!	/tmp/verify/out4.txt 1912行目; /tmp/verify/out4.txt 1913行目; /tmp/verify/out4.txt 1914行目; ほか1か所	—	publish 結果 !?keyof、P3-reparse（permissive/TopTypeExpr）
+ ?import?	/tmp/verify/out4.txt 1916行目; /tmp/verify/out4.txt 1917行目; /tmp/verify/out4.txt 1918行目; ほか1か所	—	publish 結果 ??import、P3-reparse（permissive/TopTypeExpr）
+ ?import!	/tmp/verify/out4.txt 1920行目; /tmp/verify/out4.txt 1921行目; /tmp/verify/out4.txt 1922行目; ほか1か所	—	publish 結果 !?import、P3-reparse（permissive/TopTypeExpr）
+ ?1?	/tmp/verify/out4.txt 1924行目; /tmp/verify/out4.txt 1925行目; /tmp/verify/out4.txt 1926行目; ほか1か所	—	publish 結果 ??1、P3-reparse（permissive/TopTypeExpr）
+ ?1!	/tmp/verify/out4.txt 1928行目; /tmp/verify/out4.txt 1929行目; /tmp/verify/out4.txt 1930行目; ほか1か所	—	publish 結果 !?1、P3-reparse（permissive/TopTypeExpr）
+ !a?	/tmp/verify/out4.txt 1932行目; /tmp/verify/out4.txt 1933行目; /tmp/verify/out4.txt 1934行目; ほか1か所	—	publish 結果 ?!a、P3-reparse（permissive/TopTypeExpr）
+ !a!	/tmp/verify/out4.txt 1936行目; /tmp/verify/out4.txt 1937行目; /tmp/verify/out4.txt 1938行目; ほか1か所	—	publish 結果 !!a、P3-reparse（permissive/TopTypeExpr）
+ ![]?	/tmp/verify/out4.txt 1940行目; /tmp/verify/out4.txt 1941行目	—	publish 結果 ?![]、P3-reparse（permissive/TopTypeExpr）
+ ![]!	/tmp/verify/out4.txt 1942行目; /tmp/verify/out4.txt 1943行目	—	publish 結果 !![]、P3-reparse（permissive/TopTypeExpr）
+ !??	/tmp/verify/out4.txt 1944行目; /tmp/verify/out4.txt 1945行目; /tmp/verify/out4.txt 1946行目; ほか1か所	—	publish 結果 ?!?、P3-reparse（permissive/TopTypeExpr）
+ !?!	/tmp/verify/out4.txt 1948行目; /tmp/verify/out4.txt 1949行目; /tmp/verify/out4.txt 1950行目; ほか1か所	—	publish 結果 !!?、P3-reparse（permissive/TopTypeExpr）
+ !function?	/tmp/verify/out4.txt 1952行目; /tmp/verify/out4.txt 1953行目; /tmp/verify/out4.txt 1954行目; ほか1か所	—	publish 結果 ?!function、P3-reparse（permissive/TopTypeExpr）
+ !function!	/tmp/verify/out4.txt 1956行目; /tmp/verify/out4.txt 1957行目; /tmp/verify/out4.txt 1958行目; ほか1か所	—	publish 結果 !!function、P3-reparse（permissive/TopTypeExpr）
+ !new?	/tmp/verify/out4.txt 1960行目; /tmp/verify/out4.txt 1961行目; /tmp/verify/out4.txt 1962行目; ほか1か所	—	publish 結果 ?!new、P3-reparse（permissive/TopTypeExpr）
+ !new!	/tmp/verify/out4.txt 1964行目; /tmp/verify/out4.txt 1965行目; /tmp/verify/out4.txt 1966行目; ほか1か所	—	publish 結果 !!new、P3-reparse（permissive/TopTypeExpr）
+ !'x'?	/tmp/verify/out4.txt 1968行目; /tmp/verify/out4.txt 1969行目; /tmp/verify/out4.txt 1970行目; ほか1か所	—	publish 結果 ?!'x'、P3-reparse（permissive/TopTypeExpr）
+ !'x'!	/tmp/verify/out4.txt 1972行目; /tmp/verify/out4.txt 1973行目; /tmp/verify/out4.txt 1974行目; ほか1か所	—	publish 結果 !!'x'、P3-reparse（permissive/TopTypeExpr）
+ !typeof?	/tmp/verify/out4.txt 1976行目; /tmp/verify/out4.txt 1977行目; /tmp/verify/out4.txt 1978行目; ほか1か所	—	publish 結果 ?!typeof、P3-reparse（permissive/TopTypeExpr）
+ !typeof!	/tmp/verify/out4.txt 1980行目; /tmp/verify/out4.txt 1981行目; /tmp/verify/out4.txt 1982行目; ほか1か所	—	publish 結果 !!typeof、P3-reparse（permissive/TopTypeExpr）
+ !keyof?	/tmp/verify/out4.txt 1984行目; /tmp/verify/out4.txt 1985行目; /tmp/verify/out4.txt 1986行目; ほか1か所	—	publish 結果 ?!keyof、P3-reparse（permissive/TopTypeExpr）
+ !keyof!	/tmp/verify/out4.txt 1988行目; /tmp/verify/out4.txt 1989行目; /tmp/verify/out4.txt 1990行目; ほか1か所	—	publish 結果 !!keyof、P3-reparse（permissive/TopTypeExpr）
+ !import?	/tmp/verify/out4.txt 1992行目; /tmp/verify/out4.txt 1993行目; /tmp/verify/out4.txt 1994行目; ほか1か所	—	publish 結果 ?!import、P3-reparse（permissive/TopTypeExpr）
+ !import!	/tmp/verify/out4.txt 1996行目; /tmp/verify/out4.txt 1997行目; /tmp/verify/out4.txt 1998行目; ほか1か所	—	publish 結果 !!import、P3-reparse（permissive/TopTypeExpr）
+ !1?	/tmp/verify/out4.txt 2000行目; /tmp/verify/out4.txt 2001行目; /tmp/verify/out4.txt 2002行目; ほか1か所	—	publish 結果 ?!1、P3-reparse（permissive/TopTypeExpr）
+ !1!	/tmp/verify/out4.txt 2004行目; /tmp/verify/out4.txt 2005行目; /tmp/verify/out4.txt 2006行目; ほか1か所	—	publish 結果 !!1、P3-reparse（permissive/TopTypeExpr）
+??!=	/tmp/verify/out4.txt 2014行目; /tmp/verify/out4.txt 2015行目; /tmp/verify/out4.txt 2016行目; ほか1か所	—	publish 結果 !??=、P3-ast（permissive/TopTypeExpr）
+??!...	/tmp/verify/out4.txt 2018行目; /tmp/verify/out4.txt 2019行目; /tmp/verify/out4.txt 2020行目; ほか1か所	—	publish 結果 ...!??、P3-ast（permissive/TopTypeExpr）
+??! 	/tmp/verify/out4.txt 2022行目; /tmp/verify/out4.txt 2023行目; /tmp/verify/out4.txt 2024行目; ほか1か所	—	publish 結果 !??、P3-ast（permissive/TopTypeExpr）
+?? !	/tmp/verify/out4.txt 2026行目; /tmp/verify/out4.txt 2027行目; /tmp/verify/out4.txt 2028行目; ほか1か所	—	publish 結果 !??、P3-ast（permissive/TopTypeExpr）
+? ?!	/tmp/verify/out4.txt 2030行目; /tmp/verify/out4.txt 2031行目; /tmp/verify/out4.txt 2032行目; ほか1か所	—	publish 結果 !??、P3-ast（permissive/TopTypeExpr）
+...??!	/tmp/verify/out4.txt 2034行目; /tmp/verify/out4.txt 2035行目; /tmp/verify/out4.txt 2036行目; ほか1か所	—	publish 結果 ...!??、P3-ast（permissive/TopTypeExpr）
+ ??!	/tmp/verify/out4.txt 2038行目; /tmp/verify/out4.txt 2039行目; /tmp/verify/out4.txt 2040行目; ほか1か所	—	publish 結果 !??、P3-ast（permissive/TopTypeExpr）

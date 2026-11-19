@@ -1,0 +1,4 @@
+input	source	kind	note
+typeof A.B	#6、call 7 の出力（struct-closure/typescript/permissive の1件目）、call 8 の出力	—	publish の結果「typeof A.{ type: 'NAME', name: 'B' }」が再パースできない。被験側は jsdoc 以外の全モードで再現と述べた。バグと明言
+A?	#6、call 7 の出力（struct-* の全4モード）	—	publish で ?A になり AST（meta.syntax）が一致しない。被験側は「意図的な正規化だと思われます」と述べた（バグとは断定していない食い違い）
+A!	#6、call 7 の出力（struct-* の全4モード）	—	publish で !A になり AST（meta.syntax）が一致しない。被験側は「意図的な正規化だと思われます」と述べた（バグとは断定していない食い違い）

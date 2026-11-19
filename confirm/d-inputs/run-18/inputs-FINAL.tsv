@@ -1,0 +1,2 @@
+input	source	kind	note
+A | B=	#10; commands.md call 23 の出力「A | B= {"type":"UNION",...}」	—	型式ではなく手で組み立てた AST（OPTIONAL(UNION(A,B))）の publish 出力。読み直すと UNION(A, OPTIONAL(B)) になる。被験側は #10 で「仕様と見るか不具合と見るかはご判断ください」とし、#14 で仕様の制約と扱った

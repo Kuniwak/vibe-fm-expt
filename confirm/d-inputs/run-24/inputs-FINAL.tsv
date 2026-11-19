@@ -1,0 +1,130 @@
+input	source	kind	note
+!Foo!	#8 バグ1; call 5 の出力 16行目; call 7 の出力 10行目; ほか1か所	—	#8：`!!Foo` と出力され構文エラー
+keyof Array![]	#8 バグ1	—	#8：`keyof !Array[]` と出力され型の意味が変わる
+typeof a.b	#8 バグ2; call 5 の出力 45行目; call 7 の出力 24行目	—	#8：MEMBER の name にノードが入り、publish が `typeof a.{ type: 'NAME', name: 'b' }` になる
+?!	call 5 の出力 2行目; call 12 の出力 36行目	—	DIFF、publish 結果 !?（NOMETA なし（meta も比較））
+1?	call 5 の出力 3行目; call 12 の出力 6行目; call 12 の出力 22行目; ほか1か所	—	DIFF、publish 結果 ?1（NOMETA なし（meta も比較））
+a!	call 5 の出力 4行目; call 12 の出力 5行目; call 12 の出力 21行目; ほか1か所	—	DIFF、publish 結果 !a（NOMETA なし（meta も比較））
+*!	call 5 の出力 5行目	—	DIFF、publish 結果 !*（NOMETA なし（meta も比較））
+1!	call 5 の出力 6行目; call 12 の出力 7行目; call 12 の出力 20行目; ほか1か所	—	DIFF、publish 結果 !1（NOMETA なし（meta も比較））
+?...	call 5 の出力 7行目; call 7 の出力 4行目; call 12 の出力 18行目; ほか2か所	—	DIFF、publish 結果 ...?（NOMETA なし（meta も比較））
+a.b!	call 5 の出力 8行目; call 12 の出力 28行目	—	DIFF、publish 結果 !a.b（NOMETA なし（meta も比較））
+[]!=	call 5 の出力 9行目	—	DIFF、publish 結果 ![]=（NOMETA なし（meta も比較））
+"s"!	call 5 の出力 10行目; call 12 の出力 16行目; call 12 の出力 46行目	—	DIFF、publish 結果 !"s"（NOMETA なし（meta も比較））
+'q'?	call 5 の出力 11行目; call 12 の出力 14行目; call 12 の出力 43行目	—	DIFF、publish 結果 ?'q'（NOMETA なし（meta も比較））
+'q'!	call 5 の出力 12行目; call 12 の出力 15行目; call 12 の出力 45行目	—	DIFF、publish 結果 !'q'（NOMETA なし（meta も比較））
+new!	call 5 の出力 13行目	—	DIFF、publish 結果 !new（NOMETA なし（meta も比較））
+a-b!	call 5 の出力 14行目; call 12 の出力 32行目	—	DIFF、publish 結果 !a-b（NOMETA なし（meta も比較））
+this?	call 5 の出力 15行目	—	DIFF、publish 結果 ?this（NOMETA なし（meta も比較））
+...*?	call 5 の出力 17行目	—	DIFF、publish 結果 ...?*（NOMETA なし（meta も比較））
+-1.5?	call 5 の出力 18行目	—	DIFF、publish 結果 ?-1.5（NOMETA なし（meta も比較））
+?a-b?	call 5 の出力 19行目	—	ERR、publish 結果 ??a-b（NOMETA なし（meta も比較））
+...a?	call 5 の出力 20行目	—	DIFF、publish 結果 ...?a（NOMETA なし（meta も比較））
+?"s"!	call 5 の出力 21行目; call 7 の出力 8行目; call 8 の出力 2行目	—	ERR、publish 結果 !?"s"（NOMETA なし（meta も比較））
+...1?	call 5 の出力 22行目	—	DIFF、publish 結果 ...?1（NOMETA なし（meta も比較））
+?'q'!	call 5 の出力 23行目	—	ERR、publish 結果 !?'q'（NOMETA なし（meta も比較））
+event?	call 5 の出力 24行目	—	DIFF、publish 結果 ?event（NOMETA なし（meta も比較））
+keyof?	call 5 の出力 25行目	—	DIFF、publish 結果 ?keyof（NOMETA なし（meta も比較））
+(new!)	call 5 の出力 26行目	—	DIFF、publish 結果 (!new)（NOMETA なし（meta も比較））
+event!	call 5 の出力 27行目	—	DIFF、publish 結果 !event（NOMETA なし（meta も比較））
+Array!	call 5 の出力 28行目	—	DIFF、publish 結果 !Array（NOMETA なし（meta も比較））
+["s"!]	call 5 の出力 29行目	—	DIFF、publish 結果 [!"s"]（NOMETA なし（meta も比較））
+[0x1F]!	call 5 の出力 30行目	—	DIFF、publish 結果 ![0x1F]（NOMETA なし（meta も比較））
+"a\"b"!	call 5 の出力 31行目	—	DIFF、publish 結果 !"a\"b"（NOMETA なし（meta も比較））
+?event?	call 5 の出力 32行目	—	ERR、publish 結果 ??event（NOMETA なし（meta も比較））
+_y~'c'!	call 5 の出力 33行目	—	DIFF、publish 結果 !_y~'c'（NOMETA なし（meta も比較））
+{1: *!}	call 5 の出力 34行目	—	DIFF、publish 結果 {1: !*}（NOMETA なし（meta も比較））
+'a\'b'!	call 5 の出力 35行目	—	DIFF、publish 結果 !'a\'b'（NOMETA なし（meta も比較））
+import?	call 5 の出力 36行目	—	DIFF、publish 結果 ?import（NOMETA なし（meta も比較））
+typeof?	call 5 の出力 37行目	—	DIFF、publish 結果 ?typeof（NOMETA なし（meta も比較））
+..._y.b?	call 5 の出力 38行目	—	DIFF、publish 結果 ...?_y.b（NOMETA なし（meta も比較））
+module?=	call 5 の出力 39行目	—	DIFF、publish 結果 ?module=（NOMETA なし（meta も比較））
+external?	call 5 の出力 40行目	—	DIFF、publish 結果 ?external（NOMETA なし（meta も比較））
+?Foo.'e'?	call 5 の出力 41行目	—	ERR、publish 結果 ??Foo.'e'（NOMETA なし（meta も比較））
+function!	call 5 の出力 42行目	—	DIFF、publish 結果 !function（NOMETA なし（meta も比較））
+readonly!	call 5 の出力 43行目	—	DIFF、publish 結果 !readonly（NOMETA なし（meta も比較））
+a-b | 'q'?	call 5 の出力 44行目	—	DIFF、publish 結果 a-b | ?'q'（NOMETA なし（meta も比較））
+readonly.b!	call 5 の出力 46行目	—	DIFF、publish 結果 !readonly.b（NOMETA なし（meta も比較））
+a!|typeof[]	call 5 の出力 47行目	—	DIFF、publish 結果 !a | typeof[]（NOMETA なし（meta も比較））
+!undefined?	call 5 の出力 48行目	—	ERR、publish 結果 ?!undefined（NOMETA なし（meta も比較））
+[event, 1]?	call 5 の出力 49行目	—	DIFF、publish 結果 ?[event, 1]（NOMETA なし（meta も比較））
+import('b')!	call 5 の出力 50行目	—	DIFF、publish 結果 !import('b')（NOMETA なし（meta も比較））
+keyof keyof!	call 5 の出力 51行目	—	ERR、publish 結果 keyof !keyof（NOMETA なし（meta も比較））
+?typeof | *?	call 5 の出力 52行目	—	DIFF、publish 結果 ?typeof | ?*（NOMETA なし（meta も比較））
+_y|external!	call 5 の出力 53行目	—	DIFF、publish 結果 _y | !external（NOMETA なし（meta も比較））
+(module:'x')?	call 5 の出力 54行目	—	DIFF、publish 結果 ?(module:'x')（NOMETA なし（meta も比較））
+...() => new?	call 5 の出力 55行目	—	DIFF、publish 結果 ...?() => new（NOMETA なし（meta も比較））
+'q' & module?	call 5 の出力 56行目	—	DIFF、publish 結果 'q' & ?module（NOMETA なし（meta も比較））
+{readonly a}!	call 5 の出力 57行目	—	DIFF、publish 結果 !{readonly a}（NOMETA なし（meta も比較））
+[string,a.b!]	call 5 の出力 58行目	—	DIFF、publish 結果 [string, !a.b]（NOMETA なし（meta も比較））
+(function()?)	call 5 の出力 59行目	—	DIFF、publish 結果 (?function())（NOMETA なし（meta も比較））
+external:Foo?	call 5 の出力 60行目	—	DIFF、publish 結果 ?external:Foo（NOMETA なし（meta も比較））
+keyof keyof *?	call 5 の出力 61行目	—	ERR、publish 結果 keyof keyof ?*（NOMETA なし（meta も比較））
+a...	call 7 の出力 2行目; call 12 の出力 12行目; call 12 の出力 33行目; ほか1か所	—	DIFF、publish 結果 ...a（NOMETA=1）
+*...	call 7 の出力 3行目; call 12 の出力 17行目; call 12 の出力 30行目; ほか1か所	—	DIFF、publish 結果 ...*（NOMETA=1）
+_y...	call 7 の出力 5行目	—	DIFF、publish 結果 ..._y（NOMETA=1）
+x$...	call 7 の出力 6行目	—	DIFF、publish 結果 ...x$（NOMETA=1）
+[]...	call 7 の出力 7行目	—	DIFF、publish 結果 ...[]（NOMETA=1）
+?new!	call 7 の出力 9行目; call 8 の出力 3行目	—	ERR、publish 結果 !?new（NOMETA=1）
+!"s"?	call 7 の出力 11行目; call 8 の出力 5行目	—	ERR、publish 結果 ?!"s"（NOMETA=1）
+?null?	call 7 の出力 12行目; call 8 の出力 6行目	—	ERR、publish 結果 ??null（NOMETA=1）
+"s"...	call 7 の出力 13行目	—	DIFF、publish 結果 ..."s"（NOMETA=1）
+Foo...	call 7 の出力 14行目	—	DIFF、publish 結果 ...Foo（NOMETA=1）
+event...	call 7 の出力 15行目	—	DIFF、publish 結果 ...event（NOMETA=1）
+keyof...	call 7 の出力 16行目	—	DIFF、publish 結果 ...keyof（NOMETA=1）
+'q'[]...	call 7 の出力 17行目	—	DIFF、publish 結果 ...'q'[]（NOMETA=1）
+{'k'}...	call 7 の出力 18行目	—	DIFF、publish 結果 ...{'k'}（NOMETA=1）
+typeof...	call 7 の出力 19行目	—	DIFF、publish 結果 ...typeof（NOMETA=1）
+"a\"b"...	call 7 の出力 20行目	—	DIFF、publish 結果 ..."a\"b"（NOMETA=1）
+event?...	call 7 の出力 21行目	—	DIFF、publish 結果 ...?event（NOMETA=1）
+!event=...	call 7 の出力 22行目	—	DIFF、publish 結果 ...!event=（NOMETA=1）
+event[]...	call 7 の出力 23行目	—	DIFF、publish 結果 ...event[]（NOMETA=1）
+!{"k": a}!	call 7 の出力 25行目; call 8 の出力 8行目	—	ERR、publish 結果 !!{"k": a}（NOMETA=1）
+function...	call 7 の出力 26行目	—	DIFF、publish 結果 ...function（NOMETA=1）
+...keyof 1?	call 7 の出力 27行目; call 8 の出力 9行目	—	ERR、publish 結果 ...keyof ?1（NOMETA=1）
+keyof Foo...	call 7 の出力 28行目	—	DIFF、publish 結果 ...keyof Foo（NOMETA=1）
+Foo."c d"...	call 7 の出力 29行目	—	DIFF、publish 結果 ...Foo."c d"（NOMETA=1）
+![string...]	call 7 の出力 30行目	—	DIFF、publish 結果 ![...string]（NOMETA=1）
+keyof 'q'...	call 7 の出力 31行目	—	DIFF、publish 結果 ...keyof 'q'（NOMETA=1）
+keyof new...	call 7 の出力 32行目	—	DIFF、publish 結果 ...keyof new（NOMETA=1）
+import('b')...	call 7 の出力 33行目	—	DIFF、publish 結果 ...import('b')（NOMETA=1）
+function(*)...	call 7 の出力 34行目	—	DIFF、publish 結果 ...function(*)（NOMETA=1）
+import('b')!...	call 7 の出力 35行目	—	DIFF、publish 結果 ...!import('b')（NOMETA=1）
+typeof a.b & "s"	call 7 の出力 36行目	—	ERR、publish 結果 typeof a.{ type: 'NAME', name: 'b' } & "s"（NOMETA=1）
+keyof module:'x'!	call 7 の出力 37行目; call 8 の出力 13行目	—	ERR、publish 結果 keyof !module:'x'（NOMETA=1）
+module:foo/bar...	call 7 の出力 38行目	—	DIFF、publish 結果 ...module:foo/bar（NOMETA=1）
+function(new: ?)...	call 7 の出力 39行目	—	DIFF、publish 結果 ...function(new: ?)（NOMETA=1）
+function(!keyof)...	call 7 の出力 40行目	—	DIFF、publish 結果 ...function(!keyof)（NOMETA=1）
+[!import?,(import)]	call 7 の出力 41行目; call 8 の出力 14行目	—	ERR、publish 結果 [?!import, (import)]（NOMETA=1）
+function(): -1.5...	call 7 の出力 42行目	—	DIFF、publish 結果 ...function(): -1.5（NOMETA=1）
+new () => 'a\'b'...	call 7 の出力 43行目	—	DIFF、publish 結果 ...new () => 'a\'b'（NOMETA=1）
+function(new: _y)...	call 7 の出力 44行目	—	DIFF、publish 結果 ...function(new: _y)（NOMETA=1）
+[_y,keyof] & ?keyof?	call 7 の出力 45行目; call 8 の出力 15行目	—	ERR、publish 結果 [_y, keyof] & ??keyof（NOMETA=1）
+module:'x'|[Array]...	call 7 の出力 46行目	—	DIFF、publish 結果 ...module:'x' | [Array]（NOMETA=1）
+!new () => (event)...	call 7 の出力 47行目	—	DIFF、publish 結果 ...!new () => (event)（NOMETA=1）
+function(0x1F,a.b)...	call 7 の出力 48行目	—	DIFF、publish 結果 ...function(0x1F, a.b)（NOMETA=1）
+? | -1.5 | function...	call 7 の出力 49行目	—	DIFF、publish 結果 ...? | -1.5 | function（NOMETA=1）
+?module:foo | new[]...	call 7 の出力 50行目	—	DIFF、publish 結果 ...?module:foo | new[]（NOMETA=1）
+function(): keyof x$![]	call 7 の出力 51行目; call 8 の出力 16行目	—	DIFF、publish 結果 function(): keyof !x$[]（NOMETA=1）
+?function('q',function)!	call 7 の出力 52行目; call 8 の出力 17行目	—	ERR、publish 結果 !?function('q', function)（NOMETA=1）
+new () => keyof(-1.5)...	call 7 の出力 53行目	—	DIFF、publish 結果 ...new () => keyof(-1.5)（NOMETA=1）
+new () => module:"a/b"...	call 7 の出力 54行目	—	DIFF、publish 結果 ...new () => module:"a/b"（NOMETA=1）
+function(): x$ | string...	call 7 の出力 55行目	—	DIFF、publish 結果 ...function(): x$ | string（NOMETA=1）
+function(new: a#event:b)...	call 7 の出力 56行目	—	DIFF、publish 結果 ...function(new: a#event:b)（NOMETA=1）
+module:'x'<keyof(function)>...	call 7 の出力 57行目	—	DIFF、publish 結果 ...module:'x'<keyof(function)>（NOMETA=1）
+module:'x'.<function(null...)>	call 7 の出力 58行目	—	DIFF、publish 結果 module:'x'.<function(...null)>（NOMETA=1）
+(?module)|keyof function & a.b...	call 7 の出力 59行目	—	DIFF、publish 結果 ...(?module) | keyof function & a.b（NOMETA=1）
+function(!event, module): Array![]	call 7 の出力 60行目; call 8 の出力 18行目	—	DIFF、publish 結果 function(!event, module): !Array[]（NOMETA=1）
+function(null & undefined...) & ?module=	call 7 の出力 61行目	—	DIFF、publish 結果 function(...null & undefined) & ?module=（NOMETA=1）
+(!Array?)	call 8 の出力 7行目	—	ERR、publish 結果 (?!Array)（NOMETA=1、DOTS も除外）
+keyof "a\"b"!	call 8 の出力 10行目	—	ERR、publish 結果 keyof !"a\"b"（NOMETA=1、DOTS も除外）
+keyof () => a?	call 8 の出力 11行目	—	ERR、publish 結果 keyof ?() => a（NOMETA=1、DOTS も除外）
+!new () => _y!	call 8 の出力 12行目	—	ERR、publish 結果 !!new () => _y（NOMETA=1、DOTS も除外）
+*?	call 12 の出力 8行目; call 12 の出力 23行目; call 12 の出力 39行目	—	DIFF、publish 結果 ?*（NOMETA なし（python3 がなく修正は未適用のまま））
+{}?	call 12 の出力 9行目	—	DIFF、publish 結果 ?{}（NOMETA なし（python3 がなく修正は未適用のまま））
+_y!	call 12 の出力 10行目; call 12 の出力 25行目; call 12 の出力 40行目	—	DIFF、publish 結果 !_y（NOMETA なし（python3 がなく修正は未適用のまま））
+x$?	call 12 の出力 11行目; call 12 の出力 26行目; call 12 の出力 41行目	—	DIFF、publish 結果 ?x$（NOMETA なし（python3 がなく修正は未適用のまま））
+"s"?	call 12 の出力 13行目; call 12 の出力 42行目	—	DIFF、publish 結果 ?"s"（NOMETA なし（python3 がなく修正は未適用のまま））
+{}!	call 12 の出力 24行目	—	DIFF、publish 結果 !{}（NOMETA なし（python3 がなく修正は未適用のまま））
+a.b?	call 12 の出力 27行目	—	DIFF、publish 結果 ?a.b（NOMETA なし（python3 がなく修正は未適用のまま））
+a-b?	call 12 の出力 29行目	—	DIFF、publish 結果 ?a-b（NOMETA なし（python3 がなく修正は未適用のまま））

@@ -1,0 +1,20 @@
+input	source	kind	note
+typeof a.b	#2（バグ1の見出し）、#8 の表 #1	—	#2 の見出しでの書き方。MEMBER の name がオブジェクトになる
+typeof b.c	#2、call 3 の出力（P3-reparse:permissive/closure/typescript）、call 4 の出力	—	publish が「typeof b.{ type: 'NAME', name: 'c' }」を返し再パース不能
+?A?	#2、#8 の表 #2、call 3 の出力（P3-reparse:全4モード）	—	publish で ??A になり再パース不能
+? A ?	call 3 の出力（P3-reparse:全4モード）	—	空白区切りの変形。publish で ??A
+?A!	#2、#8 の表 #2、call 3 の出力（P3-reparse:全4モード）	—	publish で !?A になり再パース不能
+? A !	call 3 の出力（P3-reparse:全4モード）	—	空白区切りの変形。publish で !?A
+?b.c?	call 3 の出力（P3-reparse:jsdoc の5件目）	—	publish で ??b.c
+??!	#2、#8 の表 #2、call 3 の出力（P3-ast:全4モード）	—	publish で !?? になり AST が別物（入れ子が逆転）
+? ? !	call 3 の出力（P3-ast:全4モード）	—	空白区切りの変形。publish で !??
+keyof A?	#4、#8 の表 #3	—	publish で keyof ?A になり再パース不能。被験側の修正（call 10、11）の後の検査で見つかった。被験側は「隠れていた」バグと述べた（#4「a third one that had been hidden behind them」、#8「1と2を直して初めて見えたもの」）
+keyof A ?	call 11 の出力（P3-reparse:permissive/typescript）	—	被験側の修正1、2を当てた後のライブラリで検出。publish で keyof ?A
+keyof A !	call 11 の出力（P3-reparse:permissive/typescript）	—	同上。publish で keyof !A
+keyof b.c ?	call 11 の出力（P3-reparse:permissive/typescript）	—	同上。publish で keyof ?b.c
+keyof b.c !	call 11 の出力（P3-reparse:permissive/typescript）	—	同上。publish で keyof !b.c
+keyof * ?	call 11 の出力（P3-reparse:permissive/typescript）	—	同上。publish で keyof ?*
+keyof keyof module: 'y' ?   =	call 14 の出力（P3-reparse:permissive）	—	被験側の KEY_QUERY の途中の修正（call 14）を当てたライブラリで検出。publish で keyof keyof ?module:'y'=
+keyof "a\"b" ? =	call 14 の出力（P3-reparse:permissive/typescript）	—	同上。JSON の "keyof \"a\\\"b\" ? =" を復元した形。publish で keyof ?"a\"b"=
+( module: ) => ! new	#7、call 20 の出力（P2:permissive/typescript）	—	publish が TypeError: Cannot read properties of null (reading 'type') で落ちる。ランダム部分で検出
+(a:) => A	#8 の表 #4、call 22 の出力（ORIG: Cannot read properties of null）	—	被験側が git stash で元のコードでも落ちることを確かめた入力
