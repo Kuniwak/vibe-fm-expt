@@ -331,7 +331,7 @@ D と D2 は、段階1の終わり（S1、A または A2 と同じ状態）と�
 
 ### 条件B：事前登録の予測表との比較
 
-予測表の観点ごとに、3回の観察を並べた比較表を作った（`analysis/series2-abc-reports/comparison.md`）。
+予測表の観点ごとに、3回の観察を並べた比較表を作った（[comparison.md](https://github.com/Kuniwak/vibe-fm-expt/blob/main/analysis/series2-abc-reports/comparison.md)）。
 観察は、run ごとの報告から要約した。
 run ごとの報告は、仮説、予測、正解、独立な確認の結果を見せないサブエージェントが、記録を読む前に固定した指示に従って書いた。
 比較表では、支持するかどうかの判定はしていない。
@@ -340,7 +340,7 @@ run ごとの報告は、仮説、予測、正解、独立な確認の結果を�
 ## 追加の分析の方法（事前登録していない）
 
 第1部の「結果を見て行った追加の分析」の方法である。
-対象は条件A、A2、B の9回で、規則は作業者が記録を読む前に固定した（`analysis/exploratory-4-tried/rules.md`）。
+対象は条件A、A2、B の9回で、規則は作業者が記録を読む前に固定した（[rules.md](https://github.com/Kuniwak/vibe-fm-expt/blob/main/analysis/exploratory-4-tried/rules.md)）。
 
 1. 記録から、AI の文章、思考、人への質問を除き、実行したコマンドとその出力だけを機械的に抜き出した。
 2. 1人のサブエージェントが、それだけを読み、検査を1回実行するごとに1行の表（表1）を作った。列は、対象（実コードかモデルか、どの版か）、判定している条件（コードの引用）、入力の範囲、比較の緩め方、記録された結果である。
@@ -348,7 +348,7 @@ run ごとの報告は、仮説、予測、正解、独立な確認の結果を�
 4. 読み手向けの要約に載せる行は、基準を先に固定して機械的に選んだ（どちらかが「対応する実行が見つからない」とした行と、主張した範囲に全称の表現がある行。64行）。
 
 2人が同じ実行を挙げたのは200件のうち98件で、82件は一部だけが重なった。
-表1、表2、要約は `analysis/exploratory-4-tried/` にある。
+表1、表2、要約は [analysis/exploratory-4-tried/](https://github.com/Kuniwak/vibe-fm-expt/tree/main/analysis/exploratory-4-tried) にある。
 
 ## 限界
 
