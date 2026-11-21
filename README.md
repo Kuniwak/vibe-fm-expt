@@ -7,7 +7,7 @@ AI エージェント（Claude Code）に形式手法で検証させたとき、
 - [`analysis/blog-results-draft.md`](analysis/blog-results-draft.md)：系列2（本実験）の結果のまとめ。仮説ごとのまとめ、実験の構成、結果の表、限界、用語の説明を含む。最初に読むならこれである。
 - [`analysis/results.md`](analysis/results.md)：系列1（run-02〜run-10）の結果。系列1は、対象リポジトリのビルドが止まる問題を含んだ環境での結果である（`preregistration.md` の12章）。
 - [`preregistration.md`](preregistration.md)：仮説、条件、手順、予測、実行後の変更と逸脱の記録。
-  事前登録の冒頭には「コミットのハッシュと時刻が証拠になる」という趣旨の文があるが、公開したリポジトリの履歴は1つのコミットにまとめてあり、ローカルの時刻も書き換えられる。時刻とハッシュは実験者のローカルの記録であり、第三者が検証できる証拠ではない。
+  事前登録の冒頭には「コミットのハッシュと時刻が証拠になる」という趣旨の文があるが、コミットの時刻もハッシュも、履歴を作り直せば作れる。時刻とハッシュは実験者の記録であり、第三者が検証できる証拠ではない。
 - [`analysis/series2-d-confirm/`](analysis/series2-d-confirm/)：系列2の独立な確認の表と注記。
 - [`analysis/series2-d-predictions.md`](analysis/series2-d-predictions.md)：条件D と D2 の予測と、その結果の照合。
 
@@ -142,7 +142,7 @@ COND=TEST OFF_PROTOCOL=1 MODEL=claude-opus-5-5 PROMPT_FILE=<無関係な発言�
 系列2（run-18 以降）は、対象リポジトリのビルドを直したイメージで行った。
 条件D と D2 の2組目（`s2-y`）は、ハーネスの待機の不具合を直した後の版で行った。
 経緯と、どの run がどの版かは `preregistration.md` の12章にある。
-文書が参照しているコミットのハッシュは、`LOCAL_HISTORY.md` で日時と内容を確かめられる。
+文書が参照しているコミットは、このリポジトリの履歴にある。
 
 ### run の記録
 
