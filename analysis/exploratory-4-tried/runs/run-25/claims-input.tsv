@@ -1,0 +1,4 @@
+id	msg	quote
+C10	#4	| P1 parse の全域性 | どの入力でも、AST を返すかそのモードの `SyntaxError` を投げるかのどちらかになる | ✅ 違反なし |
+C11	#4	| P2 publish の全域性 | parse で得た任意の AST を、`publish` が例外なく文字列にできる | ✅ 違反なし |
+C13	#4	| P4 traverse の正しさ | 全ノードをちょうど1回ずつ訪問し、enter/leave の対応と親情報が正しい | ✅ 違反なし |

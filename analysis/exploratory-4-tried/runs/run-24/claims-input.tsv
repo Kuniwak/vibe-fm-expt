@@ -1,0 +1,14 @@
+id	msg	quote
+C6	#2	Strict round-trip (including meta) now has 0 failures.
+C7	#3	Bugs fixed, and all tests, lint, and typecheck pass.
+C8	#3	Bugs fixed, and all tests, lint, and typecheck pass.
+C9	#4	Soundness theorems check out (no `sorryAx`).
+C10	#7	Every theorem builds with no `sorry` and no warnings.
+C13	#8	どちらも修正済みです。
+C22	#8	修正後は `meta.syntax` に従い、元の書き方（前置か後置か）を保って出力します。
+C28	#8	パーサは PEG の規則と選択の優先順位を、文法の規則ごとにそのまま写しています。
+C29	#8	**`parse_iff`**：`parse ts = some a` が成り立つのは、`a` がパーサの生成しうる AST で、かつ `print a = ts` のときだけです。
+C30	#8	つまりこの範囲では、パーサと修正後の publisher は互いに逆変換になります。
+C38	#8	修正前のコードではこの 4 件がすべて失敗し、修正後は全テスト 343 件が成功します。
+C39	#8	lint と型チェックも通っています。
+C40	#8	修正後、各モードで数十万件規模のランダム入力を試しましたが、不一致は 0 件でした。
