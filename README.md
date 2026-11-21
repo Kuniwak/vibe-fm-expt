@@ -7,6 +7,7 @@ AI エージェント（Claude Code）に形式手法で検証させたとき、
 - [`analysis/blog-results-draft.md`](analysis/blog-results-draft.md)：系列2（本実験）の結果のまとめ。仮説ごとのまとめ、実験の構成、結果の表、限界、用語の説明を含む。最初に読むならこれである。
 - [`analysis/results.md`](analysis/results.md)：系列1（run-02〜run-10）の結果。系列1は、対象リポジトリのビルドが止まる問題を含んだ環境での結果である（`preregistration.md` の12章）。
 - [`preregistration.md`](preregistration.md)：仮説、条件、手順、予測、実行後の変更と逸脱の記録。
+  事前登録の冒頭には「コミットのハッシュと時刻が証拠になる」という趣旨の文があるが、公開したリポジトリの履歴は1つのコミットにまとめてあり、ローカルの時刻も書き換えられる。時刻とハッシュは実験者のローカルの記録であり、第三者が検証できる証拠ではない。
 - [`analysis/series2-d-confirm/`](analysis/series2-d-confirm/)：系列2の独立な確認の表と注記。
 - [`analysis/series2-d-predictions.md`](analysis/series2-d-predictions.md)：条件D と D2 の予測と、その結果の照合。
 
@@ -24,7 +25,7 @@ AI は Claude Code（`claude-opus-5-5`）で、run ごとに新しいコンテ�
 |---|---|---|
 | A | 「Lean 4 で」バグがないことを検証させる | `devenv`（Lean 4 と Mathlib） |
 | A2 | 「形式手法で」バグがないことを検証させる | `devenv-b`（`devenv` に、TLA+ と、その実行に使う Java、Z3 を加えたもの） |
-| B | 外部の手順書（mizchi 氏の formal-methods-playbook.md）にしたがって検証させる | `devenv-b` |
+| B | 外部の手順書（下の「条件B の手順書について」）にしたがって検証させる | `devenv-b` |
 | D | A と同じ指示で始め、記事の手順を段階ごとに続ける | `devenv` |
 | D2 | A2 と同じ指示で始め、記事の手順を段階ごとに続ける | `devenv-b` |
 
@@ -163,6 +164,20 @@ COND=TEST OFF_PROTOCOL=1 MODEL=claude-opus-5-5 PROMPT_FILE=<無関係な発言�
 - **モデル**：`MODEL` で指定する。登録済みのモデルと違う値は、`OFF_PROTOCOL=1` を付けた場合だけ受け付ける。基準線のないモデルは、先に `MODEL=<モデル名> PROBE_WRITE_BASELINE=1 make probe` で基準線を書き、中身を確認してから使う。指示ファイル、メモリ、MCP、ユーザー由来のスキルやプラグインが見つかった場合は、基準線を書かずに失敗する。
 - **打ち切り時間と手順の定数**：`config/protocol.env` にある。
 - **ネットワーク**：`NET=allowlist`（既定）は `config/allow-domains.txt` の宛先への HTTPS だけを許可する。`NET=open` は制限しない。適用したルールは `record/network.log` に残る。
+
+## 条件B の手順書について
+
+条件B では、公開されている形式手法の手順書（mizchi 氏の formal-methods-playbook.md、リビジョン `2133eced`。出典は [`THIRD_PARTY.md`](THIRD_PARTY.md)）を渡した。
+選んだのは、公開されていて広く読まれており、手順が具体的で、版を固定して再現できるからである。
+
+この手順書は、実装から仕様を取り出してバグを見つけるためのものである。
+一方、この実験では「このリポジトリにバグがないことを、下の文書にしたがって検証してください」と頼んだ。
+バグがないことを確かめる用途は、手順書が想定したものではない。
+この使い方を選んだのは実験者であり、条件をそろえるためである（A と A2 も同じ文型で頼んでいる）。
+
+結果から言えるのは、この版の手順書を、この頼み方で、Claude Code（`claude-opus-5-5`）に、jsdoctypeparser について渡したときの挙動だけである。
+手順書を本来の用途で使ったときの価値や、著者については、何も言わない。
+また、実験者（筆者）は比べられる側の記事の著者であり、仮説の当事者である。
 
 ## ライセンス
 
